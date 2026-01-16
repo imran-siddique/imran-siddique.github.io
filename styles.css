@@ -111,26 +111,168 @@ section > p {
     margin-top: auto;
 }
 
-/* Open Source Section */
-.contributions-list {
+/* About Section */
+.about .intro {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #444;
+}
+
+/* Signature Series Section */
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
     margin-top: 2rem;
 }
 
-.contribution-item {
-    padding: 1.5rem;
+.post-card {
     background: #f8f9fa;
+    border-radius: 10px;
+    padding: 2rem;
+    border-left: 4px solid #667eea;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.post-number {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.post-card h3 {
+    color: #333;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.post-tagline {
+    color: #555;
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 5px;
+}
+
+.post-concepts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.concept-tag {
+    display: inline-block;
+    background: #667eea;
+    color: white;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-weight: 500;
+}
+
+/* Key Areas Section */
+.areas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.area-card {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    padding: 2rem;
+    border-radius: 10px;
+    border: 2px solid #667eea;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.area-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.area-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.area-card h3 {
+    color: #667eea;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.area-card p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+/* Open Source Section */
+.repositories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.repo-card {
+    background: #f8f9fa;
+    padding: 1.5rem;
     border-radius: 8px;
     border-left: 4px solid #667eea;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.contribution-item h3 {
+.repo-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.repo-card h3 {
     color: #667eea;
     margin-bottom: 0.5rem;
+    font-size: 1.2rem;
 }
 
-.contribution-item p {
+.repo-card p {
     color: #666;
     margin-bottom: 1rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.repo-link {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.repo-link:hover {
+    color: #764ba2;
+}
+
+.github-cta {
+    margin-top: 2rem;
+    text-align: center;
 }
 
 .btn-primary {
@@ -200,5 +342,25 @@ footer p {
 
     .link-cards {
         grid-template-columns: 1fr;
+    }
+
+    .posts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .areas-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .repositories-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .post-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .area-card h3 {
+        font-size: 1.1rem;
     }
 }
