@@ -372,9 +372,6 @@ section {
     box-shadow: var(--shadow-lg);
     border-left-width: 6px;
 }
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-}
 
 .post-number {
     display: inline-block;
