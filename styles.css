@@ -347,6 +347,78 @@ section {
     line-height: 1.7;
 }
 
+/* Timeline Styles */
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 2rem auto 0;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2.5rem;
+    padding-left: 2rem;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -2.5rem;
+    top: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 0 0 4px var(--white);
+}
+
+.timeline-content {
+    background: var(--bg-light);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.timeline-content:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateX(5px);
+}
+
+.timeline-content h3 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-period {
+    display: inline-block;
+    color: var(--secondary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.timeline-content p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-top: 0.75rem;
+}
+
 /* Post Cards */
 .post-card {
     background: var(--bg-light);
@@ -1103,6 +1175,21 @@ footer {
     
     section {
         margin: 1rem 0;
+    }
+    
+    .timeline {
+        padding-left: 1.5rem;
+    }
+    
+    .timeline-marker {
+        left: -2rem;
+        width: 2rem;
+        height: 2rem;
+        font-size: 1rem;
+    }
+    
+    .timeline-item {
+        padding-left: 1.5rem;
     }
 }
 
