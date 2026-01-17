@@ -228,7 +228,8 @@ section {
 .featured-work,
 .key-areas,
 .signature-series,
-.connect-section {
+.connect-section,
+.career-highlights {
     padding: 3rem 0;
 }
 
@@ -240,7 +241,8 @@ section {
 .featured-work h2,
 .key-areas h2,
 .signature-series h2,
-.connect-section h2 {
+.connect-section h2,
+.career-highlights h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     color: var(--primary-color);
