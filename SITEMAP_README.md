@@ -26,8 +26,8 @@ This repository now includes SEO optimization files:
 
 ## Sitemap Contains
 
-The sitemap includes the following pages:
-- Homepage (index.html)
+The sitemap includes the following 5 pages:
+- Homepage (/)
 - About page
 - Projects page
 - Writings page
