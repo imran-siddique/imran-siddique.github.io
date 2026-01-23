@@ -3,8 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Open source projects by Imran Siddique - Agent Control Plane, Agentic Architecture, Self-Evaluating Agents">
-    <title>Projects - Imran Siddique</title>
+    <meta name="description" content="Open source AI projects by Imran Siddique: Agent Control Plane (0% safety violations), Self-Correcting Agent Kernel (SCAK), Inter-Agent Trust Protocol (IATP), Cross-Model Verification Kernel (CMVK), Context-as-a-Service (CaaS). Production-ready autonomous AI infrastructure.">
+    <meta name="keywords" content="Agent Control Plane, SCAK, IATP, CMVK, CaaS, AI Agents, Open Source, Python, LLM Governance, Agentic Architecture, Self-Correcting Agents, AI Safety, Autonomous Systems, Imran Siddique">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imran-siddique.github.io/projects.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://imran-siddique.github.io/projects.html">
+    <meta property="og:title" content="Open Source AI Projects - Imran Siddique">
+    <meta property="og:description" content="Production-ready open source projects for autonomous AI systems: Agent Control Plane, SCAK, IATP, CMVK, and Context-as-a-Service.">
+    <meta property="og:site_name" content="Imran Siddique">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:title" content="Open Source AI Projects - Imran Siddique">
+    <meta name="twitter:description" content="Production-ready infrastructure for autonomous AI systems. Agent Control Plane achieves 0% safety violations.">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Open Source AI Projects by Imran Siddique",
+        "description": "Production-ready open source projects for autonomous AI systems",
+        "author": {
+            "@type": "Person",
+            "name": "Imran Siddique",
+            "url": "https://imran-siddique.github.io"
+        },
+        "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": [
+                {"@type": "SoftwareSourceCode", "name": "Inter-Agent Trust Protocol", "codeRepository": "https://github.com/imran-siddique/inter-agent-trust-protocol"},
+                {"@type": "SoftwareSourceCode", "name": "Agent Control Plane", "codeRepository": "https://github.com/imran-siddique/agent-control-plane"},
+                {"@type": "SoftwareSourceCode", "name": "Self-Correcting Agent Kernel", "codeRepository": "https://github.com/imran-siddique/self-correcting-agent-kernel"},
+                {"@type": "SoftwareSourceCode", "name": "Cross-Model Verification Kernel", "codeRepository": "https://github.com/imran-siddique/cross-model-verification-kernel"},
+                {"@type": "SoftwareSourceCode", "name": "Context-as-a-Service", "codeRepository": "https://github.com/imran-siddique/context-as-a-service"}
+            ]
+        }
+    }
+    </script>
+    
+    <title>Open Source AI Projects - Agent Control Plane, SCAK, IATP | Imran Siddique</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -43,8 +86,46 @@
                 <div class="projects-grid">
                     <article class="project-card featured">
                         <div class="project-header">
+                            <div class="project-icon">🛡️</div>
+                            <div class="project-stars">⭐ 1 | 🆕 New</div>
+                        </div>
+                        <h3>Inter-Agent Trust Protocol (IATP)</h3>
+                        <p class="project-description">A lightweight sidecar architecture solving the "Trust" and "Undo" problems for AI agents. Just like Envoy transformed microservices by extracting networking concerns into a sidecar, IATP extracts trust, security, and governance concerns from agents.</p>
+                        
+                        <div class="project-highlights">
+                            <h4>Key Features:</h4>
+                            <ul>
+                                <li><strong>Capability Discovery:</strong> What can this agent do?</li>
+                                <li><strong>Trust Negotiation:</strong> Should I trust this agent with my data?</li>
+                                <li><strong>Policy Enforcement:</strong> Block dangerous operations, warn about risky ones</li>
+                                <li><strong>Transaction Tracking:</strong> Full audit trail for reversibility</li>
+                                <li><strong>Privacy Protection:</strong> Automatic PII detection and scrubbing</li>
+                                <li><strong>Go Sidecar:</strong> High-performance binary with 10k+ concurrent connections</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-benchmark">
+                            <strong>🎯 Research Results:</strong> 100% cascading hallucination prevention, &lt;1ms latency overhead, ~10MB memory footprint
+                        </div>
+
+                        <div class="project-tech">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Go</span>
+                            <span class="tech-badge">Service Mesh</span>
+                            <span class="tech-badge">PyPI: iatp</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://github.com/imran-siddique/inter-agent-trust-protocol" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                                View on GitHub →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card featured">
+                        <div class="project-header">
                             <div class="project-icon">🏗️</div>
-                            <div class="project-stars">⭐ 3</div>
+                            <div class="project-stars">⭐ 3 | 🍴 1</div>
                         </div>
                         <h3>Agent Control Plane</h3>
                         <p class="project-description">A governance and management layer for autonomous AI agents. Treats the LLM as a raw compute component and provides a kernel-like layer for safe, controlled execution.</p>
@@ -69,10 +150,125 @@
                             <span class="tech-badge">Python</span>
                             <span class="tech-badge">AI Agents</span>
                             <span class="tech-badge">Governance</span>
+                            <span class="tech-badge">PyPI</span>
                         </div>
 
                         <div class="project-links">
                             <a href="https://github.com/imran-siddique/agent-control-plane" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                                View on GitHub →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card featured">
+                        <div class="project-header">
+                            <div class="project-icon">🔄</div>
+                            <div class="project-stars">⭐ 1 | 🍴 1</div>
+                        </div>
+                        <h3>Self-Correcting Agent Kernel (SCAK)</h3>
+                        <p class="project-description">Automated alignment via Differential Auditing and Semantic Memory Hygiene. Implements an OODA Loop (Observe, Orient, Decide, Act) for AI Agents, decoupled into runtime and alignment loops.</p>
+                        
+                        <div class="project-highlights">
+                            <h4>Dual-Loop Architecture:</h4>
+                            <ul>
+                                <li><strong>Triage Engine:</strong> Routes failures between sync fixes and async learning</li>
+                                <li><strong>Completeness Auditor:</strong> Detects "Laziness" using teacher model (o1-preview)</li>
+                                <li><strong>Semantic Purge:</strong> Classifies patches by decay type for context reduction</li>
+                                <li><strong>Memory Controller:</strong> Three-tier architecture (Kernel → Cache → Archive)</li>
+                                <li><strong>Multi-Agent Orchestration:</strong> Coordinate specialized agents</li>
+                                <li><strong>Governance Layer:</strong> ML-based threat detection and Constitutional AI</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-benchmark">
+                            <strong>🎯 Key Results:</strong> 100% laziness detection, 72% correction rate, 50% context reduction, &lt;30s MTTR
+                        </div>
+
+                        <div class="project-tech">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Self-Healing</span>
+                            <span class="tech-badge">PyPI: scak</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://github.com/imran-siddique/self-correcting-agent-kernel" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                                View on GitHub →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card featured">
+                        <div class="project-header">
+                            <div class="project-icon">⚔️</div>
+                            <div class="project-stars">⭐ 1</div>
+                        </div>
+                        <h3>Cross-Model Verification Kernel (CMVK)</h3>
+                        <p class="project-description">Adversarial multi-model verification for more reliable LLM code generation. Uses different models with different training data to verify each other's work, dramatically reducing the probability of shared errors.</p>
+                        
+                        <div class="project-highlights">
+                            <h4>Key Features:</h4>
+                            <ul>
+                                <li><strong>Adversarial Verification:</strong> Verifier actively tries to break solutions</li>
+                                <li><strong>Model Diversity:</strong> Enforces different models for generator/verifier</li>
+                                <li><strong>Prosecutor Mode:</strong> Hostile testing catches 89% of bugs</li>
+                                <li><strong>Graph of Truth:</strong> Prevents infinite loops, caches proven solutions</li>
+                                <li><strong>Strategy Banning:</strong> Automatically avoids failing approaches</li>
+                                <li><strong>Full Traceability:</strong> Replay any execution step-by-step</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-benchmark">
+                            <strong>🎯 HumanEval Results:</strong> CMVK achieves 92.4% accuracy (+8.3% over baseline GPT-4o), statistically significant (p &lt; 0.01)
+                        </div>
+
+                        <div class="project-tech">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Multi-Model</span>
+                            <span class="tech-badge">Code Verification</span>
+                            <span class="tech-badge">PyPI</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://github.com/imran-siddique/cross-model-verification-kernel" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                                View on GitHub →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card featured">
+                        <div class="project-header">
+                            <div class="project-icon">📦</div>
+                            <div class="project-stars">⭐ 1</div>
+                        </div>
+                        <h3>Context-as-a-Service (CaaS)</h3>
+                        <p class="project-description">Intelligent context pipeline solving 7 RAG fallacies — deterministic, heuristic, enterprise-trust focused. Traditional RAG systems suffer from major fallacies that lead to poor context quality.</p>
+                        
+                        <div class="project-highlights">
+                            <h4>Solves 7 RAG Fallacies:</h4>
+                            <ul>
+                                <li><strong>Structure-Aware Indexing:</strong> Three-tier hierarchical value system</li>
+                                <li><strong>Metadata Injection:</strong> Chunks carry their lineage</li>
+                                <li><strong>Time-Based Decay:</strong> Recent content ranks higher</li>
+                                <li><strong>Context Triad:</strong> Hot/Warm/Cold priority system</li>
+                                <li><strong>Pragmatic Truth:</strong> Tracks official + practical sources</li>
+                                <li><strong>Heuristic Router:</strong> Zero-latency (0.1ms) deterministic routing</li>
+                                <li><strong>Trust Gateway:</strong> Enterprise-grade on-prem router</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-benchmark">
+                            <strong>🎯 Benchmarks:</strong> +22.1% Context Triad accuracy, +18.5% Structure-Aware, 0.1ms routing vs 150ms LLM routing
+                        </div>
+
+                        <div class="project-tech">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">RAG</span>
+                            <span class="tech-badge">Context Management</span>
+                            <span class="tech-badge">PyPI</span>
+                        </div>
+
+                        <div class="project-links">
+                            <a href="https://github.com/imran-siddique/context-as-a-service" target="_blank" rel="noopener noreferrer" class="btn-primary">
                                 View on GitHub →
                             </a>
                         </div>
@@ -117,7 +313,7 @@
 
                     <article class="project-card">
                         <div class="project-header">
-                            <div class="project-icon">🔄</div>
+                            <div class="project-icon">🎓</div>
                             <div class="project-stars">⭐ 1</div>
                         </div>
                         <h3>Self-Evaluating Agent Sample</h3>
@@ -165,51 +361,13 @@
                             </a>
                         </div>
                     </article>
-
-                    <article class="project-card">
-                        <div class="project-header">
-                            <div class="project-icon">🛠️</div>
-                        </div>
-                        <h3>Self-Correcting Agent Kernel</h3>
-                        <p class="project-description">Agent kernel with self-correction capabilities and recursive ontologies for building robust, self-healing AI systems.</p>
-                        
-                        <div class="project-tech">
-                            <span class="tech-badge">Python</span>
-                            <span class="tech-badge">Self-Healing</span>
-                        </div>
-
-                        <div class="project-links">
-                            <a href="https://github.com/imran-siddique/self-correcting-agent-kernel" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                                View on GitHub →
-                            </a>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <div class="project-header">
-                            <div class="project-icon">📦</div>
-                        </div>
-                        <h3>Context as a Service</h3>
-                        <p class="project-description">Context management architecture for AI agents. Implements the principle that "Context is the new code" through deterministic context layers.</p>
-                        
-                        <div class="project-tech">
-                            <span class="tech-badge">Python</span>
-                            <span class="tech-badge">Context Management</span>
-                        </div>
-
-                        <div class="project-links">
-                            <a href="https://github.com/imran-siddique/context-as-a-service" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                                View on GitHub →
-                            </a>
-                        </div>
-                    </article>
                 </div>
 
                 <div class="github-cta">
                     <h2>Explore More Projects</h2>
                     <p>Check out all my open source contributions and experiments on GitHub</p>
                     <a href="https://github.com/imran-siddique?tab=repositories" target="_blank" rel="noopener noreferrer" class="btn-large">
-                        View All Repositories on GitHub →
+                        View All 14 Repositories on GitHub →
                     </a>
                 </div>
             </div>
@@ -237,6 +395,7 @@
                     <ul>
                         <li><a href="https://github.com/imran-siddique" target="_blank" rel="noopener noreferrer">GitHub</a></li>
                         <li><a href="https://www.linkedin.com/in/imransiddique1986/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><a href="https://twitter.com/mosiddi" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
                         <li><a href="https://medium.com/@isiddique" target="_blank" rel="noopener noreferrer">Medium</a></li>
                         <li><a href="https://dev.to/mosiddi" target="_blank" rel="noopener noreferrer">Dev.to</a></li>
                     </ul>
