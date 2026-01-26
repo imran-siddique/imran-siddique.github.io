@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,6 +24,11 @@
     <meta name="twitter:title" content="About Imran Siddique - Principal Software Engineer at Microsoft">
     <meta name="twitter:description" content="15+ years building enterprise-scale systems. Expert in Agentic AI Architecture and Scale by Subtraction methodology.">
     
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -42,7 +47,7 @@
     </script>
     
     <title>About Imran Siddique - Principal Software Engineer at Microsoft | 15+ Years Experience</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-new.css">
 </head>
 <body>
     <nav class="navbar">
@@ -55,6 +60,12 @@
                 <li><a href="writings.html">Writings</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -67,7 +78,7 @@
         <section class="hero-small">
             <div class="container">
                 <h1 class="fade-in">About Me</h1>
-                <p class="hero-subtitle fade-in">Engineering Leader | Systems Architect | AI Innovator</p>
+                <p class="hero-subtitle fade-in">Engineering Leader • Systems Architect • AI Innovator</p>
             </div>
         </section>
 
@@ -76,12 +87,12 @@
                 <div class="about-grid">
                     <div class="about-content">
                         <h2>👋 Hello, I'm Imran</h2>
-                        <p class="lead">I'm a Principal Software Engineer at Microsoft with over 15 years of experience building and leading teams that develop complex, enterprise-grade software systems.</p>
+                        <p class="lead" style="text-align: left; margin-bottom: var(--space-lg);">I'm a Principal Software Engineer at Microsoft with over 15 years of experience building and leading teams that develop complex, enterprise-grade software systems.</p>
                         
-                        <p>My work sits at the intersection of <strong>Systems Engineering</strong> and <strong>Agentic AI</strong>. I focus on building production-ready AI agent systems that are reliable, scalable, and truly autonomous—not just sophisticated chatbots.</p>
+                        <p>My work sits at the intersection of <strong style="color: var(--accent-primary);">Systems Engineering</strong> and <strong style="color: var(--accent-primary);">Agentic AI</strong>. I focus on building production-ready AI agent systems that are reliable, scalable, and truly autonomous—not just sophisticated chatbots.</p>
 
-                        <h3>🎯 My Philosophy: Scale by Subtraction</h3>
-                        <p>I believe the next generation of AI scaling won't come from adding more tokens or parameters, but from <strong>subtracting complexity</strong>. My approach emphasizes:</p>
+                        <h2>🎯 My Philosophy: Scale by Subtraction</h2>
+                        <p>I believe the next generation of AI scaling won't come from adding more tokens or parameters, but from <strong style="color: var(--accent-primary);">subtracting complexity</strong>. My approach emphasizes:</p>
                         <ul>
                             <li><strong>Control Planes over Prompts:</strong> Deterministic enforcement rather than probabilistic guardrails</li>
                             <li><strong>Constraint Graphs over Context:</strong> Multi-dimensional boundaries that define what's possible</li>
@@ -89,18 +100,17 @@
                             <li><strong>Silent Swarms over Conversations:</strong> Headless agents that communicate through structured data</li>
                         </ul>
 
-                        <h3>🚀 What I'm Working On</h3>
-                        <p>I'm currently focused on building the foundational infrastructure for autonomous AI systems, including:</p>
+                        <h2>🚀 What I'm Working On</h2>
+                        <p>I'm currently focused on building the foundational infrastructure for autonomous AI systems:</p>
                         <ul>
-                            <li><strong>Inter-Agent Trust Protocol (IATP):</strong> "Envoy for Agents" - sidecar architecture for safe agent collaboration</li>
-                            <li><strong>Agent Control Plane:</strong> Governance layer with 0% safety violations vs 26.67% for prompt-based safety</li>
-                            <li><strong>Self-Correcting Agent Kernel (SCAK):</strong> Automated alignment via differential auditing</li>
-                            <li><strong>Cross-Model Verification Kernel (CMVK):</strong> Adversarial multi-model verification achieving 92.4% accuracy</li>
-                            <li><strong>Context-as-a-Service (CaaS):</strong> Intelligent context pipeline solving 7 RAG fallacies</li>
+                            <li><strong>Agent OS:</strong> A Safety-First Kernel with POSIX-inspired primitives for AI agents</li>
+                            <li><strong>Agentic Architecture:</strong> Comprehensive patterns for production AI systems</li>
+                            <li><strong>SDLC Agents:</strong> AI agents for the Software Development Lifecycle</li>
+                            <li><strong>Design Review Assist:</strong> AI-powered architecture review tools</li>
                         </ul>
 
-                        <h3>📚 Writing & Teaching</h3>
-                        <p>I'm passionate about sharing knowledge and challenging conventional thinking. I write extensively about agentic architecture, sharing practical patterns and real-world implementations through:</p>
+                        <h2>📚 Writing & Teaching</h2>
+                        <p>I'm passionate about sharing knowledge and challenging conventional thinking. I write extensively about agentic architecture through:</p>
                         <ul>
                             <li><strong>Medium:</strong> Deep dives into agentic systems and architecture patterns</li>
                             <li><strong>Dev.to:</strong> Technical tutorials and implementation guides</li>
@@ -109,13 +119,14 @@
 
                         <p>I'm also working on a book about large-scale systems development, focusing on the art of "subtraction"—removing unnecessary complexity to improve reliability.</p>
 
-                        <h3>🎓 Background & Expertise</h3>
+                        <h2>🎓 Background & Expertise</h2>
                         <p>With more than 15 years in the industry, I've:</p>
                         <ul>
                             <li>Led engineering teams building distributed systems at scale</li>
-                            <li>Architected cloud computing and AI/ML platforms</li>
+                            <li>Architected cloud computing and AI/ML platforms at Microsoft</li>
                             <li>Developed enterprise-grade software for Fortune 500 companies</li>
                             <li>Contributed to open source projects in the AI/ML ecosystem</li>
+                            <li>Won multiple Microsoft Hackathons (2021-2025)</li>
                         </ul>
                     </div>
 
@@ -126,7 +137,7 @@
                             <p><strong>Location:</strong><br>Bellevue, Washington</p>
                             <p><strong>Experience:</strong><br>15+ years in software engineering</p>
                             <p><strong>Specialties:</strong></p>
-                            <ul class="compact-list">
+                            <ul>
                                 <li>Agentic Architecture</li>
                                 <li>Distributed Systems</li>
                                 <li>Cloud Computing (Azure)</li>
@@ -137,8 +148,8 @@
 
                         <div class="sidebar-card">
                             <h4>🏆 Achievements</h4>
-                            <ul class="compact-list">
-                                <li>14 Open Source Projects</li>
+                            <ul>
+                                <li>5 Active Open Source Projects</li>
                                 <li>Multiple Hackathon Wins (2021-2025)</li>
                                 <li>Azure DevOps Code Search Lead</li>
                                 <li>Patents in AI Governance</li>
@@ -147,16 +158,13 @@
 
                         <div class="sidebar-card">
                             <h4>🌟 Key Concepts</h4>
-                            <ul class="compact-list">
+                            <ul>
                                 <li>Agent Control Planes</li>
                                 <li>Semantic Firewalls</li>
                                 <li>Differential Auditing</li>
-                                <li>Cross-Model Verification</li>
                                 <li>The Mute Agent</li>
                                 <li>Silent Swarms</li>
-                                <li>Polymorphic Interfaces</li>
                                 <li>Scale by Subtraction</li>
-                                <li>Context Triads</li>
                             </ul>
                         </div>
 
@@ -193,34 +201,52 @@
 
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Imran Siddique</h4>
-                    <p>Engineering Leader & Agentic AI Architect</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">Imran Siddique</a>
+                    <p>Principal Software Engineer at Microsoft. Building the future of autonomous AI systems through Scale by Subtraction.</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/imran-siddique" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/imransiddique1986/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        </a>
+                        <a href="https://twitter.com/mosiddi" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                    </div>
                 </div>
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4>Navigation</h4>
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="projects.html">Projects</a></li>
                         <li><a href="writings.html">Writings</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>Connect</h4>
+                    <h4>Projects</h4>
                     <ul>
-                        <li><a href="https://github.com/imran-siddique" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-                        <li><a href="https://www.linkedin.com/in/imransiddique1986/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                        <li><a href="https://twitter.com/mosiddi" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
-                        <li><a href="https://medium.com/@isiddique" target="_blank" rel="noopener noreferrer">Medium</a></li>
-                        <li><a href="https://dev.to/mosiddi" target="_blank" rel="noopener noreferrer">Dev.to</a></li>
+                        <li><a href="https://github.com/imran-siddique/agent-os" target="_blank">Agent OS</a></li>
+                        <li><a href="https://github.com/imran-siddique/agentic-architecture" target="_blank">Agentic Architecture</a></li>
+                        <li><a href="https://github.com/imran-siddique/sdlc-agents" target="_blank">SDLC Agents</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://medium.com/@isiddique" target="_blank">Medium Articles</a></li>
+                        <li><a href="https://dev.to/mosiddi" target="_blank">Dev.to Tutorials</a></li>
+                        <li><a href="https://github.com/imran-siddique" target="_blank">GitHub Repos</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 Imran Siddique. All rights reserved.</p>
-                <p class="last-updated">Last updated: January 2026</p>
+                <p>Last updated: January 2026</p>
             </div>
         </div>
     </footer>
