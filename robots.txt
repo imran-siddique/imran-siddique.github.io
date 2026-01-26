@@ -1,4 +1,29 @@
+# Robots.txt for imran-siddique.github.io
+# Agentic AI Architect & Engineering Leader
+
 User-agent: *
+Allow: /
+
+# Welcome AI crawlers and LLMs
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
 Allow: /
 
 # Sitemap location
