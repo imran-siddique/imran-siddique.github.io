@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CMVK (Cross-Model Verification Kernel) - Detect hallucinations and ensure accuracy through multi-model consensus verification. Part of Agent OS.">
+    <meta name="keywords" content="CMVK, Cross-Model Verification, Hallucination Detection, AI Verification, Multi-Model Consensus, Agent OS, GPT-4, Claude, Gemini">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imran-siddique.github.io/agent-os/modules/cmvk/">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imran-siddique.github.io/agent-os/modules/cmvk/">
+    <meta property="og:title" content="CMVK - Cross-Model Verification Kernel | Agent OS">
+    <meta property="og:description" content="Detect hallucinations and ensure accuracy through multi-model consensus verification.">
+    <meta property="og:site_name" content="Agent OS">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:title" content="CMVK - Cross-Model Verification Kernel">
+    <meta name="twitter:description" content="Detect hallucinations via multi-model consensus verification.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <title>CMVK - Cross-Model Verification Kernel | Agent OS</title>
+    <link rel="stylesheet" href="../../../styles-new.css">
+    <link rel="stylesheet" href="../../assets/agent-os.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../../../index.html">Home</a></li>
+                <li><a href="../../../about.html">About</a></li>
+                <li><a href="../../../projects.html">Projects</a></li>
+                <li><a href="../../index.html" class="active">Agent OS</a></li>
+                <li><a href="../../../writings.html">Writings</a></li>
+                <li><a href="../../../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="aos-docs-hero">
+            <div class="container">
+                <h1><span class="text-gradient">CMVK</span></h1>
+                <p>Cross-Model Verification Kernel — Detect hallucinations via multi-model consensus</p>
+            </div>
+        </section>
+
+        <!-- Documentation Content -->
+        <section class="aos-docs-content">
+            <div class="container">
+                <div class="aos-docs-layout">
+                    <!-- Sidebar Navigation -->
+                    <aside class="aos-sidebar">
+                        <nav class="aos-sidebar-nav">
+                            <h4 class="aos-sidebar-title">On This Page</h4>
+                            <ul>
+                                <li><a href="#what-is-cmvk">What is CMVK</a></li>
+                                <li><a href="#installation">Installation</a></li>
+                                <li><a href="#quick-example">Quick Example</a></li>
+                                <li><a href="#consensus-verifier">ConsensusVerifier Class</a></li>
+                                <li><a href="#drift-detector">DriftDetector Class</a></li>
+                                <li><a href="#batch-verification">Batch Verification</a></li>
+                                <li><a href="#configuration">Configuration Options</a></li>
+                                <li><a href="#use-cases">Use Cases</a></li>
+                                <li><a href="#kernelspace-integration">KernelSpace Integration</a></li>
+                            </ul>
+                        </nav>
+                        
+                        <nav class="aos-sidebar-nav">
+                            <h4 class="aos-sidebar-title">Modules</h4>
+                            <ul>
+                                <li><a href="index.html" class="active">CMVK</a></li>
+                                <li><a href="../emk/index.html">EMK</a></li>
+                                <li><a href="../iatp/index.html">IATP</a></li>
+                                <li><a href="../amb/index.html">AMB</a></li>
+                                <li><a href="../index.html">All Modules</a></li>
+                            </ul>
+                        </nav>
+                        
+                        <nav class="aos-sidebar-nav">
+                            <h4 class="aos-sidebar-title">Documentation</h4>
+                            <ul>
+                                <li><a href="../../docs/quickstart.html">Quickstart</a></li>
+                                <li><a href="../../docs/api.html">API Reference</a></li>
+                                <li><a href="../../docs/policies.html">Policy Reference</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+
+                    <!-- Main Content -->
+                    <article class="aos-main">
+                        <h2 id="what-is-cmvk">What is CMVK?</h2>
+                        <p>
+                            <strong>CMVK (Cross-Model Verification Kernel)</strong> is a hallucination detection system 
+                            that verifies AI outputs by comparing responses across multiple language models. Instead of 
+                            trusting a single model's response, CMVK queries multiple models and uses consensus algorithms 
+                            to determine accuracy and reliability.
+                        </p>
+                        
+                        <div class="aos-callout aos-callout-info">
+                            <h4>Why Multi-Model Consensus?</h4>
+                            <p>
+                                Different LLMs have different training data and failure modes. When GPT-4, Claude, and 
+                                Gemini all agree on a factual answer, it's far more likely to be accurate than any 
+                                single model's response. CMVK leverages this principle for high-stakes decisions.
+                            </p>
+                        </div>
+
+                        <h3>Key Features</h3>
+                        <ul>
+                            <li><strong>Multi-Model Queries</strong> — Query GPT-4, Claude, Gemini, and more simultaneously</li>
+                            <li><strong>Consensus Algorithms</strong> — Configurable thresholds for agreement levels</li>
+                            <li><strong>Semantic Comparison</strong> — Uses embeddings to compare meaning, not just text</li>
+                            <li><strong>Drift Detection</strong> — Monitor model behavior changes over time</li>
+                            <li><strong>Confidence Scoring</strong> — Quantify reliability of each verification</li>
+                            <li><strong>Batch Processing</strong> — Efficiently verify multiple prompts at once</li>
+                        </ul>
+
+                        <h2 id="installation">Installation</h2>
+                        <p>Install CMVK as a standalone module or as part of the full Agent OS kernel:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code># Standalone installation
+pip install agent-os-cmvk
+
+# Or install via the kernel with CMVK extras
+pip install agent-os-kernel[cmvk]
+
+# Install with all LLM provider support
+pip install agent-os-cmvk[all]
+
+# Install with specific providers
+pip install agent-os-cmvk[openai]      # GPT-4, GPT-3.5
+pip install agent-os-cmvk[anthropic]   # Claude models
+pip install agent-os-cmvk[google]      # Gemini models</code></pre>
+                        </div>
+
+                        <h3>Environment Variables</h3>
+                        <p>Configure API keys for each provider you want to use:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code># .env file
+OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-ant-...
+GOOGLE_API_KEY=AIza...</code></pre>
+                        </div>
+
+                        <h2 id="quick-example">Quick Example</h2>
+                        <p>The simplest way to use CMVK is with the <code>verify()</code> function:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.cmvk import verify
+
+# Verify a factual claim across multiple models
+result = await verify(
+    prompt="What is the capital of France?",
+    models=["gpt-4", "claude-3-sonnet", "gemini-pro"],
+    threshold=0.8
+)
+
+print(f"Consensus: {result.consensus}")        # True
+print(f"Confidence: {result.confidence:.2f}")  # 0.95
+print(f"Answer: {result.answer}")              # "Paris"
+print(f"Agreement: {result.agreement_ratio}")  # 1.0 (all models agreed)
+
+# Check which models responded
+for model, response in result.responses.items():
+    print(f"{model}: {response.answer}")</code></pre>
+                        </div>
+
+                        <h3>Handling Verification Failures</h3>
+                        <p>When models disagree, CMVK provides detailed information:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.cmvk import verify, VerificationError
+
+result = await verify(
+    prompt="What is the best programming language?",
+    models=["gpt-4", "claude-3-sonnet", "gemini-pro"],
+    threshold=0.9
+)
+
+if not result.consensus:
+    print("Models disagreed!")
+    print(f"Confidence: {result.confidence:.2f}")
+    
+    # Inspect individual responses
+    for model, response in result.responses.items():
+        print(f"  {model}: {response.answer}")
+    
+    # Get the majority answer even without consensus
+    print(f"Majority answer: {result.majority_answer}")
+    print(f"Dissenting models: {result.dissenting_models}")</code></pre>
+                        </div>
+
+                        <h2 id="consensus-verifier">ConsensusVerifier Class</h2>
+                        <p>
+                            For more control over verification behavior, use the <code>ConsensusVerifier</code> class. 
+                            This allows you to configure model weights, comparison strategies, and caching.
+                        </p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.cmvk import ConsensusVerifier, ModelConfig
+
+# Create a verifier with custom configuration
+verifier = ConsensusVerifier(
+    models=[
+        ModelConfig("gpt-4", weight=1.0, timeout=30),
+        ModelConfig("claude-3-opus", weight=1.2, timeout=45),  # Higher weight
+        ModelConfig("gemini-pro", weight=0.8, timeout=25),
+    ],
+    threshold=0.85,
+    comparison_strategy="semantic",  # "exact", "semantic", or "fuzzy"
+    cache_responses=True,
+    max_retries=3
+)
+
+# Verify a claim
+result = await verifier.verify("The speed of light is approximately 300,000 km/s")
+
+print(f"Verified: {result.consensus}")
+print(f"Weighted confidence: {result.weighted_confidence:.2f}")</code></pre>
+                        </div>
+
+                        <h3>Comparison Strategies</h3>
+                        <table class="aos-table">
+                            <thead>
+                                <tr>
+                                    <th>Strategy</th>
+                                    <th>Description</th>
+                                    <th>Best For</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>exact</code></td>
+                                    <td>Exact string matching (case-insensitive)</td>
+                                    <td>Single-word answers, numbers</td>
+                                </tr>
+                                <tr>
+                                    <td><code>semantic</code></td>
+                                    <td>Embedding-based similarity comparison</td>
+                                    <td>Natural language answers</td>
+                                </tr>
+                                <tr>
+                                    <td><code>fuzzy</code></td>
+                                    <td>Token-level fuzzy matching</td>
+                                    <td>Lists, structured data</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Model Weighting</h3>
+                        <p>Assign different weights to models based on their reliability for your use case:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.cmvk import ConsensusVerifier, ModelConfig
+
+# For code-related questions, weight models differently
+code_verifier = ConsensusVerifier(
+    models=[
+        ModelConfig("gpt-4", weight=1.0),
+        ModelConfig("claude-3-opus", weight=1.3),   # Better at code
+        ModelConfig("gemini-pro", weight=0.7),
+    ],
+    threshold=0.8,
+    comparison_strategy="exact"  # Code needs exact matching
+)
+
+# For factual questions, use different weights
+fact_verifier = ConsensusVerifier(
+    models=[
+        ModelConfig("gpt-4", weight=1.2),           # Strong on facts
+        ModelConfig("claude-3-sonnet", weight=1.0),
+        ModelConfig("gemini-pro", weight=1.1),
+    ],
+    threshold=0.9,
+    comparison_strategy="semantic"
+)</code></pre>
+                        </div>
+
+                        <h2 id="drift-detector">DriftDetector Class</h2>
+                        <p>
+                            The <code>DriftDetector</code> monitors how model responses change over time. This is 
+                            crucial for detecting when a model's behavior shifts due to updates or fine-tuning.
+                        </p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.cmvk import DriftDetector
+
+# Initialize drift detector with baseline responses
+detector = DriftDetector(
+    models=["gpt-4", "claude-3-sonnet"],
+    baseline_prompts=[
+        "What is 2+2?",
+        "What is the capital of France?",
+        "Who wrote Romeo and Juliet?",
+    ],
+    drift_threshold=0.15,  # Alert if drift exceeds 15%
+    check_interval_hours=24
+)
+
+# Establish baseline
+await detector.establish_baseline()
+
+# Later, check for drift
+drift_report = await detector.check_drift()
+
+print(f"Overall drift: {drift_report.overall_drift:.2%}")
+print(f"Drift detected: {drift_report.drift_detected}")
+
+# Inspect per-model drift
+for model, metrics in drift_report.model_metrics.items():
+    print(f"\n{model}:")
+    print(f"  Semantic drift: {metrics.semantic_drift:.2%}")
+    print(f"  Response length change: {metrics.length_change:.1f}%")
+    print(f"  Tone shift: {metrics.tone_shift:.2%}")</code></pre>
+                        </div>
+
+                        <h3>Drift Alerts</h3>
+                        <p>Configure automatic alerts when drift exceeds thresholds:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.cmvk import DriftDetector, DriftAlert
+
+detector = DriftDetector(
+    models=["gpt-4", "claude-3-sonnet"],
+    drift_threshold=0.15,
+    alerts=[
+        DriftAlert(
+            type="webhook",
+            url="https://your-api.com/drift-alert",
+            min_severity="warning"
+        ),
+        DriftAlert(
+            type="email",
+            recipient="alerts@company.com",
+            min_severity="critical"
+        ),
+    ]
+)
+
+# Run continuous monitoring
+await detector.start_monitoring()  # Runs in background</code></pre>
+                        </div>
+
+                        <h2 id="batch-verification">Batch Verification</h2>
+                        <p>
+                            For high-throughput scenarios, use batch verification to efficiently process 
+                            multiple prompts with optimized API calls.
+                        </p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.cmvk import ConsensusVerifier, BatchVerifier
+
+# Create batch verifier
+verifier = ConsensusVerifier(
+    models=["gpt-4", "claude-3-sonnet", "gemini-pro"],
+    threshold=0.8
+)
+
+batch = BatchVerifier(
+    verifier=verifier,
+    batch_size=10,        # Process 10 prompts at a time
+    max_concurrent=5,     # Max 5 concurrent API calls per model
+    retry_failed=True
+)
+
+# Verify multiple claims
+claims = [
+    "The Earth orbits the Sun",
+    "Water boils at 100°C at sea level",
+    "Python was created by Guido van Rossum",
+    "The Great Wall of China is visible from space",  # Common misconception
+    "Lightning never strikes the same place twice",   # Myth
+]
+
+results = await batch.verify_all(claims)
+
+# Process results
+for claim, result in zip(claims, results):
+    status = "✓" if result.consensus else "✗"
+    print(f"{status} {claim}")
+    if not result.consensus:
+        print(f"   Confidence: {result.confidence:.2f}")</code></pre>
+                        </div>
+
+                        <h3>Batch with Progress Tracking</h3>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.cmvk import BatchVerifier
+from tqdm import tqdm
+
+async def verify_with_progress(claims: list[str]):
+    batch = BatchVerifier(verifier=verifier)
+    
+    results = []
+    async for result in batch.verify_stream(claims):
+        results.append(result)
+        # Update progress bar
+        print(f"Verified {len(results)}/{len(claims)}: {result.consensus}")
+    
+    return results
+
+# Or use callback
+async def on_result(index: int, result):
+    print(f"Claim {index}: {'✓' if result.consensus else '✗'}")
+
+await batch.verify_all(claims, on_complete=on_result)</code></pre>
+                        </div>
+
+                        <h2 id="configuration">Configuration Options</h2>
+                        <p>CMVK offers extensive configuration options for fine-tuning verification behavior:</p>
+
+                        <h3>Threshold Configuration</h3>
+                        <table class="aos-table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>threshold</code></td>
+                                    <td>float</td>
+                                    <td>0.8</td>
+                                    <td>Minimum confidence for consensus (0.0-1.0)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>min_models</code></td>
+                                    <td>int</td>
+                                    <td>2</td>
+                                    <td>Minimum models that must respond</td>
+                                </tr>
+                                <tr>
+                                    <td><code>require_unanimous</code></td>
+                                    <td>bool</td>
+                                    <td>False</td>
+                                    <td>Require all models to agree</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Model Configuration</h3>
+                        <table class="aos-table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>models</code></td>
+                                    <td>list</td>
+                                    <td>["gpt-4", "claude-3"]</td>
+                                    <td>Models to query for verification</td>
+                                </tr>
+                                <tr>
+                                    <td><code>timeout</code></td>
+                                    <td>int</td>
+                                    <td>30</td>
+                                    <td>Seconds to wait per model response</td>
+                                </tr>
+                                <tr>
+                                    <td><code>max_retries</code></td>
+                                    <td>int</td>
+                                    <td>3</td>
+                                    <td>Retry attempts for failed API calls</td>
+                                </tr>
+                                <tr>
+                                    <td><code>fallback_models</code></td>
+                                    <td>list</td>
+                                    <td>[]</td>
+                                    <td>Backup models if primary fails</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Full Configuration Example</h3>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.cmvk import ConsensusVerifier, ModelConfig, CMVKConfig
+
+config = CMVKConfig(
+    # Threshold settings
+    threshold=0.85,
+    min_models=2,
+    require_unanimous=False,
+    
+    # Model settings
+    models=[
+        ModelConfig(
+            name="gpt-4",
+            weight=1.0,
+            timeout=30,
+            temperature=0.0,  # Deterministic
+            max_tokens=500
+        ),
+        ModelConfig(
+            name="claude-3-opus",
+            weight=1.2,
+            timeout=45,
+            temperature=0.0,
+            max_tokens=500
+        ),
+        ModelConfig(
+            name="gemini-pro",
+            weight=0.9,
+            timeout=25,
+            temperature=0.0,
+            max_tokens=500
+        ),
+    ],
+    fallback_models=["gpt-3.5-turbo", "claude-3-haiku"],
+    
+    # Comparison settings
+    comparison_strategy="semantic",
+    embedding_model="text-embedding-3-small",
+    similarity_threshold=0.85,
+    
+    # Performance settings
+    cache_responses=True,
+    cache_ttl_seconds=3600,
+    max_concurrent_requests=10,
+    
+    # Retry settings
+    max_retries=3,
+    retry_delay_seconds=1.0,
+    exponential_backoff=True
+)
+
+verifier = ConsensusVerifier(config=config)</code></pre>
+                        </div>
+
+                        <h2 id="use-cases">Use Cases</h2>
+                        
+                        <h3>1. Fact-Checking</h3>
+                        <p>Verify factual claims before presenting them to users:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.cmvk import verify
+
+async def fact_check(claim: str) -> dict:
+    """Verify a factual claim with high confidence."""
+    result = await verify(
+        prompt=f"Is this statement true or false? Answer only 'true' or 'false': {claim}",
+        models=["gpt-4", "claude-3-opus", "gemini-pro"],
+        threshold=0.9,
+        comparison_strategy="exact"
+    )
+    
+    return {
+        "claim": claim,
+        "verified": result.consensus and result.answer.lower() == "true",
+        "confidence": result.confidence,
+        "sources": [m for m, r in result.responses.items() if r.answer.lower() == "true"]
+    }
+
+# Usage
+result = await fact_check("The Eiffel Tower is in Paris")
+print(f"Verified: {result['verified']} (confidence: {result['confidence']:.0%})")</code></pre>
+                        </div>
+
+                        <h3>2. Code Validation</h3>
+                        <p>Verify that generated code is correct before execution:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.cmvk import ConsensusVerifier
+
+code_verifier = ConsensusVerifier(
+    models=["gpt-4", "claude-3-opus"],
+    threshold=0.95,  # High threshold for code
+    comparison_strategy="exact"
+)
+
+async def validate_code(code: str, expected_behavior: str) -> bool:
+    """Verify code does what it's supposed to do."""
+    prompt = f"""
+    Analyze this code and determine if it correctly implements the expected behavior.
+    
+    Code:
+    ```python
+    {code}
+    ```
+    
+    Expected behavior: {expected_behavior}
+    
+    Answer only "correct" or "incorrect".
+    """
+    
+    result = await code_verifier.verify(prompt)
+    return result.consensus and result.answer.lower() == "correct"
+
+# Usage
+code = """
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+"""
+
+is_valid = await validate_code(code, "Calculate the nth Fibonacci number")
+print(f"Code is valid: {is_valid}")</code></pre>
+                        </div>
+
+                        <h3>3. Content Quality Assurance</h3>
+                        <p>Verify AI-generated content meets quality standards:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.cmvk import ConsensusVerifier
+
+qa_verifier = ConsensusVerifier(
+    models=["gpt-4", "claude-3-sonnet", "gemini-pro"],
+    threshold=0.8,
+    comparison_strategy="semantic"
+)
+
+async def qa_content(content: str, guidelines: list[str]) -> dict:
+    """Check if content meets quality guidelines."""
+    checks = {}
+    
+    for guideline in guidelines:
+        prompt = f"""
+        Does this content follow this guideline? Answer 'yes' or 'no'.
+        
+        Guideline: {guideline}
+        
+        Content:
+        {content}
+        """
+        
+        result = await qa_verifier.verify(prompt)
+        checks[guideline] = {
+            "passes": result.consensus and result.answer.lower() == "yes",
+            "confidence": result.confidence
+        }
+    
+    return {
+        "all_passed": all(c["passes"] for c in checks.values()),
+        "checks": checks
+    }
+
+# Usage
+guidelines = [
+    "Content is professional and appropriate",
+    "No harmful or misleading information",
+    "Grammar and spelling are correct"
+]
+
+qa_result = await qa_content("Your AI-generated article here...", guidelines)</code></pre>
+                        </div>
+
+                        <h3>4. Medical/Legal Verification</h3>
+                        <p>High-stakes verification with unanimous consensus:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.cmvk import ConsensusVerifier, ModelConfig
+
+# Ultra-strict verification for high-stakes scenarios
+strict_verifier = ConsensusVerifier(
+    models=[
+        ModelConfig("gpt-4", weight=1.0, timeout=60),
+        ModelConfig("claude-3-opus", weight=1.0, timeout=60),
+        ModelConfig("gemini-pro", weight=1.0, timeout=60),
+    ],
+    threshold=0.99,
+    require_unanimous=True,  # ALL models must agree
+    min_models=3,
+    comparison_strategy="semantic"
+)
+
+async def verify_medical_claim(claim: str) -> dict:
+    """Verify medical information with maximum scrutiny."""
+    result = await strict_verifier.verify(
+        f"Is this medical statement accurate according to current medical consensus? {claim}"
+    )
+    
+    if not result.consensus:
+        return {
+            "verified": False,
+            "warning": "CAUTION: Models did not reach unanimous consensus",
+            "confidence": result.confidence,
+            "recommendation": "Consult a medical professional"
+        }
+    
+    return {
+        "verified": True,
+        "confidence": result.confidence,
+        "disclaimer": "This is AI-generated verification, not medical advice"
+    }</code></pre>
+                        </div>
+
+                        <h2 id="kernelspace-integration">Integration with KernelSpace</h2>
+                        <p>
+                            CMVK integrates seamlessly with the Agent OS KernelSpace for automatic 
+                            verification of agent outputs.
+                        </p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import KernelSpace
+from agent_os.cmvk import ConsensusVerifier
+
+# Create kernel with CMVK integration
+kernel = KernelSpace(
+    policy="strict",
+    verification=ConsensusVerifier(
+        models=["gpt-4", "claude-3-sonnet"],
+        threshold=0.8
+    )
+)
+
+@kernel.register
+async def research_agent(query: str):
+    """Agent that automatically verifies its outputs."""
+    # Your agent logic here
+    response = await llm.complete(query)
+    
+    # KernelSpace automatically verifies before returning
+    return response
+
+# The kernel will:
+# 1. Run the agent
+# 2. Verify output with CMVK
+# 3. Block response if consensus not reached
+# 4. Log verification results to Flight Recorder</code></pre>
+                        </div>
+
+                        <h3>Policy-Based Verification</h3>
+                        <p>Configure verification requirements per policy:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import KernelSpace, Policy
+from agent_os.cmvk import ConsensusVerifier
+
+# Define verification policy
+verification_policy = Policy(
+    name="high-stakes-verification",
+    rules=[
+        {
+            "action": "financial_decision",
+            "verify": True,
+            "threshold": 0.95,
+            "models": ["gpt-4", "claude-3-opus", "gemini-pro"]
+        },
+        {
+            "action": "general_query",
+            "verify": True,
+            "threshold": 0.7,
+            "models": ["gpt-4", "claude-3-sonnet"]
+        },
+        {
+            "action": "internal_logging",
+            "verify": False  # Skip verification for logs
+        }
+    ]
+)
+
+kernel = KernelSpace(
+    policies=[verification_policy],
+    cmvk=ConsensusVerifier()
+)
+
+@kernel.register(action="financial_decision")
+async def approve_transaction(amount: float, recipient: str):
+    """High-stakes action requiring 95% consensus."""
+    # Automatically verified with strict threshold
+    return {"approved": True, "amount": amount}</code></pre>
+                        </div>
+
+                        <h3>Verification Events</h3>
+                        <p>Subscribe to verification events for monitoring:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import KernelSpace
+from agent_os.cmvk import VerificationEvent
+
+kernel = KernelSpace(policy="strict")
+
+@kernel.on(VerificationEvent.CONSENSUS_REACHED)
+async def on_consensus(event):
+    print(f"✓ Verified: {event.confidence:.0%} confidence")
+
+@kernel.on(VerificationEvent.CONSENSUS_FAILED)
+async def on_failure(event):
+    print(f"✗ Verification failed: {event.confidence:.0%}")
+    print(f"  Dissenting models: {event.dissenting_models}")
+    
+    # Optionally escalate to human review
+    await notify_human_reviewer(event)
+
+@kernel.on(VerificationEvent.MODEL_ERROR)
+async def on_error(event):
+    print(f"⚠ Model {event.model} failed: {event.error}")
+    # Failover to backup models handled automatically</code></pre>
+                        </div>
+
+                        <div class="aos-callout aos-callout-success">
+                            <h4>Next Steps</h4>
+                            <ul>
+                                <li><a href="../../docs/api.html">API Reference</a> — Complete CMVK API documentation</li>
+                                <li><a href="../emk/index.html">EMK Module</a> — Store verification results in episodic memory</li>
+                                <li><a href="../../examples/index.html">Examples</a> — Production-ready CMVK examples</li>
+                                <li><a href="../../integrations/index.html">Integrations</a> — Use CMVK with LangChain, CrewAI</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="aos-footer">
+        <div class="container">
+            <div class="aos-footer-grid">
+                <div class="aos-footer-brand">
+                    <h4>Agent OS</h4>
+                    <p>The Linux kernel for AI agents. Deterministic safety enforcement.</p>
+                    <p class="aos-footer-version">v0.1.0 • MIT License</p>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Documentation</h5>
+                    <ul>
+                        <li><a href="../../docs/quickstart.html">Quickstart</a></li>
+                        <li><a href="../../docs/api.html">API Reference</a></li>
+                        <li><a href="../../docs/policies.html">Policies</a></li>
+                        <li><a href="../index.html">Modules</a></li>
+                    </ul>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Modules</h5>
+                    <ul>
+                        <li><a href="index.html">CMVK</a></li>
+                        <li><a href="../emk/index.html">EMK</a></li>
+                        <li><a href="../iatp/index.html">IATP</a></li>
+                        <li><a href="../amb/index.html">AMB</a></li>
+                    </ul>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Connect</h5>
+                    <ul>
+                        <li><a href="https://github.com/imran-siddique" target="_blank">GitHub</a></li>
+                        <li><a href="https://linkedin.com/in/imransiddique1986" target="_blank">LinkedIn</a></li>
+                        <li><a href="https://twitter.com/mosiddi" target="_blank">Twitter</a></li>
+                        <li><a href="https://pypi.org/project/agent-os-kernel/" target="_blank">PyPI</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="aos-footer-bottom">
+                <p>&copy; 2026 Imran Siddique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../script.js"></script>
+</body>
+</html>

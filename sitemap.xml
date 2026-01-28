@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main Site -->
   <url>
     <loc>https://imran-siddique.github.io/</loc>
     <lastmod>2026-01-28</lastmod>
@@ -30,53 +31,124 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <!-- Agent OS Documentation -->
+  
+  <!-- Agent OS - Main -->
   <url>
     <loc>https://imran-siddique.github.io/agent-os/</loc>
     <lastmod>2026-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
+  
+  <!-- Agent OS - Documentation -->
   <url>
-    <loc>https://imran-siddique.github.io/agent-os/quickstart.html</loc>
+    <loc>https://imran-siddique.github.io/agent-os/docs/quickstart.html</loc>
     <lastmod>2026-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://imran-siddique.github.io/agent-os/docs.html</loc>
-    <lastmod>2026-01-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://imran-siddique.github.io/agent-os/api.html</loc>
+    <loc>https://imran-siddique.github.io/agent-os/docs/api.html</loc>
     <lastmod>2026-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://imran-siddique.github.io/agent-os/policies.html</loc>
+    <loc>https://imran-siddique.github.io/agent-os/docs/policies.html</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  
+  <!-- Agent OS - Modules -->
+  <url>
+    <loc>https://imran-siddique.github.io/agent-os/modules/</loc>
     <lastmod>2026-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://imran-siddique.github.io/agent-os/modules.html</loc>
+    <loc>https://imran-siddique.github.io/agent-os/modules/cmvk/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imran-siddique.github.io/agent-os/modules/emk/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imran-siddique.github.io/agent-os/modules/iatp/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imran-siddique.github.io/agent-os/modules/amb/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Agent OS - Integrations -->
+  <url>
+    <loc>https://imran-siddique.github.io/agent-os/integrations/</loc>
     <lastmod>2026-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://imran-siddique.github.io/agent-os/integrations.html</loc>
+    <loc>https://imran-siddique.github.io/agent-os/integrations/langchain/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imran-siddique.github.io/agent-os/integrations/crewai/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imran-siddique.github.io/agent-os/integrations/autogen/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Agent OS - Use Cases -->
+  <url>
+    <loc>https://imran-siddique.github.io/agent-os/use-cases/</loc>
     <lastmod>2026-01-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://imran-siddique.github.io/agent-os/use-cases.html</loc>
+    <loc>https://imran-siddique.github.io/agent-os/use-cases/healthcare/</loc>
     <lastmod>2026-01-28</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imran-siddique.github.io/agent-os/use-cases/finance/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://imran-siddique.github.io/agent-os/use-cases/education/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Agent OS - Examples -->
+  <url>
+    <loc>https://imran-siddique.github.io/agent-os/examples/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
