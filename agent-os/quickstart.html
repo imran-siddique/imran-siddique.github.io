@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get started with Agent OS in 5 minutes. Install, configure, and run your first governed AI agent with kernel-level policy enforcement.">
+    <meta name="keywords" content="Agent OS quickstart, AI agent tutorial, install agent-os, getting started, Python AI governance">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imran-siddique.github.io/agent-os/quickstart.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imran-siddique.github.io/agent-os/quickstart.html">
+    <meta property="og:title" content="Quickstart - Agent OS Documentation">
+    <meta property="og:description" content="Get started with Agent OS in 5 minutes. Your first governed AI agent.">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Quickstart - Agent OS">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- HowTo Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "Get Started with Agent OS",
+        "description": "Install Agent OS and create your first governed AI agent in 5 minutes",
+        "totalTime": "PT5M",
+        "tool": {
+            "@type": "HowToTool",
+            "name": "Python 3.9+"
+        },
+        "step": [
+            {
+                "@type": "HowToStep",
+                "name": "Install Agent OS",
+                "text": "Run pip install agent-os to install the package",
+                "position": 1
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Create a Kernel",
+                "text": "Import KernelSpace and create with a policy",
+                "position": 2
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Register Your Agent",
+                "text": "Use @kernel.register decorator on your agent function",
+                "position": 3
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Execute Safely",
+                "text": "Call kernel.execute() to run with policy enforcement",
+                "position": 4
+            }
+        ]
+    }
+    </script>
+    
+    <title>Quickstart - Agent OS Documentation | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css">
+    <link rel="stylesheet" href="agent-os.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="index.html" class="active">Agent OS</a></li>
+                <li><a href="../writings.html">Writings</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="docs-hero">
+            <div class="container">
+                <h1>🚀 Quickstart</h1>
+                <p>Get your first governed agent running in 5 minutes</p>
+            </div>
+        </section>
+
+        <section class="docs-content">
+            <div class="container">
+                <div class="docs-layout">
+                    <aside class="docs-sidebar">
+                        <nav class="docs-nav">
+                            <h4>On This Page</h4>
+                            <ul>
+                                <li><a href="#prerequisites">Prerequisites</a></li>
+                                <li><a href="#installation">Installation</a></li>
+                                <li><a href="#first-agent">First Agent</a></li>
+                                <li><a href="#policies">Using Policies</a></li>
+                                <li><a href="#signals">Agent Signals</a></li>
+                                <li><a href="#integrations">Framework Integrations</a></li>
+                                <li><a href="#next-steps">Next Steps</a></li>
+                            </ul>
+                        </nav>
+                        <nav class="docs-nav" style="margin-top: 1rem;">
+                            <h4>Documentation</h4>
+                            <ul>
+                                <li><a href="docs.html">Overview</a></li>
+                                <li><a href="quickstart.html" class="active">Quickstart</a></li>
+                                <li><a href="api.html">API Reference</a></li>
+                                <li><a href="policies.html">Policies</a></li>
+                                <li><a href="modules.html">Modules</a></li>
+                                <li><a href="integrations.html">Integrations</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+
+                    <div class="docs-main">
+                        <h2 id="prerequisites">Prerequisites</h2>
+                        <p>Before you begin, ensure you have:</p>
+                        <ul>
+                            <li><strong>Python 3.9+</strong> installed</li>
+                            <li><strong>pip</strong> package manager</li>
+                            <li>Basic familiarity with async/await Python</li>
+                        </ul>
+
+                        <h2 id="installation">Installation</h2>
+                        <p>Install Agent OS with pip:</p>
+                        
+                        <div class="code-block">
+                            <pre><code># Basic installation
+pip install agent-os
+
+# With all optional dependencies
+pip install agent-os[full]
+
+# Specific modules only
+pip install agent-os[cmvk]      # Cross-Model Verification
+pip install agent-os[iatp]      # Inter-Agent Trust Protocol
+pip install agent-os[healthcare] # Healthcare compliance</code></pre>
+                        </div>
+
+                        <p>Verify the installation:</p>
+                        <div class="code-block">
+                            <pre><code>python -c "import agent_os; print(agent_os.__version__)"
+# Output: 1.1.0</code></pre>
+                        </div>
+
+                        <h2 id="first-agent">Your First Governed Agent</h2>
+                        <p>Let's create a simple agent with kernel-level governance:</p>
+
+                        <div class="code-block">
+                            <pre><code>from agent_os import KernelSpace
+
+# 1. Create a kernel with the default strict policy
+kernel = KernelSpace(policy="strict")
+
+# 2. Register your agent function
+@kernel.register
+async def my_agent(task: str) -> str:
+    """A simple agent that processes tasks."""
+    # Your agent logic here
+    # The kernel intercepts all actions and enforces policies
+    return f"Completed: {task}"
+
+# 3. Execute the agent safely
+import asyncio
+
+async def main():
+    result = await kernel.execute(my_agent, "analyze this data")
+    print(result)
+    # Output: Completed: analyze this data
+
+asyncio.run(main())</code></pre>
+                        </div>
+
+                        <p>What happens behind the scenes:</p>
+                        <ol>
+                            <li>The kernel wraps your function with policy enforcement</li>
+                            <li>Every action is checked against the active policy</li>
+                            <li>Blocked actions are stopped <em>before</em> execution</li>
+                            <li>All actions are logged to the flight recorder</li>
+                        </ol>
+
+                        <h2 id="policies">Using Policies</h2>
+                        <p>Policies define what agents can and cannot do. The <code>strict</code> policy blocks dangerous operations:</p>
+
+                        <h3>Built-in Policies</h3>
+                        <div class="code-block">
+                            <pre><code># Strict - blocks file writes, shell commands, etc.
+kernel = KernelSpace(policy="strict")
+
+# Permissive - allows most actions, logs everything
+kernel = KernelSpace(policy="permissive")
+
+# Read-only - blocks all write operations
+kernel = KernelSpace(policy="read_only")</code></pre>
+                        </div>
+
+                        <h3>Custom Policies</h3>
+                        <p>Define your own rules:</p>
+
+                        <div class="code-block">
+                            <pre><code>from agent_os.policies import Policy, Pattern
+
+policy = Policy(
+    name="my-policy",
+    blocked_actions=[
+        "file_write",
+        "file_delete",
+        "database_drop",
+        "shell_execute"
+    ],
+    blocked_patterns=[
+        Pattern(r"\bpassword\b", "PII: password detected"),
+        Pattern(r"\bssn\b", "PII: SSN detected"),
+        Pattern(r"DROP\s+TABLE", "Destructive SQL blocked")
+    ],
+    allowed_domains=[
+        "api.openai.com",
+        "internal.company.com"
+    ]
+)
+
+kernel = KernelSpace(policy=policy)</code></pre>
+                        </div>
+
+                        <p>Or use YAML configuration:</p>
+                        <div class="code-block">
+                            <pre><code># policy.yaml
+name: my-policy
+version: "1.0"
+
+blocked_actions:
+  - file_write
+  - file_delete
+  - database_drop
+
+blocked_patterns:
+  - pattern: "\\bpassword\\b"
+    reason: "PII: password detected"
+  - pattern: "DROP\\s+TABLE"
+    reason: "Destructive SQL blocked"
+
+allowed_domains:
+  - api.openai.com</code></pre>
+                        </div>
+
+                        <div class="code-block">
+                            <pre><code>kernel = KernelSpace(policy="policy.yaml")</code></pre>
+                        </div>
+
+                        <h2 id="signals">Agent Signals</h2>
+                        <p>Control agent execution with POSIX-style signals:</p>
+
+                        <div class="code-block">
+                            <pre><code>from agent_os import KernelSpace, SignalDispatcher, AgentSignal
+
+kernel = KernelSpace(policy="strict")
+dispatcher = SignalDispatcher()
+
+# Register an agent
+@kernel.register
+async def long_running_agent(task):
+    # ... long-running work ...
+    pass
+
+# Start the agent
+agent_id = await kernel.spawn(long_running_agent, "big task")
+
+# Pause the agent for human review
+dispatcher.signal(agent_id, AgentSignal.SIGSTOP)
+
+# Resume execution
+dispatcher.signal(agent_id, AgentSignal.SIGCONT)
+
+# Terminate immediately (non-catchable)
+dispatcher.signal(agent_id, AgentSignal.SIGKILL)</code></pre>
+                        </div>
+
+                        <table class="posix-table">
+                            <thead>
+                                <tr>
+                                    <th>Signal</th>
+                                    <th>Description</th>
+                                    <th>Catchable?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>SIGKILL</code></td>
+                                    <td>Terminate immediately</td>
+                                    <td>No</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SIGSTOP</code></td>
+                                    <td>Pause for human review</td>
+                                    <td>No</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SIGCONT</code></td>
+                                    <td>Resume execution</td>
+                                    <td>N/A</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SIGTERM</code></td>
+                                    <td>Graceful termination</td>
+                                    <td>Yes</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h2 id="integrations">Framework Integrations</h2>
+                        <p>Agent OS wraps existing agent frameworks with minimal changes:</p>
+
+                        <h3>LangChain</h3>
+                        <div class="code-block">
+                            <pre><code>from langchain.agents import AgentExecutor
+from agent_os.integrations import LangChainKernel
+
+# Your existing LangChain agent
+agent_executor = AgentExecutor(agent=agent, tools=tools)
+
+# Wrap with Agent OS
+kernel = LangChainKernel(policy="strict")
+governed_agent = kernel.wrap(agent_executor)
+
+# Use as normal - now with kernel enforcement
+result = governed_agent.invoke({"input": "analyze this data"})</code></pre>
+                        </div>
+
+                        <h3>CrewAI</h3>
+                        <div class="code-block">
+                            <pre><code>from crewai import Crew
+from agent_os.integrations import CrewAIKernel
+
+# Your existing crew
+crew = Crew(agents=[agent1, agent2], tasks=[task1, task2])
+
+# Wrap with Agent OS
+kernel = CrewAIKernel(policy="strict")
+governed_crew = kernel.wrap(crew)
+
+# Run with governance
+result = governed_crew.kickoff()</code></pre>
+                        </div>
+
+                        <h3>OpenAI Assistants</h3>
+                        <div class="code-block">
+                            <pre><code>from openai import OpenAI
+from agent_os.integrations import OpenAIKernel
+
+client = OpenAI()
+assistant = client.beta.assistants.create(
+    name="My Assistant",
+    model="gpt-4"
+)
+
+# Wrap with Agent OS
+kernel = OpenAIKernel(policy="strict")
+governed = kernel.wrap_assistant(assistant, client)
+
+# Now governed
+response = governed.chat("What's the weather?")</code></pre>
+                        </div>
+
+                        <p><a href="integrations.html" class="btn-secondary">See All Integrations →</a></p>
+
+                        <h2 id="next-steps">Next Steps</h2>
+                        <p>Now that you have your first governed agent running:</p>
+
+                        <div class="docs-grid" style="margin-top: 1.5rem;">
+                            <a href="policies.html" class="docs-card">
+                                <div class="docs-icon">📜</div>
+                                <h3>Policy Reference</h3>
+                                <p>Full policy language</p>
+                            </a>
+                            <a href="modules.html" class="docs-card">
+                                <div class="docs-icon">🧩</div>
+                                <h3>Modules</h3>
+                                <p>CMVK, EMK, IATP, AMB</p>
+                            </a>
+                            <a href="api.html" class="docs-card">
+                                <div class="docs-icon">📖</div>
+                                <h3>API Reference</h3>
+                                <p>Complete API docs</p>
+                            </a>
+                            <a href="use-cases.html" class="docs-card">
+                                <div class="docs-icon">💼</div>
+                                <h3>Use Cases</h3>
+                                <p>Production examples</p>
+                            </a>
+                        </div>
+
+                        <h3>Get Help</h3>
+                        <ul>
+                            <li><a href="https://github.com/imran-siddique/agent-os/discussions" target="_blank">GitHub Discussions</a> — Ask questions</li>
+                            <li><a href="https://github.com/imran-siddique/agent-os/issues" target="_blank">GitHub Issues</a> — Report bugs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Agent OS</h4>
+                    <p>Kernel-level governance for autonomous AI agents</p>
+                    <p class="footer-version">v1.1.0 | MIT License</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="quickstart.html">Quickstart</a></li>
+                        <li><a href="api.html">API Reference</a></li>
+                        <li><a href="policies.html">Policy Reference</a></li>
+                        <li><a href="modules.html">Modules</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="integrations.html">Integrations</a></li>
+                        <li><a href="use-cases.html">Use Cases</a></li>
+                        <li><a href="https://github.com/imran-siddique/agent-os" target="_blank">GitHub</a></li>
+                        <li><a href="https://pypi.org/project/agent-os/" target="_blank">PyPI</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="https://github.com/imran-siddique" target="_blank">GitHub</a></li>
+                        <li><a href="https://linkedin.com/in/imransiddique1986" target="_blank">LinkedIn</a></li>
+                        <li><a href="https://twitter.com/mosiddi" target="_blank">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>

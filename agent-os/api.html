@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete API reference for Agent OS. KernelSpace, SignalDispatcher, Policy, and all module APIs documented with examples.">
+    <meta name="keywords" content="Agent OS API, KernelSpace, SignalDispatcher, Policy API, Python AI governance API">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imran-siddique.github.io/agent-os/api.html">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imran-siddique.github.io/agent-os/api.html">
+    <meta property="og:title" content="API Reference - Agent OS Documentation">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <title>API Reference - Agent OS Documentation | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css">
+    <link rel="stylesheet" href="agent-os.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="index.html" class="active">Agent OS</a></li>
+                <li><a href="../writings.html">Writings</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="docs-hero">
+            <div class="container">
+                <h1>📖 API Reference</h1>
+                <p>Complete API documentation for Agent OS</p>
+            </div>
+        </section>
+
+        <section class="docs-content">
+            <div class="container">
+                <div class="docs-layout">
+                    <aside class="docs-sidebar">
+                        <nav class="docs-nav">
+                            <h4>Core APIs</h4>
+                            <ul>
+                                <li><a href="#kernelspace">KernelSpace</a></li>
+                                <li><a href="#signal-dispatcher">SignalDispatcher</a></li>
+                                <li><a href="#agent-signal">AgentSignal</a></li>
+                                <li><a href="#policy">Policy</a></li>
+                                <li><a href="#flight-recorder">FlightRecorder</a></li>
+                            </ul>
+                        </nav>
+                        <nav class="docs-nav" style="margin-top: 1rem;">
+                            <h4>Module APIs</h4>
+                            <ul>
+                                <li><a href="#cmvk-api">CMVK</a></li>
+                                <li><a href="#emk-api">EMK</a></li>
+                                <li><a href="#iatp-api">IATP</a></li>
+                                <li><a href="#amb-api">AMB</a></li>
+                            </ul>
+                        </nav>
+                        <nav class="docs-nav" style="margin-top: 1rem;">
+                            <h4>Documentation</h4>
+                            <ul>
+                                <li><a href="docs.html">Overview</a></li>
+                                <li><a href="quickstart.html">Quickstart</a></li>
+                                <li><a href="api.html" class="active">API Reference</a></li>
+                                <li><a href="policies.html">Policies</a></li>
+                                <li><a href="modules.html">Modules</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+
+                    <div class="docs-main">
+                        <h2 id="kernelspace">KernelSpace</h2>
+                        <p>The core class that provides kernel-level agent governance.</p>
+
+                        <div class="code-block">
+                            <pre><code>from agent_os import KernelSpace
+
+kernel = KernelSpace(
+    policy="strict",           # Policy name, path, or Policy object
+    flight_recorder=True,      # Enable action logging
+    metrics=False,             # Enable Prometheus metrics
+    tracing=False              # Enable OpenTelemetry tracing
+)</code></pre>
+                        </div>
+
+                        <h3>Constructor Parameters</h3>
+                        <table>
+                            <thead>
+                                <tr><th>Parameter</th><th>Type</th><th>Default</th><th>Description</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><code>policy</code></td><td><code>str | Policy</code></td><td><code>"strict"</code></td><td>Policy name, YAML path, or Policy object</td></tr>
+                                <tr><td><code>flight_recorder</code></td><td><code>bool</code></td><td><code>True</code></td><td>Enable immutable action logging</td></tr>
+                                <tr><td><code>metrics</code></td><td><code>bool</code></td><td><code>False</code></td><td>Enable Prometheus metrics on port 9090</td></tr>
+                                <tr><td><code>tracing</code></td><td><code>bool</code></td><td><code>False</code></td><td>Enable OpenTelemetry distributed tracing</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Methods</h3>
+
+                        <h4><code>register(func)</code></h4>
+                        <p>Decorator to register an agent function with the kernel.</p>
+                        <div class="code-block">
+                            <pre><code>@kernel.register
+async def my_agent(task: str) -> str:
+    return f"Done: {task}"</code></pre>
+                        </div>
+
+                        <h4><code>execute(func, *args, **kwargs)</code></h4>
+                        <p>Execute a registered agent with policy enforcement.</p>
+                        <div class="code-block">
+                            <pre><code>result = await kernel.execute(my_agent, "analyze data")
+# Returns: "Done: analyze data"</code></pre>
+                        </div>
+
+                        <h4><code>spawn(func, *args, **kwargs)</code></h4>
+                        <p>Spawn an agent as a background process, returns agent ID.</p>
+                        <div class="code-block">
+                            <pre><code>agent_id = await kernel.spawn(long_running_agent, "big task")
+# Returns: "agent-abc123"</code></pre>
+                        </div>
+
+                        <h4><code>get_status(agent_id)</code></h4>
+                        <p>Get the current status of a spawned agent.</p>
+                        <div class="code-block">
+                            <pre><code>status = kernel.get_status(agent_id)
+# Returns: AgentStatus(state="running", progress=0.5)</code></pre>
+                        </div>
+
+                        <h2 id="signal-dispatcher">SignalDispatcher</h2>
+                        <p>Dispatches POSIX-style signals to control agent execution.</p>
+
+                        <div class="code-block">
+                            <pre><code>from agent_os import SignalDispatcher, AgentSignal
+
+dispatcher = SignalDispatcher()
+
+# Send signals
+dispatcher.signal(agent_id, AgentSignal.SIGSTOP)   # Pause
+dispatcher.signal(agent_id, AgentSignal.SIGCONT)   # Resume
+dispatcher.signal(agent_id, AgentSignal.SIGKILL)   # Terminate</code></pre>
+                        </div>
+
+                        <h3>Methods</h3>
+
+                        <h4><code>signal(agent_id, signal)</code></h4>
+                        <p>Send a signal to the specified agent.</p>
+                        <table>
+                            <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>agent_id</code></td><td><code>str</code></td><td>Target agent identifier</td></tr>
+                                <tr><td><code>signal</code></td><td><code>AgentSignal</code></td><td>Signal to send</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h4><code>register_handler(signal, handler)</code></h4>
+                        <p>Register a custom handler for catchable signals (SIGTERM, SIGWARN).</p>
+                        <div class="code-block">
+                            <pre><code>def my_handler(agent_id, signal):
+    print(f"Agent {agent_id} received {signal}")
+    
+dispatcher.register_handler(AgentSignal.SIGTERM, my_handler)</code></pre>
+                        </div>
+
+                        <h2 id="agent-signal">AgentSignal</h2>
+                        <p>Enumeration of available signals.</p>
+
+                        <table>
+                            <thead><tr><th>Signal</th><th>Value</th><th>Catchable</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>SIGKILL</code></td><td>9</td><td>No</td><td>Immediate termination</td></tr>
+                                <tr><td><code>SIGSTOP</code></td><td>19</td><td>No</td><td>Pause execution</td></tr>
+                                <tr><td><code>SIGCONT</code></td><td>18</td><td>N/A</td><td>Resume paused agent</td></tr>
+                                <tr><td><code>SIGTERM</code></td><td>15</td><td>Yes</td><td>Graceful termination</td></tr>
+                                <tr><td><code>SIGWARN</code></td><td>30</td><td>Yes</td><td>Warning signal</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h2 id="policy">Policy</h2>
+                        <p>Define custom governance policies.</p>
+
+                        <div class="code-block">
+                            <pre><code>from agent_os.policies import Policy, Pattern, ActionType
+
+policy = Policy(
+    name="my-policy",
+    blocked_actions=[
+        ActionType.FILE_WRITE,
+        ActionType.FILE_DELETE,
+        ActionType.SHELL_EXECUTE
+    ],
+    blocked_patterns=[
+        Pattern(r"\bpassword\b", "PII detected"),
+        Pattern(r"DROP\s+TABLE", "Destructive SQL")
+    ],
+    allowed_domains=["api.openai.com"],
+    on_violation="sigkill"  # or "sigstop", "sigwarn"
+)</code></pre>
+                        </div>
+
+                        <h3>Pattern Class</h3>
+                        <div class="code-block">
+                            <pre><code>from agent_os.policies import Pattern
+
+pattern = Pattern(
+    regex=r"\b\d{3}-\d{2}-\d{4}\b",  # SSN pattern
+    reason="SSN detected - PII violation",
+    severity="critical"  # "low", "medium", "high", "critical"
+)</code></pre>
+                        </div>
+
+                        <h3>ActionType Enum</h3>
+                        <table>
+                            <thead><tr><th>Action</th><th>Description</th></tr></thead>
+                            <tbody>
+                                <tr><td><code>FILE_READ</code></td><td>Read from filesystem</td></tr>
+                                <tr><td><code>FILE_WRITE</code></td><td>Write to filesystem</td></tr>
+                                <tr><td><code>FILE_DELETE</code></td><td>Delete files</td></tr>
+                                <tr><td><code>DATABASE_READ</code></td><td>Database queries</td></tr>
+                                <tr><td><code>DATABASE_WRITE</code></td><td>Database modifications</td></tr>
+                                <tr><td><code>DATABASE_DROP</code></td><td>Drop tables/databases</td></tr>
+                                <tr><td><code>SHELL_EXECUTE</code></td><td>Execute shell commands</td></tr>
+                                <tr><td><code>NETWORK_REQUEST</code></td><td>HTTP/network calls</td></tr>
+                                <tr><td><code>LLM_CALL</code></td><td>LLM API invocations</td></tr>
+                            </tbody>
+                        </table>
+
+                        <h2 id="flight-recorder">FlightRecorder</h2>
+                        <p>Immutable audit log of all agent actions.</p>
+
+                        <div class="code-block">
+                            <pre><code>from agent_os import FlightRecorder
+
+recorder = FlightRecorder(storage="file://logs/")
+
+# Query logs
+entries = recorder.query(
+    agent_id="agent-123",
+    action_type="file_write",
+    time_range=("2026-01-01", "2026-01-31")
+)
+
+# Export for compliance
+recorder.export("audit_report.json", format="json")</code></pre>
+                        </div>
+
+                        <h3>LogEntry Structure</h3>
+                        <div class="code-block">
+                            <pre><code>{
+    "id": "entry-abc123",
+    "timestamp": "2026-01-15T10:30:00Z",
+    "agent_id": "agent-123",
+    "action": "file_write",
+    "target": "/data/output.txt",
+    "policy_result": "blocked",
+    "reason": "file_write blocked by strict policy",
+    "checksum": "sha256:abc..."
+}</code></pre>
+                        </div>
+
+                        <h2 id="cmvk-api">CMVK - Cross-Model Verification</h2>
+                        <p>Detect hallucinations via multi-model consensus.</p>
+
+                        <div class="code-block">
+                            <pre><code>from cmvk import verify, ConsensusVerifier, DriftDetector
+
+# Simple verification
+score = verify(
+    "The capital of France is Paris.",
+    "Paris is the capital city of France."
+)
+print(f"Drift: {score.drift_score}")  # 0.0 = identical
+
+# Consensus verification across models
+verifier = ConsensusVerifier(
+    models=["gpt-4", "claude-3", "gemini-pro"],
+    threshold=0.8
+)
+result = await verifier.verify_consensus(prompt)
+# Returns: ConsensusResult(agreed=True, confidence=0.95)
+
+# Detect semantic drift
+detector = DriftDetector()
+drift = detector.measure(original_text, generated_text)
+print(f"Drift: {drift.score}, Flags: {drift.flags}")</code></pre>
+                        </div>
+
+                        <h2 id="emk-api">EMK - Episodic Memory</h2>
+                        <p>Immutable agent memory with semantic search.</p>
+
+                        <div class="code-block">
+                            <pre><code>from emk import Episode, FileAdapter, MemoryStore
+
+# Create an episode
+episode = Episode(
+    goal="Analyze customer data",
+    action="SELECT * FROM customers WHERE region='west'",
+    result="Retrieved 500 rows",
+    reflection="Query was efficient, consider caching"
+)
+
+# Store episodes
+store = MemoryStore(adapter=FileAdapter("memory.jsonl"))
+store.store(episode)
+
+# Semantic search
+similar = store.search(
+    query="customer data queries",
+    limit=5,
+    similarity_threshold=0.7
+)
+
+# Time-travel: replay to specific point
+snapshot = store.replay(timestamp="2026-01-15T10:00:00Z")</code></pre>
+                        </div>
+
+                        <h2 id="iatp-api">IATP - Inter-Agent Trust</h2>
+                        <p>Cryptographic identity and message signing.</p>
+
+                        <div class="code-block">
+                            <pre><code>from iatp import AgentIdentity, SignedMessage, TrustRegistry, TrustLevel
+
+# Create agent identity
+agent = AgentIdentity.create(
+    agent_id="agent-001",
+    name="Data Analyzer",
+    capabilities=["read_data", "generate_reports"]
+)
+
+# Sign a message
+message = SignedMessage.create(
+    sender=agent,
+    recipient_id="agent-002",
+    content={"task": "analyze", "data": "..."}
+)
+
+# Trust registry
+registry = TrustRegistry()
+registry.register(agent, TrustLevel.HIGH)
+
+# Verify incoming message
+result = registry.verify(message)
+if result.valid:
+    print(f"Trusted message from {result.sender_id}")
+
+# Revoke an agent
+registry.revoke("agent-001", reason="Suspicious activity")</code></pre>
+                        </div>
+
+                        <h2 id="amb-api">AMB - Agent Message Bus</h2>
+                        <p>Decoupled communication between agents.</p>
+
+                        <div class="code-block">
+                            <pre><code>from amb_core import MessageBus
+from amb_core.adapters import RedisBroker, KafkaBroker
+
+# Create message bus
+broker = RedisBroker(url="redis://localhost:6379")
+bus = MessageBus(broker)
+
+# Publish messages
+await bus.publish("agent.tasks", {
+    "task_id": "task-123",
+    "action": "analyze",
+    "data": "..."
+})
+
+# Subscribe to topics
+async def handler(message):
+    print(f"Received: {message}")
+
+await bus.subscribe("agent.results", handler)
+
+# Request/reply pattern
+response = await bus.request(
+    "agent.compute",
+    {"operation": "sum", "values": [1, 2, 3]},
+    timeout=30.0
+)</code></pre>
+                        </div>
+
+                        <h3>Available Brokers</h3>
+                        <ul>
+                            <li><code>RedisBroker</code> - Redis pub/sub</li>
+                            <li><code>KafkaBroker</code> - Apache Kafka</li>
+                            <li><code>NATSBroker</code> - NATS messaging</li>
+                            <li><code>SQSBroker</code> - AWS SQS</li>
+                            <li><code>InMemoryBroker</code> - For testing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Agent OS</h4>
+                    <p>Kernel-level governance for autonomous AI agents</p>
+                    <p class="footer-version">v1.1.0 | MIT License</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="quickstart.html">Quickstart</a></li>
+                        <li><a href="api.html">API Reference</a></li>
+                        <li><a href="policies.html">Policy Reference</a></li>
+                        <li><a href="modules.html">Modules</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="integrations.html">Integrations</a></li>
+                        <li><a href="use-cases.html">Use Cases</a></li>
+                        <li><a href="https://github.com/imran-siddique/agent-os" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="https://github.com/imran-siddique" target="_blank">GitHub</a></li>
+                        <li><a href="https://linkedin.com/in/imransiddique1986" target="_blank">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
