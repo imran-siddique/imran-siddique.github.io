@@ -104,7 +104,8 @@
                 
                 <p class="aos-description">
                     Current AI frameworks let LLMs decide everything—including whether to follow safety rules. 
-                    <strong>Agent OS inverts this</strong>: the kernel decides, the LLM just computes.
+                    <strong>Agent OS inverts this</strong>: the kernel decides, the LLM just computes. 
+                    Zero policy violations. Guaranteed.
                 </p>
                 
                 <div class="aos-stats">
@@ -120,14 +121,21 @@
                         <span class="aos-stat-value">6+</span>
                         <span class="aos-stat-label">Framework Integrations</span>
                     </div>
+                    <div class="aos-stat">
+                        <span class="aos-stat-value">4</span>
+                        <span class="aos-stat-label">Core Modules</span>
+                    </div>
                 </div>
                 
                 <div class="aos-cta">
                     <a href="docs/quickstart.html" class="aos-btn-primary">
-                        Get Started →
+                        🚀 Get Started
+                    </a>
+                    <a href="tutorials/index.html" class="aos-btn-secondary">
+                        📚 Tutorials
                     </a>
                     <a href="https://github.com/imran-siddique/agent-os" target="_blank" class="aos-btn-secondary">
-                        View on GitHub
+                        ⭐ GitHub
                     </a>
                 </div>
                 
@@ -440,10 +448,83 @@ print(result)  # "Completed: analyze data"</code></pre>
             </div>
         </section>
 
-        <!-- Documentation Navigation -->
+        <!-- Tutorials Section -->
         <section class="aos-section aos-section-dark">
             <div class="container">
-                <h2 class="aos-section-title">Documentation</h2>
+                <h2 class="aos-section-title">📚 <span class="gradient">Tutorials</span></h2>
+                <p class="aos-section-subtitle">
+                    Step-by-step guides to master Agent OS, from basics to production deployment.
+                </p>
+                
+                <div class="aos-tutorials-grid">
+                    <a href="tutorials/index.html#getting-started" class="aos-tutorial-card">
+                        <div class="aos-tutorial-header">
+                            <span class="aos-tutorial-icon">🎯</span>
+                            <div class="aos-tutorial-meta">
+                                <span class="aos-tutorial-level">Beginner</span>
+                                <span class="aos-tutorial-time">15 min</span>
+                            </div>
+                        </div>
+                        <div class="aos-tutorial-body">
+                            <h3 class="aos-tutorial-title">Your First Governed Agent</h3>
+                            <p class="aos-tutorial-desc">Learn the fundamentals of Agent OS by building a simple governed agent from scratch.</p>
+                            <div class="aos-tutorial-tags">
+                                <span class="aos-tutorial-tag">KernelSpace</span>
+                                <span class="aos-tutorial-tag">Policies</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="tutorials/index.html#hallucination-detection" class="aos-tutorial-card">
+                        <div class="aos-tutorial-header">
+                            <span class="aos-tutorial-icon">🔍</span>
+                            <div class="aos-tutorial-meta">
+                                <span class="aos-tutorial-level">Intermediate</span>
+                                <span class="aos-tutorial-time">25 min</span>
+                            </div>
+                        </div>
+                        <div class="aos-tutorial-body">
+                            <h3 class="aos-tutorial-title">Detecting Hallucinations with CMVK</h3>
+                            <p class="aos-tutorial-desc">Use multi-model consensus to verify AI outputs and catch hallucinations before they cause problems.</p>
+                            <div class="aos-tutorial-tags">
+                                <span class="aos-tutorial-tag">CMVK</span>
+                                <span class="aos-tutorial-tag">Verification</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="tutorials/index.html#multi-agent" class="aos-tutorial-card">
+                        <div class="aos-tutorial-header">
+                            <span class="aos-tutorial-icon">🤝</span>
+                            <div class="aos-tutorial-meta">
+                                <span class="aos-tutorial-level">Advanced</span>
+                                <span class="aos-tutorial-time">40 min</span>
+                            </div>
+                        </div>
+                        <div class="aos-tutorial-body">
+                            <h3 class="aos-tutorial-title">Building Multi-Agent Systems</h3>
+                            <p class="aos-tutorial-desc">Coordinate multiple agents with cryptographic trust using IATP and the Agent Message Bus.</p>
+                            <div class="aos-tutorial-tags">
+                                <span class="aos-tutorial-tag">IATP</span>
+                                <span class="aos-tutorial-tag">AMB</span>
+                                <span class="aos-tutorial-tag">Multi-Agent</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div style="text-align: center; margin-top: var(--space-xl);">
+                    <a href="tutorials/index.html" class="aos-btn-secondary">
+                        View All Tutorials →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documentation Navigation -->
+        <section class="aos-section">
+            <div class="container">
+                <h2 class="aos-section-title">📖 Documentation</h2>
                 <p class="aos-section-subtitle">
                     Everything you need to build governed AI agents.
                 </p>
@@ -453,6 +534,12 @@ print(result)  # "Completed: analyze data"</code></pre>
                         <div class="aos-doc-icon">🚀</div>
                         <h3 class="aos-doc-title">Quickstart</h3>
                         <p class="aos-doc-desc">Get running in 2 minutes</p>
+                    </a>
+                    
+                    <a href="tutorials/index.html" class="aos-doc-card">
+                        <div class="aos-doc-icon">📚</div>
+                        <h3 class="aos-doc-title">Tutorials</h3>
+                        <p class="aos-doc-desc">Step-by-step guides</p>
                     </a>
                     
                     <a href="docs/api.html" class="aos-doc-card">

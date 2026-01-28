@@ -46,41 +46,38 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="aos-section" style="padding-top: 120px;">
+        <section class="aos-docs-hero">
             <div class="container">
-                <nav class="aos-breadcrumb">
-                    <a href="../index.html">Agent OS</a> / <span>Integrations</span>
-                </nav>
-                
-                <h1 class="aos-section-title" style="font-size: 2.5rem;">
-                    <span class="gradient">Framework Integrations</span>
-                </h1>
-                
-                <p class="aos-section-subtitle" style="max-width: 700px; margin: 0 auto;">
-                    Wrap your existing agents with one line. No rewrites required.
-                </p>
-                
-                <div class="aos-install" style="margin-top: var(--space-lg);">
-                    <code class="aos-install-cmd">
-                        <span class="prefix">$</span> pip install agent-os-kernel[all]
-                    </code>
-                </div>
+                <h1>🔌 <span class="text-gradient">Framework Integrations</span></h1>
+                <p>Wrap your existing AI agents with kernel-level governance in one line</p>
             </div>
         </section>
 
         <!-- Overview Section -->
-        <section class="aos-section aos-section-dark">
+        <section class="aos-section">
             <div class="container">
-                <h2 class="aos-section-title">Overview</h2>
-                <p class="aos-section-subtitle">
+                <!-- Breadcrumb -->
+                <nav class="aos-breadcrumb">
+                    <a href="../index.html">Agent OS</a>
+                    <span class="separator">→</span>
+                    <span class="current">Integrations</span>
+                </nav>
+                
+                <p class="aos-section-subtitle" style="max-width: 700px; text-align: left;">
                     Agent OS provides drop-in integrations for all major AI agent frameworks. 
                     Each integration wraps your existing agents with kernel-level governance—no code changes required.
                 </p>
                 
-                <div class="aos-code-block" style="max-width: 700px; margin: var(--space-lg) auto;">
+                <div class="aos-code-block" style="max-width: 700px; margin: var(--space-lg) 0;">
                     <pre><code># The universal pattern: wrap any agent with one line
 from agent_os.integrations import &lt;framework&gt;_kernel
 governed_agent = &lt;framework&gt;_kernel.wrap(your_agent)</code></pre>
+                </div>
+                
+                <div class="aos-install">
+                    <code class="aos-install-cmd">
+                        <span class="prefix">$</span> pip install agent-os-kernel[all]
+                    </code>
                 </div>
             </div>
         </section>
