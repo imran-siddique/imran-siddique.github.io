@@ -1,21 +1,26 @@
 /* ============================================
    AGENT OS - PREMIUM DOCUMENTATION THEME
-   Extends main site with unique identity
+   Modern, sleek design aligned with main site
    ============================================ */
 
-/* Agent OS Brand Colors - Unique to differentiate */
+/* Agent OS Brand Colors */
 :root {
     --aos-primary: #10b981;      /* Emerald - safety/trust */
+    --aos-primary-light: #34d399;
+    --aos-primary-dark: #059669;
     --aos-secondary: #6366f1;    /* Indigo - tech/precision */
     --aos-accent: #f59e0b;       /* Amber - alerts/warnings */
-    --aos-gradient: linear-gradient(135deg, #10b981 0%, #6366f1 100%);
-    --aos-gradient-hover: linear-gradient(135deg, #34d399 0%, #818cf8 100%);
+    --aos-danger: #ef4444;       /* Red - errors/problems */
+    --aos-gradient: linear-gradient(135deg, #10b981 0%, #059669 50%, #6366f1 100%);
+    --aos-gradient-hover: linear-gradient(135deg, #34d399 0%, #10b981 50%, #818cf8 100%);
+    --aos-gradient-subtle: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
     --aos-glow: 0 0 40px rgba(16, 185, 129, 0.3);
     --aos-glow-hover: 0 0 60px rgba(16, 185, 129, 0.5);
+    --aos-glow-soft: 0 4px 20px rgba(16, 185, 129, 0.15);
 }
 
 /* ============================================
-   AGENT OS LANDING PAGE
+   AGENT OS LANDING PAGE HERO
    ============================================ */
 .aos-hero {
     min-height: 100vh;
@@ -43,7 +48,7 @@
     z-index: 0;
 }
 
-/* Kernel grid visualization */
+/* Animated grid pattern */
 .aos-hero::after {
     content: '';
     position: absolute;
@@ -52,11 +57,17 @@
     right: 0;
     bottom: 0;
     background-image: 
-        linear-gradient(rgba(16, 185, 129, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(16, 185, 129, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 185, 129, 0.04) 1px, transparent 1px);
     background-size: 60px 60px;
     pointer-events: none;
     z-index: 0;
+    animation: gridPulse 8s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
 }
 
 .aos-hero-content {
@@ -79,6 +90,7 @@
     color: var(--aos-primary);
     margin-bottom: var(--space-xl);
     animation: fadeInUp 0.6s ease;
+    backdrop-filter: blur(10px);
 }
 
 .aos-badge .pulse-dot {
@@ -87,6 +99,12 @@
     background: var(--aos-primary);
     border-radius: 50%;
     animation: pulse 2s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--aos-primary);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 10px var(--aos-primary); }
+    50% { opacity: 0.7; transform: scale(1.2); box-shadow: 0 0 20px var(--aos-primary); }
 }
 
 .aos-title {
@@ -95,6 +113,7 @@
     line-height: 1;
     margin-bottom: var(--space-lg);
     animation: fadeInUp 0.6s ease 0.1s both;
+    letter-spacing: -0.03em;
 }
 
 .aos-title .gradient {
@@ -102,6 +121,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-shadow: 0 0 60px rgba(16, 185, 129, 0.3);
 }
 
 .aos-tagline {
@@ -116,15 +136,20 @@
     color: var(--text-muted);
     max-width: 700px;
     margin: 0 auto var(--space-xl);
-    line-height: 1.7;
+    line-height: 1.8;
     animation: fadeInUp 0.6s ease 0.3s both;
+}
+
+.aos-description strong {
+    color: var(--aos-primary);
+    font-weight: 600;
 }
 
 /* Stats row */
 .aos-stats {
     display: flex;
     justify-content: center;
-    gap: var(--space-3xl);
+    gap: var(--space-xl);
     margin-bottom: var(--space-2xl);
     flex-wrap: wrap;
     animation: fadeInUp 0.6s ease 0.4s both;
@@ -132,24 +157,38 @@
 
 .aos-stat {
     text-align: center;
+    padding: var(--space-lg);
+    background: var(--glass-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    min-width: 140px;
+    transition: var(--transition-normal);
+}
+
+.aos-stat:hover {
+    border-color: var(--aos-primary);
+    transform: translateY(-4px);
+    box-shadow: var(--aos-glow-soft);
 }
 
 .aos-stat-value {
     display: block;
-    font-size: 3rem;
+    font-size: 2.75rem;
     font-weight: 800;
     background: var(--aos-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     line-height: 1;
+    margin-bottom: var(--space-xs);
 }
 
 .aos-stat-label {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    font-weight: 500;
 }
 
 /* CTA buttons */
@@ -175,11 +214,13 @@
     text-decoration: none;
     transition: var(--transition-normal);
     box-shadow: var(--aos-glow);
+    border: none;
+    cursor: pointer;
 }
 
 .aos-btn-primary:hover {
     background: var(--aos-gradient-hover);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: var(--aos-glow-hover);
     color: white;
 }
@@ -197,6 +238,18 @@
     border-radius: var(--radius-md);
     text-decoration: none;
     transition: var(--transition-normal);
+    cursor: pointer;
+}
+
+.aos-btn-secondary:hover {
+    border-color: var(--aos-primary);
+    color: var(--aos-primary);
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.aos-btn-small {
+    padding: var(--space-sm) var(--space-lg);
+    font-size: 0.875rem;
 }
 
 .aos-btn-secondary:hover {
@@ -220,10 +273,18 @@
     font-family: var(--font-mono);
     font-size: 1rem;
     color: var(--aos-primary);
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.aos-install-cmd:hover {
+    border-color: var(--aos-primary);
+    box-shadow: var(--aos-glow-soft);
 }
 
 .aos-install-cmd .prefix {
     color: var(--text-muted);
+    user-select: none;
 }
 
 /* ============================================
@@ -242,14 +303,23 @@
     font-weight: 700;
     text-align: center;
     margin-bottom: var(--space-sm);
+    letter-spacing: -0.02em;
+}
+
+.aos-section-title .gradient {
+    background: var(--aos-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .aos-section-subtitle {
     text-align: center;
     color: var(--text-muted);
     font-size: 1.125rem;
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto var(--space-2xl);
+    line-height: 1.7;
 }
 
 /* ============================================
@@ -345,39 +415,80 @@
     border-radius: var(--radius-lg);
     padding: var(--space-2xl);
     text-decoration: none;
-    transition: var(--transition-normal);
     display: block;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-normal);
+}
+
+.aos-feature::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--aos-gradient-subtle);
+    opacity: 0;
+    transition: var(--transition-normal);
 }
 
 .aos-feature:hover {
     border-color: var(--aos-primary);
-    transform: translateY(-4px);
+    transform: translateY(-6px);
     box-shadow: var(--aos-glow);
+}
+
+.aos-feature:hover::before {
+    opacity: 1;
+}
+
+.aos-feature > * {
+    position: relative;
+    z-index: 1;
 }
 
 .aos-feature-icon {
     font-size: 2.5rem;
     margin-bottom: var(--space-md);
+    display: inline-block;
 }
 
 .aos-feature-title {
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.aos-feature-subtitle {
+    font-size: 0.8rem;
+    color: var(--aos-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     margin-bottom: var(--space-sm);
+    font-weight: 500;
 }
 
 .aos-feature-desc {
     color: var(--text-secondary);
     font-size: 0.9375rem;
-    line-height: 1.6;
+    line-height: 1.7;
     margin-bottom: var(--space-md);
 }
 
 .aos-feature-link {
     color: var(--aos-primary);
-    font-weight: 500;
+    font-weight: 600;
     font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: var(--transition-fast);
+}
+
+.aos-feature:hover .aos-feature-link {
+    gap: var(--space-sm);
 }
 
 /* ============================================
@@ -847,6 +958,45 @@
     margin: var(--space-lg) 0;
 }
 
+/* Callouts */
+.aos-callout {
+    padding: var(--space-lg);
+    border-radius: var(--radius-md);
+    margin: var(--space-lg) 0;
+    border-left: 4px solid;
+}
+
+.aos-callout h4 {
+    font-size: 1rem;
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+}
+
+.aos-callout p {
+    margin-bottom: 0;
+    font-size: 0.9375rem;
+}
+
+.aos-callout-info {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: var(--aos-secondary);
+}
+
+.aos-callout-success {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: var(--aos-primary);
+}
+
+.aos-callout-warning {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: var(--aos-accent);
+}
+
+.aos-callout-danger {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: var(--aos-danger);
+}
+
 /* Table styles */
 .aos-table {
     width: 100%;
@@ -855,6 +1005,7 @@
     background: var(--bg-card);
     border-radius: var(--radius-md);
     overflow: hidden;
+    border: 1px solid var(--border-color);
 }
 
 .aos-table th,
@@ -882,9 +1033,153 @@
 
 .aos-table code {
     background: var(--bg-tertiary);
-    padding: 2px 6px;
+    padding: 2px 8px;
     border-radius: 4px;
     font-size: 0.8125rem;
+    color: var(--aos-primary);
+}
+
+/* ============================================
+   TUTORIAL CARDS
+   ============================================ */
+.aos-tutorials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-xl);
+}
+
+.aos-tutorial-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    text-decoration: none;
+    transition: var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+}
+
+.aos-tutorial-card:hover {
+    border-color: var(--aos-primary);
+    transform: translateY(-6px);
+    box-shadow: var(--aos-glow);
+}
+
+.aos-tutorial-header {
+    padding: var(--space-lg) var(--space-xl);
+    background: var(--aos-gradient-subtle);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.aos-tutorial-icon {
+    font-size: 2rem;
+}
+
+.aos-tutorial-meta {
+    flex: 1;
+}
+
+.aos-tutorial-level {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--aos-primary);
+    font-weight: 600;
+}
+
+.aos-tutorial-time {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.aos-tutorial-body {
+    padding: var(--space-xl);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.aos-tutorial-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+}
+
+.aos-tutorial-desc {
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+    flex: 1;
+}
+
+.aos-tutorial-tags {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.aos-tutorial-tag {
+    background: var(--bg-tertiary);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+/* ============================================
+   BREADCRUMB
+   ============================================ */
+.aos-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) 0;
+    font-size: 0.875rem;
+    margin-bottom: var(--space-lg);
+}
+
+.aos-breadcrumb a {
+    color: var(--text-muted);
+    transition: var(--transition-fast);
+}
+
+.aos-breadcrumb a:hover {
+    color: var(--aos-primary);
+}
+
+.aos-breadcrumb .separator {
+    color: var(--text-muted);
+}
+
+.aos-breadcrumb .current {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* ============================================
+   PAGE HEADER
+   ============================================ */
+.aos-page-header {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.aos-page-header h1 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    margin-bottom: var(--space-sm);
+}
+
+.aos-page-header .description {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    max-width: 700px;
 }
 
 /* ============================================
@@ -903,15 +1198,28 @@
     .aos-footer-grid {
         grid-template-columns: 1fr 1fr;
     }
+    
+    .aos-tutorials-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 768px) {
+    .aos-hero {
+        padding: calc(80px + var(--space-2xl)) 0 var(--space-2xl);
+    }
+    
     .aos-stats {
-        gap: var(--space-xl);
+        gap: var(--space-md);
+    }
+    
+    .aos-stat {
+        min-width: 120px;
+        padding: var(--space-md);
     }
     
     .aos-stat-value {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
     
     .aos-comparison {
@@ -926,6 +1234,18 @@
     
     .aos-footer-grid {
         grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .aos-step {
+        padding-left: var(--space-2xl);
+    }
+    
+    .aos-step-number {
+        left: calc(-1 * var(--space-2xl));
+        width: 32px;
+        height: 32px;
+        font-size: 0.875rem;
     }
 }
 
@@ -944,9 +1264,16 @@
         width: 100%;
         justify-content: center;
     }
+    
+    .aos-install-cmd {
+        font-size: 0.875rem;
+        padding: var(--space-sm) var(--space-md);
+    }
 }
 
-/* Animations */
+/* ============================================
+   ANIMATIONS
+   ============================================ */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -956,4 +1283,32 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Scroll animations */
+.aos-animate {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.aos-animate.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
