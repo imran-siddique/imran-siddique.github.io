@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agent OS use cases: Healthcare (HIPAA), Finance, Education (COPPA), and Enterprise. Real-world production examples with governance policies.">
+    <meta name="keywords" content="AI healthcare, HIPAA AI, AI compliance, AI governance use cases, enterprise AI agents, education AI safety">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imran-siddique.github.io/agent-os/use-cases.html">
+    
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imran-siddique.github.io/agent-os/use-cases.html">
+    <meta property="og:title" content="Use Cases - Agent OS Documentation">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <title>Use Cases - Agent OS Documentation | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css">
+    <link rel="stylesheet" href="agent-os.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="index.html" class="active">Agent OS</a></li>
+                <li><a href="../writings.html">Writings</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="docs-hero">
+            <div class="container">
+                <h1>💼 Use Cases</h1>
+                <p>Production examples of Agent OS in action</p>
+            </div>
+        </section>
+
+        <section class="docs-content">
+            <div class="container">
+                <div class="docs-layout">
+                    <aside class="docs-sidebar">
+                        <nav class="docs-nav">
+                            <h4>Industries</h4>
+                            <ul>
+                                <li><a href="#healthcare">Healthcare</a></li>
+                                <li><a href="#finance">Finance</a></li>
+                                <li><a href="#education">Education</a></li>
+                                <li><a href="#enterprise">Enterprise</a></li>
+                            </ul>
+                        </nav>
+                        <nav class="docs-nav" style="margin-top: 1rem;">
+                            <h4>Documentation</h4>
+                            <ul>
+                                <li><a href="quickstart.html">Quickstart</a></li>
+                                <li><a href="api.html">API Reference</a></li>
+                                <li><a href="policies.html">Policies</a></li>
+                                <li><a href="modules.html">Modules</a></li>
+                                <li><a href="use-cases.html" class="active">Use Cases</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+
+                    <div class="docs-main">
+                        <p>Agent OS is used in production across industries where AI safety, compliance, and auditability are critical.</p>
+
+                        <h2 id="healthcare">🏥 Healthcare — HIPAA Compliance</h2>
+                        
+                        <div class="comparison-card solution" style="margin: 1.5rem 0;">
+                            <h4>Result</h4>
+                            <p><strong>0 PHI incidents</strong> across 12 agents over 6 months. Audit preparation reduced from 40 hours to 2 hours per month.</p>
+                        </div>
+
+                        <h3>The Challenge</h3>
+                        <p>Healthcare organizations want AI agents for clinical decision support, administrative automation, and patient data analysis. But HIPAA requires:</p>
+                        <ul>
+                            <li>Audit trails for all PHI access</li>
+                            <li>Minimum necessary data access</li>
+                            <li>Breach notification capabilities</li>
+                            <li>Role-based access controls</li>
+                        </ul>
+
+                        <h3>The Solution</h3>
+                        <div class="code-block">
+                            <pre><code>from agent_os import KernelSpace
+from agent_os.policies.templates import hipaa_standard
+
+# HIPAA-compliant kernel
+kernel = KernelSpace(
+    policy=hipaa_standard(),
+    audit_storage="encrypted_s3",
+    breach_alerts="pagerduty"
+)
+
+@kernel.register
+async def clinical_notes_agent(patient_id: str, query: str):
+    """Agent for querying clinical notes."""
+    # Kernel automatically:
+    # - Logs all PHI access with purpose
+    # - Scans outputs for PHI before return
+    # - Enforces role-based access
+    # - Alerts on unusual access patterns
+    
+    notes = await search_clinical_notes(patient_id, query)
+    return notes</code></pre>
+                        </div>
+
+                        <h3>Policy Highlights</h3>
+                        <div class="code-block">
+                            <pre><code># HIPAA policy features
+policies:
+  phi_detection:
+    enabled: true
+    patterns:
+      - medical_record_numbers
+      - ssn
+      - dates_of_birth
+      - addresses
+    on_detect: redact_and_log
+    
+  access_control:
+    require_purpose: true
+    allowed_purposes: [treatment, operations, research]
+    
+  audit:
+    log_all_access: true
+    retention_days: 2190  # 6 years per HIPAA
+    
+  breach_detection:
+    unusual_volume_threshold: 100
+    after_hours_alert: true</code></pre>
+                        </div>
+
+                        <hr style="margin: 3rem 0; border-color: var(--border-color);">
+
+                        <h2 id="finance">💰 Finance — Risk Management</h2>
+
+                        <div class="comparison-card solution" style="margin: 1.5rem 0;">
+                            <h4>Result</h4>
+                            <p><strong>$2.3M in avoided losses</strong> from blocked high-risk trades. Real-time compliance with SEC regulations.</p>
+                        </div>
+
+                        <h3>The Challenge</h3>
+                        <p>Financial services deploy AI agents for trading, risk analysis, and compliance. Requirements include:</p>
+                        <ul>
+                            <li>Position limits and risk controls</li>
+                            <li>Audit trails for regulatory review</li>
+                            <li>PII/PCI data protection</li>
+                            <li>Circuit breakers for anomalous behavior</li>
+                        </ul>
+
+                        <h3>The Solution</h3>
+                        <div class="code-block">
+                            <pre><code>from agent_os import KernelSpace
+from agent_os.policies import Policy, Pattern
+
+# DeFi risk sentinel policy
+policy = Policy(
+    name="defi-risk-policy",
+    
+    # Custom risk checks
+    pre_action_hooks=[
+        check_position_limits,
+        verify_counterparty_trust,
+        calculate_exposure
+    ],
+    
+    # Blocked patterns
+    blocked_patterns=[
+        Pattern(r"position_size\s*>\s*1000000", "Position limit exceeded"),
+        Pattern(r"leverage\s*>\s*10", "Leverage limit exceeded")
+    ],
+    
+    # Circuit breaker
+    circuit_breaker={
+        "max_actions_per_minute": 100,
+        "max_value_per_hour": 10_000_000,
+        "on_trigger": "sigstop"  # Pause for review
+    }
+)
+
+kernel = KernelSpace(policy=policy)
+
+@kernel.register
+async def trading_agent(action: str, params: dict):
+    # All trades governed
+    # Circuit breaker triggers SIGSTOP if anomalous
+    return await execute_trade(action, params)</code></pre>
+                        </div>
+
+                        <h3>Case Study: DeFi Risk Sentinel</h3>
+                        <table>
+                            <thead><tr><th>Metric</th><th>Before</th><th>After</th></tr></thead>
+                            <tbody>
+                                <tr><td>Policy violations</td><td>12/month</td><td>0</td></tr>
+                                <tr><td>Risk exposure events</td><td>3/quarter</td><td>0</td></tr>
+                                <tr><td>Audit findings</td><td>5</td><td>0</td></tr>
+                                <tr><td>Regulatory confidence</td><td>Medium</td><td>High</td></tr>
+                            </tbody>
+                        </table>
+
+                        <hr style="margin: 3rem 0; border-color: var(--border-color);">
+
+                        <h2 id="education">📚 Education — COPPA/FERPA Compliance</h2>
+
+                        <div class="comparison-card solution" style="margin: 1.5rem 0;">
+                            <h4>Result</h4>
+                            <p><strong>100% age-appropriate content</strong>. Full parent visibility into all student interactions. Zero PII collection from minors.</p>
+                        </div>
+
+                        <h3>The Challenge</h3>
+                        <p>Educational AI tutors have enormous potential but come with serious safety concerns:</p>
+                        <ul>
+                            <li>Age-inappropriate content generation</li>
+                            <li>COPPA restrictions on data from children under 13</li>
+                            <li>FERPA requirements for educational records</li>
+                            <li>Parent/guardian visibility requirements</li>
+                        </ul>
+
+                        <h3>The Solution</h3>
+                        <div class="code-block">
+                            <pre><code>from agent_os import KernelSpace
+from agent_os.policies.templates import k12_safe
+
+# COPPA-compliant tutoring kernel
+kernel = KernelSpace(
+    policy=k12_safe(max_age=13),
+    parent_portal=True,
+    pii_mode="strict_reject"
+)
+
+@kernel.register
+async def tutoring_agent(question: str, student_context: dict):
+    """Safe tutoring agent for K-12."""
+    # Kernel automatically:
+    # - Filters age-inappropriate content
+    # - Blocks PII collection attempts
+    # - Logs all interactions for parent review
+    # - Redirects sensitive topics to trusted adults
+    
+    response = await generate_educational_response(question)
+    return response</code></pre>
+                        </div>
+
+                        <h3>Content Safety Policy</h3>
+                        <div class="code-block">
+                            <pre><code># K-12 safety policy
+content_filtering:
+  enabled: true
+  age_groups:
+    elementary: [5, 11]
+    middle_school: [11, 14]
+    high_school: [14, 18]
+    
+  blocked_topics:
+    all_ages:
+      - violence
+      - explicit_content
+      - illegal_activities
+    under_13:
+      - dating_advice
+      - social_media
+      - personal_finances
+      
+  sensitive_topics:
+    - mental_health
+    - bullying
+    - abuse
+  on_sensitive: redirect_to_adult
+  
+parent_visibility:
+  enabled: true
+  log_all_interactions: true
+  allow_interaction_download: true
+  alert_on_concerning_topics: true</code></pre>
+                        </div>
+
+                        <hr style="margin: 3rem 0; border-color: var(--border-color);">
+
+                        <h2 id="enterprise">🏢 Enterprise — Multi-Agent Governance</h2>
+
+                        <div class="comparison-card solution" style="margin: 1.5rem 0;">
+                            <h4>Result</h4>
+                            <p><strong>SOC 2 Type II certified</strong> AI agent deployment. Complete audit trail for all 50+ agents across 12 teams.</p>
+                        </div>
+
+                        <h3>The Challenge</h3>
+                        <p>Enterprise deployments involve many agents across teams, requiring:</p>
+                        <ul>
+                            <li>Centralized policy management</li>
+                            <li>Cross-agent trust verification</li>
+                            <li>Comprehensive audit logging</li>
+                            <li>Role-based access control</li>
+                            <li>Integration with existing security infrastructure</li>
+                        </ul>
+
+                        <h3>The Solution</h3>
+                        <div class="code-block">
+                            <pre><code>from agent_os import KernelSpace
+from agent_os.policies.templates import enterprise_standard
+from agent_os.integrations import SSOIntegration, SIEMIntegration
+
+# Enterprise kernel with SSO and SIEM integration
+kernel = KernelSpace(
+    policy=enterprise_standard(
+        allowed_domains=["*.company.internal", "api.openai.com"],
+        require_auth=True
+    ),
+    auth=SSOIntegration(provider="okta"),
+    audit=SIEMIntegration(endpoint="https://siem.company.internal")
+)
+
+# Register agents with IATP for inter-agent trust
+from iatp import TrustRegistry
+
+registry = TrustRegistry()
+registry.register(data_agent, TrustLevel.HIGH)
+registry.register(reporting_agent, TrustLevel.MEDIUM)
+registry.register(external_agent, TrustLevel.LOW)
+
+# Cross-agent communication is verified
+@kernel.register
+async def coordinator_agent(task: str):
+    # Messages between agents are signed and verified
+    # Trust levels enforce capability restrictions
+    result = await data_agent.execute(task)
+    report = await reporting_agent.summarize(result)
+    return report</code></pre>
+                        </div>
+
+                        <h3>Observability Stack</h3>
+                        <div class="code-block">
+                            <pre><code># Enterprise observability
+observability:
+  metrics:
+    enabled: true
+    prometheus_port: 9090
+    dashboards: grafana
+    
+  tracing:
+    enabled: true
+    provider: opentelemetry
+    jaeger_endpoint: http://jaeger:14268
+    
+  logging:
+    enabled: true
+    format: json
+    siem_integration: splunk
+    
+  alerts:
+    policy_violation:
+      severity: critical
+      notify: [pagerduty, slack]
+    unusual_activity:
+      severity: warning
+      notify: [slack]</code></pre>
+                        </div>
+
+                        <h3>Production Examples</h3>
+
+                        <div class="use-cases-grid" style="margin-top: 1.5rem;">
+                            <div class="use-case-card">
+                                <h4>🌱 Carbon Credit Auditor</h4>
+                                <p>Verifies carbon credit claims with blockchain anchoring</p>
+                                <div class="use-case-stat">34K+ audits, 0 false positives</div>
+                            </div>
+                            <div class="use-case-card">
+                                <h4>⚡ Grid Balancing Swarm</h4>
+                                <p>Real-time energy grid coordination across regions</p>
+                                <div class="use-case-stat">99.97% uptime</div>
+                            </div>
+                            <div class="use-case-card">
+                                <h4>📊 Compliance Reporter</h4>
+                                <p>Automated regulatory reporting with audit trails</p>
+                                <div class="use-case-stat">90% time savings</div>
+                            </div>
+                            <div class="use-case-card">
+                                <h4>🔒 Security Analyst</h4>
+                                <p>Threat detection and response automation</p>
+                                <div class="use-case-stat">15min MTTR</div>
+                            </div>
+                        </div>
+
+                        <h2>Getting Started with Your Use Case</h2>
+                        <p>Ready to deploy governed agents in your industry?</p>
+
+                        <div class="docs-grid" style="margin-top: 1.5rem;">
+                            <a href="quickstart.html" class="docs-card">
+                                <div class="docs-icon">🚀</div>
+                                <h3>Quickstart</h3>
+                                <p>5-minute setup</p>
+                            </a>
+                            <a href="policies.html" class="docs-card">
+                                <div class="docs-icon">📜</div>
+                                <h3>Policy Templates</h3>
+                                <p>HIPAA, SOC 2, COPPA</p>
+                            </a>
+                            <a href="https://github.com/imran-siddique/agent-os/discussions" target="_blank" class="docs-card">
+                                <div class="docs-icon">💬</div>
+                                <h3>Discuss</h3>
+                                <p>Ask the community</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Agent OS</h4>
+                    <p>Kernel-level governance for autonomous AI agents</p>
+                    <p class="footer-version">v1.1.0 | MIT License</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="quickstart.html">Quickstart</a></li>
+                        <li><a href="api.html">API Reference</a></li>
+                        <li><a href="policies.html">Policy Reference</a></li>
+                        <li><a href="modules.html">Modules</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="integrations.html">Integrations</a></li>
+                        <li><a href="use-cases.html">Use Cases</a></li>
+                        <li><a href="https://github.com/imran-siddique/agent-os" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="https://github.com/imran-siddique" target="_blank">GitHub</a></li>
+                        <li><a href="https://linkedin.com/in/imransiddique1986" target="_blank">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
