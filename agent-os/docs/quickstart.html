@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get started with Agent OS in minutes. Learn how to install, configure, and build your first governed AI agent with deterministic safety enforcement.">
+    <meta name="keywords" content="Agent OS quickstart, AI agent tutorial, agent-os-kernel, AI safety, LangChain integration, CrewAI integration, POSIX signals">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imran-siddique.github.io/agent-os/docs/quickstart.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imran-siddique.github.io/agent-os/docs/quickstart.html">
+    <meta property="og:title" content="Quickstart Guide - Agent OS">
+    <meta property="og:description" content="Get started with Agent OS in minutes. Build your first governed AI agent with deterministic safety enforcement.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <title>Quickstart Guide - Agent OS | Imran Siddique</title>
+    <link rel="stylesheet" href="../../styles-new.css">
+    <link rel="stylesheet" href="../assets/agent-os.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../about.html">About</a></li>
+                <li><a href="../../projects.html">Projects</a></li>
+                <li><a href="../index.html" class="active">Agent OS</a></li>
+                <li><a href="../../writings.html">Writings</a></li>
+                <li><a href="../../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="aos-docs-hero">
+            <div class="container">
+                <h1>🚀 <span class="text-gradient">Quickstart Guide</span></h1>
+                <p>Get up and running with Agent OS in under 5 minutes</p>
+            </div>
+        </section>
+
+        <!-- Documentation Content -->
+        <section class="aos-docs-content">
+            <div class="container">
+                <div class="aos-docs-layout">
+                    <!-- Sidebar Navigation -->
+                    <aside class="aos-sidebar">
+                        <nav class="aos-sidebar-nav">
+                            <h4 class="aos-sidebar-title">On This Page</h4>
+                            <ul>
+                                <li><a href="#prerequisites">Prerequisites</a></li>
+                                <li><a href="#installation">Installation</a></li>
+                                <li><a href="#first-agent">Your First Governed Agent</a></li>
+                                <li><a href="#policies">Using Policies</a></li>
+                                <li><a href="#signals">POSIX Signals</a></li>
+                                <li><a href="#integrations">Framework Integrations</a></li>
+                                <li><a href="#next-steps">Next Steps</a></li>
+                            </ul>
+                        </nav>
+                        
+                        <nav class="aos-sidebar-nav">
+                            <h4 class="aos-sidebar-title">Documentation</h4>
+                            <ul>
+                                <li><a href="quickstart.html" class="active">Quickstart</a></li>
+                                <li><a href="../tutorials/index.html">Tutorials</a></li>
+                                <li><a href="api.html">API Reference</a></li>
+                                <li><a href="policies.html">Policy Reference</a></li>
+                                <li><a href="../modules/index.html">Modules</a></li>
+                                <li><a href="../integrations/index.html">Integrations</a></li>
+                                <li><a href="../examples/index.html">Examples</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+
+                    <!-- Main Content -->
+                    <article class="aos-main">
+                        <h2 id="prerequisites">Prerequisites</h2>
+                        <p>Before you begin, ensure you have the following installed on your system:</p>
+                        
+                        <table class="aos-table">
+                            <thead>
+                                <tr>
+                                    <th>Requirement</th>
+                                    <th>Version</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Python</td>
+                                    <td><code>3.9+</code></td>
+                                    <td>Python 3.10+ recommended for best performance</td>
+                                </tr>
+                                <tr>
+                                    <td>pip</td>
+                                    <td><code>21.0+</code></td>
+                                    <td>Package installer for Python</td>
+                                </tr>
+                                <tr>
+                                    <td>Operating System</td>
+                                    <td>Any</td>
+                                    <td>Windows, macOS, Linux supported</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Optional Dependencies</h3>
+                        <p>Depending on your use case, you may also need:</p>
+                        <ul>
+                            <li><strong>Redis</strong> — For Agent Message Bus (AMB) with Redis backend</li>
+                            <li><strong>OpenAI API Key</strong> — For CMVK cross-model verification</li>
+                            <li><strong>LangChain/CrewAI</strong> — For framework integrations</li>
+                        </ul>
+
+                        <h2 id="installation">Installation</h2>
+                        <p>Install Agent OS from PyPI using pip:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>pip install agent-os-kernel</code></pre>
+                        </div>
+
+                        <h3>Verify Installation</h3>
+                        <p>Confirm the installation was successful:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>python -c "import agent_os; print(agent_os.__version__)"</code></pre>
+                        </div>
+
+                        <h3>Install with Optional Dependencies</h3>
+                        <p>For additional features, install with extras:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code># Install with LangChain integration
+pip install agent-os-kernel[langchain]
+
+# Install with CrewAI integration
+pip install agent-os-kernel[crewai]
+
+# Install with all integrations
+pip install agent-os-kernel[all]
+
+# Install with Redis support for AMB
+pip install agent-os-kernel[redis]</code></pre>
+                        </div>
+
+                        <h2 id="first-agent">Your First Governed Agent</h2>
+                        <p>Let's create a simple governed agent that demonstrates the core concept of kernel-level safety enforcement.</p>
+
+                        <h3>Step 1: Import and Initialize the Kernel</h3>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import KernelSpace
+
+# Initialize the kernel with default strict policy
+kernel = KernelSpace(policy="strict")</code></pre>
+                        </div>
+
+                        <h3>Step 2: Register Your Agent Function</h3>
+                        <div class="aos-code-block">
+                            <pre><code>@kernel.register
+async def my_first_agent(task: str) -> str:
+    """
+    A simple agent that processes tasks.
+    The kernel automatically enforces safety policies
+    on every action this agent attempts.
+    """
+    # Simulate some agent work
+    result = f"Processed task: {task}"
+    
+    # Any dangerous operations would be blocked
+    # by the kernel before they execute
+    return result</code></pre>
+                        </div>
+
+                        <h3>Step 3: Execute the Agent</h3>
+                        <div class="aos-code-block">
+                            <pre><code>import asyncio
+
+async def main():
+    # Execute the governed agent
+    result = await kernel.execute(my_first_agent, "analyze sales data")
+    print(result)
+    
+    # View the execution trace
+    trace = kernel.get_trace()
+    print(f"Execution completed in {trace.duration_ms}ms")
+    print(f"Policy violations: {trace.violations}")
+
+# Run the example
+asyncio.run(main())</code></pre>
+                        </div>
+
+                        <h3>Complete Example</h3>
+                        <p>Here's the full working example you can copy and run:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code>"""
+my_first_agent.py - A minimal governed agent example
+"""
+import asyncio
+from agent_os import KernelSpace
+
+# Initialize kernel with strict safety policy
+kernel = KernelSpace(policy="strict")
+
+@kernel.register
+async def analyze_data(query: str) -> str:
+    """Agent that analyzes data with kernel governance."""
+    # In a real agent, this might call an LLM
+    # The kernel intercepts and validates every action
+    return f"Analysis complete for: {query}"
+
+@kernel.register  
+async def write_report(data: str) -> str:
+    """Agent that writes reports with governance."""
+    return f"Report generated: {len(data)} chars processed"
+
+async def main():
+    # Execute governed agents
+    analysis = await kernel.execute(analyze_data, "Q4 revenue trends")
+    report = await kernel.execute(write_report, analysis)
+    
+    print(report)
+    
+    # Check execution metrics
+    metrics = kernel.metrics()
+    print(f"\n--- Kernel Metrics ---")
+    print(f"Total executions: {metrics.total_executions}")
+    print(f"Policy violations blocked: {metrics.blocked_actions}")
+    print(f"Average latency: {metrics.avg_latency_ms:.2f}ms")
+
+if __name__ == "__main__":
+    asyncio.run(main())</code></pre>
+                        </div>
+
+                        <h2 id="policies">Using Policies</h2>
+                        <p>Policies define what your agents can and cannot do. They are enforced at the kernel level, meaning the agent code cannot bypass them.</p>
+
+                        <h3>Built-in Policies</h3>
+                        <p>Agent OS includes several pre-configured policies:</p>
+                        
+                        <table class="aos-table">
+                            <thead>
+                                <tr>
+                                    <th>Policy</th>
+                                    <th>Description</th>
+                                    <th>Use Case</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>strict</code></td>
+                                    <td>Maximum restrictions, explicit allow-list</td>
+                                    <td>Production, regulated industries</td>
+                                </tr>
+                                <tr>
+                                    <td><code>moderate</code></td>
+                                    <td>Balanced safety with flexibility</td>
+                                    <td>Development, internal tools</td>
+                                </tr>
+                                <tr>
+                                    <td><code>permissive</code></td>
+                                    <td>Minimal restrictions, logging only</td>
+                                    <td>Testing, sandboxed environments</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Custom Policy Configuration</h3>
+                        <p>Create custom policies using YAML or Python:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code># policy.yaml
+name: healthcare_policy
+version: "1.0"
+
+rules:
+  # Block any PHI-related operations
+  - action: "read_file"
+    pattern: "*.phi"
+    effect: deny
+    signal: SIGKILL
+    
+  # Require approval for external API calls
+  - action: "http_request"
+    domains: ["*"]
+    effect: require_approval
+    timeout: 30s
+    
+  # Allow internal operations
+  - action: "compute"
+    effect: allow
+    
+  # Log all database operations
+  - action: "database_*"
+    effect: allow
+    audit: true</code></pre>
+                        </div>
+
+                        <h3>Loading Custom Policies</h3>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import KernelSpace, Policy
+
+# Load from YAML file
+kernel = KernelSpace(policy="./policy.yaml")
+
+# Or define programmatically
+policy = Policy(
+    name="my_policy",
+    rules=[
+        {"action": "file_write", "pattern": "/tmp/*", "effect": "allow"},
+        {"action": "file_write", "pattern": "*", "effect": "deny"},
+        {"action": "http_request", "domains": ["api.safe.com"], "effect": "allow"},
+    ]
+)
+kernel = KernelSpace(policy=policy)</code></pre>
+                        </div>
+
+                        <h3>Policy Enforcement in Action</h3>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import KernelSpace
+from agent_os.exceptions import PolicyViolation
+
+kernel = KernelSpace(policy="strict")
+
+@kernel.register
+async def risky_agent(task: str):
+    # This action will be blocked by the kernel
+    # The agent code never actually executes the delete
+    await kernel.action("file_delete", path="/etc/passwd")
+    return "Done"
+
+async def main():
+    try:
+        await kernel.execute(risky_agent, "cleanup")
+    except PolicyViolation as e:
+        print(f"Blocked: {e.action} - {e.reason}")
+        print(f"Signal sent: {e.signal}")  # SIGKILL
+
+asyncio.run(main())</code></pre>
+                        </div>
+
+                        <h2 id="signals">POSIX Signals</h2>
+                        <p>Agent OS uses POSIX-style signals to control agent execution. Unlike traditional operating systems, these signals are non-catchable—agents cannot ignore them.</p>
+
+                        <h3>Available Signals</h3>
+                        <table class="aos-table">
+                            <thead>
+                                <tr>
+                                    <th>Signal</th>
+                                    <th>Action</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>SIGKILL</code></td>
+                                    <td>Terminate</td>
+                                    <td>Immediately terminates the agent. Non-catchable, no cleanup.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SIGSTOP</code></td>
+                                    <td>Pause</td>
+                                    <td>Suspends agent execution. State is preserved.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SIGCONT</code></td>
+                                    <td>Resume</td>
+                                    <td>Resumes a paused agent from where it stopped.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SIGTERM</code></td>
+                                    <td>Graceful stop</td>
+                                    <td>Requests graceful termination with cleanup time.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SIGUSR1</code></td>
+                                    <td>Custom</td>
+                                    <td>User-defined signal for custom handlers.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Sending Signals Manually</h3>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import KernelSpace, Signal
+
+kernel = KernelSpace()
+
+@kernel.register
+async def long_running_agent(task: str):
+    for i in range(100):
+        await kernel.checkpoint()  # Check for signals
+        await process_chunk(i)
+    return "Complete"
+
+async def main():
+    # Start agent in background
+    agent_id = await kernel.spawn(long_running_agent, "process all data")
+    
+    # Pause after 5 seconds
+    await asyncio.sleep(5)
+    await kernel.signal(agent_id, Signal.SIGSTOP)
+    print("Agent paused")
+    
+    # Resume after user confirmation
+    input("Press Enter to resume...")
+    await kernel.signal(agent_id, Signal.SIGCONT)
+    
+    # Wait for completion
+    result = await kernel.wait(agent_id)
+    print(result)</code></pre>
+                        </div>
+
+                        <h3>Automatic Signal Dispatch</h3>
+                        <p>The kernel automatically sends signals based on policy violations:</p>
+                        
+                        <div class="aos-code-block">
+                            <pre><code># When an agent attempts a blocked action:
+# 1. Kernel intercepts the action BEFORE execution
+# 2. Policy engine evaluates the action
+# 3. If denied: SIGKILL sent immediately
+# 4. Agent terminates, action never executes
+
+# Example policy rule that triggers SIGKILL:
+rules:
+  - action: "execute_code"
+    pattern: "rm -rf *"
+    effect: deny
+    signal: SIGKILL
+    reason: "Destructive command blocked"</code></pre>
+                        </div>
+
+                        <h2 id="integrations">Framework Integrations</h2>
+                        <p>Agent OS integrates with popular AI agent frameworks. Wrap your existing agents with one line—no rewrites required.</p>
+
+                        <h3>LangChain Integration</h3>
+                        <div class="aos-code-block">
+                            <pre><code>from langchain.agents import create_openai_functions_agent
+from langchain_openai import ChatOpenAI
+from langchain.tools import Tool
+from agent_os.integrations import langchain_kernel
+
+# Create your LangChain agent as usual
+llm = ChatOpenAI(model="gpt-4")
+tools = [
+    Tool(name="search", func=search_web, description="Search the web"),
+    Tool(name="calculate", func=calculator, description="Do math"),
+]
+agent = create_openai_functions_agent(llm, tools, prompt)
+
+# Wrap with Agent OS governance - one line!
+governed_agent = langchain_kernel.wrap(
+    agent,
+    policy="strict",
+    signals_enabled=True
+)
+
+# Execute with full kernel protection
+result = await governed_agent.ainvoke({"input": "What is 2+2?"})</code></pre>
+                        </div>
+
+                        <h3>CrewAI Integration</h3>
+                        <div class="aos-code-block">
+                            <pre><code>from crewai import Agent, Task, Crew
+from agent_os.integrations import crewai_kernel
+
+# Define your CrewAI agents
+researcher = Agent(
+    role="Researcher",
+    goal="Find accurate information",
+    backstory="Expert researcher with attention to detail"
+)
+
+writer = Agent(
+    role="Writer", 
+    goal="Create compelling content",
+    backstory="Skilled technical writer"
+)
+
+# Create the crew
+crew = Crew(
+    agents=[researcher, writer],
+    tasks=[research_task, writing_task]
+)
+
+# Wrap entire crew with governance
+governed_crew = crewai_kernel.wrap(
+    crew,
+    policy="moderate",
+    inter_agent_trust=True  # Enable IATP for agent communication
+)
+
+# Execute with kernel protection
+result = governed_crew.kickoff()</code></pre>
+                        </div>
+
+                        <h3>AutoGen Integration</h3>
+                        <div class="aos-code-block">
+                            <pre><code>from autogen import AssistantAgent, UserProxyAgent
+from agent_os.integrations import autogen_kernel
+
+# Create AutoGen agents
+assistant = AssistantAgent(
+    name="assistant",
+    llm_config={"model": "gpt-4"}
+)
+
+user_proxy = UserProxyAgent(
+    name="user_proxy",
+    human_input_mode="NEVER"
+)
+
+# Wrap with governance
+governed_assistant = autogen_kernel.wrap(assistant, policy="strict")
+governed_proxy = autogen_kernel.wrap(user_proxy, policy="strict")
+
+# Chat with kernel protection
+governed_proxy.initiate_chat(
+    governed_assistant,
+    message="Write a Python function to sort a list"
+)</code></pre>
+                        </div>
+
+                        <h3>OpenAI Assistants Integration</h3>
+                        <div class="aos-code-block">
+                            <pre><code>from openai import OpenAI
+from agent_os.integrations import openai_kernel
+
+client = OpenAI()
+
+# Create assistant
+assistant = client.beta.assistants.create(
+    name="Data Analyst",
+    instructions="You analyze data and create visualizations",
+    model="gpt-4-turbo",
+    tools=[{"type": "code_interpreter"}]
+)
+
+# Wrap with governance
+governed_assistant = openai_kernel.wrap(
+    assistant,
+    client=client,
+    policy="strict",
+    allowed_file_types=[".csv", ".json", ".xlsx"]
+)
+
+# Use governed assistant
+thread = governed_assistant.create_thread()
+governed_assistant.add_message(thread.id, "Analyze this sales data")
+run = governed_assistant.run(thread.id)</code></pre>
+                        </div>
+
+                        <h3>Generic Wrapper for Any Framework</h3>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import KernelSpace, govern
+
+# Use the @govern decorator for any async function
+kernel = KernelSpace(policy="strict")
+
+@govern(kernel)
+async def my_custom_agent(input_data):
+    """Works with any framework or custom code."""
+    # Your agent logic here
+    result = await some_framework.process(input_data)
+    return result
+
+# Or wrap at runtime
+from some_framework import Agent
+agent = Agent()
+governed = kernel.wrap(agent.run)</code></pre>
+                        </div>
+
+                        <h2 id="next-steps">Next Steps</h2>
+                        <p>Now that you have Agent OS running, explore these resources to deepen your knowledge:</p>
+
+                        <div class="aos-features" style="margin-top: var(--space-xl);">
+                            <a href="api.html" class="aos-feature">
+                                <div class="aos-feature-icon">📖</div>
+                                <h3 class="aos-feature-title">API Reference</h3>
+                                <p class="aos-feature-desc">Complete documentation of all classes, methods, and configuration options.</p>
+                                <span class="aos-feature-link">View API docs →</span>
+                            </a>
+                            
+                            <a href="policies.html" class="aos-feature">
+                                <div class="aos-feature-icon">📜</div>
+                                <h3 class="aos-feature-title">Policy Reference</h3>
+                                <p class="aos-feature-desc">Learn how to write custom policies for your specific compliance requirements.</p>
+                                <span class="aos-feature-link">View policy guide →</span>
+                            </a>
+                            
+                            <a href="../modules/cmvk/index.html" class="aos-feature">
+                                <div class="aos-feature-icon">🔍</div>
+                                <h3 class="aos-feature-title">CMVK Module</h3>
+                                <p class="aos-feature-desc">Cross-Model Verification Kernel for detecting hallucinations.</p>
+                                <span class="aos-feature-link">Learn about CMVK →</span>
+                            </a>
+                            
+                            <a href="../modules/emk/index.html" class="aos-feature">
+                                <div class="aos-feature-icon">🧠</div>
+                                <h3 class="aos-feature-title">EMK Module</h3>
+                                <p class="aos-feature-desc">Episodic Memory Kernel for immutable agent memory and time-travel debugging.</p>
+                                <span class="aos-feature-link">Learn about EMK →</span>
+                            </a>
+                            
+                            <a href="../modules/iatp/index.html" class="aos-feature">
+                                <div class="aos-feature-icon">🤝</div>
+                                <h3 class="aos-feature-title">IATP Module</h3>
+                                <p class="aos-feature-desc">Inter-Agent Trust Protocol for secure multi-agent communication.</p>
+                                <span class="aos-feature-link">Learn about IATP →</span>
+                            </a>
+                            
+                            <a href="../examples/index.html" class="aos-feature">
+                                <div class="aos-feature-icon">💡</div>
+                                <h3 class="aos-feature-title">Examples</h3>
+                                <p class="aos-feature-desc">Production-ready examples for healthcare, finance, and enterprise use cases.</p>
+                                <span class="aos-feature-link">Browse examples →</span>
+                            </a>
+                        </div>
+
+                        <h3>Get Help</h3>
+                        <ul>
+                            <li><a href="https://github.com/imran-siddique/agent-os/discussions" target="_blank">GitHub Discussions</a> — Ask questions and share ideas</li>
+                            <li><a href="https://github.com/imran-siddique/agent-os/issues" target="_blank">Issue Tracker</a> — Report bugs or request features</li>
+                            <li><a href="https://pypi.org/project/agent-os-kernel/" target="_blank">PyPI Package</a> — View release history and changelog</li>
+                        </ul>
+
+                        <h3>Contributing</h3>
+                        <p>Agent OS is open source under the MIT license. We welcome contributions!</p>
+                        <div class="aos-code-block">
+                            <pre><code># Clone the repository
+git clone https://github.com/imran-siddique/agent-os.git
+cd agent-os
+
+# Install development dependencies
+pip install -e ".[dev]"
+
+# Run tests
+pytest
+
+# Submit a pull request!</code></pre>
+                        </div>
+
+                        <div style="margin-top: var(--space-2xl); padding: var(--space-xl); background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-md);">
+                            <h3 style="margin-top: 0; color: var(--aos-primary);">🎉 You're Ready!</h3>
+                            <p style="margin-bottom: 0;">You now have the foundation to build governed AI agents with Agent OS. Remember: the kernel decides, the LLM just computes. Your agents will never be able to bypass the safety policies you define.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="aos-footer">
+        <div class="container">
+            <div class="aos-footer-grid">
+                <div class="aos-footer-brand">
+                    <h4>Agent OS</h4>
+                    <p>The Linux kernel for AI agents. Deterministic safety enforcement.</p>
+                    <p class="aos-footer-version">v0.1.0 • MIT License</p>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Documentation</h5>
+                    <ul>
+                        <li><a href="quickstart.html">Quickstart</a></li>
+                        <li><a href="api.html">API Reference</a></li>
+                        <li><a href="policies.html">Policies</a></li>
+                        <li><a href="../modules/index.html">Modules</a></li>
+                    </ul>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Resources</h5>
+                    <ul>
+                        <li><a href="../integrations/index.html">Integrations</a></li>
+                        <li><a href="../use-cases/index.html">Use Cases</a></li>
+                        <li><a href="../examples/index.html">Examples</a></li>
+                        <li><a href="https://github.com/imran-siddique/agent-os" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Connect</h5>
+                    <ul>
+                        <li><a href="https://github.com/imran-siddique" target="_blank">GitHub</a></li>
+                        <li><a href="https://linkedin.com/in/imransiddique1986" target="_blank">LinkedIn</a></li>
+                        <li><a href="https://twitter.com/mosiddi" target="_blank">Twitter</a></li>
+                        <li><a href="https://pypi.org/project/agent-os-kernel/" target="_blank">PyPI</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="aos-footer-bottom">
+                <p>&copy; 2026 Imran Siddique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../script.js"></script>
+</body>
+</html>

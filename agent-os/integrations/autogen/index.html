@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agent OS AutoGen Integration: Govern Microsoft AutoGen agents with kernel-level safety, message interception, and code execution controls.">
+    <meta name="keywords" content="Agent OS, AutoGen, Microsoft AutoGen, AI Agents, Multi-Agent, Code Execution, Governance, Safety">
+    <meta name="author" content="Imran Siddique">
+    <link rel="canonical" href="https://imran-siddique.github.io/agent-os/integrations/autogen/">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://imran-siddique.github.io/agent-os/integrations/autogen/">
+    <meta property="og:title" content="AutoGen Integration - Agent OS">
+    <meta property="og:description" content="Govern Microsoft AutoGen agents with kernel-level safety, message interception, and code execution controls.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <title>AutoGen Integration - Agent OS | Imran Siddique</title>
+    <link rel="stylesheet" href="../../../styles-new.css">
+    <link rel="stylesheet" href="../../assets/agent-os.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../../../index.html">Home</a></li>
+                <li><a href="../../../about.html">About</a></li>
+                <li><a href="../../../projects.html">Projects</a></li>
+                <li><a href="../../index.html" class="active">Agent OS</a></li>
+                <li><a href="../../../writings.html">Writings</a></li>
+                <li><a href="../../../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="aos-section" style="padding-top: 120px;">
+            <div class="container">
+                <nav class="aos-breadcrumb">
+                    <a href="../../index.html">Agent OS</a> / <a href="../index.html">Integrations</a> / <span>AutoGen</span>
+                </nav>
+                
+                <h1 class="aos-section-title" style="font-size: 2.5rem;">
+                    <span class="gradient">🤖 AutoGen Integration</span>
+                </h1>
+                
+                <p class="aos-section-subtitle" style="max-width: 700px; margin: 0 auto;">
+                    Govern Microsoft AutoGen agents with kernel-level safety. Message interception, 
+                    code execution controls, and group chat governance—all with one line of code.
+                </p>
+                
+                <div class="aos-install" style="margin-top: var(--space-lg);">
+                    <code class="aos-install-cmd">
+                        <span class="prefix">$</span> pip install agent-os-kernel[autogen]
+                    </code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Overview Section -->
+        <section class="aos-section aos-section-dark" id="overview">
+            <div class="container">
+                <h2 class="aos-section-title">Overview</h2>
+                <p class="aos-section-subtitle">
+                    AutoGen enables powerful multi-agent conversations where agents can execute code, 
+                    collaborate on tasks, and autonomously iterate on solutions. Agent OS provides 
+                    kernel-level governance to ensure these capabilities remain safe and controlled.
+                </p>
+                
+                <div class="aos-features" style="margin-top: var(--space-lg);">
+                    <div class="aos-feature">
+                        <div class="aos-feature-icon">💬</div>
+                        <h3 class="aos-feature-title">Message Interception</h3>
+                        <p class="aos-feature-desc">
+                            Monitor and filter all messages between agents. Block sensitive content, 
+                            enforce communication policies, and audit all conversations.
+                        </p>
+                    </div>
+                    
+                    <div class="aos-feature">
+                        <div class="aos-feature-icon">🔒</div>
+                        <h3 class="aos-feature-title">Code Execution Control</h3>
+                        <p class="aos-feature-desc">
+                            Sandbox code execution with configurable policies. Control file access, 
+                            network permissions, and execution timeouts.
+                        </p>
+                    </div>
+                    
+                    <div class="aos-feature">
+                        <div class="aos-feature-icon">👥</div>
+                        <h3 class="aos-feature-title">Group Chat Governance</h3>
+                        <p class="aos-feature-desc">
+                            Govern entire group chats with unified policies. Control agent selection, 
+                            iteration limits, and conversation flow.
+                        </p>
+                    </div>
+                    
+                    <div class="aos-feature">
+                        <div class="aos-feature-icon">📊</div>
+                        <h3 class="aos-feature-title">Full Audit Trail</h3>
+                        <p class="aos-feature-desc">
+                            Complete visibility into all agent actions. Track messages, code executions, 
+                            and policy decisions with flight recorder integration.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Installation Section -->
+        <section class="aos-section" id="installation">
+            <div class="container">
+                <h2 class="aos-section-title">Installation</h2>
+                
+                <div class="aos-steps">
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">1</span>
+                            <h3 class="aos-step-title">Install Agent OS with AutoGen Support</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code># Install with AutoGen extras
+pip install agent-os-kernel[autogen]
+
+# Or install everything
+pip install agent-os-kernel[all]
+
+# Verify installation
+python -c "from agent_os.integrations import autogen_kernel; print('✓ AutoGen integration ready')"</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">2</span>
+                            <h3 class="aos-step-title">Verify AutoGen Installation</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code># Ensure AutoGen is installed (v0.2.0+ required)
+pip install pyautogen>=0.2.0
+
+# Verify compatibility
+python -c "import autogen; print(f'AutoGen version: {autogen.__version__}')"</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">3</span>
+                            <h3 class="aos-step-title">Configure Your Environment</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code># Set up your LLM API key
+export OPENAI_API_KEY="your-api-key"
+
+# Optional: Configure Agent OS kernel
+export AGENT_OS_POLICY="strict"
+export AGENT_OS_AUDIT_LOG="./agent_os_audit.jsonl"</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wrapping AssistantAgent Section -->
+        <section class="aos-section aos-section-dark" id="assistant-agent">
+            <div class="container">
+                <h2 class="aos-section-title">Wrapping AssistantAgent</h2>
+                <p class="aos-section-subtitle">
+                    The AssistantAgent is the primary AI-powered agent in AutoGen. Wrap it with 
+                    Agent OS to add governance without changing your existing code.
+                </p>
+                
+                <div class="aos-steps">
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">1</span>
+                            <h3 class="aos-step-title">Basic Wrapping</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>from autogen import AssistantAgent
+from agent_os.integrations import autogen_kernel
+
+# Configure your LLM
+llm_config = {
+    "model": "gpt-4-turbo",
+    "api_key": os.environ["OPENAI_API_KEY"],
+    "temperature": 0.7
+}
+
+# Create your AutoGen assistant
+assistant = AssistantAgent(
+    name="coding_assistant",
+    system_message="You are a helpful coding assistant.",
+    llm_config=llm_config
+)
+
+# Wrap with Agent OS governance
+governed_assistant = autogen_kernel.wrap(assistant)
+
+# The assistant now operates under kernel protection</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">2</span>
+                            <h3 class="aos-step-title">Configuring Policies</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.integrations import autogen_kernel
+from agent_os.policies import Policy
+
+# Define a custom policy for the assistant
+assistant_policy = Policy(
+    name="assistant_policy",
+    rules=[
+        # Limit response length
+        {"action": "generate", "max_tokens": 2000},
+        
+        # Block certain topics
+        {"action": "generate", "blocked_topics": ["politics", "violence"]},
+        
+        # Require code review for certain languages
+        {"action": "code_suggest", "languages": ["python", "javascript"], "require_review": True}
+    ]
+)
+
+# Wrap with custom policy
+governed_assistant = autogen_kernel.wrap(
+    assistant,
+    policy=assistant_policy,
+    audit_log=True,
+    max_consecutive_auto_reply=10
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">3</span>
+                            <h3 class="aos-step-title">Message Filtering</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.integrations import autogen_kernel
+from agent_os.filters import ContentFilter, PIIFilter
+
+# Create content filters
+content_filter = ContentFilter(
+    block_patterns=[
+        r"\b(password|secret|api_key)\s*=\s*['\"][^'\"]+['\"]",  # Block hardcoded secrets
+        r"\b(DROP|DELETE|TRUNCATE)\s+TABLE\b",  # Block destructive SQL
+    ],
+    redact_patterns=[
+        r"\b\d{3}-\d{2}-\d{4}\b",  # Redact SSN
+        r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b",  # Redact emails
+    ]
+)
+
+pii_filter = PIIFilter(
+    detect_types=["ssn", "credit_card", "phone", "email"],
+    action="redact"  # or "block"
+)
+
+# Wrap with filters
+governed_assistant = autogen_kernel.wrap(
+    assistant,
+    message_filters=[content_filter, pii_filter],
+    filter_incoming=True,
+    filter_outgoing=True
+)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Wrapping UserProxyAgent Section -->
+        <section class="aos-section" id="user-proxy-agent">
+            <div class="container">
+                <h2 class="aos-section-title">Wrapping UserProxyAgent</h2>
+                <p class="aos-section-subtitle">
+                    The UserProxyAgent handles human input and code execution. This is where 
+                    kernel-level governance is most critical for safety.
+                </p>
+                
+                <div class="aos-steps">
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">1</span>
+                            <h3 class="aos-step-title">Basic UserProxy Wrapping</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>from autogen import UserProxyAgent
+from agent_os.integrations import autogen_kernel
+
+# Create your UserProxyAgent
+user_proxy = UserProxyAgent(
+    name="user_proxy",
+    human_input_mode="TERMINATE",  # or "ALWAYS", "NEVER"
+    max_consecutive_auto_reply=10,
+    code_execution_config={
+        "work_dir": "./workspace",
+        "use_docker": False  # We'll use Agent OS sandboxing instead
+    }
+)
+
+# Wrap with Agent OS for code execution governance
+governed_user_proxy = autogen_kernel.wrap(
+    user_proxy,
+    code_policy="sandboxed",  # "sandboxed", "restricted", "permissive"
+    execution_timeout=30,
+    max_iterations=10
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">2</span>
+                            <h3 class="aos-step-title">Human Input Governance</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.integrations import autogen_kernel
+
+# Configure human input handling
+governed_user_proxy = autogen_kernel.wrap(
+    user_proxy,
+    human_input_config={
+        # Validate human input before processing
+        "validate_input": True,
+        
+        # Filter sensitive content from human input
+        "filter_pii": True,
+        
+        # Log all human interactions
+        "audit_human_input": True,
+        
+        # Require confirmation for certain actions
+        "confirm_actions": ["file_write", "network_request", "code_execute"]
+    }
+)
+
+# Now human input is also governed by the kernel</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">3</span>
+                            <h3 class="aos-step-title">Initiating Governed Conversations</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code># Both agents are now governed
+governed_assistant = autogen_kernel.wrap(assistant, policy="strict")
+governed_user_proxy = autogen_kernel.wrap(user_proxy, code_policy="sandboxed")
+
+# Start a governed conversation
+governed_user_proxy.initiate_chat(
+    governed_assistant,
+    message="Write a Python script to analyze this CSV file and generate a summary report."
+)
+
+# All messages and code executions are:
+# ✓ Filtered through kernel policies
+# ✓ Logged to flight recorder
+# ✓ Sandboxed for safety
+# ✓ Subject to iteration limits</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Group Chat Governance Section -->
+        <section class="aos-section aos-section-dark" id="group-chat">
+            <div class="container">
+                <h2 class="aos-section-title">Group Chat Governance</h2>
+                <p class="aos-section-subtitle">
+                    AutoGen's GroupChat enables multiple agents to collaborate. Agent OS provides 
+                    unified governance across all participants.
+                </p>
+                
+                <div class="aos-steps">
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">1</span>
+                            <h3 class="aos-step-title">Wrapping GroupChat</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>from autogen import GroupChat, GroupChatManager, AssistantAgent, UserProxyAgent
+from agent_os.integrations import autogen_kernel
+
+# Create multiple agents
+coder = AssistantAgent(name="coder", llm_config=llm_config,
+    system_message="You write code to solve problems.")
+reviewer = AssistantAgent(name="reviewer", llm_config=llm_config,
+    system_message="You review code for bugs and improvements.")
+tester = AssistantAgent(name="tester", llm_config=llm_config,
+    system_message="You write tests for the code.")
+user_proxy = UserProxyAgent(name="user", code_execution_config={"work_dir": "./workspace"})
+
+# Create the group chat
+group_chat = GroupChat(
+    agents=[user_proxy, coder, reviewer, tester],
+    messages=[],
+    max_round=20
+)
+
+# Create the manager
+manager = GroupChatManager(groupchat=group_chat, llm_config=llm_config)
+
+# Wrap the entire group chat with governance
+governed_manager = autogen_kernel.wrap_group_chat(
+    manager,
+    policy="collaborative",
+    max_rounds=20,
+    audit_all_messages=True
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">2</span>
+                            <h3 class="aos-step-title">Agent Selection Policies</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.integrations import autogen_kernel
+from agent_os.policies import GroupPolicy
+
+# Define policies for agent selection
+group_policy = GroupPolicy(
+    name="dev_team_policy",
+    rules=[
+        # Require reviewer after coder
+        {"after_agent": "coder", "require_agent": "reviewer"},
+        
+        # Limit consecutive replies from same agent
+        {"max_consecutive_same_agent": 2},
+        
+        # Require user approval before code execution
+        {"before_action": "code_execute", "require_agent": "user"},
+        
+        # Block certain agent transitions
+        {"from_agent": "tester", "blocked_to": ["tester"]},  # Tester can't reply to self
+    ],
+    
+    # Trust levels for inter-agent communication
+    trust_matrix={
+        "coder": {"reviewer": 0.9, "tester": 0.8, "user": 1.0},
+        "reviewer": {"coder": 0.9, "tester": 0.9, "user": 1.0},
+        "tester": {"coder": 0.8, "reviewer": 0.9, "user": 1.0},
+    }
+)
+
+governed_manager = autogen_kernel.wrap_group_chat(
+    manager,
+    policy=group_policy
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">3</span>
+                            <h3 class="aos-step-title">Conversation Flow Control</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.integrations import autogen_kernel
+
+# Advanced conversation control
+governed_manager = autogen_kernel.wrap_group_chat(
+    manager,
+    flow_control={
+        # Terminate conditions
+        "terminate_on": [
+            {"keyword": "TASK_COMPLETE"},
+            {"consensus": 0.8},  # 80% of agents agree
+            {"max_messages": 100}
+        ],
+        
+        # Escalation rules
+        "escalate_to_human": [
+            {"on_error": True},
+            {"on_timeout": True},
+            {"on_budget_exceed": True}
+        ],
+        
+        # Rate limiting
+        "rate_limit": {
+            "messages_per_minute": 30,
+            "tokens_per_minute": 50000
+        },
+        
+        # Deadlock detection
+        "detect_loops": True,
+        "loop_threshold": 5  # Same pattern repeated 5 times
+    }
+)
+
+# Start the governed group chat
+user_proxy.initiate_chat(
+    governed_manager,
+    message="Build a REST API for user management with authentication."
+)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code Execution Control Section -->
+        <section class="aos-section" id="code-execution">
+            <div class="container">
+                <h2 class="aos-section-title">Code Execution Control</h2>
+                <p class="aos-section-subtitle">
+                    AutoGen agents can execute code autonomously. Agent OS provides multiple layers 
+                    of protection to ensure code execution remains safe.
+                </p>
+                
+                <div class="aos-steps">
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">1</span>
+                            <h3 class="aos-step-title">Sandboxed Execution</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.integrations import autogen_kernel
+from agent_os.sandbox import SandboxConfig
+
+# Configure the sandbox
+sandbox_config = SandboxConfig(
+    # Isolation level
+    isolation="container",  # "process", "container", "vm"
+    
+    # Resource limits
+    max_memory_mb=512,
+    max_cpu_percent=50,
+    max_execution_time=30,
+    
+    # File system access
+    filesystem={
+        "work_dir": "./workspace",
+        "read_paths": ["./data", "./config"],
+        "write_paths": ["./workspace/output"],
+        "blocked_paths": ["/etc", "/root", "~/.ssh"]
+    },
+    
+    # Network access
+    network={
+        "enabled": False,  # Disable by default
+        "allowed_hosts": [],
+        "allowed_ports": []
+    }
+)
+
+# Apply sandbox to UserProxyAgent
+governed_user_proxy = autogen_kernel.wrap(
+    user_proxy,
+    sandbox=sandbox_config
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">2</span>
+                            <h3 class="aos-step-title">Code Analysis Before Execution</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.integrations import autogen_kernel
+from agent_os.analysis import CodeAnalyzer
+
+# Configure code analysis
+code_analyzer = CodeAnalyzer(
+    # Static analysis rules
+    block_imports=[
+        "subprocess", "os.system", "eval", "exec",
+        "pickle", "marshal", "__import__"
+    ],
+    
+    # Pattern-based blocking
+    block_patterns=[
+        r"open\s*\(\s*['\"]\/etc",  # Block /etc access
+        r"requests\.get\s*\(",       # Block HTTP requests
+        r"socket\.",                 # Block raw sockets
+        r"shutil\.rmtree",           # Block recursive delete
+    ],
+    
+    # Complexity limits
+    max_lines=500,
+    max_functions=20,
+    max_nesting_depth=5,
+    
+    # Require approval for certain operations
+    require_approval=[
+        "file_write",
+        "external_command",
+        "database_query"
+    ]
+)
+
+governed_user_proxy = autogen_kernel.wrap(
+    user_proxy,
+    code_analyzer=code_analyzer,
+    pre_execution_hook=True  # Analyze before every execution
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">3</span>
+                            <h3 class="aos-step-title">Execution Policies</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.integrations import autogen_kernel
+from agent_os.policies import ExecutionPolicy
+
+# Define execution policy
+exec_policy = ExecutionPolicy(
+    name="safe_execution",
+    
+    # Language restrictions
+    allowed_languages=["python", "bash"],
+    python_version="3.10",
+    
+    # Package restrictions
+    allowed_packages=[
+        "pandas", "numpy", "matplotlib", "seaborn",
+        "scikit-learn", "requests", "json", "csv"
+    ],
+    blocked_packages=[
+        "subprocess", "multiprocessing", "ctypes"
+    ],
+    
+    # Execution limits
+    max_retries=3,
+    retry_on_error=True,
+    
+    # Output limits
+    max_output_size_kb=100,
+    truncate_output=True,
+    
+    # Rollback on failure
+    enable_rollback=True,
+    snapshot_before_execution=True
+)
+
+governed_user_proxy = autogen_kernel.wrap(
+    user_proxy,
+    execution_policy=exec_policy
+)
+
+# Now all code execution is governed by the policy</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Example: Governed Coding Assistant Section -->
+        <section class="aos-section aos-section-dark" id="example">
+            <div class="container">
+                <h2 class="aos-section-title">Example: Governed Coding Assistant</h2>
+                <p class="aos-section-subtitle">
+                    A complete example showing how to build a production-ready, governed coding assistant 
+                    with AutoGen and Agent OS.
+                </p>
+                
+                <div class="aos-code-block" style="margin-top: var(--space-lg);">
+                    <pre><code>"""
+Governed Coding Assistant with AutoGen and Agent OS
+====================================================
+
+A production-ready coding assistant with:
+- Kernel-level governance
+- Sandboxed code execution
+- Full audit trail
+- Policy-based controls
+"""
+
+import os
+from autogen import AssistantAgent, UserProxyAgent, GroupChat, GroupChatManager
+from agent_os.integrations import autogen_kernel
+from agent_os.policies import Policy, ExecutionPolicy, GroupPolicy
+from agent_os.sandbox import SandboxConfig
+from agent_os.audit import FlightRecorder
+
+# =============================================================================
+# 1. Configure the Flight Recorder for Auditing
+# =============================================================================
+
+recorder = FlightRecorder(
+    output_path="./audit_logs/coding_assistant.jsonl",
+    capture_level="detailed",  # "basic", "detailed", "full"
+    include_timestamps=True,
+    include_token_counts=True
+)
+
+# =============================================================================
+# 2. Define Policies
+# =============================================================================
+
+# Policy for the coding assistant
+coder_policy = Policy(
+    name="coder_policy",
+    rules=[
+        # Response quality
+        {"action": "generate", "require_explanation": True},
+        {"action": "code_suggest", "require_comments": True},
+        
+        # Safety
+        {"action": "generate", "blocked_topics": ["hacking", "exploits", "malware"]},
+        {"action": "code_suggest", "blocked_patterns": [
+            r"eval\s*\(",
+            r"exec\s*\(",
+            r"__import__\s*\("
+        ]}
+    ]
+)
+
+# Policy for code execution
+exec_policy = ExecutionPolicy(
+    name="safe_execution",
+    allowed_languages=["python"],
+    allowed_packages=["pandas", "numpy", "matplotlib", "seaborn", "requests", "json"],
+    max_execution_time=30,
+    max_memory_mb=256,
+    max_output_size_kb=50
+)
+
+# Sandbox configuration
+sandbox = SandboxConfig(
+    isolation="process",
+    filesystem={
+        "work_dir": "./workspace",
+        "write_paths": ["./workspace"],
+        "blocked_paths": ["/etc", "/root", "~"]
+    },
+    network={"enabled": False}
+)
+
+# =============================================================================
+# 3. Create and Wrap Agents
+# =============================================================================
+
+# LLM configuration
+llm_config = {
+    "model": "gpt-4-turbo",
+    "api_key": os.environ["OPENAI_API_KEY"],
+    "temperature": 0.3  # Lower temperature for coding tasks
+}
+
+# Create the coding assistant
+coder = AssistantAgent(
+    name="coder",
+    system_message="""You are an expert Python developer. You write clean, 
+    well-documented code with proper error handling. Always explain your 
+    approach before writing code.""",
+    llm_config=llm_config
+)
+
+# Create the code reviewer
+reviewer = AssistantAgent(
+    name="reviewer",
+    system_message="""You are a senior code reviewer. Review code for:
+    - Bugs and logic errors
+    - Security vulnerabilities
+    - Performance issues
+    - Code style and best practices
+    Provide specific, actionable feedback.""",
+    llm_config=llm_config
+)
+
+# Create the user proxy with code execution
+user_proxy = UserProxyAgent(
+    name="user",
+    human_input_mode="TERMINATE",
+    max_consecutive_auto_reply=10,
+    code_execution_config={
+        "work_dir": "./workspace",
+        "use_docker": False
+    }
+)
+
+# =============================================================================
+# 4. Wrap Agents with Agent OS Governance
+# =============================================================================
+
+# Wrap the coder with policy governance
+governed_coder = autogen_kernel.wrap(
+    coder,
+    policy=coder_policy,
+    audit_log=True,
+    flight_recorder=recorder
+)
+
+# Wrap the reviewer
+governed_reviewer = autogen_kernel.wrap(
+    reviewer,
+    policy=coder_policy,
+    audit_log=True,
+    flight_recorder=recorder
+)
+
+# Wrap the user proxy with execution controls
+governed_user_proxy = autogen_kernel.wrap(
+    user_proxy,
+    execution_policy=exec_policy,
+    sandbox=sandbox,
+    flight_recorder=recorder
+)
+
+# =============================================================================
+# 5. Create Governed Group Chat
+# =============================================================================
+
+# Group policy for the development team
+group_policy = GroupPolicy(
+    name="dev_team",
+    rules=[
+        # Require review after coding
+        {"after_agent": "coder", "require_agent": "reviewer"},
+        
+        # Limit iterations
+        {"max_consecutive_same_agent": 2}
+    ]
+)
+
+# Create the group chat
+group_chat = GroupChat(
+    agents=[governed_user_proxy, governed_coder, governed_reviewer],
+    messages=[],
+    max_round=15
+)
+
+# Create and wrap the manager
+manager = GroupChatManager(groupchat=group_chat, llm_config=llm_config)
+
+governed_manager = autogen_kernel.wrap_group_chat(
+    manager,
+    policy=group_policy,
+    flight_recorder=recorder,
+    flow_control={
+        "terminate_on": [{"keyword": "TASK_COMPLETE"}],
+        "detect_loops": True
+    }
+)
+
+# =============================================================================
+# 6. Run the Governed Conversation
+# =============================================================================
+
+def main():
+    """Run the governed coding assistant."""
+    
+    print("=" * 60)
+    print("Governed Coding Assistant")
+    print("Agent OS Kernel: Active")
+    print("=" * 60)
+    
+    # Start the conversation
+    governed_user_proxy.initiate_chat(
+        governed_manager,
+        message="""
+        Create a Python script that:
+        1. Reads a CSV file containing sales data
+        2. Calculates monthly totals and growth rates
+        3. Generates a summary report with visualizations
+        4. Saves the report as a PDF
+        
+        The CSV has columns: date, product, quantity, price
+        """
+    )
+    
+    # Print audit summary
+    print("\n" + "=" * 60)
+    print("Audit Summary")
+    print("=" * 60)
+    
+    summary = recorder.get_summary()
+    print(f"Total messages: {summary['total_messages']}")
+    print(f"Code executions: {summary['code_executions']}")
+    print(f"Policy violations: {summary['policy_violations']}")
+    print(f"Blocked actions: {summary['blocked_actions']}")
+    print(f"Total tokens used: {summary['total_tokens']}")
+
+if __name__ == "__main__":
+    main()</code></pre>
+                </div>
+                
+                <div style="margin-top: var(--space-lg); padding: var(--space-md); background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-lg);">
+                    <h4 style="color: #10b981; margin-bottom: var(--space-sm);">✓ What This Example Provides</h4>
+                    <ul style="color: var(--text-secondary); margin: 0; padding-left: var(--space-md);">
+                        <li>Multi-agent collaboration with coder and reviewer agents</li>
+                        <li>Sandboxed code execution with resource limits</li>
+                        <li>Policy-based governance for safe code generation</li>
+                        <li>Complete audit trail with flight recorder</li>
+                        <li>Group chat governance with agent selection rules</li>
+                        <li>Loop detection and automatic termination</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Troubleshooting Section -->
+        <section class="aos-section" id="troubleshooting">
+            <div class="container">
+                <h2 class="aos-section-title">Troubleshooting</h2>
+                
+                <div class="aos-features" style="grid-template-columns: 1fr;">
+                    
+                    <!-- Issue 1 -->
+                    <div class="aos-feature" style="max-width: 100%;">
+                        <h3 class="aos-feature-title">❌ Import Error: autogen_kernel not found</h3>
+                        <p class="aos-feature-desc">
+                            The AutoGen integration is not installed or there's a version mismatch.
+                        </p>
+                        <div class="aos-code-block" style="margin-top: var(--space-md);">
+                            <pre><code># Solution: Install with AutoGen extras
+pip uninstall agent-os-kernel
+pip install agent-os-kernel[autogen]
+
+# Verify both packages
+pip show pyautogen agent-os-kernel
+
+# Check version compatibility
+python -c "
+import autogen
+from agent_os.integrations import autogen_kernel
+print(f'AutoGen: {autogen.__version__}')
+print(f'Agent OS AutoGen integration: OK')
+"</code></pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Issue 2 -->
+                    <div class="aos-feature" style="max-width: 100%;">
+                        <h3 class="aos-feature-title">❌ Code Execution Blocked Unexpectedly</h3>
+                        <p class="aos-feature-desc">
+                            The sandbox or code analyzer is blocking legitimate code.
+                        </p>
+                        <div class="aos-code-block" style="margin-top: var(--space-md);">
+                            <pre><code># Debug: Check what's being blocked
+from agent_os.integrations import autogen_kernel
+
+governed_agent = autogen_kernel.wrap(
+    agent,
+    debug=True,  # Enable debug logging
+    log_blocked_actions=True
+)
+
+# Check the audit log
+from agent_os.audit import FlightRecorder
+recorder = FlightRecorder("./debug_audit.jsonl")
+
+governed_agent = autogen_kernel.wrap(
+    agent,
+    flight_recorder=recorder,
+    capture_level="full"
+)
+
+# After running, inspect blocked actions
+blocked = recorder.query(action_type="blocked")
+for action in blocked:
+    print(f"Blocked: {action['reason']}")
+    print(f"Code: {action['code'][:100]}...")
+
+# Solution: Adjust your policy or sandbox config
+from agent_os.sandbox import SandboxConfig
+
+sandbox = SandboxConfig(
+    # Add the blocked import to allowed list
+    allowed_imports=["pandas", "numpy", "your_blocked_import"],
+    
+    # Or relax the filesystem permissions
+    filesystem={
+        "read_paths": ["./data", "/path/you/need"]
+    }
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Issue 3 -->
+                    <div class="aos-feature" style="max-width: 100%;">
+                        <h3 class="aos-feature-title">❌ Group Chat Loops or Doesn't Terminate</h3>
+                        <p class="aos-feature-desc">
+                            Agents are stuck in a conversation loop or don't reach termination.
+                        </p>
+                        <div class="aos-code-block" style="margin-top: var(--space-md);">
+                            <pre><code># Solution: Enable loop detection and set clear termination conditions
+from agent_os.integrations import autogen_kernel
+
+governed_manager = autogen_kernel.wrap_group_chat(
+    manager,
+    flow_control={
+        # Multiple termination conditions (any can trigger)
+        "terminate_on": [
+            {"keyword": "TASK_COMPLETE"},
+            {"keyword": "TERMINATE"},
+            {"max_messages": 50},
+            {"max_rounds": 15},
+            {"consensus": 0.7}  # 70% agents agree task is done
+        ],
+        
+        # Loop detection
+        "detect_loops": True,
+        "loop_threshold": 3,  # Detect after 3 similar exchanges
+        "loop_action": "escalate",  # "terminate", "escalate", "warn"
+        
+        # Timeout
+        "conversation_timeout": 300,  # 5 minutes max
+        
+        # Stall detection
+        "stall_threshold": 5,  # No progress after 5 messages
+        "stall_action": "prompt_user"
+    }
+)
+
+# Also ensure agents have clear termination instructions
+assistant = AssistantAgent(
+    name="assistant",
+    system_message="""... When the task is complete, respond with 
+    'TASK_COMPLETE' to end the conversation.""",
+    llm_config=llm_config
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Issue 4 -->
+                    <div class="aos-feature" style="max-width: 100%;">
+                        <h3 class="aos-feature-title">❌ Messages Being Filtered Incorrectly</h3>
+                        <p class="aos-feature-desc">
+                            Legitimate content is being blocked by message filters.
+                        </p>
+                        <div class="aos-code-block" style="margin-top: var(--space-md);">
+                            <pre><code># Debug: See what's being filtered
+from agent_os.filters import ContentFilter
+
+content_filter = ContentFilter(
+    block_patterns=[...],
+    debug=True,  # Log all filter decisions
+    log_matches=True
+)
+
+# Test your filter against specific content
+test_message = "Your message that's being blocked"
+result = content_filter.analyze(test_message)
+print(f"Would block: {result.would_block}")
+print(f"Matched patterns: {result.matched_patterns}")
+print(f"Redactions: {result.redactions}")
+
+# Solution: Refine your patterns
+content_filter = ContentFilter(
+    block_patterns=[
+        # Be more specific with patterns
+        r"\bpassword\s*=\s*['\"][^'\"]{8,}['\"]",  # Only block actual passwords
+    ],
+    
+    # Use allowlist for false positives
+    allow_patterns=[
+        r"password\s*validation",  # Allow discussion of password validation
+        r"set.*password.*policy",  # Allow password policy discussions
+    ],
+    
+    # Adjust sensitivity
+    case_sensitive=False,
+    
+    # Use redaction instead of blocking for borderline cases
+    redact_instead_of_block=True
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Issue 5 -->
+                    <div class="aos-feature" style="max-width: 100%;">
+                        <h3 class="aos-feature-title">❌ Performance Issues with Governance Overhead</h3>
+                        <p class="aos-feature-desc">
+                            Agent responses are slow due to governance checks.
+                        </p>
+                        <div class="aos-code-block" style="margin-top: var(--space-md);">
+                            <pre><code># Solution: Optimize governance configuration
+from agent_os.integrations import autogen_kernel
+
+# Use lighter-weight policies for performance
+governed_agent = autogen_kernel.wrap(
+    agent,
+    policy="basic",  # "basic" instead of "strict"
+    
+    # Async policy checks (don't block on every message)
+    async_policy_check=True,
+    
+    # Cache policy decisions
+    cache_policy_decisions=True,
+    cache_ttl=60,  # Cache for 60 seconds
+    
+    # Reduce audit overhead
+    audit_level="basic",  # "basic", "detailed", "full"
+    sample_rate=0.1,  # Only audit 10% of messages
+    
+    # Skip certain checks for trusted operations
+    skip_checks_for=["internal_messages", "status_updates"]
+)
+
+# For code execution, use process isolation instead of container
+sandbox = SandboxConfig(
+    isolation="process",  # Faster than "container"
+    
+    # Pre-warm the sandbox
+    pre_warm=True,
+    
+    # Reuse sandbox between executions
+    persistent=True
+)</code></pre>
+                        </div>
+                    </div>
+                    
+                    <!-- Issue 6 -->
+                    <div class="aos-feature" style="max-width: 100%;">
+                        <h3 class="aos-feature-title">❌ Flight Recorder Not Capturing Events</h3>
+                        <p class="aos-feature-desc">
+                            Audit logs are empty or missing expected events.
+                        </p>
+                        <div class="aos-code-block" style="margin-top: var(--space-md);">
+                            <pre><code># Solution: Ensure flight recorder is properly connected
+from agent_os.audit import FlightRecorder
+
+# Create recorder with verbose settings
+recorder = FlightRecorder(
+    output_path="./audit_logs/debug.jsonl",
+    capture_level="full",
+    
+    # Ensure immediate writes
+    buffer_size=1,  # Write every event immediately
+    flush_on_event=True,
+    
+    # Capture all event types
+    event_types=[
+        "message_sent", "message_received",
+        "code_execution", "policy_check",
+        "action_blocked", "action_allowed",
+        "error", "warning"
+    ]
+)
+
+# Connect to ALL governed agents
+governed_assistant = autogen_kernel.wrap(
+    assistant,
+    flight_recorder=recorder
+)
+
+governed_user_proxy = autogen_kernel.wrap(
+    user_proxy,
+    flight_recorder=recorder  # Same recorder instance
+)
+
+governed_manager = autogen_kernel.wrap_group_chat(
+    manager,
+    flight_recorder=recorder  # Same recorder instance
+)
+
+# Verify recording is working
+print(f"Recorder active: {recorder.is_active}")
+print(f"Output path: {recorder.output_path}")
+
+# After conversation, flush and check
+recorder.flush()
+print(f"Events recorded: {recorder.event_count}")</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: var(--space-xl); text-align: center;">
+                    <p style="color: var(--text-muted);">
+                        Still having issues? 
+                        <a href="https://github.com/imran-siddique/agent-os/issues" target="_blank" style="color: var(--accent-primary);">
+                            Open an issue on GitHub
+                        </a>
+                        or check the 
+                        <a href="../../docs/api.html" style="color: var(--accent-primary);">
+                            API Reference
+                        </a>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="aos-section aos-section-dark">
+            <div class="container" style="text-align: center;">
+                <h2 class="aos-section-title">Ready to Govern Your AutoGen Agents?</h2>
+                <p class="aos-section-subtitle">
+                    Start with kernel-level safety in minutes.
+                </p>
+                
+                <div class="aos-cta" style="justify-content: center;">
+                    <a href="../../docs/quickstart.html" class="aos-btn-primary">
+                        Get Started →
+                    </a>
+                    <a href="../index.html" class="aos-btn-secondary">
+                        View All Integrations
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="aos-footer">
+        <div class="container">
+            <div class="aos-footer-grid">
+                <div class="aos-footer-brand">
+                    <h4>Agent OS</h4>
+                    <p>The Linux kernel for AI agents. Deterministic safety enforcement.</p>
+                    <p class="aos-footer-version">v0.1.0 • MIT License</p>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Documentation</h5>
+                    <ul>
+                        <li><a href="../../docs/quickstart.html">Quickstart</a></li>
+                        <li><a href="../../docs/api.html">API Reference</a></li>
+                        <li><a href="../../docs/policies.html">Policies</a></li>
+                        <li><a href="../../modules/index.html">Modules</a></li>
+                    </ul>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Integrations</h5>
+                    <ul>
+                        <li><a href="../langchain/index.html">LangChain</a></li>
+                        <li><a href="../crewai/index.html">CrewAI</a></li>
+                        <li><a href="index.html" class="active">AutoGen</a></li>
+                        <li><a href="../index.html">View All</a></li>
+                    </ul>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Connect</h5>
+                    <ul>
+                        <li><a href="https://github.com/imran-siddique" target="_blank">GitHub</a></li>
+                        <li><a href="https://linkedin.com/in/imransiddique1986" target="_blank">LinkedIn</a></li>
+                        <li><a href="https://twitter.com/mosiddi" target="_blank">Twitter</a></li>
+                        <li><a href="https://pypi.org/project/agent-os-kernel/" target="_blank">PyPI</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="aos-footer-bottom">
+                <p>&copy; 2026 Imran Siddique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../script.js"></script>
+</body>
+</html>
