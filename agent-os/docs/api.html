@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agent OS API Reference - Complete documentation for KernelSpace, SignalDispatcher, AgentSignal, Policy, FlightRecorder, and module APIs.">
+    <meta name="keywords" content="Agent OS API, KernelSpace, SignalDispatcher, AgentSignal, Policy Engine, FlightRecorder, CMVK, EMK, IATP, AMB">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imran-siddique.github.io/agent-os/docs/api.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imran-siddique.github.io/agent-os/docs/api.html">
+    <meta property="og:title" content="Agent OS API Reference">
+    <meta property="og:description" content="Complete API documentation for Agent OS - the Linux kernel for AI agents.">
+    <meta property="og:site_name" content="Agent OS">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <title>API Reference - Agent OS | Imran Siddique</title>
+    <link rel="stylesheet" href="../../styles-new.css">
+    <link rel="stylesheet" href="../assets/agent-os.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../about.html">About</a></li>
+                <li><a href="../../projects.html">Projects</a></li>
+                <li><a href="../index.html" class="active">Agent OS</a></li>
+                <li><a href="../../writings.html">Writings</a></li>
+                <li><a href="../../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="aos-docs-hero">
+            <div class="container">
+                <h1><span class="gradient">API Reference</span></h1>
+                <p>Complete API documentation for Agent OS v0.1.0</p>
+            </div>
+        </section>
+
+        <!-- Documentation Content -->
+        <section class="aos-docs-content">
+            <div class="container">
+                <div class="aos-docs-layout">
+                    <!-- Sidebar Navigation -->
+                    <aside class="aos-sidebar">
+                        <nav class="aos-sidebar-nav">
+                            <h4 class="aos-sidebar-title">Core Classes</h4>
+                            <ul>
+                                <li><a href="#kernelspace">KernelSpace</a></li>
+                                <li><a href="#signaldispatcher">SignalDispatcher</a></li>
+                                <li><a href="#signals">AgentSignal Enum</a></li>
+                                <li><a href="#policy">Policy</a></li>
+                                <li><a href="#pattern">Pattern</a></li>
+                                <li><a href="#flightrecorder">FlightRecorder</a></li>
+                            </ul>
+                        </nav>
+                        <nav class="aos-sidebar-nav">
+                            <h4 class="aos-sidebar-title">Module APIs</h4>
+                            <ul>
+                                <li><a href="#cmvk">CMVK</a></li>
+                                <li><a href="#emk">EMK</a></li>
+                                <li><a href="#iatp">IATP</a></li>
+                                <li><a href="#amb">AMB</a></li>
+                            </ul>
+                        </nav>
+                        <nav class="aos-sidebar-nav">
+                            <h4 class="aos-sidebar-title">Resources</h4>
+                            <ul>
+                                <li><a href="quickstart.html">Quickstart</a></li>
+                                <li><a href="policies.html">Policy Reference</a></li>
+                                <li><a href="../examples/index.html">Examples</a></li>
+                            </ul>
+                        </nav>
+                    </aside>
+
+                    <!-- Main Content -->
+                    <div class="aos-main">
+                        <!-- KernelSpace -->
+                        <h2 id="kernelspace">KernelSpace</h2>
+                        <p>
+                            The <code>KernelSpace</code> class is the core orchestrator of Agent OS. It manages agent registration, 
+                            execution, policy enforcement, and signal dispatch. All agent interactions flow through the kernel.
+                        </p>
+
+                        <h3>Constructor</h3>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import KernelSpace
+
+kernel = KernelSpace(
+    policy: str | Policy = "strict",
+    flight_recorder: FlightRecorder | None = None,
+    signal_dispatcher: SignalDispatcher | None = None,
+    max_concurrent_agents: int = 100,
+    timeout: float = 300.0,
+    debug: bool = False
+)</code></pre>
+                        </div>
+
+                        <table class="aos-table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Type</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>policy</code></td>
+                                    <td><code>str | Policy</code></td>
+                                    <td><code>"strict"</code></td>
+                                    <td>Policy name ("strict", "permissive", "custom") or Policy instance</td>
+                                </tr>
+                                <tr>
+                                    <td><code>flight_recorder</code></td>
+                                    <td><code>FlightRecorder | None</code></td>
+                                    <td><code>None</code></td>
+                                    <td>Custom flight recorder for audit logging</td>
+                                </tr>
+                                <tr>
+                                    <td><code>signal_dispatcher</code></td>
+                                    <td><code>SignalDispatcher | None</code></td>
+                                    <td><code>None</code></td>
+                                    <td>Custom signal dispatcher instance</td>
+                                </tr>
+                                <tr>
+                                    <td><code>max_concurrent_agents</code></td>
+                                    <td><code>int</code></td>
+                                    <td><code>100</code></td>
+                                    <td>Maximum agents running simultaneously</td>
+                                </tr>
+                                <tr>
+                                    <td><code>timeout</code></td>
+                                    <td><code>float</code></td>
+                                    <td><code>300.0</code></td>
+                                    <td>Default execution timeout in seconds</td>
+                                </tr>
+                                <tr>
+                                    <td><code>debug</code></td>
+                                    <td><code>bool</code></td>
+                                    <td><code>False</code></td>
+                                    <td>Enable debug logging</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>kernel.register()</h3>
+                        <p>
+                            Decorator that registers an agent function with the kernel. The kernel wraps the agent 
+                            to intercept all actions and enforce policies.
+                        </p>
+
+                        <div class="aos-code-block">
+                            <pre><code>@kernel.register(
+    name: str | None = None,
+    permissions: list[str] | None = None,
+    rate_limit: int | None = None,
+    priority: int = 0
+)
+async def my_agent(task: str) -> str:
+    """Your agent implementation."""
+    return f"Completed: {task}"</code></pre>
+                        </div>
+
+                        <table class="aos-table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>name</code></td>
+                                    <td><code>str | None</code></td>
+                                    <td>Custom agent name (defaults to function name)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>permissions</code></td>
+                                    <td><code>list[str] | None</code></td>
+                                    <td>List of granted permissions: ["read", "write", "execute", "network"]</td>
+                                </tr>
+                                <tr>
+                                    <td><code>rate_limit</code></td>
+                                    <td><code>int | None</code></td>
+                                    <td>Maximum executions per minute</td>
+                                </tr>
+                                <tr>
+                                    <td><code>priority</code></td>
+                                    <td><code>int</code></td>
+                                    <td>Execution priority (higher = more priority)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p><strong>Example: Register with permissions</strong></p>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import KernelSpace
+
+kernel = KernelSpace(policy="strict")
+
+@kernel.register(
+    name="data_processor",
+    permissions=["read", "write"],
+    rate_limit=60
+)
+async def data_processor(input_data: dict) -> dict:
+    """Process data with read/write permissions."""
+    # Kernel enforces: only read/write actions allowed
+    # Network calls would be blocked
+    result = await transform(input_data)
+    return {"status": "success", "data": result}</code></pre>
+                        </div>
+
+                        <h3>kernel.execute()</h3>
+                        <p>
+                            Executes a registered agent with full kernel supervision. All actions are intercepted,
+                            validated against policy, and logged to the flight recorder.
+                        </p>
+
+                        <div class="aos-code-block">
+                            <pre><code>result = await kernel.execute(
+    agent: Callable,
+    *args,
+    timeout: float | None = None,
+    context: dict | None = None,
+    **kwargs
+) -> Any</code></pre>
+                        </div>
+
+                        <table class="aos-table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>agent</code></td>
+                                    <td><code>Callable</code></td>
+                                    <td>The registered agent function to execute</td>
+                                </tr>
+                                <tr>
+                                    <td><code>*args</code></td>
+                                    <td><code>Any</code></td>
+                                    <td>Positional arguments passed to the agent</td>
+                                </tr>
+                                <tr>
+                                    <td><code>timeout</code></td>
+                                    <td><code>float | None</code></td>
+                                    <td>Override default timeout for this execution</td>
+                                </tr>
+                                <tr>
+                                    <td><code>context</code></td>
+                                    <td><code>dict | None</code></td>
+                                    <td>Additional context (user_id, session_id, etc.)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>**kwargs</code></td>
+                                    <td><code>Any</code></td>
+                                    <td>Keyword arguments passed to the agent</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p><strong>Returns:</strong> The agent's return value, or raises <code>PolicyViolationError</code> if blocked.</p>
+
+                        <div class="aos-code-block">
+                            <pre><code>import asyncio
+from agent_os import KernelSpace
+
+kernel = KernelSpace(policy="strict")
+
+@kernel.register
+async def analyzer(data: str) -> dict:
+    return {"analyzed": True, "length": len(data)}
+
+# Execute with context
+result = asyncio.run(
+    kernel.execute(
+        analyzer,
+        "sample data",
+        context={"user_id": "user_123", "session_id": "sess_456"}
+    )
+)
+print(result)  # {"analyzed": True, "length": 11}</code></pre>
+                        </div>
+
+                        <h3>kernel.spawn()</h3>
+                        <p>
+                            Spawns a new child agent process. Child agents inherit parent policies but can have 
+                            additional restrictions. Useful for parallel task execution.
+                        </p>
+
+                        <div class="aos-code-block">
+                            <pre><code>child_id = await kernel.spawn(
+    agent: Callable,
+    *args,
+    parent_id: str | None = None,
+    inherit_permissions: bool = True,
+    additional_restrictions: list[str] | None = None,
+    **kwargs
+) -> str</code></pre>
+                        </div>
+
+                        <table class="aos-table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>agent</code></td>
+                                    <td><code>Callable</code></td>
+                                    <td>The agent function to spawn</td>
+                                </tr>
+                                <tr>
+                                    <td><code>parent_id</code></td>
+                                    <td><code>str | None</code></td>
+                                    <td>Parent agent ID for hierarchical tracking</td>
+                                </tr>
+                                <tr>
+                                    <td><code>inherit_permissions</code></td>
+                                    <td><code>bool</code></td>
+                                    <td>Whether child inherits parent's permissions</td>
+                                </tr>
+                                <tr>
+                                    <td><code>additional_restrictions</code></td>
+                                    <td><code>list[str] | None</code></td>
+                                    <td>Extra restrictions beyond parent's policy</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p><strong>Returns:</strong> Unique child agent ID (UUID string)</p>
+
+                        <div class="aos-code-block">
+                            <pre><code>@kernel.register
+async def coordinator(tasks: list[str]) -> list[dict]:
+    """Spawn child agents for parallel processing."""
+    child_ids = []
+    
+    for task in tasks:
+        child_id = await kernel.spawn(
+            worker_agent,
+            task,
+            parent_id=kernel.current_agent_id,
+            additional_restrictions=["no_network"]
+        )
+        child_ids.append(child_id)
+    
+    # Wait for all children to complete
+    results = await kernel.wait_all(child_ids)
+    return results
+
+@kernel.register
+async def worker_agent(task: str) -> dict:
+    """Process individual task."""
+    return {"task": task, "status": "complete"}</code></pre>
+                        </div>
+
+                        <h3>kernel.send_signal()</h3>
+                        <p>Send a POSIX-style signal to a running agent.</p>
+
+                        <div class="aos-code-block">
+                            <pre><code>await kernel.send_signal(
+    agent_id: str,
+    signal: AgentSignal
+) -> bool</code></pre>
+                        </div>
+
+                        <h3>kernel.get_agent_status()</h3>
+                        <p>Retrieve the current status of a registered agent.</p>
+
+                        <div class="aos-code-block">
+                            <pre><code>status = kernel.get_agent_status(agent_id: str) -> AgentStatus
+
+# AgentStatus fields:
+# - id: str
+# - name: str
+# - state: "running" | "stopped" | "terminated" | "waiting"
+# - started_at: datetime
+# - actions_count: int
+# - violations_count: int</code></pre>
+                        </div>
+
+                        <!-- SignalDispatcher -->
+                        <h2 id="signaldispatcher">SignalDispatcher</h2>
+                        <p>
+                            The <code>SignalDispatcher</code> handles POSIX-style signals for agent lifecycle control.
+                            Signals provide deterministic control over agent execution.
+                        </p>
+
+                        <h3>Constructor</h3>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import SignalDispatcher
+
+dispatcher = SignalDispatcher(
+    kernel: KernelSpace,
+    queue_size: int = 1000,
+    async_delivery: bool = True
+)</code></pre>
+                        </div>
+
+                        <h3>dispatcher.send()</h3>
+                        <p>Send a signal to an agent. Non-catchable signals (SIGKILL) are executed immediately.</p>
+
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import SignalDispatcher, AgentSignal
+
+# Send SIGSTOP to pause agent
+await dispatcher.send(
+    agent_id="agent_123",
+    signal=AgentSignal.SIGSTOP
+)
+
+# Send SIGCONT to resume
+await dispatcher.send(
+    agent_id="agent_123", 
+    signal=AgentSignal.SIGCONT
+)
+
+# Terminate with SIGKILL (non-catchable)
+await dispatcher.send(
+    agent_id="agent_123",
+    signal=AgentSignal.SIGKILL
+)</code></pre>
+                        </div>
+
+                        <h3>dispatcher.register_handler()</h3>
+                        <p>Register a custom handler for catchable signals (SIGTERM, SIGUSR1, SIGUSR2).</p>
+
+                        <div class="aos-code-block">
+                            <pre><code>@dispatcher.register_handler(AgentSignal.SIGTERM)
+async def graceful_shutdown(agent_id: str, signal: AgentSignal):
+    """Custom handler for graceful shutdown."""
+    agent = kernel.get_agent(agent_id)
+    await agent.cleanup()
+    await agent.save_state()
+    return True  # Allow termination
+
+@dispatcher.register_handler(AgentSignal.SIGUSR1)
+async def dump_state(agent_id: str, signal: AgentSignal):
+    """Custom handler for state dumping."""
+    agent = kernel.get_agent(agent_id)
+    state = await agent.get_state()
+    await flight_recorder.log_state_dump(agent_id, state)</code></pre>
+                        </div>
+
+                        <!-- AgentSignal Enum -->
+                        <h2 id="signals">AgentSignal Enum</h2>
+                        <p>
+                            POSIX-inspired signals for agent control. Some signals are catchable (handlers can intercept),
+                            while others are non-catchable (kernel enforces immediately).
+                        </p>
+
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import AgentSignal
+
+class AgentSignal(Enum):
+    # Non-catchable signals (kernel enforced)
+    SIGKILL = 9    # Immediate termination, no cleanup
+    SIGSTOP = 19   # Immediate pause, cannot be caught
+    
+    # Catchable signals (handlers can intercept)
+    SIGCONT = 18   # Resume from SIGSTOP
+    SIGTERM = 15   # Graceful termination request
+    SIGUSR1 = 10   # User-defined signal 1
+    SIGUSR2 = 12   # User-defined signal 2
+    SIGALRM = 14   # Timeout alarm</code></pre>
+                        </div>
+
+                        <table class="aos-table">
+                            <thead>
+                                <tr>
+                                    <th>Signal</th>
+                                    <th>Value</th>
+                                    <th>Catchable</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>SIGKILL</code></td>
+                                    <td>9</td>
+                                    <td>❌ No</td>
+                                    <td>Immediate termination. Agent cannot catch or ignore.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SIGSTOP</code></td>
+                                    <td>19</td>
+                                    <td>❌ No</td>
+                                    <td>Immediate pause. Agent freezes until SIGCONT.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SIGCONT</code></td>
+                                    <td>18</td>
+                                    <td>✅ Yes</td>
+                                    <td>Resume execution after SIGSTOP.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SIGTERM</code></td>
+                                    <td>15</td>
+                                    <td>✅ Yes</td>
+                                    <td>Graceful termination. Agent can cleanup first.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SIGUSR1</code></td>
+                                    <td>10</td>
+                                    <td>✅ Yes</td>
+                                    <td>User-defined. Common use: state dump.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SIGUSR2</code></td>
+                                    <td>12</td>
+                                    <td>✅ Yes</td>
+                                    <td>User-defined. Common use: config reload.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SIGALRM</code></td>
+                                    <td>14</td>
+                                    <td>✅ Yes</td>
+                                    <td>Timer expired. Used for timeout enforcement.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p><strong>Example: Signal-based agent control</strong></p>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import KernelSpace, AgentSignal
+import asyncio
+
+kernel = KernelSpace(policy="strict")
+
+@kernel.register
+async def long_running_agent(iterations: int):
+    """Agent that can be paused and resumed."""
+    for i in range(iterations):
+        # Check for pause signal
+        if kernel.is_stopped():
+            await kernel.wait_for_continue()
+        
+        await process_iteration(i)
+        await asyncio.sleep(1)
+    
+    return {"completed": iterations}
+
+async def main():
+    # Start agent
+    task = asyncio.create_task(
+        kernel.execute(long_running_agent, 100)
+    )
+    
+    # Pause after 5 seconds
+    await asyncio.sleep(5)
+    await kernel.send_signal(kernel.current_agent_id, AgentSignal.SIGSTOP)
+    print("Agent paused")
+    
+    # Resume after 3 seconds
+    await asyncio.sleep(3)
+    await kernel.send_signal(kernel.current_agent_id, AgentSignal.SIGCONT)
+    print("Agent resumed")
+    
+    result = await task
+    print(result)</code></pre>
+                        </div>
+
+                        <!-- Policy -->
+                        <h2 id="policy">Policy</h2>
+                        <p>
+                            The <code>Policy</code> class defines rules that govern agent behavior. Policies are enforced
+                            at the kernel level before any action executes.
+                        </p>
+
+                        <h3>Constructor</h3>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import Policy, Pattern
+
+policy = Policy(
+    name: str,
+    version: str = "1.0.0",
+    rules: list[Rule] | None = None,
+    default_action: str = "deny",  # "allow" | "deny"
+    inheritance: str = "strict"    # "strict" | "permissive" | "none"
+)</code></pre>
+                        </div>
+
+                        <h3>policy.add_rule()</h3>
+                        <p>Add a rule to the policy. Rules are evaluated in order; first match wins.</p>
+
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import Policy, Pattern
+
+policy = Policy(name="healthcare_policy", default_action="deny")
+
+# Allow read operations on non-sensitive data
+policy.add_rule(
+    action="allow",
+    pattern=Pattern(
+        operation="read",
+        resource="data/*",
+        exclude=["data/phi/*", "data/pii/*"]
+    ),
+    reason="Allow reading non-sensitive data"
+)
+
+# Deny all write operations to PHI
+policy.add_rule(
+    action="deny",
+    pattern=Pattern(
+        operation="write",
+        resource="data/phi/*"
+    ),
+    reason="PHI write requires explicit approval",
+    on_violation="SIGKILL"  # Immediate termination
+)
+
+# Allow network calls to approved endpoints only
+policy.add_rule(
+    action="allow",
+    pattern=Pattern(
+        operation="network",
+        resource="https://api.approved-service.com/*"
+    ),
+    rate_limit=100  # Max 100 calls per minute
+)</code></pre>
+                        </div>
+
+                        <h3>Built-in Policies</h3>
+                        <table class="aos-table">
+                            <thead>
+                                <tr>
+                                    <th>Policy Name</th>
+                                    <th>Default Action</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>"strict"</code></td>
+                                    <td>deny</td>
+                                    <td>Deny everything not explicitly allowed. Production recommended.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>"permissive"</code></td>
+                                    <td>allow</td>
+                                    <td>Allow everything not explicitly denied. Development only.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>"audit"</code></td>
+                                    <td>allow</td>
+                                    <td>Allow all but log violations. Useful for policy development.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Pattern -->
+                        <h2 id="pattern">Pattern</h2>
+                        <p>
+                            <code>Pattern</code> defines matching criteria for policy rules. Supports glob patterns,
+                            regex, and structured matching.
+                        </p>
+
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import Pattern
+
+# Simple glob pattern
+pattern = Pattern(
+    operation="read",
+    resource="files/*.txt"
+)
+
+# Regex pattern
+pattern = Pattern(
+    operation="write",
+    resource=r"db/users/\d+",
+    match_type="regex"
+)
+
+# Structured pattern with conditions
+pattern = Pattern(
+    operation="execute",
+    resource="tools/*",
+    conditions={
+        "user_role": ["admin", "operator"],
+        "time_window": {"start": "09:00", "end": "17:00"},
+        "max_cost": 100.0
+    }
+)
+
+# Exclude specific resources
+pattern = Pattern(
+    operation="*",
+    resource="api/*",
+    exclude=["api/admin/*", "api/internal/*"]
+)</code></pre>
+                        </div>
+
+                        <table class="aos-table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>operation</code></td>
+                                    <td><code>str</code></td>
+                                    <td>Operation type: "read", "write", "execute", "network", "*"</td>
+                                </tr>
+                                <tr>
+                                    <td><code>resource</code></td>
+                                    <td><code>str</code></td>
+                                    <td>Resource path pattern (glob or regex)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>match_type</code></td>
+                                    <td><code>str</code></td>
+                                    <td>"glob" (default) or "regex"</td>
+                                </tr>
+                                <tr>
+                                    <td><code>conditions</code></td>
+                                    <td><code>dict | None</code></td>
+                                    <td>Additional matching conditions</td>
+                                </tr>
+                                <tr>
+                                    <td><code>exclude</code></td>
+                                    <td><code>list[str] | None</code></td>
+                                    <td>Patterns to exclude from match</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- FlightRecorder -->
+                        <h2 id="flightrecorder">FlightRecorder</h2>
+                        <p>
+                            The <code>FlightRecorder</code> provides comprehensive audit logging for all agent activities.
+                            Like an airplane's black box, it captures everything for debugging and compliance.
+                        </p>
+
+                        <h3>Constructor</h3>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import FlightRecorder
+
+recorder = FlightRecorder(
+    storage: str = "memory",  # "memory" | "sqlite" | "postgresql" | "s3"
+    connection_string: str | None = None,
+    retention_days: int = 90,
+    compression: bool = True,
+    encryption_key: bytes | None = None
+)</code></pre>
+                        </div>
+
+                        <h3>recorder.log()</h3>
+                        <p>Log an event. Called automatically by the kernel for all actions.</p>
+
+                        <div class="aos-code-block">
+                            <pre><code>await recorder.log(
+    event_type: str,
+    agent_id: str,
+    data: dict,
+    severity: str = "info"  # "debug" | "info" | "warning" | "error" | "critical"
+)
+
+# Example
+await recorder.log(
+    event_type="action_blocked",
+    agent_id="agent_123",
+    data={
+        "action": "write",
+        "resource": "data/phi/patient_001.json",
+        "policy_rule": "deny_phi_write",
+        "reason": "PHI access denied without explicit approval"
+    },
+    severity="warning"
+)</code></pre>
+                        </div>
+
+                        <h3>recorder.query()</h3>
+                        <p>Query recorded events with filters.</p>
+
+                        <div class="aos-code-block">
+                            <pre><code>from datetime import datetime, timedelta
+
+# Query all violations in the last hour
+violations = await recorder.query(
+    event_type="policy_violation",
+    start_time=datetime.now() - timedelta(hours=1),
+    end_time=datetime.now(),
+    limit=100
+)
+
+# Query specific agent activity
+activity = await recorder.query(
+    agent_id="agent_123",
+    severity=["warning", "error", "critical"],
+    limit=50
+)
+
+# Query with custom filters
+events = await recorder.query(
+    filters={
+        "data.resource": {"$regex": "data/phi/*"},
+        "data.action": "write"
+    }
+)</code></pre>
+                        </div>
+
+                        <h3>recorder.replay()</h3>
+                        <p>Replay events for debugging (time-travel debugging).</p>
+
+                        <div class="aos-code-block">
+                            <pre><code># Get execution timeline
+timeline = await recorder.get_timeline(
+    agent_id="agent_123",
+    execution_id="exec_456"
+)
+
+# Replay to specific point
+state = await recorder.replay(
+    agent_id="agent_123",
+    execution_id="exec_456",
+    to_event_id="evt_789"  # Replay up to this event
+)
+
+print(f"Agent state at event: {state}")</code></pre>
+                        </div>
+
+                        <h3>recorder.export()</h3>
+                        <p>Export audit logs for compliance reporting.</p>
+
+                        <div class="aos-code-block">
+                            <pre><code># Export to JSON
+await recorder.export(
+    format="json",
+    output_path="audit_report.json",
+    start_time=datetime(2024, 1, 1),
+    end_time=datetime(2024, 1, 31),
+    include_metadata=True
+)
+
+# Export to CSV for analysis
+await recorder.export(
+    format="csv",
+    output_path="audit_report.csv",
+    fields=["timestamp", "agent_id", "event_type", "severity"]
+)</code></pre>
+                        </div>
+
+                        <!-- Module APIs -->
+                        <h2 id="cmvk">CMVK (Cross-Model Verification Kernel)</h2>
+                        <p>
+                            The CMVK module detects hallucinations by comparing outputs across multiple LLMs.
+                            If models disagree beyond a threshold, the output is flagged or blocked.
+                        </p>
+
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.modules import CMVK
+
+cmvk = CMVK(
+    models=["gpt-4", "claude-3", "gemini-pro"],
+    consensus_threshold=0.8,  # 80% agreement required
+    voting_strategy="majority",  # "majority" | "unanimous" | "weighted"
+    timeout=30.0
+)
+
+# Verify a response
+result = await cmvk.verify(
+    prompt="What is the capital of France?",
+    response="Paris is the capital of France.",
+    context={"domain": "geography"}
+)
+
+print(result)
+# {
+#     "verified": True,
+#     "confidence": 0.95,
+#     "model_votes": {"gpt-4": True, "claude-3": True, "gemini-pro": True},
+#     "consensus": "unanimous"
+# }
+
+# Integrate with kernel
+kernel = KernelSpace(policy="strict")
+kernel.add_module(cmvk)
+
+@kernel.register
+async def verified_agent(query: str):
+    response = await llm.generate(query)
+    
+    # CMVK automatically verifies before returning
+    return response  # Blocked if verification fails</code></pre>
+                        </div>
+
+                        <h2 id="emk">EMK (Episodic Memory Kernel)</h2>
+                        <p>
+                            The EMK provides immutable, searchable memory for agents. Supports semantic search,
+                            temporal queries, and memory isolation between agents.
+                        </p>
+
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.modules import EMK
+
+emk = EMK(
+    storage="postgresql",
+    connection_string="postgresql://localhost/agent_memory",
+    embedding_model="text-embedding-3-small",
+    isolation="agent"  # "agent" | "session" | "global"
+)
+
+# Store a memory
+await emk.store(
+    agent_id="agent_123",
+    content="User prefers dark mode and metric units.",
+    metadata={"type": "preference", "confidence": 0.9},
+    tags=["user_preference", "ui"]
+)
+
+# Semantic search
+memories = await emk.search(
+    agent_id="agent_123",
+    query="What display settings does the user prefer?",
+    limit=5,
+    min_relevance=0.7
+)
+
+# Temporal query
+recent = await emk.query(
+    agent_id="agent_123",
+    since=datetime.now() - timedelta(hours=24),
+    tags=["user_preference"]
+)
+
+# Memory is immutable - create new version instead of updating
+await emk.store(
+    agent_id="agent_123",
+    content="User now prefers light mode.",
+    supersedes="memory_456",  # Reference to previous memory
+    metadata={"type": "preference", "confidence": 0.95}
+)</code></pre>
+                        </div>
+
+                        <h2 id="iatp">IATP (Inter-Agent Trust Protocol)</h2>
+                        <p>
+                            The IATP module provides cryptographic identity and message signing for multi-agent systems.
+                            Ensures agents can verify each other's identity and message integrity.
+                        </p>
+
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.modules import IATP
+
+iatp = IATP(
+    key_storage="vault",  # "memory" | "file" | "vault" | "hsm"
+    algorithm="ed25519",
+    trust_model="web"  # "hierarchical" | "web" | "pki"
+)
+
+# Register agent identity
+identity = await iatp.register_agent(
+    agent_id="agent_123",
+    metadata={"role": "data_processor", "department": "analytics"}
+)
+
+print(identity.public_key)  # Base64 encoded public key
+
+# Sign a message
+signed_message = await iatp.sign(
+    sender_id="agent_123",
+    message={"action": "process", "data_id": "dataset_456"},
+    recipient_id="agent_789"
+)
+
+# Verify a received message
+verification = await iatp.verify(signed_message)
+print(verification)
+# {
+#     "valid": True,
+#     "sender": "agent_123",
+#     "timestamp": "2024-01-15T10:30:00Z",
+#     "trust_level": 0.95
+# }
+
+# Establish trust relationship
+await iatp.establish_trust(
+    from_agent="agent_123",
+    to_agent="agent_789",
+    trust_level=0.9,
+    permissions=["send_data", "request_action"]
+)</code></pre>
+                        </div>
+
+                        <h2 id="amb">AMB (Agent Message Bus)</h2>
+                        <p>
+                            The AMB module provides decoupled communication between agents. Supports multiple
+                            backends and message patterns (pub/sub, request/reply, streaming).
+                        </p>
+
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.modules import AMB
+
+amb = AMB(
+    backend="redis",  # "memory" | "redis" | "kafka" | "nats" | "sqs"
+    connection_string="redis://localhost:6379",
+    serializer="msgpack"  # "json" | "msgpack" | "protobuf"
+)
+
+# Publish a message
+await amb.publish(
+    topic="tasks.process",
+    message={"task_id": "task_123", "priority": "high"},
+    sender_id="coordinator"
+)
+
+# Subscribe to messages
+@amb.subscribe("tasks.process")
+async def handle_task(message, metadata):
+    """Process incoming tasks."""
+    task_id = message["task_id"]
+    result = await process_task(task_id)
+    
+    # Reply to sender
+    await amb.reply(
+        metadata.reply_to,
+        {"task_id": task_id, "status": "completed", "result": result}
+    )
+
+# Request/Reply pattern
+response = await amb.request(
+    topic="agents.status",
+    message={"agent_id": "agent_123"},
+    timeout=5.0
+)
+
+# Streaming
+async for message in amb.stream("events.realtime"):
+    await process_event(message)
+
+# Message routing with filters
+@amb.subscribe(
+    "tasks.*",
+    filter={"priority": "high", "department": "analytics"}
+)
+async def handle_priority_tasks(message, metadata):
+    await fast_track_process(message)</code></pre>
+                        </div>
+
+                        <!-- Additional Resources -->
+                        <h2 id="additional">Additional Resources</h2>
+                        <ul>
+                            <li><a href="quickstart.html">Quickstart Guide</a> - Get running in 2 minutes</li>
+                            <li><a href="policies.html">Policy Reference</a> - Complete policy configuration</li>
+                            <li><a href="../modules/index.html">Module Deep Dives</a> - Detailed module documentation</li>
+                            <li><a href="../integrations/index.html">Framework Integrations</a> - LangChain, CrewAI, AutoGen</li>
+                            <li><a href="../examples/index.html">Examples</a> - Production-ready code samples</li>
+                            <li><a href="https://github.com/imran-siddique/agent-os" target="_blank">GitHub Repository</a> - Source code and issues</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="aos-footer">
+        <div class="container">
+            <div class="aos-footer-grid">
+                <div class="aos-footer-brand">
+                    <h4>Agent OS</h4>
+                    <p>The Linux kernel for AI agents. Deterministic safety enforcement.</p>
+                    <p class="aos-footer-version">v0.1.0 • MIT License</p>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Documentation</h5>
+                    <ul>
+                        <li><a href="quickstart.html">Quickstart</a></li>
+                        <li><a href="api.html">API Reference</a></li>
+                        <li><a href="policies.html">Policies</a></li>
+                        <li><a href="../modules/index.html">Modules</a></li>
+                    </ul>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Resources</h5>
+                    <ul>
+                        <li><a href="../integrations/index.html">Integrations</a></li>
+                        <li><a href="../use-cases/index.html">Use Cases</a></li>
+                        <li><a href="../examples/index.html">Examples</a></li>
+                        <li><a href="https://github.com/imran-siddique/agent-os" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Connect</h5>
+                    <ul>
+                        <li><a href="https://github.com/imran-siddique" target="_blank">GitHub</a></li>
+                        <li><a href="https://linkedin.com/in/imransiddique1986" target="_blank">LinkedIn</a></li>
+                        <li><a href="https://twitter.com/mosiddi" target="_blank">Twitter</a></li>
+                        <li><a href="https://pypi.org/project/agent-os-kernel/" target="_blank">PyPI</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="aos-footer-bottom">
+                <p>&copy; 2026 Imran Siddique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../script.js"></script>
+</body>
+</html>
