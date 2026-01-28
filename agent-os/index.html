@@ -1,0 +1,662 @@
+<!-- Deployed: 2026-01-28 15:05:25 -->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agent OS: The Linux kernel for AI agents. Deterministic safety enforcement with 0% policy violations. POSIX-inspired primitives for governing autonomous AI systems.">
+    <meta name="keywords" content="Agent OS, AI Safety, AI Governance, LLM Kernel, AI Agents, Policy Enforcement, CMVK, Episodic Memory, Multi-Agent Trust, POSIX AI, agent-os-kernel">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://imran-siddique.github.io/agent-os/">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://imran-siddique.github.io/agent-os/">
+    <meta property="og:title" content="Agent OS - The Linux Kernel for AI Agents">
+    <meta property="og:description" content="Deterministic safety enforcement with 0% policy violations. POSIX-inspired primitives for governing autonomous AI systems.">
+    <meta property="og:site_name" content="Agent OS">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:title" content="Agent OS - The Linux Kernel for AI Agents">
+    <meta name="twitter:description" content="0% safety violations. Deterministic enforcement. The operating system layer for AI agents.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Agent OS",
+        "alternateName": "agent-os-kernel",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",
+        "description": "The Linux kernel for AI agents. Deterministic safety enforcement with 0% policy violations through POSIX-inspired primitives.",
+        "url": "https://imran-siddique.github.io/agent-os/",
+        "downloadUrl": "https://pypi.org/project/agent-os-kernel/",
+        "softwareVersion": "0.1.0",
+        "author": {
+            "@type": "Person",
+            "name": "Imran Siddique",
+            "url": "https://imran-siddique.github.io",
+            "jobTitle": "Principal Software Engineer",
+            "worksFor": {"@type": "Organization", "name": "Microsoft"}
+        },
+        "license": "https://opensource.org/licenses/MIT",
+        "programmingLanguage": "Python",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+        "featureList": [
+            "0% safety violations guaranteed",
+            "POSIX-style signals (SIGKILL, SIGSTOP, SIGCONT)",
+            "Cross-Model Verification Kernel (CMVK)",
+            "Episodic Memory Kernel (EMK)",
+            "Inter-Agent Trust Protocol (IATP)",
+            "Agent Message Bus (AMB)",
+            "LangChain, CrewAI, AutoGen integrations"
+        ]
+    }
+    </script>
+    
+    <title>Agent OS - The Linux Kernel for AI Agents | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css">
+    <link rel="stylesheet" href="assets/agent-os.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="index.html" class="active">Agent OS</a></li>
+                <li><a href="../writings.html">Writings</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="aos-hero">
+            <div class="aos-hero-content">
+                <div class="aos-badge">
+                    <span class="pulse-dot"></span>
+                    Open Source • MIT License • Production Ready
+                </div>
+                
+                <h1 class="aos-title">
+                    <span class="gradient">Agent OS</span>
+                </h1>
+                
+                <p class="aos-tagline">The Linux Kernel for AI Agents</p>
+                
+                <p class="aos-description">
+                    Current AI frameworks let LLMs decide everything—including whether to follow safety rules. 
+                    <strong>Agent OS inverts this</strong>: the kernel decides, the LLM just computes. 
+                    Zero policy violations. Guaranteed.
+                </p>
+                
+                <div class="aos-stats">
+                    <div class="aos-stat">
+                        <span class="aos-stat-value">0%</span>
+                        <span class="aos-stat-label">Safety Violations</span>
+                    </div>
+                    <div class="aos-stat">
+                        <span class="aos-stat-value">&lt;5ms</span>
+                        <span class="aos-stat-label">Enforcement Latency</span>
+                    </div>
+                    <div class="aos-stat">
+                        <span class="aos-stat-value">6+</span>
+                        <span class="aos-stat-label">Framework Integrations</span>
+                    </div>
+                    <div class="aos-stat">
+                        <span class="aos-stat-value">4</span>
+                        <span class="aos-stat-label">Core Modules</span>
+                    </div>
+                </div>
+                
+                <div class="aos-cta">
+                    <a href="docs/quickstart.html" class="aos-btn-primary">
+                        🚀 Get Started
+                    </a>
+                    <a href="tutorials/index.html" class="aos-btn-secondary">
+                        📚 Tutorials
+                    </a>
+                    <a href="https://github.com/imran-siddique/agent-os" target="_blank" class="aos-btn-secondary">
+                        ⭐ GitHub
+                    </a>
+                </div>
+                
+                <div class="aos-install">
+                    <code class="aos-install-cmd">
+                        <span class="prefix">$</span> pip install agent-os-kernel
+                    </code>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem/Solution Section -->
+        <section class="aos-section aos-section-dark">
+            <div class="container">
+                <h2 class="aos-section-title">Why Agent OS?</h2>
+                <p class="aos-section-subtitle">
+                    The difference between hoping your agent behaves and guaranteeing it.
+                </p>
+                
+                <div class="aos-comparison">
+                    <div class="aos-card-problem">
+                        <div class="aos-card-header">
+                            <span class="aos-card-icon">❌</span>
+                            <h3 class="aos-card-title">The Problem: Hope-Based Safety</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>system_prompt = """
+You are a helpful assistant.
+Please don't delete important files.
+Be careful with sensitive data.
+Always ask before taking action.
+"""
+# 🤞 Hope the LLM complies...</code></pre>
+                        </div>
+                        <div class="aos-card-result">
+                            <strong>Result: 26.67%</strong> safety violations in testing
+                        </div>
+                    </div>
+                    
+                    <div class="aos-card-solution">
+                        <div class="aos-card-header">
+                            <span class="aos-card-icon">✅</span>
+                            <h3 class="aos-card-title">The Solution: Kernel Enforcement</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import KernelSpace
+
+kernel = KernelSpace(policy="strict")
+
+@kernel.register
+async def my_agent(task):
+    # Kernel intercepts every action
+    # Blocked actions never execute
+    return await process(task)</code></pre>
+                        </div>
+                        <div class="aos-card-result">
+                            <strong>Result: 0%</strong> policy violations guaranteed
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture Section -->
+        <section class="aos-section">
+            <div class="container">
+                <h2 class="aos-section-title">The OS Analogy</h2>
+                <p class="aos-section-subtitle">
+                    Agent OS applies proven operating system principles to AI governance.
+                </p>
+                
+                <div class="aos-architecture">
+                    <div class="aos-arch-layer aos-arch-user">
+                        <div class="aos-arch-label">User Space (Untrusted)</div>
+                        <div class="aos-arch-name">Your Agent Code</div>
+                        <div class="aos-arch-desc">
+                            Can crash, hallucinate, try dangerous things—but the kernel intercepts first.
+                        </div>
+                    </div>
+                    
+                    <div class="aos-arch-arrow">↓ Every action passes through the kernel ↓</div>
+                    
+                    <div class="aos-arch-layer aos-arch-kernel">
+                        <div class="aos-arch-label">Kernel Space (Trusted)</div>
+                        <div class="aos-arch-name">Agent OS</div>
+                        <div class="aos-arch-modules">
+                            <span class="aos-arch-module">Policy Engine</span>
+                            <span class="aos-arch-module">Flight Recorder</span>
+                            <span class="aos-arch-module">Signal Dispatch</span>
+                            <span class="aos-arch-module">CMVK</span>
+                            <span class="aos-arch-module">IATP</span>
+                        </div>
+                        <div class="aos-arch-desc">
+                            If agent violates policy → SIGKILL (non-catchable). No exceptions.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="aos-section aos-section-dark">
+            <div class="container">
+                <h2 class="aos-section-title">Core Modules</h2>
+                <p class="aos-section-subtitle">
+                    Each module solves a specific problem and can be used independently.
+                </p>
+                
+                <div class="aos-features">
+                    <a href="modules/cmvk/index.html" class="aos-feature">
+                        <div class="aos-feature-icon">🔍</div>
+                        <h3 class="aos-feature-title">CMVK</h3>
+                        <p class="aos-feature-desc">
+                            Cross-Model Verification Kernel. Detect hallucinations by comparing outputs across multiple LLMs.
+                        </p>
+                        <span class="aos-feature-link">Learn more →</span>
+                    </a>
+                    
+                    <a href="modules/emk/index.html" class="aos-feature">
+                        <div class="aos-feature-icon">🧠</div>
+                        <h3 class="aos-feature-title">EMK</h3>
+                        <p class="aos-feature-desc">
+                            Episodic Memory Kernel. Immutable agent memory with semantic search and time-travel debugging.
+                        </p>
+                        <span class="aos-feature-link">Learn more →</span>
+                    </a>
+                    
+                    <a href="modules/iatp/index.html" class="aos-feature">
+                        <div class="aos-feature-icon">🤝</div>
+                        <h3 class="aos-feature-title">IATP</h3>
+                        <p class="aos-feature-desc">
+                            Inter-Agent Trust Protocol. Cryptographic identity and message signing for multi-agent systems.
+                        </p>
+                        <span class="aos-feature-link">Learn more →</span>
+                    </a>
+                    
+                    <a href="modules/amb/index.html" class="aos-feature">
+                        <div class="aos-feature-icon">📡</div>
+                        <h3 class="aos-feature-title">AMB</h3>
+                        <p class="aos-feature-desc">
+                            Agent Message Bus. Decoupled communication with Redis, Kafka, NATS, and SQS backends.
+                        </p>
+                        <span class="aos-feature-link">Learn more →</span>
+                    </a>
+                    
+                    <a href="docs/policies.html" class="aos-feature">
+                        <div class="aos-feature-icon">🔐</div>
+                        <h3 class="aos-feature-title">Policy Engine</h3>
+                        <p class="aos-feature-desc">
+                            Define what agents can and cannot do. Policies enforced at kernel level—before actions execute.
+                        </p>
+                        <span class="aos-feature-link">Learn more →</span>
+                    </a>
+                    
+                    <a href="docs/api.html#signals" class="aos-feature">
+                        <div class="aos-feature-icon">⚡</div>
+                        <h3 class="aos-feature-title">POSIX Signals</h3>
+                        <p class="aos-feature-desc">
+                            Control execution with SIGKILL (terminate), SIGSTOP (pause), and SIGCONT (resume).
+                        </p>
+                        <span class="aos-feature-link">Learn more →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Integrations Section -->
+        <section class="aos-section">
+            <div class="container">
+                <h2 class="aos-section-title">Framework Integrations</h2>
+                <p class="aos-section-subtitle">
+                    Wrap your existing agents with one line. No rewrites required.
+                </p>
+                
+                <div class="aos-integrations">
+                    <a href="integrations/langchain/index.html" class="aos-integration">
+                        <h4 class="aos-integration-name">🦜 LangChain</h4>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.integrations import langchain_kernel
+governed = langchain_kernel.wrap(agent)</code></pre>
+                        </div>
+                    </a>
+                    
+                    <a href="integrations/crewai/index.html" class="aos-integration">
+                        <h4 class="aos-integration-name">👥 CrewAI</h4>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.integrations import crewai_kernel
+governed = crewai_kernel.wrap(crew)</code></pre>
+                        </div>
+                    </a>
+                    
+                    <a href="integrations/autogen/index.html" class="aos-integration">
+                        <h4 class="aos-integration-name">🤖 AutoGen</h4>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.integrations import autogen_kernel
+governed = autogen_kernel.wrap(assistant)</code></pre>
+                        </div>
+                    </a>
+                    
+                    <a href="integrations/index.html" class="aos-integration">
+                        <h4 class="aos-integration-name">🔮 OpenAI Assistants</h4>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os.integrations import openai_kernel
+governed = openai_kernel.wrap(assistant)</code></pre>
+                        </div>
+                    </a>
+                </div>
+                
+                <div style="text-align: center; margin-top: var(--space-xl);">
+                    <a href="integrations/index.html" class="aos-btn-secondary">
+                        View All Integrations →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases Section -->
+        <section class="aos-section aos-section-dark">
+            <div class="container">
+                <h2 class="aos-section-title">Production Use Cases</h2>
+                <p class="aos-section-subtitle">
+                    Agent OS in action across regulated industries.
+                </p>
+                
+                <div class="aos-use-cases">
+                    <a href="use-cases/healthcare/index.html" class="aos-use-case">
+                        <div class="aos-use-case-icon">🏥</div>
+                        <h3 class="aos-use-case-title">Healthcare</h3>
+                        <p class="aos-use-case-desc">HIPAA-compliant AI agents with guaranteed PHI protection.</p>
+                        <span class="aos-use-case-stat">0 PHI incidents</span>
+                    </a>
+                    
+                    <a href="use-cases/finance/index.html" class="aos-use-case">
+                        <div class="aos-use-case-icon">💰</div>
+                        <h3 class="aos-use-case-title">Finance</h3>
+                        <p class="aos-use-case-desc">Risk-aware agents with position limits and compliance guardrails.</p>
+                        <span class="aos-use-case-stat">$2.3M risk prevented</span>
+                    </a>
+                    
+                    <a href="use-cases/education/index.html" class="aos-use-case">
+                        <div class="aos-use-case-icon">📚</div>
+                        <h3 class="aos-use-case-title">Education</h3>
+                        <p class="aos-use-case-desc">Safe tutoring bots with age-appropriate content and parent visibility.</p>
+                        <span class="aos-use-case-stat">COPPA compliant</span>
+                    </a>
+                    
+                    <a href="examples/index.html" class="aos-use-case">
+                        <div class="aos-use-case-icon">🏢</div>
+                        <h3 class="aos-use-case-title">Enterprise</h3>
+                        <p class="aos-use-case-desc">Multi-agent coordination with cryptographic trust.</p>
+                        <span class="aos-use-case-stat">SOC 2 ready</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Start Section -->
+        <section class="aos-section">
+            <div class="container">
+                <h2 class="aos-section-title">Get Started in 2 Minutes</h2>
+                
+                <div class="aos-steps">
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">1</span>
+                            <h3 class="aos-step-title">Install</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>pip install agent-os-kernel</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">2</span>
+                            <h3 class="aos-step-title">Create a Governed Agent</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>from agent_os import KernelSpace
+
+kernel = KernelSpace(policy="strict")
+
+@kernel.register
+async def my_agent(task: str):
+    # Your agent logic here
+    # Kernel enforces policies automatically
+    return f"Completed: {task}"</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">3</span>
+                            <h3 class="aos-step-title">Execute Safely</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code>import asyncio
+
+result = asyncio.run(kernel.execute(my_agent, "analyze data"))
+print(result)  # "Completed: analyze data"</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: var(--space-xl);">
+                    <a href="docs/quickstart.html" class="aos-btn-primary">
+                        Full Quickstart Guide →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tutorials Section -->
+        <section class="aos-section aos-section-dark">
+            <div class="container">
+                <h2 class="aos-section-title">📚 <span class="gradient">Tutorials</span></h2>
+                <p class="aos-section-subtitle">
+                    Step-by-step guides to master Agent OS, from basics to production deployment.
+                </p>
+                
+                <div class="aos-tutorials-grid">
+                    <a href="tutorials/index.html#getting-started" class="aos-tutorial-card">
+                        <div class="aos-tutorial-header">
+                            <span class="aos-tutorial-icon">🎯</span>
+                            <div class="aos-tutorial-meta">
+                                <span class="aos-tutorial-level">Beginner</span>
+                                <span class="aos-tutorial-time">15 min</span>
+                            </div>
+                        </div>
+                        <div class="aos-tutorial-body">
+                            <h3 class="aos-tutorial-title">Your First Governed Agent</h3>
+                            <p class="aos-tutorial-desc">Learn the fundamentals of Agent OS by building a simple governed agent from scratch.</p>
+                            <div class="aos-tutorial-tags">
+                                <span class="aos-tutorial-tag">KernelSpace</span>
+                                <span class="aos-tutorial-tag">Policies</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="tutorials/index.html#hallucination-detection" class="aos-tutorial-card">
+                        <div class="aos-tutorial-header">
+                            <span class="aos-tutorial-icon">🔍</span>
+                            <div class="aos-tutorial-meta">
+                                <span class="aos-tutorial-level">Intermediate</span>
+                                <span class="aos-tutorial-time">25 min</span>
+                            </div>
+                        </div>
+                        <div class="aos-tutorial-body">
+                            <h3 class="aos-tutorial-title">Detecting Hallucinations with CMVK</h3>
+                            <p class="aos-tutorial-desc">Use multi-model consensus to verify AI outputs and catch hallucinations before they cause problems.</p>
+                            <div class="aos-tutorial-tags">
+                                <span class="aos-tutorial-tag">CMVK</span>
+                                <span class="aos-tutorial-tag">Verification</span>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="tutorials/index.html#multi-agent" class="aos-tutorial-card">
+                        <div class="aos-tutorial-header">
+                            <span class="aos-tutorial-icon">🤝</span>
+                            <div class="aos-tutorial-meta">
+                                <span class="aos-tutorial-level">Advanced</span>
+                                <span class="aos-tutorial-time">40 min</span>
+                            </div>
+                        </div>
+                        <div class="aos-tutorial-body">
+                            <h3 class="aos-tutorial-title">Building Multi-Agent Systems</h3>
+                            <p class="aos-tutorial-desc">Coordinate multiple agents with cryptographic trust using IATP and the Agent Message Bus.</p>
+                            <div class="aos-tutorial-tags">
+                                <span class="aos-tutorial-tag">IATP</span>
+                                <span class="aos-tutorial-tag">AMB</span>
+                                <span class="aos-tutorial-tag">Multi-Agent</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div style="text-align: center; margin-top: var(--space-xl);">
+                    <a href="tutorials/index.html" class="aos-btn-secondary">
+                        View All Tutorials →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documentation Navigation -->
+        <section class="aos-section">
+            <div class="container">
+                <h2 class="aos-section-title">📖 Documentation</h2>
+                <p class="aos-section-subtitle">
+                    Everything you need to build governed AI agents.
+                </p>
+                
+                <div class="aos-docs-grid">
+                    <a href="docs/quickstart.html" class="aos-doc-card">
+                        <div class="aos-doc-icon">🚀</div>
+                        <h3 class="aos-doc-title">Quickstart</h3>
+                        <p class="aos-doc-desc">Get running in 2 minutes</p>
+                    </a>
+                    
+                    <a href="tutorials/index.html" class="aos-doc-card">
+                        <div class="aos-doc-icon">📚</div>
+                        <h3 class="aos-doc-title">Tutorials</h3>
+                        <p class="aos-doc-desc">Step-by-step guides</p>
+                    </a>
+                    
+                    <a href="docs/api.html" class="aos-doc-card">
+                        <div class="aos-doc-icon">📖</div>
+                        <h3 class="aos-doc-title">API Reference</h3>
+                        <p class="aos-doc-desc">Complete API docs</p>
+                    </a>
+                    
+                    <a href="docs/policies.html" class="aos-doc-card">
+                        <div class="aos-doc-icon">📜</div>
+                        <h3 class="aos-doc-title">Policy Reference</h3>
+                        <p class="aos-doc-desc">Define governance rules</p>
+                    </a>
+                    
+                    <a href="modules/index.html" class="aos-doc-card">
+                        <div class="aos-doc-icon">🧩</div>
+                        <h3 class="aos-doc-title">Modules</h3>
+                        <p class="aos-doc-desc">CMVK, EMK, IATP, AMB</p>
+                    </a>
+                    
+                    <a href="integrations/index.html" class="aos-doc-card">
+                        <div class="aos-doc-icon">🔌</div>
+                        <h3 class="aos-doc-title">Integrations</h3>
+                        <p class="aos-doc-desc">Framework guides</p>
+                    </a>
+                    
+                    <a href="examples/index.html" class="aos-doc-card">
+                        <div class="aos-doc-icon">💡</div>
+                        <h3 class="aos-doc-title">Examples</h3>
+                        <p class="aos-doc-desc">Production demos</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Section -->
+        <section class="aos-section">
+            <div class="container">
+                <h2 class="aos-section-title">Join the Community</h2>
+                
+                <div class="aos-community">
+                    <a href="https://github.com/imran-siddique/agent-os" target="_blank" class="aos-community-card">
+                        <div class="aos-community-icon">⭐</div>
+                        <h4 class="aos-community-title">GitHub</h4>
+                        <p class="aos-community-desc">Star & contribute</p>
+                    </a>
+                    
+                    <a href="https://github.com/imran-siddique/agent-os/discussions" target="_blank" class="aos-community-card">
+                        <div class="aos-community-icon">💬</div>
+                        <h4 class="aos-community-title">Discussions</h4>
+                        <p class="aos-community-desc">Ask questions</p>
+                    </a>
+                    
+                    <a href="https://github.com/imran-siddique/agent-os/issues" target="_blank" class="aos-community-card">
+                        <div class="aos-community-icon">🐛</div>
+                        <h4 class="aos-community-title">Issues</h4>
+                        <p class="aos-community-desc">Report bugs</p>
+                    </a>
+                    
+                    <a href="https://pypi.org/project/agent-os-kernel/" target="_blank" class="aos-community-card">
+                        <div class="aos-community-icon">📦</div>
+                        <h4 class="aos-community-title">PyPI</h4>
+                        <p class="aos-community-desc">agent-os-kernel</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="aos-footer">
+        <div class="container">
+            <div class="aos-footer-grid">
+                <div class="aos-footer-brand">
+                    <h4>Agent OS</h4>
+                    <p>The Linux kernel for AI agents. Deterministic safety enforcement.</p>
+                    <p class="aos-footer-version">v0.1.0 • MIT License</p>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Documentation</h5>
+                    <ul>
+                        <li><a href="docs/quickstart.html">Quickstart</a></li>
+                        <li><a href="docs/api.html">API Reference</a></li>
+                        <li><a href="docs/policies.html">Policies</a></li>
+                        <li><a href="modules/index.html">Modules</a></li>
+                    </ul>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Resources</h5>
+                    <ul>
+                        <li><a href="integrations/index.html">Integrations</a></li>
+                        <li><a href="use-cases/index.html">Use Cases</a></li>
+                        <li><a href="examples/index.html">Examples</a></li>
+                        <li><a href="https://github.com/imran-siddique/agent-os" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Connect</h5>
+                    <ul>
+                        <li><a href="https://github.com/imran-siddique" target="_blank">GitHub</a></li>
+                        <li><a href="https://linkedin.com/in/imransiddique1986" target="_blank">LinkedIn</a></li>
+                        <li><a href="https://twitter.com/mosiddi" target="_blank">Twitter</a></li>
+                        <li><a href="https://pypi.org/project/agent-os-kernel/" target="_blank">PyPI</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="aos-footer-bottom">
+                <p>&copy; 2026 Imran Siddique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
