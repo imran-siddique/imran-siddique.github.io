@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agent OS Modules: CMVK, EMK, IATP, AMB - Independent, composable modules for AI agent governance. Cross-model verification, episodic memory, inter-agent trust, and message bus.">
+    <meta name="keywords" content="Agent OS, CMVK, EMK, IATP, AMB, AI Modules, Cross-Model Verification, Episodic Memory, Inter-Agent Trust, Agent Message Bus">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imran-siddique.github.io/agent-os/modules/">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://imran-siddique.github.io/agent-os/modules/">
+    <meta property="og:title" content="Agent OS Modules - Modular Architecture for AI Governance">
+    <meta property="og:description" content="Independent, composable modules: CMVK, EMK, IATP, AMB. Use together or independently.">
+    <meta property="og:site_name" content="Agent OS">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:title" content="Agent OS Modules - Modular Architecture">
+    <meta name="twitter:description" content="Independent, composable modules for AI agent governance.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <title>Modules - Agent OS | Imran Siddique</title>
+    <link rel="stylesheet" href="../../styles-new.css">
+    <link rel="stylesheet" href="../assets/agent-os.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../about.html">About</a></li>
+                <li><a href="../../projects.html">Projects</a></li>
+                <li><a href="../index.html" class="active">Agent OS</a></li>
+                <li><a href="../../writings.html">Writings</a></li>
+                <li><a href="../../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="aos-hero" style="padding: var(--space-3xl) 0 var(--space-2xl);">
+            <div class="aos-hero-content">
+                <div class="aos-badge">
+                    <span class="pulse-dot"></span>
+                    Modular • Independent • Composable
+                </div>
+                
+                <h1 class="aos-title">
+                    <span class="gradient">Modules</span>
+                </h1>
+                
+                <p class="aos-tagline">Building Blocks for AI Governance</p>
+                
+                <p class="aos-description">
+                    Agent OS is built on a modular architecture where each component solves a specific problem 
+                    and can be used <strong>independently or together</strong>. Mix and match based on your needs.
+                </p>
+            </div>
+        </section>
+
+        <!-- Architecture Overview Section -->
+        <section class="aos-section aos-section-dark">
+            <div class="container">
+                <h2 class="aos-section-title">Modular Architecture</h2>
+                <p class="aos-section-subtitle">
+                    Four layers of abstraction—from primitives to applications.
+                </p>
+                
+                <!-- Layer Diagram -->
+                <div class="aos-architecture" style="max-width: 800px; margin: 0 auto;">
+                    <div class="aos-arch-layer" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(139, 92, 246, 0.1)); border-color: rgba(168, 85, 247, 0.4);">
+                        <div class="aos-arch-label">Layer 4: Applications</div>
+                        <div class="aos-arch-name">Your AI Agents</div>
+                        <div class="aos-arch-desc">
+                            LangChain, CrewAI, AutoGen, custom agents—governed by Agent OS.
+                        </div>
+                    </div>
+                    
+                    <div class="aos-arch-arrow">↓</div>
+                    
+                    <div class="aos-arch-layer" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.1)); border-color: rgba(59, 130, 246, 0.4);">
+                        <div class="aos-arch-label">Layer 3: Framework</div>
+                        <div class="aos-arch-name">Agent OS Kernel</div>
+                        <div class="aos-arch-desc">
+                            KernelSpace, Policy Engine, Signal Dispatch, Flight Recorder
+                        </div>
+                    </div>
+                    
+                    <div class="aos-arch-arrow">↓</div>
+                    
+                    <div class="aos-arch-layer" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.1)); border-color: rgba(16, 185, 129, 0.4);">
+                        <div class="aos-arch-label">Layer 2: Infrastructure</div>
+                        <div class="aos-arch-name">Core Modules</div>
+                        <div class="aos-arch-modules">
+                            <span class="aos-arch-module">CMVK</span>
+                            <span class="aos-arch-module">EMK</span>
+                            <span class="aos-arch-module">IATP</span>
+                            <span class="aos-arch-module">AMB</span>
+                        </div>
+                    </div>
+                    
+                    <div class="aos-arch-arrow">↓</div>
+                    
+                    <div class="aos-arch-layer aos-arch-kernel">
+                        <div class="aos-arch-label">Layer 1: Primitives</div>
+                        <div class="aos-arch-name">Foundation</div>
+                        <div class="aos-arch-desc">
+                            Cryptographic primitives, vector stores, message queues, consensus protocols
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Independence Principle -->
+        <section class="aos-section">
+            <div class="container">
+                <h2 class="aos-section-title">Module Independence Principle</h2>
+                <p class="aos-section-subtitle">
+                    Each module is a standalone package with zero cross-dependencies.
+                </p>
+                
+                <div class="aos-comparison" style="max-width: 900px; margin: 0 auto;">
+                    <div class="aos-card-problem" style="flex: 1;">
+                        <div class="aos-card-header">
+                            <span class="aos-card-icon">❌</span>
+                            <h3 class="aos-card-title">Monolithic Approach</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code># You want memory, but get everything
+pip install mega-ai-framework  # 500MB
+# Pulls in: ML models, databases, 
+# message queues, vector stores...</code></pre>
+                        </div>
+                        <div class="aos-card-result">
+                            <strong>Problem:</strong> Bloated dependencies, version conflicts
+                        </div>
+                    </div>
+                    
+                    <div class="aos-card-solution" style="flex: 1;">
+                        <div class="aos-card-header">
+                            <span class="aos-card-icon">✅</span>
+                            <h3 class="aos-card-title">Agent OS Approach</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code># Install only what you need
+pip install agent-os-emk  # Just memory
+pip install agent-os-cmvk # Just verification
+# Each module: < 50KB</code></pre>
+                        </div>
+                        <div class="aos-card-result">
+                            <strong>Result:</strong> Minimal footprint, no conflicts
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Modules Section -->
+        <section class="aos-section aos-section-dark">
+            <div class="container">
+                <h2 class="aos-section-title">Core Modules</h2>
+                <p class="aos-section-subtitle">
+                    Four specialized modules, each solving a critical AI governance challenge.
+                </p>
+                
+                <div class="aos-features">
+                    <!-- CMVK -->
+                    <a href="cmvk/index.html" class="aos-feature">
+                        <div class="aos-feature-icon">🔍</div>
+                        <h3 class="aos-feature-title">CMVK</h3>
+                        <p class="aos-feature-subtitle">Cross-Model Verification Kernel</p>
+                        <p class="aos-feature-desc">
+                            Detect hallucinations and ensure accuracy by comparing outputs across multiple LLMs. 
+                            Configurable consensus thresholds and model weighting.
+                        </p>
+                        <div class="aos-code-block" style="margin-top: var(--space-md);">
+                            <pre><code>from agent_os.cmvk import verify
+
+result = await verify(
+    prompt="What is 2+2?",
+    models=["gpt-4", "claude-3"],
+    threshold=0.8
+)
+# result.consensus: True
+# result.confidence: 0.95</code></pre>
+                        </div>
+                        <span class="aos-feature-link">Learn more →</span>
+                    </a>
+                    
+                    <!-- EMK -->
+                    <a href="emk/index.html" class="aos-feature">
+                        <div class="aos-feature-icon">🧠</div>
+                        <h3 class="aos-feature-title">EMK</h3>
+                        <p class="aos-feature-subtitle">Episodic Memory Kernel</p>
+                        <p class="aos-feature-desc">
+                            Immutable, auditable agent memory with semantic search and time-travel debugging. 
+                            Perfect for compliance and reproducibility.
+                        </p>
+                        <div class="aos-code-block" style="margin-top: var(--space-md);">
+                            <pre><code>from agent_os.emk import Memory
+
+memory = Memory(agent_id="agent-1")
+await memory.store(
+    content="User requested refund",
+    metadata={"type": "action"}
+)
+# Time-travel: replay any moment</code></pre>
+                        </div>
+                        <span class="aos-feature-link">Learn more →</span>
+                    </a>
+                    
+                    <!-- IATP -->
+                    <a href="iatp/index.html" class="aos-feature">
+                        <div class="aos-feature-icon">🤝</div>
+                        <h3 class="aos-feature-title">IATP</h3>
+                        <p class="aos-feature-subtitle">Inter-Agent Trust Protocol</p>
+                        <p class="aos-feature-desc">
+                            Cryptographic identity and message signing for multi-agent systems. 
+                            Prevent impersonation, verify message integrity, establish trust chains.
+                        </p>
+                        <div class="aos-code-block" style="margin-top: var(--space-md);">
+                            <pre><code>from agent_os.iatp import Identity
+
+agent = Identity.create("agent-1")
+signed = agent.sign({
+    "action": "transfer",
+    "amount": 100
+})
+# Recipient verifies signature</code></pre>
+                        </div>
+                        <span class="aos-feature-link">Learn more →</span>
+                    </a>
+                    
+                    <!-- AMB -->
+                    <a href="amb/index.html" class="aos-feature">
+                        <div class="aos-feature-icon">📡</div>
+                        <h3 class="aos-feature-title">AMB</h3>
+                        <p class="aos-feature-subtitle">Agent Message Bus</p>
+                        <p class="aos-feature-desc">
+                            Decoupled, async communication between agents. Supports Redis, Kafka, NATS, 
+                            and SQS backends with unified API.
+                        </p>
+                        <div class="aos-code-block" style="margin-top: var(--space-md);">
+                            <pre><code>from agent_os.amb import MessageBus
+
+bus = MessageBus(backend="redis")
+await bus.publish(
+    topic="tasks",
+    message={"task": "analyze"}
+)
+# Agents subscribe to topics</code></pre>
+                        </div>
+                        <span class="aos-feature-link">Learn more →</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Installation Section -->
+        <section class="aos-section">
+            <div class="container">
+                <h2 class="aos-section-title">Installation</h2>
+                <p class="aos-section-subtitle">
+                    Install the full kernel or individual modules—your choice.
+                </p>
+                
+                <div class="aos-steps">
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">1</span>
+                            <h3 class="aos-step-title">Full Kernel (All Modules)</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code># Install everything
+pip install agent-os-kernel
+
+# Includes: CMVK, EMK, IATP, AMB + KernelSpace</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">2</span>
+                            <h3 class="aos-step-title">Individual Modules</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code># Cross-Model Verification
+pip install agent-os-cmvk
+
+# Episodic Memory
+pip install agent-os-emk
+
+# Inter-Agent Trust Protocol
+pip install agent-os-iatp
+
+# Agent Message Bus
+pip install agent-os-amb</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="aos-step">
+                        <div class="aos-step-header">
+                            <span class="aos-step-number">3</span>
+                            <h3 class="aos-step-title">With Optional Backends</h3>
+                        </div>
+                        <div class="aos-code-block">
+                            <pre><code># EMK with PostgreSQL support
+pip install agent-os-emk[postgres]
+
+# AMB with Kafka support
+pip install agent-os-amb[kafka]
+
+# CMVK with all LLM providers
+pip install agent-os-cmvk[all]</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Module Comparison Table -->
+        <section class="aos-section aos-section-dark">
+            <div class="container">
+                <h2 class="aos-section-title">Module Comparison</h2>
+                <p class="aos-section-subtitle">
+                    Choose the right modules for your use case.
+                </p>
+                
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; margin-top: var(--space-xl);">
+                        <thead>
+                            <tr style="border-bottom: 2px solid var(--border);">
+                                <th style="padding: var(--space-md); text-align: left; color: var(--text-primary);">Module</th>
+                                <th style="padding: var(--space-md); text-align: left; color: var(--text-primary);">Problem Solved</th>
+                                <th style="padding: var(--space-md); text-align: left; color: var(--text-primary);">Use When</th>
+                                <th style="padding: var(--space-md); text-align: center; color: var(--text-primary);">Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: var(--space-md); color: var(--accent);">CMVK</td>
+                                <td style="padding: var(--space-md); color: var(--text-secondary);">Hallucination detection</td>
+                                <td style="padding: var(--space-md); color: var(--text-secondary);">High-stakes decisions, fact verification</td>
+                                <td style="padding: var(--space-md); text-align: center; color: var(--text-muted);">~25KB</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: var(--space-md); color: var(--accent);">EMK</td>
+                                <td style="padding: var(--space-md); color: var(--text-secondary);">Audit trails & debugging</td>
+                                <td style="padding: var(--space-md); color: var(--text-secondary);">Compliance, debugging, reproducibility</td>
+                                <td style="padding: var(--space-md); text-align: center; color: var(--text-muted);">~30KB</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid var(--border);">
+                                <td style="padding: var(--space-md); color: var(--accent);">IATP</td>
+                                <td style="padding: var(--space-md); color: var(--text-secondary);">Agent impersonation</td>
+                                <td style="padding: var(--space-md); color: var(--text-secondary);">Multi-agent systems, zero-trust environments</td>
+                                <td style="padding: var(--space-md); text-align: center; color: var(--text-muted);">~20KB</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: var(--space-md); color: var(--accent);">AMB</td>
+                                <td style="padding: var(--space-md); color: var(--text-secondary);">Agent coordination</td>
+                                <td style="padding: var(--space-md); color: var(--text-secondary);">Distributed agents, async workflows</td>
+                                <td style="padding: var(--space-md); text-align: center; color: var(--text-muted);">~35KB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Combining Modules Section -->
+        <section class="aos-section">
+            <div class="container">
+                <h2 class="aos-section-title">Combining Modules</h2>
+                <p class="aos-section-subtitle">
+                    Modules compose naturally for powerful combinations.
+                </p>
+                
+                <div class="aos-code-block" style="max-width: 800px; margin: var(--space-xl) auto;">
+                    <pre><code>from agent_os import KernelSpace
+from agent_os.cmvk import verify
+from agent_os.emk import Memory
+from agent_os.iatp import Identity
+from agent_os.amb import MessageBus
+
+# Initialize modules
+kernel = KernelSpace(policy="strict")
+memory = Memory(agent_id="finance-agent")
+identity = Identity.create("finance-agent")
+bus = MessageBus(backend="redis")
+
+@kernel.register
+async def finance_agent(task: str):
+    # Verify critical decisions with CMVK
+    decision = await verify(
+        prompt=f"Should we approve: {task}",
+        models=["gpt-4", "claude-3"],
+        threshold=0.9
+    )
+    
+    # Log to immutable memory
+    await memory.store(
+        content=f"Decision: {decision.result}",
+        metadata={"consensus": decision.confidence}
+    )
+    
+    # Sign and broadcast result
+    signed_msg = identity.sign({"result": decision.result})
+    await bus.publish("decisions", signed_msg)
+    
+    return decision.result</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documentation Links -->
+        <section class="aos-section aos-section-dark">
+            <div class="container">
+                <h2 class="aos-section-title">📖 Module Documentation</h2>
+                
+                <div class="aos-docs-grid">
+                    <a href="cmvk/index.html" class="aos-doc-card">
+                        <div class="aos-doc-icon">🔍</div>
+                        <h3 class="aos-doc-title">CMVK Docs</h3>
+                        <p class="aos-doc-desc">Cross-model verification</p>
+                    </a>
+                    
+                    <a href="emk/index.html" class="aos-doc-card">
+                        <div class="aos-doc-icon">🧠</div>
+                        <h3 class="aos-doc-title">EMK Docs</h3>
+                        <p class="aos-doc-desc">Episodic memory</p>
+                    </a>
+                    
+                    <a href="iatp/index.html" class="aos-doc-card">
+                        <div class="aos-doc-icon">🤝</div>
+                        <h3 class="aos-doc-title">IATP Docs</h3>
+                        <p class="aos-doc-desc">Inter-agent trust</p>
+                    </a>
+                    
+                    <a href="amb/index.html" class="aos-doc-card">
+                        <div class="aos-doc-icon">📡</div>
+                        <h3 class="aos-doc-title">AMB Docs</h3>
+                        <p class="aos-doc-desc">Message bus</p>
+                    </a>
+                    
+                    <a href="../tutorials/index.html" class="aos-doc-card">
+                        <div class="aos-doc-icon">📚</div>
+                        <h3 class="aos-doc-title">Tutorials</h3>
+                        <p class="aos-doc-desc">Step-by-step guides</p>
+                    </a>
+                    
+                    <a href="../docs/api.html" class="aos-doc-card">
+                        <div class="aos-doc-icon">📖</div>
+                        <h3 class="aos-doc-title">API Reference</h3>
+                        <p class="aos-doc-desc">Complete API docs</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="aos-footer">
+        <div class="container">
+            <div class="aos-footer-grid">
+                <div class="aos-footer-brand">
+                    <h4>Agent OS</h4>
+                    <p>The Linux kernel for AI agents. Deterministic safety enforcement.</p>
+                    <p class="aos-footer-version">v0.1.0 • MIT License</p>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Documentation</h5>
+                    <ul>
+                        <li><a href="../docs/quickstart.html">Quickstart</a></li>
+                        <li><a href="../docs/api.html">API Reference</a></li>
+                        <li><a href="../docs/policies.html">Policies</a></li>
+                        <li><a href="index.html">Modules</a></li>
+                    </ul>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Resources</h5>
+                    <ul>
+                        <li><a href="../integrations/index.html">Integrations</a></li>
+                        <li><a href="../use-cases/index.html">Use Cases</a></li>
+                        <li><a href="../examples/index.html">Examples</a></li>
+                        <li><a href="https://github.com/imran-siddique/agent-os" target="_blank">GitHub</a></li>
+                    </ul>
+                </div>
+                
+                <div class="aos-footer-section">
+                    <h5>Connect</h5>
+                    <ul>
+                        <li><a href="https://github.com/imran-siddique" target="_blank">GitHub</a></li>
+                        <li><a href="https://linkedin.com/in/imransiddique1986" target="_blank">LinkedIn</a></li>
+                        <li><a href="https://twitter.com/mosiddi" target="_blank">Twitter</a></li>
+                        <li><a href="https://pypi.org/project/agent-os-kernel/" target="_blank">PyPI</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="aos-footer-bottom">
+                <p>&copy; 2026 Imran Siddique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../script.js"></script>
+</body>
+</html>
