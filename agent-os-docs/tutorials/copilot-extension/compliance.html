@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AgentOS Compliance Frameworks: GDPR, HIPAA, SOC2, and PCI-DSS policy templates for safety-first agents.">
+    <title>Compliance Frameworks - AgentOS Copilot Extension</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../styles-new.css">
+    <link rel="stylesheet" href="../../assets/agent-os.css">
+    <style>
+        .tutorial-content { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .breadcrumb { display: flex; gap: 0.5rem; margin-bottom: 2rem; color: #94a3b8; font-size: 0.9rem; flex-wrap: wrap; }
+        .breadcrumb a { color: #10b981; text-decoration: none; }
+        .hero-section { background: linear-gradient(135deg, #1e1e2e 0%, #1a3a2e 50%, #1a1a2e 100%); padding: 4rem 2rem; border-radius: 16px; margin-bottom: 3rem; text-align: center; }
+        .hero-section h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .framework-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .framework-card { background: rgba(30, 30, 46, 0.8); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; }
+        .framework-card:hover { border-color: rgba(16, 185, 129, 0.5); transform: translateY(-3px); }
+        .framework-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+        .framework-card h3 { color: #10b981; margin-bottom: 0.5rem; }
+        .framework-card p { color: #94a3b8; font-size: 0.85rem; }
+        .step-box { background: rgba(30, 30, 46, 0.6); border-left: 3px solid #10b981; padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; }
+        .step-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: linear-gradient(135deg, #10b981, #059669); color: white; font-weight: bold; border-radius: 50%; margin-right: 0.75rem; font-size: 0.85rem; }
+        .command-box { background: #0d0d14; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; font-family: 'JetBrains Mono', monospace; overflow-x: auto; }
+        .command-box .prefix { color: #10b981; }
+        .command-box .cmd { color: #e2e8f0; }
+        .policy-section { margin: 3rem 0; }
+        .policy-section h2 { color: #e2e8f0; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .requirement-list { background: rgba(30, 30, 46, 0.6); border-radius: 8px; padding: 1.5rem; margin: 1rem 0; }
+        .requirement-list li { margin: 0.5rem 0; color: #94a3b8; }
+        .score-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; border-radius: 8px; font-weight: 600; }
+        .score-excellent { background: rgba(16, 185, 129, 0.2); color: #6ee7b7; }
+        .score-good { background: rgba(234, 179, 8, 0.2); color: #fcd34d; }
+        .score-poor { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+        .tip-box { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+        .tip-box strong { color: #10b981; }
+        .warning-box { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+        .warning-box strong { color: #f87171; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; gap: 1rem; }
+        .nav-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; color: #10b981; text-decoration: none; }
+        .nav-btn:hover { background: rgba(16, 185, 129, 0.2); }
+        pre { background: #0d0d14; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; line-height: 1.6; }
+        table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        th { color: #10b981; font-weight: 600; }
+        td { color: #94a3b8; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../../../index.html">Home</a></li>
+                <li><a href="../../../about.html">About</a></li>
+                <li><a href="../../../projects.html">Projects</a></li>
+                <li><a href="../../index.html" class="active">Agent OS</a></li>
+                <li><a href="../../../writings.html">Writings</a></li>
+                <li><a href="../../../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="tutorial-content">
+            <div class="breadcrumb">
+                <a href="../../index.html">Agent OS</a> →
+                <a href="index.html">Copilot Extension</a> →
+                <span>Compliance Frameworks</span>
+            </div>
+
+            <div class="hero-section">
+                <span style="font-size: 3rem;">🛡️</span>
+                <h1><span class="text-gradient">Compliance Frameworks</span></h1>
+                <p style="color: #94a3b8; max-width: 600px; margin: 0 auto;">Pre-built policy templates for GDPR, HIPAA, SOC2, and PCI-DSS. Automated validation ensures your agents are always compliant.</p>
+            </div>
+
+            <h2>Supported Frameworks</h2>
+            <div class="framework-grid">
+                <div class="framework-card">
+                    <div class="framework-icon">🇪🇺</div>
+                    <h3>GDPR</h3>
+                    <p>EU data protection and privacy</p>
+                </div>
+                <div class="framework-card">
+                    <div class="framework-icon">🏥</div>
+                    <h3>HIPAA</h3>
+                    <p>Healthcare data security</p>
+                </div>
+                <div class="framework-card">
+                    <div class="framework-icon">🔐</div>
+                    <h3>SOC2</h3>
+                    <p>Security & availability controls</p>
+                </div>
+                <div class="framework-card">
+                    <div class="framework-icon">💳</div>
+                    <h3>PCI-DSS</h3>
+                    <p>Payment card data security</p>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>Checking Compliance</h2>
+                <p>Use the <code style="color: #10b981;">@agentos compliance</code> command to validate your agent:</p>
+
+                <div class="step-box">
+                    <h3><span class="step-number">1</span> View Available Frameworks</h3>
+                    <div class="command-box">
+                        <span class="prefix">User:</span> <span class="cmd">@agentos compliance</span>
+                    </div>
+                    <p>Shows all available compliance frameworks and their requirements.</p>
+                </div>
+
+                <div class="step-box">
+                    <h3><span class="step-number">2</span> Validate Against a Framework</h3>
+                    <div class="command-box">
+                        <span class="prefix">User:</span> <span class="cmd">@agentos compliance gdpr</span>
+                    </div>
+                    <pre><code><span style="color: #10b981;">AgentOS:</span> 🛡️ GDPR Compliance Check
+
+<b>Framework:</b> General Data Protection Regulation (EU)
+<b>Version:</b> 2.0
+
+<b>Compliance Score:</b> <span style="color: #6ee7b7;">92%</span> ✅
+
+<b>Requirements Checked:</b>
+✅ Data minimization - Only collect necessary data
+✅ Purpose limitation - Data used for stated purpose
+✅ Storage limitation - Retention policy defined
+⚠️ Consent logging - Consider adding explicit consent audit trail
+✅ Access controls - Role-based access implemented
+✅ Encryption - Data encrypted at rest and in transit
+
+<b>Recommendations:</b>
+1. Add consent logging for user data collection
+2. Consider implementing data portability (Art. 20)</code></pre>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>🇪🇺 GDPR Framework</h2>
+                <p>The General Data Protection Regulation covers EU citizen data protection.</p>
+
+                <h3>Key Requirements</h3>
+                <ul class="requirement-list">
+                    <li><strong>Data Minimization:</strong> Collect only necessary personal data</li>
+                    <li><strong>Purpose Limitation:</strong> Use data only for stated purposes</li>
+                    <li><strong>Storage Limitation:</strong> Define data retention periods</li>
+                    <li><strong>Consent Management:</strong> Record and manage user consent</li>
+                    <li><strong>Right to Erasure:</strong> Support data deletion requests</li>
+                    <li><strong>Data Portability:</strong> Enable data export</li>
+                </ul>
+
+                <div class="command-box">
+                    <span class="prefix">User:</span> <span class="cmd">@agentos add gdpr policy to my agent</span>
+                </div>
+
+                <pre><code># Auto-generated GDPR policy rules
+policies:
+  - name: "gdpr-data-minimization"
+    rule: "Only collect fields explicitly required"
+    enforcement: strict
+
+  - name: "gdpr-purpose-limitation"
+    rule: "Validate data usage matches consent"
+    enforcement: strict
+
+  - name: "gdpr-retention"
+    rule: "Delete personal data after 90 days"
+    enforcement: audit
+    retention_days: 90
+
+  - name: "gdpr-encryption"
+    rule: "Encrypt all PII at rest and in transit"
+    enforcement: strict</code></pre>
+            </div>
+
+            <div class="policy-section">
+                <h2>🏥 HIPAA Framework</h2>
+                <p>Health Insurance Portability and Accountability Act for healthcare data.</p>
+
+                <h3>Key Requirements</h3>
+                <ul class="requirement-list">
+                    <li><strong>PHI Protection:</strong> Secure Protected Health Information</li>
+                    <li><strong>Access Controls:</strong> Role-based access with audit logs</li>
+                    <li><strong>Encryption:</strong> AES-256 for data at rest, TLS 1.3 in transit</li>
+                    <li><strong>Audit Logging:</strong> Log all PHI access events</li>
+                    <li><strong>Minimum Necessary:</strong> Access only required PHI</li>
+                    <li><strong>BAA Compliance:</strong> Business Associate Agreement requirements</li>
+                </ul>
+
+                <div class="warning-box">
+                    <strong>⚠️ Critical:</strong> HIPAA violations can result in fines up to $1.5 million per violation category. AgentOS automatically blocks agents that fail HIPAA validation.
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>🔐 SOC2 Framework</h2>
+                <p>Service Organization Control 2 for security, availability, and confidentiality.</p>
+
+                <h3>Trust Service Criteria</h3>
+                <table>
+                    <tr><th>Criterion</th><th>Description</th><th>Status</th></tr>
+                    <tr><td>Security</td><td>Protection against unauthorized access</td><td>✅ Enforced</td></tr>
+                    <tr><td>Availability</td><td>System uptime and reliability</td><td>✅ Enforced</td></tr>
+                    <tr><td>Processing Integrity</td><td>Accurate and complete processing</td><td>✅ Enforced</td></tr>
+                    <tr><td>Confidentiality</td><td>Protection of confidential information</td><td>✅ Enforced</td></tr>
+                    <tr><td>Privacy</td><td>Personal information handling</td><td>✅ Enforced</td></tr>
+                </table>
+            </div>
+
+            <div class="policy-section">
+                <h2>💳 PCI-DSS Framework</h2>
+                <p>Payment Card Industry Data Security Standard for handling card data.</p>
+
+                <h3>Key Requirements</h3>
+                <ul class="requirement-list">
+                    <li><strong>No Storage of Sensitive Auth Data:</strong> Never store CVV, PIN, or track data</li>
+                    <li><strong>PAN Masking:</strong> Display only last 4 digits of card numbers</li>
+                    <li><strong>Encryption:</strong> Strong cryptography for card data transmission</li>
+                    <li><strong>Key Management:</strong> Secure cryptographic key procedures</li>
+                    <li><strong>Network Security:</strong> Firewall and segmentation requirements</li>
+                </ul>
+
+                <div class="command-box">
+                    <span class="prefix">User:</span> <span class="cmd">@agentos compliance pci-dss</span>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>PII Detection</h2>
+                <p>AgentOS automatically scans your code for Personally Identifiable Information patterns:</p>
+
+                <pre><code><span style="color: #10b981;">AgentOS:</span> 🔍 PII Detection Results
+
+<b>Patterns Detected:</b>
+📧 Email addresses: 3 instances (lines 45, 78, 112)
+📱 Phone numbers: 1 instance (line 89)
+💳 Credit card patterns: 0 instances ✅
+🔢 SSN patterns: 0 instances ✅
+
+<b>Recommendations:</b>
+1. Line 45: Hash email before storing
+2. Line 78: Add encryption for email transmission
+3. Line 89: Mask phone number in logs</code></pre>
+
+                <div class="tip-box">
+                    <strong>💡 Tip:</strong> Use <code>@agentos security</code> to run a full security audit including PII detection, secret scanning, and vulnerability checks.
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2>Compliance Scores</h2>
+                <p>Understanding your compliance score:</p>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0;">
+                    <span class="score-badge score-excellent">✅ 90-100% Excellent</span>
+                    <span class="score-badge score-good">⚠️ 70-89% Good</span>
+                    <span class="score-badge score-poor">❌ Below 70% Needs Work</span>
+                </div>
+
+                <p>Agents with scores below 70% will be blocked from deployment. Use the recommendations to improve your score.</p>
+            </div>
+
+            <div class="nav-buttons">
+                <a href="templates.html" class="nav-btn">← Template Gallery</a>
+                <a href="testing.html" class="nav-btn">Testing & Simulation →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2026 Imran Siddique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.hamburger')?.addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

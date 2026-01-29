@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agent Creation Tutorial: Learn to create AI agents from natural language descriptions with the AgentOS GitHub Copilot Extension. Covers NL parsing, data sources, scheduling, and code generation.">
+    <meta name="keywords" content="AgentOS, agent creation, natural language, Copilot Extension, AI agents, code generation, data sources, scheduling">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imransiddique.com/agent-os-docs/tutorials/copilot-extension/agent-creation.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imransiddique.com/agent-os-docs/tutorials/copilot-extension/agent-creation.html">
+    <meta property="og:title" content="Agent Creation from Natural Language - AgentOS Copilot Extension">
+    <meta property="og:description" content="Create powerful AI agents from simple descriptions. Learn NL parsing, data sources, scheduling, and multi-language code generation.">
+    <meta property="og:site_name" content="Agent OS">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:title" content="Agent Creation - AgentOS Copilot Extension">
+    <meta name="twitter:description" content="Create AI agents from natural language with the AgentOS Copilot Extension.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <title>Agent Creation - Copilot Extension Tutorial | Agent OS</title>
+    <link rel="stylesheet" href="../../../styles-new.css">
+    <link rel="stylesheet" href="../../assets/agent-os.css">
+    <style>
+        .tutorial-content { max-width: 960px; margin: 0 auto; padding: 2rem; }
+        .tutorial-content h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .tutorial-content h2 { font-size: 1.8rem; margin: 2.5rem 0 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .tutorial-content h3 { font-size: 1.3rem; margin: 1.5rem 0 0.75rem; color: #10b981; }
+        .tutorial-content h4 { font-size: 1.1rem; margin: 1.2rem 0 0.5rem; color: #6ee7b7; }
+        .tutorial-content p { color: #94a3b8; line-height: 1.8; margin-bottom: 1rem; }
+        .tutorial-content ul, .tutorial-content ol { color: #94a3b8; margin-bottom: 1rem; padding-left: 1.5rem; }
+        .tutorial-content li { margin-bottom: 0.5rem; line-height: 1.6; }
+        .tutorial-content code { background: rgba(16, 185, 129, 0.15); padding: 0.2rem 0.5rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: #6ee7b7; }
+        .tutorial-content pre { background: #0d0d14; padding: 1.5rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .tutorial-content pre code { background: none; padding: 0; color: #e2e8f0; }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #1e1e2e 0%, #1a3a2e 50%, #1a1a2e 100%);
+            padding: 4rem 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        .hero-section h1 { position: relative; z-index: 1; }
+        .hero-section p { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+        .hero-icon { font-size: 4rem; display: block; margin-bottom: 1rem; }
+        
+        .step-box { background: rgba(30, 30, 46, 0.8); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .step-number { background: linear-gradient(135deg, #10b981, #059669); color: white; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 0.75rem; }
+        
+        .tip-box { background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+        .warning-box { background: rgba(245, 158, 11, 0.1); border-left: 4px solid #f59e0b; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+        .info-box { background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+        
+        .command-syntax { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05)); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .command-syntax h4 { color: #10b981; margin-top: 0; margin-bottom: 1rem; }
+        
+        .extraction-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+        .extraction-card { background: rgba(30, 30, 46, 0.8); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; }
+        .extraction-card h4 { color: #10b981; margin-top: 0; display: flex; align-items: center; gap: 0.5rem; }
+        .extraction-card .icon { font-size: 1.5rem; }
+        
+        .code-tabs { display: flex; gap: 0.5rem; margin-bottom: -1px; flex-wrap: wrap; }
+        .code-tab { padding: 0.75rem 1.25rem; background: rgba(30, 30, 46, 0.6); border: 1px solid rgba(16, 185, 129, 0.2); border-bottom: none; border-radius: 8px 8px 0 0; cursor: pointer; color: #94a3b8; transition: all 0.3s ease; }
+        .code-tab:hover, .code-tab.active { background: rgba(16, 185, 129, 0.2); color: #e2e8f0; border-color: rgba(16, 185, 129, 0.4); }
+        .code-panel { display: none; }
+        .code-panel.active { display: block; }
+        
+        .example-section { background: rgba(30, 30, 46, 0.6); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 16px; padding: 2rem; margin: 2rem 0; }
+        .example-section h3 { margin-top: 0; }
+        
+        .conversation-box { background: #0d0d14; border-radius: 12px; padding: 1.5rem; margin: 1rem 0; }
+        .message { margin-bottom: 1rem; padding: 1rem; border-radius: 8px; }
+        .message:last-child { margin-bottom: 0; }
+        .message.user { background: rgba(16, 185, 129, 0.15); border-left: 3px solid #10b981; }
+        .message.assistant { background: rgba(99, 102, 241, 0.15); border-left: 3px solid #6366f1; }
+        .message-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .message.user .message-label { color: #10b981; }
+        .message.assistant .message-label { color: #6366f1; }
+        
+        .policy-card { background: rgba(30, 30, 46, 0.8); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; margin: 1rem 0; }
+        .policy-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(16, 185, 129, 0.2); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; color: #6ee7b7; margin-right: 0.5rem; margin-bottom: 0.5rem; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.75rem 1rem; text-align: left; border: 1px solid rgba(16, 185, 129, 0.2); }
+        th { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+        td { color: #94a3b8; }
+        
+        .breadcrumb { margin-bottom: 2rem; }
+        .breadcrumb a { color: #10b981; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { color: #64748b; margin: 0 0.5rem; }
+        
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; gap: 1rem; }
+        .nav-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; color: #e2e8f0; text-decoration: none; transition: all 0.3s ease; }
+        .nav-btn:hover { background: rgba(16, 185, 129, 0.25); transform: translateY(-2px); }
+        
+        .best-practice { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem; background: rgba(16, 185, 129, 0.05); border-radius: 8px; margin-bottom: 1rem; }
+        .best-practice .icon { font-size: 1.5rem; flex-shrink: 0; }
+        .best-practice .content { flex: 1; }
+        .best-practice h5 { margin: 0 0 0.25rem 0; color: #e2e8f0; }
+        .best-practice p { margin: 0; font-size: 0.9rem; }
+        
+        @media (max-width: 768px) {
+            .tutorial-content { padding: 1rem; }
+            .hero-section { padding: 2rem 1rem; }
+            .hero-section h1 { font-size: 2rem; }
+            .extraction-grid { grid-template-columns: 1fr; }
+            .nav-buttons { flex-direction: column; }
+            .nav-btn { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../../../index.html">Home</a></li>
+                <li><a href="../../../about.html">About</a></li>
+                <li><a href="../../../projects.html">Projects</a></li>
+                <li><a href="../../index.html" class="active">Agent OS</a></li>
+                <li><a href="../../../writings.html">Writings</a></li>
+                <li><a href="../../../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="tutorial-content">
+        <nav class="breadcrumb">
+            <a href="../../index.html">Agent OS</a>
+            <span>→</span>
+            <a href="../index.html">Tutorials</a>
+            <span>→</span>
+            <a href="index.html">Copilot Extension</a>
+            <span>→</span>
+            <span>Agent Creation</span>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <span class="hero-icon">🪄</span>
+            <h1><span style="background: linear-gradient(135deg, #10b981, #6ee7b7); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Agent Creation from Natural Language</span></h1>
+            <p style="font-size: 1.2rem; color: #e2e8f0; margin-bottom: 1rem;">
+                Transform plain English descriptions into production-ready AI agents with intelligent parsing, automatic policy detection, and multi-language code generation.
+            </p>
+            <p style="color: #94a3b8;">
+                Just describe what you want your agent to do, and AgentOS handles the rest—extracting data sources, detecting schedules, recommending policies, and generating clean, type-safe code.
+            </p>
+        </section>
+
+        <h2>The @agentos create Command</h2>
+        <p>The <code>@agentos create</code> command is your gateway to building agents from natural language. It uses advanced NLP to understand your intent and generates complete, deployable agent code.</p>
+        
+        <div class="command-syntax">
+            <h4>📝 Basic Syntax</h4>
+            <pre><code>@agentos create [description]</code></pre>
+            <p style="margin-top: 1rem;">Where <code>[description]</code> is a natural language description of what you want your agent to do.</p>
+        </div>
+
+        <h3>Command Options</h3>
+        <table>
+            <tr>
+                <th>Option</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><code>--lang</code></td>
+                <td>Target programming language</td>
+                <td><code>--lang typescript</code></td>
+            </tr>
+            <tr>
+                <td><code>--policy</code></td>
+                <td>Specify compliance framework</td>
+                <td><code>--policy gdpr</code></td>
+            </tr>
+            <tr>
+                <td><code>--output</code></td>
+                <td>Output directory for generated files</td>
+                <td><code>--output ./agents/</code></td>
+            </tr>
+            <tr>
+                <td><code>--template</code></td>
+                <td>Base template to extend</td>
+                <td><code>--template data-processor</code></td>
+            </tr>
+            <tr>
+                <td><code>--interactive</code></td>
+                <td>Enable multi-turn clarification</td>
+                <td><code>--interactive</code></td>
+            </tr>
+            <tr>
+                <td><code>--dry-run</code></td>
+                <td>Preview without generating files</td>
+                <td><code>--dry-run</code></td>
+            </tr>
+        </table>
+
+        <div class="tip-box">
+            <strong>💡 Pro Tip:</strong> Use <code>--interactive</code> for complex agents. AgentOS will ask clarifying questions to ensure the generated agent matches your exact needs.
+        </div>
+
+        <h2>Natural Language Parser</h2>
+        <p>The NL parser is the brain behind agent creation. It analyzes your description and extracts key components to build your agent.</p>
+
+        <div class="extraction-grid">
+            <div class="extraction-card">
+                <h4><span class="icon">📛</span> Agent Name</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem;">Automatically generates a meaningful name from your description, or extracts it if you specify one.</p>
+                <pre style="font-size: 0.85rem;"><code>"Create a sales report generator"
+→ SalesReportGeneratorAgent</code></pre>
+            </div>
+            
+            <div class="extraction-card">
+                <h4><span class="icon">📊</span> Data Sources</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem;">Identifies where your agent needs to read data from—Slack, GitHub, Jira, databases, APIs, and more.</p>
+                <pre style="font-size: 0.85rem;"><code>"Pull issues from GitHub"
+→ source: github.issues</code></pre>
+            </div>
+            
+            <div class="extraction-card">
+                <h4><span class="icon">📤</span> Output Destinations</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem;">Determines where results should be sent—Slack channels, email, databases, webhooks, or files.</p>
+                <pre style="font-size: 0.85rem;"><code>"send summary to #reports"
+→ destination: slack.channel</code></pre>
+            </div>
+            
+            <div class="extraction-card">
+                <h4><span class="icon">⏰</span> Schedule Detection</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem;">Parses timing expressions and converts them to cron schedules or event triggers.</p>
+                <pre style="font-size: 0.85rem;"><code>"every Monday at 9am"
+→ cron: "0 9 * * 1"</code></pre>
+            </div>
+            
+            <div class="extraction-card">
+                <h4><span class="icon">🔧</span> Task Decomposition</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem;">Breaks complex tasks into sequential or parallel sub-tasks with proper data flow.</p>
+                <pre style="font-size: 0.85rem;"><code>"fetch, analyze, report"
+→ [fetch] → [analyze] → [report]</code></pre>
+            </div>
+            
+            <div class="extraction-card">
+                <h4><span class="icon">🔐</span> Permissions</h4>
+                <p style="color: #94a3b8; font-size: 0.9rem;">Infers required permissions and generates minimal-privilege access configurations.</p>
+                <pre style="font-size: 0.85rem;"><code>"read customer database"
+→ db.customers: read-only</code></pre>
+            </div>
+        </div>
+
+        <h3>Supported Data Sources</h3>
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Sources</th>
+                <th>Trigger Keywords</th>
+            </tr>
+            <tr>
+                <td><strong>Communication</strong></td>
+                <td>Slack, Microsoft Teams, Discord, Email</td>
+                <td>messages, channels, threads, inbox</td>
+            </tr>
+            <tr>
+                <td><strong>Development</strong></td>
+                <td>GitHub, GitLab, Bitbucket, Azure DevOps</td>
+                <td>issues, PRs, commits, repositories</td>
+            </tr>
+            <tr>
+                <td><strong>Project Management</strong></td>
+                <td>Jira, Asana, Linear, Trello, Monday</td>
+                <td>tickets, tasks, sprints, projects</td>
+            </tr>
+            <tr>
+                <td><strong>Databases</strong></td>
+                <td>PostgreSQL, MySQL, MongoDB, Redis</td>
+                <td>database, table, collection, records</td>
+            </tr>
+            <tr>
+                <td><strong>APIs</strong></td>
+                <td>REST, GraphQL, gRPC, WebSocket</td>
+                <td>API, endpoint, webhook, service</td>
+            </tr>
+            <tr>
+                <td><strong>Storage</strong></td>
+                <td>S3, Azure Blob, GCS, local files</td>
+                <td>files, bucket, storage, upload</td>
+            </tr>
+        </table>
+
+        <h2>Policy Auto-Detection & Recommendations</h2>
+        <p>AgentOS analyzes your agent's data access patterns and automatically recommends appropriate security policies and compliance frameworks.</p>
+
+        <div class="policy-card">
+            <h4 style="color: #10b981; margin-top: 0;">🔍 How It Works</h4>
+            <ol>
+                <li>Parser identifies sensitive data types (PII, financial, health records)</li>
+                <li>Matches data patterns to compliance requirements</li>
+                <li>Generates policy recommendations with severity levels</li>
+                <li>Applies policies automatically or prompts for confirmation</li>
+            </ol>
+        </div>
+
+        <h3>Example: Policy Detection</h3>
+        <div class="conversation-box">
+            <div class="message user">
+                <div class="message-label">You</div>
+                <code>@agentos create an agent that processes customer support tickets from Zendesk, extracts customer email and order details, and updates our CRM</code>
+            </div>
+            <div class="message assistant">
+                <div class="message-label">AgentOS</div>
+                <p style="color: #e2e8f0; margin: 0 0 1rem 0;"><strong>🔒 Policy Recommendations Detected:</strong></p>
+                <div style="margin-bottom: 1rem;">
+                    <span class="policy-badge">🛡️ GDPR Required</span>
+                    <span class="policy-badge">📧 PII Handling</span>
+                    <span class="policy-badge">🔐 Data Encryption</span>
+                </div>
+                <p style="color: #94a3b8; margin: 0;">The agent processes <strong>customer email addresses</strong> (PII) and <strong>order data</strong>. I recommend applying:</p>
+                <ul style="color: #94a3b8; margin: 0.5rem 0;">
+                    <li><code>gdpr-compliant</code> - Ensures data subject rights</li>
+                    <li><code>pii-protection</code> - Masks/encrypts personal data</li>
+                    <li><code>audit-logging</code> - Tracks all data access</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Available Policy Frameworks</h3>
+        <table>
+            <tr>
+                <th>Framework</th>
+                <th>Auto-Detected When</th>
+                <th>Key Protections</th>
+            </tr>
+            <tr>
+                <td><code>gdpr</code></td>
+                <td>EU customer data, email, names</td>
+                <td>Consent tracking, right to deletion, data portability</td>
+            </tr>
+            <tr>
+                <td><code>hipaa</code></td>
+                <td>Health records, medical data</td>
+                <td>PHI encryption, access controls, audit trails</td>
+            </tr>
+            <tr>
+                <td><code>soc2</code></td>
+                <td>Multi-tenant systems, SaaS</td>
+                <td>Access logging, change management, availability</td>
+            </tr>
+            <tr>
+                <td><code>pci-dss</code></td>
+                <td>Payment data, card numbers</td>
+                <td>Tokenization, encryption, network segmentation</td>
+            </tr>
+            <tr>
+                <td><code>ccpa</code></td>
+                <td>California consumer data</td>
+                <td>Opt-out mechanisms, disclosure requirements</td>
+            </tr>
+        </table>
+
+        <h2>Code Generation Examples</h2>
+        <p>AgentOS generates production-ready code in Python, TypeScript, and Go. Each language follows idiomatic patterns and includes full type safety.</p>
+
+        <h3>Example Prompt</h3>
+        <pre><code>@agentos create an agent that monitors GitHub issues labeled "urgent" in my repos, 
+analyzes sentiment, and sends a Slack alert to #engineering if negative</code></pre>
+
+        <div class="code-tabs">
+            <button class="code-tab active" onclick="showCodeTab('python')">🐍 Python</button>
+            <button class="code-tab" onclick="showCodeTab('typescript')">📘 TypeScript</button>
+            <button class="code-tab" onclick="showCodeTab('go')">🔷 Go</button>
+        </div>
+
+        <div id="python-code" class="code-panel active">
+            <pre><code>"""
+GitHub Urgent Issue Monitor Agent
+Generated by AgentOS Copilot Extension
+"""
+
+from agent_os import KernelSpace, Policy
+from agent_os.integrations import GitHubClient, SlackClient
+from agent_os.analysis import SentimentAnalyzer
+from typing import List, Dict, Any
+import asyncio
+
+# Initialize kernel with security policies
+kernel = KernelSpace(
+    policy=Policy.load("standard"),
+    audit_logging=True
+)
+
+# Configure integrations
+github = GitHubClient(scope="repo:read")
+slack = SlackClient(channel="#engineering")
+sentiment = SentimentAnalyzer(model="roberta-base")
+
+@kernel.agent(
+    name="UrgentIssueMonitor",
+    schedule="*/15 * * * *",  # Every 15 minutes
+    description="Monitors urgent GitHub issues and alerts on negative sentiment"
+)
+async def monitor_urgent_issues(repos: List[str]) -> Dict[str, Any]:
+    """
+    Fetch urgent issues, analyze sentiment, and alert if negative.
+    
+    Args:
+        repos: List of repository names to monitor
+        
+    Returns:
+        Summary of processed issues and alerts sent
+    """
+    alerts_sent = 0
+    processed = 0
+    
+    for repo in repos:
+        # Fetch issues with "urgent" label (policy-checked)
+        issues = await github.issues.list(
+            repo=repo,
+            labels=["urgent"],
+            state="open"
+        )
+        
+        for issue in issues:
+            processed += 1
+            
+            # Analyze sentiment (rate-limited by policy)
+            analysis = await sentiment.analyze(
+                text=f"{issue.title} {issue.body}",
+                return_score=True
+            )
+            
+            # Alert if sentiment is negative
+            if analysis.sentiment == "negative" and analysis.score > 0.7:
+                await slack.send(
+                    text=f"⚠️ *Urgent Issue Alert*\n"
+                         f"Repo: {repo}\n"
+                         f"Issue: <{issue.url}|#{issue.number} {issue.title}>\n"
+                         f"Sentiment: {analysis.sentiment} ({analysis.score:.0%})\n"
+                         f"Author: @{issue.user.login}",
+                    priority="high"
+                )
+                alerts_sent += 1
+    
+    return {
+        "status": "success",
+        "issues_processed": processed,
+        "alerts_sent": alerts_sent
+    }
+
+if __name__ == "__main__":
+    result = asyncio.run(
+        kernel.execute(
+            monitor_urgent_issues,
+            repos=["my-org/api", "my-org/frontend", "my-org/backend"]
+        )
+    )
+    print(f"Processed {result['issues_processed']} issues, sent {result['alerts_sent']} alerts")</code></pre>
+        </div>
+
+        <div id="typescript-code" class="code-panel">
+            <pre><code>/**
+ * GitHub Urgent Issue Monitor Agent
+ * Generated by AgentOS Copilot Extension
+ */
+
+import { KernelSpace, Policy, Agent } from '@agent-os/core';
+import { GitHubClient, SlackClient } from '@agent-os/integrations';
+import { SentimentAnalyzer } from '@agent-os/analysis';
+
+interface Issue {
+  number: number;
+  title: string;
+  body: string;
+  url: string;
+  user: { login: string };
+}
+
+interface MonitorResult {
+  status: 'success' | 'error';
+  issuesProcessed: number;
+  alertsSent: number;
+}
+
+// Initialize kernel with security policies
+const kernel = new KernelSpace({
+  policy: Policy.load('standard'),
+  auditLogging: true,
+});
+
+// Configure integrations
+const github = new GitHubClient({ scope: 'repo:read' });
+const slack = new SlackClient({ channel: '#engineering' });
+const sentiment = new SentimentAnalyzer({ model: 'roberta-base' });
+
+@Agent({
+  name: 'UrgentIssueMonitor',
+  schedule: '*/15 * * * *', // Every 15 minutes
+  description: 'Monitors urgent GitHub issues and alerts on negative sentiment',
+})
+class UrgentIssueMonitorAgent {
+  
+  async execute(repos: string[]): Promise<MonitorResult> {
+    let alertsSent = 0;
+    let processed = 0;
+
+    for (const repo of repos) {
+      // Fetch issues with "urgent" label (policy-checked)
+      const issues = await github.issues.list({
+        repo,
+        labels: ['urgent'],
+        state: 'open',
+      });
+
+      for (const issue of issues) {
+        processed++;
+
+        // Analyze sentiment (rate-limited by policy)
+        const analysis = await sentiment.analyze({
+          text: ${issue.title} ,
+          returnScore: true,
+        });
+
+        // Alert if sentiment is negative
+        if (analysis.sentiment === 'negative' && analysis.score > 0.7) {
+          await slack.send({
+            text: [
+              '⚠️ *Urgent Issue Alert*',
+              Repo: \${repo}\`,
+              Issue: <|# >,
+              Sentiment:  (%),
+              Author: @,
+            ].join('\n'),
+            priority: 'high',
+          });
+          alertsSent++;
+        }
+      }
+    }
+
+    return {
+      status: 'success',
+      issuesProcessed: processed,
+      alertsSent,
+    };
+  }
+}
+
+// Execute agent
+const agent = new UrgentIssueMonitorAgent();
+kernel.register(agent);
+
+kernel.execute(agent, {
+  repos: ['my-org/api', 'my-org/frontend', 'my-org/backend'],
+}).then((result) => {
+  console.log(Processed  issues, sent  alerts);
+});</code></pre>
+        </div>
+
+        <div id="go-code" class="code-panel">
+            <pre><code>// GitHub Urgent Issue Monitor Agent
+// Generated by AgentOS Copilot Extension
+
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+
+    "github.com/agent-os/sdk-go/kernel"
+    "github.com/agent-os/sdk-go/integrations/github"
+    "github.com/agent-os/sdk-go/integrations/slack"
+    "github.com/agent-os/sdk-go/analysis/sentiment"
+)
+
+// MonitorResult holds the execution results
+type MonitorResult struct {
+    Status          string json:"status"
+    IssuesProcessed int    json:"issues_processed"
+    AlertsSent      int    json:"alerts_sent"
+}
+
+// UrgentIssueMonitor monitors GitHub issues for negative sentiment
+type UrgentIssueMonitor struct {
+    kernel    *kernel.KernelSpace
+    github    *github.Client
+    slack     *slack.Client
+    sentiment *sentiment.Analyzer
+}
+
+// NewUrgentIssueMonitor creates a new monitor agent
+func NewUrgentIssueMonitor() *UrgentIssueMonitor {
+    k := kernel.New(kernel.Config{
+        Policy:       kernel.PolicyLoad("standard"),
+        AuditLogging: true,
+    })
+
+    return &UrgentIssueMonitor{
+        kernel:    k,
+        github:    github.NewClient(github.WithScope("repo:read")),
+        slack:     slack.NewClient(slack.WithChannel("#engineering")),
+        sentiment: sentiment.NewAnalyzer(sentiment.WithModel("roberta-base")),
+    }
+}
+
+// Execute runs the monitoring task
+func (m *UrgentIssueMonitor) Execute(ctx context.Context, repos []string) (*MonitorResult, error) {
+    var alertsSent, processed int
+
+    for _, repo := range repos {
+        // Fetch issues with "urgent" label (policy-checked)
+        issues, err := m.github.Issues.List(ctx, github.IssueFilter{
+            Repo:   repo,
+            Labels: []string{"urgent"},
+            State:  "open",
+        })
+        if err != nil {
+            return nil, fmt.Errorf("failed to fetch issues for %s: %w", repo, err)
+        }
+
+        for _, issue := range issues {
+            processed++
+
+            // Analyze sentiment (rate-limited by policy)
+            analysis, err := m.sentiment.Analyze(ctx, sentiment.Input{
+                Text:        fmt.Sprintf("%s %s", issue.Title, issue.Body),
+                ReturnScore: true,
+            })
+            if err != nil {
+                log.Printf("Sentiment analysis failed for issue #%d: %v", issue.Number, err)
+                continue
+            }
+
+            // Alert if sentiment is negative
+            if analysis.Sentiment == "negative" && analysis.Score > 0.7 {
+                msg := fmt.Sprintf(
+                    "⚠️ *Urgent Issue Alert*\nRepo: %s\nIssue: <%s|#%d %s>\nSentiment: %s (%.0f%%)\nAuthor: @%s",
+                    repo, issue.URL, issue.Number, issue.Title,
+                    analysis.Sentiment, analysis.Score*100, issue.User.Login,
+                )
+
+                if err := m.slack.Send(ctx, slack.Message{
+                    Text:     msg,
+                    Priority: slack.PriorityHigh,
+                }); err != nil {
+                    log.Printf("Failed to send Slack alert: %v", err)
+                    continue
+                }
+                alertsSent++
+            }
+        }
+    }
+
+    return &MonitorResult{
+        Status:          "success",
+        IssuesProcessed: processed,
+        AlertsSent:      alertsSent,
+    }, nil
+}
+
+func main() {
+    monitor := NewUrgentIssueMonitor()
+    
+    repos := []string{"my-org/api", "my-org/frontend", "my-org/backend"}
+    
+    result, err := monitor.Execute(context.Background(), repos)
+    if err != nil {
+        log.Fatalf("Monitor execution failed: %v", err)
+    }
+
+    fmt.Printf("Processed %d issues, sent %d alerts\n", 
+        result.IssuesProcessed, result.AlertsSent)
+}</code></pre>
+        </div>
+
+        <h2>Interactive Examples</h2>
+        <p>Let's walk through creating different types of agents with realistic prompts and responses.</p>
+
+        <div class="example-section">
+            <h3>📊 Example 1: Data Processing Agent</h3>
+            <p>An agent that aggregates sales data from multiple sources and generates reports.</p>
+            
+            <div class="conversation-box">
+                <div class="message user">
+                    <div class="message-label">You</div>
+                    <code>@agentos create an agent that pulls sales data from our PostgreSQL database and Salesforce API every morning at 6am, calculates daily/weekly/monthly metrics, and uploads a summary report to S3</code>
+                </div>
+                <div class="message assistant">
+                    <div class="message-label">AgentOS</div>
+                    <p style="color: #e2e8f0; margin: 0 0 1rem 0;"><strong>✨ Agent Configuration Extracted:</strong></p>
+                    <pre style="font-size: 0.85rem; margin: 0;"><code>Name: SalesMetricsReporter
+Schedule: "0 6 * * *" (Daily at 6:00 AM)
+
+Data Sources:
+  ├── PostgreSQL (sales_db.transactions)
+  └── Salesforce API (opportunities, accounts)
+
+Processing:
+  ├── Aggregate by day/week/month
+  ├── Calculate: revenue, units, avg_order_value
+  └── Compare to previous periods
+
+Output:
+  └── S3: s3://reports/sales/{date}.json
+
+Recommended Policies:
+  ├── 🔐 database-readonly
+  ├── 📊 pii-anonymization (customer names)
+  └── 📝 audit-logging</code></pre>
+                    <p style="color: #94a3b8; margin: 1rem 0 0 0;">Shall I generate this agent? [Yes / Modify / Cancel]</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-section">
+            <h3>🔍 Example 2: Monitoring Agent</h3>
+            <p>An agent that watches system metrics and triggers alerts.</p>
+            
+            <div class="conversation-box">
+                <div class="message user">
+                    <div class="message-label">You</div>
+                    <code>@agentos create a monitoring agent that checks our API response times from Datadog, memory usage from CloudWatch, and error rates from Sentry. Alert the on-call engineer via PagerDuty if any metric exceeds thresholds</code>
+                </div>
+                <div class="message assistant">
+                    <div class="message-label">AgentOS</div>
+                    <p style="color: #e2e8f0; margin: 0 0 1rem 0;"><strong>✨ Agent Configuration Extracted:</strong></p>
+                    <pre style="font-size: 0.85rem; margin: 0;"><code>Name: InfraHealthMonitor
+Schedule: "*/5 * * * *" (Every 5 minutes)
+
+Data Sources:
+  ├── Datadog: api.response_time (p95, p99)
+  ├── CloudWatch: memory_utilization, cpu_utilization
+  └── Sentry: error_rate, unhandled_exceptions
+
+Thresholds (configurable):
+  ├── Response time: > 500ms (warning), > 1000ms (critical)
+  ├── Memory: > 80% (warning), > 95% (critical)
+  └── Error rate: > 1% (warning), > 5% (critical)
+
+Alerting:
+  └── PagerDuty: on-call rotation
+
+Generated Files:
+  ├── agent.py (main logic)
+  ├── config.yaml (thresholds)
+  ├── policy.yaml (access controls)
+  └── README.md (documentation)</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="example-section">
+            <h3>💬 Example 3: Customer Support Agent</h3>
+            <p>An agent that handles customer inquiries using AI and escalates when needed.</p>
+            
+            <div class="conversation-box">
+                <div class="message user">
+                    <div class="message-label">You</div>
+                    <code>@agentos create a customer support agent that monitors Zendesk tickets, uses GPT-4 to draft responses for common questions using our knowledge base, and escalates complex issues to human agents. Track resolution times and customer satisfaction --policy gdpr --interactive</code>
+                </div>
+                <div class="message assistant">
+                    <div class="message-label">AgentOS</div>
+                    <p style="color: #e2e8f0; margin: 0 0 1rem 0;"><strong>🤔 I have a few clarifying questions:</strong></p>
+                    <ol style="color: #94a3b8; margin: 0;">
+                        <li><strong>Knowledge base source:</strong> Where is your KB stored?
+                            <ul>
+                                <li>[ ] Notion</li>
+                                <li>[ ] Confluence</li>
+                                <li>[ ] Custom vector DB</li>
+                                <li>[ ] Other (specify)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Auto-respond threshold:</strong> What confidence level should trigger automatic responses?
+                            <ul>
+                                <li>[ ] High (>90%) - Conservative</li>
+                                <li>[ ] Medium (>75%) - Balanced</li>
+                                <li>[ ] Low (>60%) - Aggressive</li>
+                            </ul>
+                        </li>
+                        <li><strong>Human escalation criteria:</strong> Besides low confidence, what should trigger escalation?
+                            <ul>
+                                <li>[ ] Refund requests</li>
+                                <li>[ ] Legal/compliance mentions</li>
+                                <li>[ ] Angry/frustrated sentiment</li>
+                                <li>[ ] VIP customers</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+                <div class="message user">
+                    <div class="message-label">You</div>
+                    <code>Notion for KB, medium confidence, escalate on refunds and angry sentiment</code>
+                </div>
+                <div class="message assistant">
+                    <div class="message-label">AgentOS</div>
+                    <p style="color: #e2e8f0; margin: 0;">✅ <strong>Got it!</strong> Generating CustomerSupportAgent with GDPR compliance...</p>
+                </div>
+            </div>
+        </div>
+
+        <h2>Customizing Generated Code</h2>
+        <p>Generated code is just a starting point. Here's how to customize it effectively.</p>
+
+        <h3>Configuration Files</h3>
+        <p>Every generated agent includes a <code>config.yaml</code> that you can modify without touching code:</p>
+        
+        <pre><code># config.yaml - Customize your agent without code changes
+agent:
+  name: UrgentIssueMonitor
+  version: "1.0.0"
+  
+schedule:
+  cron: "*/15 * * * *"      # Adjust frequency
+  timezone: "America/New_York"
+  
+sources:
+  github:
+    repos:
+      - "my-org/api"
+      - "my-org/frontend"   # Add more repos here
+    labels:
+      - "urgent"
+      - "critical"          # Add more labels
+      
+thresholds:
+  sentiment_score: 0.7      # Adjust sensitivity
+  max_alerts_per_hour: 10   # Rate limiting
+  
+notifications:
+  slack:
+    channel: "#engineering"
+    mention_on_critical: "@oncall"</code></pre>
+
+        <h3>Extending the Agent</h3>
+        <div class="step-box">
+            <p><span class="step-number">1</span> <strong>Add custom processing logic</strong></p>
+            <pre><code>@kernel.middleware
+async def custom_enrichment(issue, next):
+    """Add team assignment based on issue labels"""
+    issue.assigned_team = determine_team(issue.labels)
+    return await next(issue)</code></pre>
+        </div>
+
+        <div class="step-box">
+            <p><span class="step-number">2</span> <strong>Add new integrations</strong></p>
+            <pre><code># Add Jira integration for issue mirroring
+from agent_os.integrations import JiraClient
+jira = JiraClient(project="ENG")
+
+# In your agent function:
+await jira.create_issue(
+    summary=f"[GitHub] {issue.title}",
+    priority="High" if analysis.score > 0.8 else "Medium"
+)</code></pre>
+        </div>
+
+        <div class="step-box">
+            <p><span class="step-number">3</span> <strong>Customize policies</strong></p>
+            <pre><code># policy.yaml - Fine-tune security rules
+policies:
+  rate_limiting:
+    llm_calls_per_minute: 30    # Increase for high volume
+    api_calls_per_minute: 100
+    
+  data_access:
+    github:
+      allowed_repos: ["my-org/*"]
+      denied_actions: ["delete", "admin"]
+      
+  output_restrictions:
+    slack:
+      allowed_channels: ["#engineering", "#alerts"]
+      require_approval_for: ["@channel", "@here"]</code></pre>
+        </div>
+
+        <h2>Multi-Turn Conversations</h2>
+        <p>For complex agents, AgentOS uses multi-turn conversations to gather requirements and clarify ambiguities.</p>
+
+        <h3>When AgentOS Asks Questions</h3>
+        <ul>
+            <li><strong>Ambiguous data sources:</strong> "You mentioned 'the database'—which one? (PostgreSQL, MySQL, MongoDB)"</li>
+            <li><strong>Missing credentials:</strong> "I'll need API access to Slack. Should I use existing tokens or create new ones?"</li>
+            <li><strong>Security decisions:</strong> "This agent accesses PII. Should I apply GDPR policies automatically?"</li>
+            <li><strong>Schedule clarification:</strong> "You said 'regularly'—how often? (hourly, daily, weekly)"</li>
+            <li><strong>Error handling:</strong> "What should happen if the API is unavailable? (retry, skip, alert)"</li>
+        </ul>
+
+        <div class="info-box">
+            <strong>📝 Note:</strong> Use <code>--interactive</code> to always enable clarifying questions, or <code>--auto</code> to have AgentOS make reasonable defaults without asking.
+        </div>
+
+        <h2>Best Practices for Descriptions</h2>
+        <p>Write better descriptions to get better agents. Follow these guidelines:</p>
+
+        <div class="best-practice">
+            <span class="icon">✅</span>
+            <div class="content">
+                <h5>Be Specific About Data Sources</h5>
+                <p><strong>Good:</strong> "Pull open issues from the github.com/acme/api repository"<br>
+                <strong>Bad:</strong> "Get issues from GitHub"</p>
+            </div>
+        </div>
+
+        <div class="best-practice">
+            <span class="icon">✅</span>
+            <div class="content">
+                <h5>Include Timing Information</h5>
+                <p><strong>Good:</strong> "Run every weekday at 9am EST"<br>
+                <strong>Bad:</strong> "Run regularly"</p>
+            </div>
+        </div>
+
+        <div class="best-practice">
+            <span class="icon">✅</span>
+            <div class="content">
+                <h5>Specify Output Destinations</h5>
+                <p><strong>Good:</strong> "Send summary to #sales-reports Slack channel and email to team@company.com"<br>
+                <strong>Bad:</strong> "Notify the team"</p>
+            </div>
+        </div>
+
+        <div class="best-practice">
+            <span class="icon">✅</span>
+            <div class="content">
+                <h5>Define Success Criteria</h5>
+                <p><strong>Good:</strong> "Alert if response time exceeds 500ms for more than 5 minutes"<br>
+                <strong>Bad:</strong> "Alert if slow"</p>
+            </div>
+        </div>
+
+        <div class="best-practice">
+            <span class="icon">✅</span>
+            <div class="content">
+                <h5>Mention Compliance Requirements</h5>
+                <p><strong>Good:</strong> "Process EU customer data with GDPR compliance"<br>
+                <strong>Bad:</strong> "Process customer data"</p>
+            </div>
+        </div>
+
+        <div class="best-practice">
+            <span class="icon">✅</span>
+            <div class="content">
+                <h5>Describe Error Handling</h5>
+                <p><strong>Good:</strong> "Retry 3 times on failure, then alert DevOps"<br>
+                <strong>Bad:</strong> "Handle errors"</p>
+            </div>
+        </div>
+
+        <h3>Template Prompts</h3>
+        <p>Use these templates as starting points for common agent types:</p>
+
+        <pre><code># Data Pipeline Agent
+@agentos create an agent that:
+- Pulls [DATA_TYPE] from [SOURCE] every [SCHEDULE]
+- Transforms data by [OPERATIONS]
+- Loads results into [DESTINATION]
+- Alerts [TEAM/CHANNEL] on failures
+
+# Monitoring Agent  
+@agentos create an agent that:
+- Monitors [METRICS] from [SOURCES]
+- Triggers alerts when [CONDITIONS]
+- Sends notifications to [DESTINATIONS]
+- Runs every [INTERVAL]
+
+# Automation Agent
+@agentos create an agent that:
+- Watches for [TRIGGER_EVENT] in [SOURCE]
+- Performs [ACTIONS] automatically
+- Logs results to [DESTINATION]
+- Escalates to [PERSON/TEAM] when [CONDITIONS]</code></pre>
+
+        <div class="warning-box">
+            <strong>⚠️ Avoid These Common Mistakes:</strong>
+            <ul style="margin: 0.5rem 0 0 0;">
+                <li>Don't use vague verbs like "handle", "process", or "manage" without specifics</li>
+                <li>Don't omit security requirements—AgentOS will ask, slowing generation</li>
+                <li>Don't describe implementation details—focus on <em>what</em>, not <em>how</em></li>
+                <li>Don't combine unrelated tasks—create separate agents instead</li>
+            </ul>
+        </div>
+
+        <h2>What's Next?</h2>
+        <p>Now that you know how to create agents from natural language, explore these related topics:</p>
+        
+        <ul>
+            <li><a href="templates.html" style="color: #10b981;">📦 Agent Templates</a> - Browse and customize 50+ pre-built templates</li>
+            <li><a href="compliance.html" style="color: #10b981;">🔒 Compliance Frameworks</a> - Deep dive into GDPR, HIPAA, SOC2 compliance</li>
+            <li><a href="deployment.html" style="color: #10b981;">🚀 Deployment</a> - Deploy agents to GitHub Actions, AWS, or Kubernetes</li>
+        </ul>
+
+        <div class="nav-buttons">
+            <a href="getting-started.html" class="nav-btn">← Previous: Getting Started</a>
+            <a href="templates.html" class="nav-btn">Next: Templates →</a>
+        </div>
+    </main>
+
+    <script>
+        function showCodeTab(lang) {
+            // Hide all panels
+            document.querySelectorAll('.code-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            // Deactivate all tabs
+            document.querySelectorAll('.code-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Show selected panel and activate tab
+            document.getElementById(lang + '-code').classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+    <script src="../../../script.js"></script>
+</body>
+</html>

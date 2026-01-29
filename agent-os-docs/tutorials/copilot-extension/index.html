@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AgentOS GitHub Copilot Extension: Build safe AI agents with natural language. 50+ templates, compliance frameworks, 0% policy violations.">
+    <meta name="keywords" content="AgentOS Copilot, GitHub Copilot extension, AI agents, safety, compliance, GDPR, HIPAA, SOC2">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imransiddique.com/agent-os-docs/tutorials/copilot-extension/">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://imransiddique.com/agent-os-docs/tutorials/copilot-extension/">
+    <meta property="og:title" content="GitHub Copilot Extension - AgentOS">
+    <meta property="og:description" content="Build safe AI agents with natural language and 0% policy violations.">
+    <meta property="og:site_name" content="Agent OS">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:title" content="AgentOS GitHub Copilot Extension">
+    <meta name="twitter:description" content="Build safe AI agents with natural language. 50+ templates, compliance frameworks.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <title>GitHub Copilot Extension - AgentOS | Imran Siddique</title>
+    <link rel="stylesheet" href="../../../styles-new.css">
+    <link rel="stylesheet" href="../../assets/agent-os.css">
+    <style>
+        .copilot-hero {
+            background: linear-gradient(135deg, #1e1e2e 0%, #1a3a2e 50%, #1a1a2e 100%);
+            padding: 6rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .copilot-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        .copilot-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .copilot-icon {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        .copilot-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        .copilot-badge .pulse {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .copilot-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .copilot-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .copilot-btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+        .copilot-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+        .copilot-btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .copilot-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .feature-card {
+            background: rgba(30, 30, 46, 0.8);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(16, 185, 129, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            color: #e2e8f0;
+        }
+        .feature-card p {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .feature-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .feature-tag {
+            background: rgba(16, 185, 129, 0.15);
+            color: #6ee7b7;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        .install-section {
+            background: #1a1a2e;
+            padding: 3rem;
+            border-radius: 16px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        .install-section h2 {
+            margin-bottom: 1rem;
+        }
+        .install-code {
+            background: #0d0d14;
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+        .install-code .prefix {
+            color: #10b981;
+        }
+        .install-code .cmd {
+            color: #e2e8f0;
+        }
+        .screenshot-section {
+            margin: 4rem 0;
+        }
+        .screenshot-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .screenshot-tab {
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            color: #94a3b8;
+            transition: all 0.3s ease;
+        }
+        .screenshot-tab:hover, .screenshot-tab.active {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: #e2e8f0;
+        }
+        .screenshot-content {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 2rem;
+            min-height: 400px;
+        }
+        .screenshot-content pre {
+            background: #0d0d14;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .stat-card {
+            background: rgba(30, 30, 46, 0.6);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #10b981, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .highlight-box h3 {
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+        .command-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .command-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        .command-item code {
+            color: #10b981;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+        .command-item p {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+        @media (max-width: 768px) {
+            .copilot-hero h1 { font-size: 2.5rem; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../../../index.html">Home</a></li>
+                <li><a href="../../../about.html">About</a></li>
+                <li><a href="../../../projects.html">Projects</a></li>
+                <li><a href="../../index.html" class="active">Agent OS</a></li>
+                <li><a href="../../../writings.html">Writings</a></li>
+                <li><a href="../../../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="copilot-hero">
+            <div class="container">
+                <span class="copilot-icon">🤖</span>
+                <div class="copilot-badge">
+                    <span class="pulse"></span>
+                    GitHub Copilot Extension
+                </div>
+                <h1><span class="text-gradient">AgentOS for Copilot</span></h1>
+                <p style="font-size: 1.3rem; color: #94a3b8; max-width: 700px; margin: 0 auto 1rem;">
+                    Build safe AI agents with natural language and 0% policy violations
+                </p>
+                <p style="color: #64748b; max-width: 600px; margin: 0 auto;">
+                    Create agents from descriptions, use 50+ templates, ensure compliance with GDPR, HIPAA, SOC2, 
+                    and deploy directly to GitHub Actions—all through Copilot Chat.
+                </p>
+                
+                <div class="copilot-cta">
+                    <a href="getting-started.html" class="copilot-btn copilot-btn-primary">
+                        🚀 Get Started
+                    </a>
+                    <a href="https://github.com/imran-siddique/agent-os" target="_blank" class="copilot-btn copilot-btn-secondary">
+                        ⭐ Star on GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="aos-section">
+            <div class="container">
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-value">13</div>
+                        <div class="stat-label">Chat Commands</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">50+</div>
+                        <div class="stat-label">Agent Templates</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">Compliance Frameworks</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">0%</div>
+                        <div class="stat-label">Policy Violations</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Commands -->
+        <section class="aos-section">
+            <div class="container">
+                <div class="highlight-box">
+                    <h3>⚡ Quick Commands</h3>
+                    <p style="color: #94a3b8; margin-bottom: 1.5rem;">Use these commands in GitHub Copilot Chat</p>
+                    <div class="command-list">
+                        <div class="command-item">
+                            <code>@agentos create agent for [task]</code>
+                            <p>Generate agent from natural language</p>
+                        </div>
+                        <div class="command-item">
+                            <code>@agentos templates</code>
+                            <p>Browse 50+ pre-built templates</p>
+                        </div>
+                        <div class="command-item">
+                            <code>@agentos compliance gdpr</code>
+                            <p>Check GDPR compliance</p>
+                        </div>
+                        <div class="command-item">
+                            <code>@agentos deploy</code>
+                            <p>Deploy to GitHub Actions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="aos-section">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 0.5rem;">🎯 Features & Tutorials</h2>
+                <p style="text-align: center; color: #94a3b8; margin-bottom: 2rem;">Click any feature to learn how to use it</p>
+                
+                <div class="feature-grid">
+                    <a href="getting-started.html" class="feature-card">
+                        <span class="feature-icon">🚀</span>
+                        <h3>Getting Started</h3>
+                        <p>Install the extension, run your first command, and create a working agent in under 5 minutes with step-by-step guidance.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Beginner</span>
+                            <span class="feature-tag">5 min</span>
+                        </div>
+                    </a>
+
+                    <a href="agent-creation.html" class="feature-card">
+                        <span class="feature-icon">🤖</span>
+                        <h3>Agent Creation</h3>
+                        <p>Create agents from natural language descriptions. Automatic task decomposition, policy detection, and code generation in Python, TypeScript, or Go.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">NL to Code</span>
+                            <span class="feature-tag">Multi-language</span>
+                        </div>
+                    </a>
+
+                    <a href="templates.html" class="feature-card">
+                        <span class="feature-icon">📚</span>
+                        <h3>Template Gallery</h3>
+                        <p>50+ pre-built templates across 8 categories: Data Processing, DevOps, Customer Support, Content, BI, Security, Integration, Automation.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">50+ Templates</span>
+                            <span class="feature-tag">8 Categories</span>
+                        </div>
+                    </a>
+
+                    <a href="compliance.html" class="feature-card">
+                        <span class="feature-icon">📋</span>
+                        <h3>Compliance Frameworks</h3>
+                        <p>Built-in GDPR, HIPAA, SOC 2, and PCI DSS compliance checking. Automatic policy generation and violation detection.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">GDPR</span>
+                            <span class="feature-tag">HIPAA</span>
+                            <span class="feature-tag">SOC2</span>
+                            <span class="feature-tag">PCI-DSS</span>
+                        </div>
+                    </a>
+
+                    <a href="testing.html" class="feature-card">
+                        <span class="feature-icon">🧪</span>
+                        <h3>Testing & Security</h3>
+                        <p>Automated test generation, edge case detection, security vulnerability scanning, and cost estimation before deployment.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Auto Tests</span>
+                            <span class="feature-tag">Security Scan</span>
+                        </div>
+                    </a>
+
+                    <a href="debugging.html" class="feature-card">
+                        <span class="feature-icon">🔧</span>
+                        <h3>Debugging & Optimization</h3>
+                        <p>AI-powered error diagnosis, execution trace analysis, performance bottleneck detection, and automated fix suggestions.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Error Diagnosis</span>
+                            <span class="feature-tag">Auto Fix</span>
+                        </div>
+                    </a>
+
+                    <a href="deployment.html" class="feature-card">
+                        <span class="feature-icon">🚀</span>
+                        <h3>GitHub Deployment</h3>
+                        <p>One-command deployment to GitHub Actions. Auto-generates workflows, manages secrets, creates PRs with agent code and policies.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">GitHub Actions</span>
+                            <span class="feature-tag">Auto PR</span>
+                        </div>
+                    </a>
+
+                    <a href="cmvk-review.html" class="feature-card">
+                        <span class="feature-icon">🔍</span>
+                        <h3>Multi-Model Review</h3>
+                        <p>CMVK (Cross-Model Verification Kernel) reviews code with multiple AI models for consensus-based safety verification.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Multi-Model</span>
+                            <span class="feature-tag">Consensus</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Preview Section -->
+        <section class="aos-section">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 2rem;">👀 Quick Preview</h2>
+                
+                <div class="screenshot-section">
+                    <div class="screenshot-tabs">
+                        <button class="screenshot-tab active" onclick="showTab('create')">Create Agent</button>
+                        <button class="screenshot-tab" onclick="showTab('templates')">Templates</button>
+                        <button class="screenshot-tab" onclick="showTab('compliance')">Compliance</button>
+                        <button class="screenshot-tab" onclick="showTab('deploy')">Deploy</button>
+                    </div>
+                    
+                    <div class="screenshot-content" id="screenshot-content">
+                        <pre id="create-preview"><code><span style="color: #6ee7b7;">User:</span> @agentos create agent for processing customer feedback from Slack
+
+<span style="color: #10b981;">AgentOS:</span> 🤖 <b>Agent Created: CustomerFeedbackProcessingAgent</b>
+
+Processing customer feedback from Slack
+
+<b>### Tasks</b>
+- Read data from Slack API
+- Analyze and process data
+- Send results to Database
+
+<b>### 🛡️ Safety Policies Applied</b>
+✅ <b>API Rate Limiting</b> (rate_limit): Limits API calls to prevent quota exhaustion
+✅ <b>PII Protection</b> (data_privacy): Redacts personally identifiable information
+✅ <b>Authentication Required</b> (auth): Requires valid API token
+✅ <b>Audit Logging</b> (logging): Logs all agent actions for audit trail
+
+<b>### Generated Code (Python)</b>
+```python
+from agent_os import KernelSpace
+from agent_os.integrations import create_safe_toolkit
+
+kernel = KernelSpace(policy="strict")
+toolkit = create_safe_toolkit("standard")
+
+SLACK_TOKEN = os.environ.get("SLACK_TOKEN")
+
+@kernel.register
+async def customer_feedback_processing_agent(task: str):
+    results = {"status": "success", "timestamp": datetime.utcnow().isoformat()}
+    
+    data = await fetch_from_slack_api()
+    processed = await process_data(data)
+    await send_to_database(processed)
+    
+    return results
+```
+
+[🚀 Deploy to GitHub Actions] [🧪 Test Agent] [📋 Copy Code]</code></pre>
+                        
+                        <pre id="templates-preview" style="display:none;"><code><span style="color: #6ee7b7;">User:</span> @agentos templates devops
+
+<span style="color: #10b981;">AgentOS:</span> 📚 <b>Agent Templates</b>
+
+Found <b>10</b> templates in <b>devops</b>
+
+<b>### Categories</b>
+- <b>data-processing</b> (10): ETL, data cleaning, file processing
+- <b>customer-support</b> (5): Ticket routing, sentiment analysis
+- <b>devops</b> (10): Deployment, monitoring, incident response
+- <b>content-management</b> (5): Moderation, SEO, social media
+- <b>business-intelligence</b> (5): Dashboards, KPIs, anomaly detection
+- <b>security</b> (5): Access audits, compliance, scanning
+- <b>integration</b> (5): API connectors, webhooks
+- <b>automation</b> (5): Workflows, notifications, cleanup
+
+<b>### Templates</b>
+
+<b>#### Deployment Automation Agent</b>
+🔴 advanced | ⏱️ 30 minutes
+Automates deployment workflows with rollback capabilities and notifications.
+
+<b>#### Uptime Monitoring Agent</b>
+🟢 beginner | ⏱️ 10 minutes
+Monitors API endpoints and websites for uptime with alerting.
+
+<b>#### Log Analysis Agent</b>
+🟡 intermediate | ⏱️ 20 minutes
+Analyzes application logs to detect errors, anomalies, and patterns.
+
+<b>#### Incident Response Agent</b>
+🔴 advanced | ⏱️ 30 minutes
+Coordinates incident response with automated runbooks and communication.
+
+<b>#### Security Scanning Agent</b>
+🟡 intermediate | ⏱️ 15 minutes
+Scans code and dependencies for security vulnerabilities.</code></pre>
+                        
+                        <pre id="compliance-preview" style="display:none;"><code><span style="color: #6ee7b7;">User:</span> @agentos compliance gdpr
+
+<span style="color: #10b981;">AgentOS:</span> 📋 <b>GDPR Standard Compliance</b>
+
+<b>Framework:</b> GDPR | <b>Version:</b> 2.0
+
+Ensures compliance with EU General Data Protection Regulation for 
+processing personal data of EU residents.
+
+<b>### Data Handling Requirements</b>
+| Requirement       | Value           |
+|-------------------|-----------------|
+| PII Redaction     | ✅ Required     |
+| Encryption        | ✅ Required     |
+| Retention         | 365 days        |
+| Consent Required  | ✅ Yes          |
+
+<b>### Key Controls (6 total)</b>
+- <b>Purpose Limitation</b>: Process data only for specified purposes
+- <b>Consent Management</b>: Track and verify user consent
+- <b>Right to Access</b>: Provide data access on request
+- <b>Right to Erasure</b>: Delete data on request
+- <b>Data Minimization</b>: Collect only necessary data
+- <b>Encryption</b>: Encrypt personal data
+
+<b>### Compliance Check</b>
+<b>Score:</b> 🟢 85/100
+<b>Status:</b> ✅ Compliant
+
+<b>### Recommendations</b>
+- Add comprehensive audit logging
+- Implement encryption for sensitive data
+
+[Generate Policy YAML] [Fix Violations]</code></pre>
+                        
+                        <pre id="deploy-preview" style="display:none;"><code><span style="color: #6ee7b7;">User:</span> @agentos deploy
+
+<span style="color: #10b981;">AgentOS:</span> 🚀 <b>Deploy CustomerFeedbackProcessingAgent</b>
+
+<b>### Files to Create</b>
+- `agents/customer_feedback_processing_agent.py`
+- `.github/workflows/customer-feedback-processing-agent.yml`
+- `policies/customer-feedback-processing-agent.yaml`
+- `tests/test_customer_feedback_processing_agent.py`
+
+<b>### GitHub Actions Workflow</b>
+```yaml
+name: Customer Feedback Processing Agent
+
+on:
+  schedule:
+    - cron: '0 9 * * *'  # Daily at 9am
+  workflow_dispatch:
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run Agent
+        uses: agentos/run-agent@v1
+        env:
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+```
+
+<b>### Required Secrets</b>
+- `SLACK_TOKEN` - Bot token from Slack app
+- `DATABASE_URL` - Database connection string
+
+[Create Pull Request] [Copy Files] [Configure Secrets]</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Commands Reference -->
+        <section class="aos-section">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 2rem;">📖 Complete Command Reference</h2>
+                
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: rgba(16, 185, 129, 0.1);">
+                                <th style="padding: 1rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1);">Command</th>
+                                <th style="padding: 1rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1);">Description</th>
+                                <th style="padding: 1rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1);">Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);"><code style="color: #10b981;">@agentos create</code></td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #94a3b8;">Create agent from description</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #64748b;">@agentos create agent for monitoring API uptime</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);"><code style="color: #10b981;">@agentos design</code></td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #94a3b8;">Design multi-step workflow</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #64748b;">@agentos design workflow to generate reports</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);"><code style="color: #10b981;">@agentos templates</code></td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #94a3b8;">Browse template gallery</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #64748b;">@agentos templates devops</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);"><code style="color: #10b981;">@agentos test</code></td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #94a3b8;">Test agent with scenarios</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #64748b;">@agentos test</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);"><code style="color: #10b981;">@agentos debug</code></td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #94a3b8;">Debug agent failures</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #64748b;">@agentos why did this agent fail?</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);"><code style="color: #10b981;">@agentos compliance</code></td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #94a3b8;">Check compliance framework</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #64748b;">@agentos compliance hipaa</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);"><code style="color: #10b981;">@agentos security</code></td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #94a3b8;">Run security audit</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #64748b;">@agentos security</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);"><code style="color: #10b981;">@agentos deploy</code></td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #94a3b8;">Deploy to GitHub Actions</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #64748b;">@agentos deploy</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);"><code style="color: #10b981;">@agentos optimize</code></td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #94a3b8;">Performance optimization</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #64748b;">@agentos optimize</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);"><code style="color: #10b981;">@agentos review</code></td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #94a3b8;">CMVK multi-model review</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #64748b;">@agentos review</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);"><code style="color: #10b981;">@agentos policy</code></td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #94a3b8;">Show active policies</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #64748b;">@agentos policy</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05);"><code style="color: #10b981;">@agentos audit</code></td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #94a3b8;">View audit log</td>
+                                <td style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #64748b;">@agentos audit</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem;"><code style="color: #10b981;">@agentos help</code></td>
+                                <td style="padding: 1rem; color: #94a3b8;">Show all commands</td>
+                                <td style="padding: 1rem; color: #64748b;">@agentos help</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Navigation -->
+        <section class="aos-section">
+            <div class="container" style="text-align: center;">
+                <p style="color: #94a3b8; margin-bottom: 1rem;">Ready to get started?</p>
+                <a href="getting-started.html" class="copilot-btn copilot-btn-primary">
+                    🚀 Getting Started Tutorial →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Agent OS</h3>
+                    <p>Kernel-level governance for AI agents</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="../../index.html">Overview</a></li>
+                        <li><a href="../vscode-extension/index.html">VS Code Extension</a></li>
+                        <li><a href="index.html">Copilot Extension</a></li>
+                        <li><a href="../../modules/index.html">Modules</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://github.com/imran-siddique/agent-os" target="_blank">GitHub</a></li>
+                        <li><a href="../../examples/index.html">Examples</a></li>
+                        <li><a href="../../use-cases/index.html">Use Cases</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Imran Siddique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all previews
+            document.querySelectorAll('.screenshot-content pre').forEach(pre => {
+                pre.style.display = 'none';
+            });
+            
+            // Show selected preview
+            document.getElementById(tabName + '-preview').style.display = 'block';
+            
+            // Update tab styles
+            document.querySelectorAll('.screenshot-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Mobile menu toggle
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
