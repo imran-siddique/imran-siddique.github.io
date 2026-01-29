@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agent OS VS Code Extension: Visual development environment for building safe AI agents. Policy Editor, Workflow Designer, Security Diagnostics, and Enterprise features.">
+    <meta name="keywords" content="Agent OS VS Code, AI safety extension, policy editor, workflow designer, code security, enterprise AI governance">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imransiddique.com/agent-os-docs/tutorials/vscode-extension/">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://imransiddique.com/agent-os-docs/tutorials/vscode-extension/">
+    <meta property="og:title" content="VS Code Extension - Agent OS">
+    <meta property="og:description" content="Visual development environment for building safe AI agents with kernel-level enforcement.">
+    <meta property="og:site_name" content="Agent OS">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:title" content="Agent OS VS Code Extension">
+    <meta name="twitter:description" content="Build safe AI agents with visual tools. Policy Editor, Workflow Designer, and more.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <title>VS Code Extension - Agent OS | Imran Siddique</title>
+    <link rel="stylesheet" href="../../../styles-new.css">
+    <link rel="stylesheet" href="../../assets/agent-os.css">
+    <style>
+        .vscode-hero {
+            background: linear-gradient(135deg, #1e1e2e 0%, #2d1b4e 50%, #1a1a2e 100%);
+            padding: 6rem 0 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .vscode-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        .vscode-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .vscode-icon {
+            font-size: 4rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        .vscode-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        .vscode-badge .pulse {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .vscode-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .vscode-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .vscode-btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+        }
+        .vscode-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+        .vscode-btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .vscode-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .feature-card {
+            background: rgba(30, 30, 46, 0.8);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            color: #e2e8f0;
+        }
+        .feature-card p {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .feature-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .feature-tag {
+            background: rgba(99, 102, 241, 0.15);
+            color: #a5b4fc;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        .install-section {
+            background: #1a1a2e;
+            padding: 3rem;
+            border-radius: 16px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        .install-section h2 {
+            margin-bottom: 1rem;
+        }
+        .install-code {
+            background: #0d0d14;
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+        .install-code .prefix {
+            color: #10b981;
+        }
+        .install-code .cmd {
+            color: #e2e8f0;
+        }
+        .screenshot-section {
+            margin: 4rem 0;
+        }
+        .screenshot-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .screenshot-tab {
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            color: #94a3b8;
+            transition: all 0.3s ease;
+        }
+        .screenshot-tab:hover, .screenshot-tab.active {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.3);
+            color: #e2e8f0;
+        }
+        .screenshot-content {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 2rem;
+            min-height: 400px;
+        }
+        .screenshot-content pre {
+            background: #0d0d14;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .stat-card {
+            background: rgba(30, 30, 46, 0.6);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        @media (max-width: 768px) {
+            .vscode-hero h1 { font-size: 2.5rem; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../../../index.html">Home</a></li>
+                <li><a href="../../../about.html">About</a></li>
+                <li><a href="../../../projects.html">Projects</a></li>
+                <li><a href="../../index.html" class="active">Agent OS</a></li>
+                <li><a href="../../../writings.html">Writings</a></li>
+                <li><a href="../../../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="vscode-hero">
+            <div class="container">
+                <span class="vscode-icon">🛡️</span>
+                <div class="vscode-badge">
+                    <span class="pulse"></span>
+                    Now Available on VS Code Marketplace
+                </div>
+                <h1><span class="text-gradient">VS Code Extension</span></h1>
+                <p style="font-size: 1.3rem; color: #94a3b8; max-width: 700px; margin: 0 auto 1rem;">
+                    Visual development environment for building safe, policy-compliant AI agents
+                </p>
+                <p style="color: #64748b; max-width: 600px; margin: 0 auto;">
+                    Design workflows visually, create policies with templates, get real-time security diagnostics, 
+                    and monitor agent activity—all without leaving VS Code.
+                </p>
+                
+                <div class="vscode-cta">
+                    <a href="https://marketplace.visualstudio.com/items?itemName=agent-os.agent-os-vscode" target="_blank" class="vscode-btn vscode-btn-primary">
+                        ⬇️ Install Extension
+                    </a>
+                    <a href="https://github.com/imran-siddique/agent-os" target="_blank" class="vscode-btn vscode-btn-secondary">
+                        ⭐ Star on GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section class="aos-section">
+            <div class="container">
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-value">18</div>
+                        <div class="stat-label">Commands</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">14</div>
+                        <div class="stat-label">Code Snippets</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Policy Templates</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">4</div>
+                        <div class="stat-label">Compliance Frameworks</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Install Section -->
+        <section class="aos-section">
+            <div class="container">
+                <div class="install-section">
+                    <h2>⚡ Quick Install</h2>
+                    <p style="color: #94a3b8;">Install from VS Code or command line</p>
+                    <div class="install-code">
+                        <span class="prefix">$</span> <span class="cmd">code --install-extension agent-os.agent-os-vscode</span>
+                    </div>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-top: 1rem;">
+                        Or search "Agent OS" in VS Code Extensions (Ctrl+Shift+X)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="aos-section">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 0.5rem;">🎯 Features & Tutorials</h2>
+                <p style="text-align: center; color: #94a3b8; margin-bottom: 2rem;">Click any feature to learn how to use it</p>
+                
+                <div class="feature-grid">
+                    <a href="getting-started.html" class="feature-card">
+                        <span class="feature-icon">🚀</span>
+                        <h3>Getting Started</h3>
+                        <p>Interactive onboarding that guides you through setup, configuration, and creating your first safe agent in under 5 minutes.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Beginner</span>
+                            <span class="feature-tag">5 min</span>
+                        </div>
+                    </a>
+
+                    <a href="policy-editor.html" class="feature-card">
+                        <span class="feature-icon">📜</span>
+                        <h3>Policy Editor</h3>
+                        <p>Visual policy management with 5 templates (Strict Security, SOC 2, GDPR, Development, Rate Limiting). Real-time validation and testing.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Templates</span>
+                            <span class="feature-tag">YAML</span>
+                            <span class="feature-tag">Validation</span>
+                        </div>
+                    </a>
+
+                    <a href="workflow-designer.html" class="feature-card">
+                        <span class="feature-icon">🔧</span>
+                        <h3>Workflow Designer</h3>
+                        <p>Drag-and-drop visual builder for agent workflows. 4 node types, 8 action types. Export to Python, TypeScript, or Go.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Visual</span>
+                            <span class="feature-tag">No-Code</span>
+                            <span class="feature-tag">Code Export</span>
+                        </div>
+                    </a>
+
+                    <a href="security-diagnostics.html" class="feature-card">
+                        <span class="feature-icon">🔒</span>
+                        <h3>Security Diagnostics</h3>
+                        <p>Real-time vulnerability detection as you code. 13 security rules covering os.system, eval, exec, SQL injection, and more.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Real-time</span>
+                            <span class="feature-tag">Quick Fixes</span>
+                            <span class="feature-tag">13 Rules</span>
+                        </div>
+                    </a>
+
+                    <a href="metrics-dashboard.html" class="feature-card">
+                        <span class="feature-icon">📊</span>
+                        <h3>Metrics Dashboard</h3>
+                        <p>Monitor policy checks, violations blocked, and agent activity in real-time. Charts, activity feed, and export capabilities.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Monitoring</span>
+                            <span class="feature-tag">Charts</span>
+                            <span class="feature-tag">Export</span>
+                        </div>
+                    </a>
+
+                    <a href="intellisense-snippets.html" class="feature-card">
+                        <span class="feature-icon">💡</span>
+                        <h3>IntelliSense & Snippets</h3>
+                        <p>14 code snippets for Python, TypeScript, and YAML. Context-aware completions for AgentOS APIs with hover documentation.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">Snippets</span>
+                            <span class="feature-tag">Autocomplete</span>
+                            <span class="feature-tag">Documentation</span>
+                        </div>
+                    </a>
+
+                    <a href="enterprise-features.html" class="feature-card">
+                        <span class="feature-icon">🏢</span>
+                        <h3>Enterprise Features</h3>
+                        <p>SSO with Azure AD, Okta, Google, GitHub. Role-based access control with 5 role levels. Compliance frameworks for SOC 2, GDPR, HIPAA, PCI DSS.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">SSO</span>
+                            <span class="feature-tag">RBAC</span>
+                            <span class="feature-tag">Compliance</span>
+                        </div>
+                    </a>
+
+                    <a href="cicd-integration.html" class="feature-card">
+                        <span class="feature-icon">🔄</span>
+                        <h3>CI/CD Integration</h3>
+                        <p>One-click setup for GitHub Actions, GitLab CI, Jenkins, Azure Pipelines, and CircleCI. Pre-commit hooks for local validation.</p>
+                        <div class="feature-tags">
+                            <span class="feature-tag">GitHub Actions</span>
+                            <span class="feature-tag">GitLab CI</span>
+                            <span class="feature-tag">Jenkins</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Preview Section -->
+        <section class="aos-section">
+            <div class="container">
+                <h2 style="text-align: center; margin-bottom: 2rem;">👀 Quick Preview</h2>
+                
+                <div class="screenshot-section">
+                    <div class="screenshot-tabs">
+                        <button class="screenshot-tab active" onclick="showTab('policy')">Policy Editor</button>
+                        <button class="screenshot-tab" onclick="showTab('workflow')">Workflow Designer</button>
+                        <button class="screenshot-tab" onclick="showTab('diagnostics')">Security Diagnostics</button>
+                        <button class="screenshot-tab" onclick="showTab('snippets')">Snippets</button>
+                    </div>
+                    
+                    <div class="screenshot-content" id="screenshot-content">
+                        <pre id="policy-preview"><code># Strict Security Policy - Agent OS
+# Block dangerous operations, enforce rate limits
+
+policy:
+  name: "Strict Security Policy"
+  version: "1.0"
+  rules:
+    - name: "Block file writes outside /tmp"
+      condition: "agent.action == 'file.write'"
+      constraint: "not path.startsWith('/tmp/')"
+      action: "deny"
+      message: "File writes restricted to /tmp/"
+    
+    - name: "Block external API calls"
+      condition: "agent.action == 'http.request'"
+      constraint: "not url.host.endsWith('.internal.com')"
+      action: "deny"
+      message: "External API calls not allowed"
+    
+    - name: "Rate limit LLM calls"
+      condition: "agent.action == 'llm.call'"
+      constraint: "rate > 100 per minute"
+      action: "throttle"
+      message: "LLM calls rate limited to 100/min"</code></pre>
+                        
+                        <pre id="workflow-preview" style="display:none;"><code># Generated from Workflow Designer
+# Data Processing Pipeline with Safety Guarantees
+
+from agent_os import KernelSpace, Policy
+from agent_os.tools import create_safe_toolkit
+
+kernel = KernelSpace(policy="strict")
+toolkit = create_safe_toolkit("standard")
+
+async def read_input(context):
+    """Read input data from source"""
+    # Policy: rate_limit
+    return await toolkit.file.read(context["input_path"])
+
+async def process_with_llm(context):
+    """Process data with LLM"""
+    # Policy: strict
+    return await toolkit.llm.call(
+        model="gpt-4",
+        prompt=context["data"]
+    )
+
+async def write_output(context):
+    """Write processed data"""
+    # Policy: strict
+    return await toolkit.file.write(
+        "/tmp/output.json",
+        context["result"]
+    )
+
+@kernel.register
+async def run_workflow(task: str):
+    context = {"task": task, "input_path": "/data/input.csv"}
+    context["data"] = await read_input(context)
+    context["result"] = await process_with_llm(context)
+    await write_output(context)
+    return {"status": "success"}</code></pre>
+                        
+                        <pre id="diagnostics-preview" style="display:none;"><code># Security Diagnostics detects issues as you type
+
+import os
+import subprocess
+
+user_input = input("Enter command: ")
+
+# ⚠️ Warning: os.system() can execute arbitrary commands
+os.system(user_input)  # 🔴 Flagged
+
+# ⚠️ Warning: eval() is dangerous with untrusted input
+result = eval(user_input)  # 🔴 Flagged
+
+# ⚠️ Warning: subprocess with shell=True is vulnerable
+subprocess.call(cmd, shell=True)  # 🔴 Flagged
+
+# ✅ Safe alternative suggested:
+subprocess.run(["ls", "-la"], check=True)  # ✅ OK
+
+# ⚠️ Warning: Hardcoded credential detected
+api_key = "sk-abc123..."  # 🔴 Flagged
+
+# ✅ Safe alternative:
+api_key = os.environ.get("API_KEY")  # ✅ OK</code></pre>
+                        
+                        <pre id="snippets-preview" style="display:none;"><code># Type 'aos-' and press Tab to expand snippets
+
+# aos-agent → Creates a complete agent template
+from agent_os import KernelSpace, Policy
+from agent_os.tools import create_safe_toolkit
+
+kernel = KernelSpace(policy="strict")
+toolkit = create_safe_toolkit("standard")
+
+@kernel.agent
+async def my_agent(task: str):
+    """Agent with full safety guarantees"""
+    result = await kernel.execute(task, toolkit=toolkit)
+    return result
+
+# aos-policy → Creates policy YAML template
+# aos-kernel → Creates kernel initialization
+# aos-workflow → Creates workflow function
+# aos-cmvk → Creates CMVK integration
+# aos-langchain → Creates LangChain integration
+# aos-github-action → Creates CI/CD workflow
+
+# 14 snippets available for Python, TypeScript, YAML</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="aos-section" style="background: linear-gradient(135deg, #1e1e2e 0%, #2d1b4e 100%); padding: 4rem 0;">
+            <div class="container" style="text-align: center;">
+                <h2>Ready to Build Safe AI Agents?</h2>
+                <p style="color: #94a3b8; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Install the extension and start building policy-compliant AI agents in minutes. 
+                    Zero configuration required.
+                </p>
+                <div class="vscode-cta">
+                    <a href="https://marketplace.visualstudio.com/items?itemName=agent-os.agent-os-vscode" target="_blank" class="vscode-btn vscode-btn-primary">
+                        ⬇️ Install Now
+                    </a>
+                    <a href="getting-started.html" class="vscode-btn vscode-btn-secondary">
+                        📖 Read Tutorial
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Agent OS</h4>
+                    <ul>
+                        <li><a href="../../index.html">Overview</a></li>
+                        <li><a href="../../docs/quickstart.html">Quick Start</a></li>
+                        <li><a href="../index.html">Tutorials</a></li>
+                        <li><a href="https://github.com/imran-siddique/agent-os">GitHub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>VS Code Extension</h4>
+                    <ul>
+                        <li><a href="getting-started.html">Getting Started</a></li>
+                        <li><a href="policy-editor.html">Policy Editor</a></li>
+                        <li><a href="workflow-designer.html">Workflow Designer</a></li>
+                        <li><a href="enterprise-features.html">Enterprise</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="https://twitter.com/mosiddi">Twitter</a></li>
+                        <li><a href="https://linkedin.com/in/imransiddique">LinkedIn</a></li>
+                        <li><a href="https://github.com/imran-siddique">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../../script.js"></script>
+    <script>
+        function showTab(tab) {
+            // Update tabs
+            document.querySelectorAll('.screenshot-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update content
+            document.querySelectorAll('#screenshot-content pre').forEach(p => p.style.display = 'none');
+            document.getElementById(tab + '-preview').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

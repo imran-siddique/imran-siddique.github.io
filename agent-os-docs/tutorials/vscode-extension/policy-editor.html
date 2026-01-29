@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Policy Editor Tutorial - Create and manage AI safety policies with visual templates. Strict Security, SOC 2, GDPR, Development, and Rate Limiting policies.">
+    <title>Policy Editor - VS Code Extension | Agent OS</title>
+    <link rel="stylesheet" href="../../../styles-new.css">
+    <link rel="stylesheet" href="../../assets/agent-os.css">
+    <style>
+        .tutorial-content { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .tutorial-content h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .tutorial-content h2 { font-size: 1.8rem; margin: 2.5rem 0 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .tutorial-content h3 { font-size: 1.3rem; margin: 1.5rem 0 0.75rem; }
+        .tutorial-content p { color: #94a3b8; line-height: 1.8; margin-bottom: 1rem; }
+        .tutorial-content code { background: rgba(99, 102, 241, 0.15); padding: 0.2rem 0.5rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace; }
+        .tutorial-content pre { background: #0d0d14; padding: 1.5rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; }
+        .tutorial-content pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.75rem 1rem; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        th { background: rgba(99, 102, 241, 0.15); }
+        .template-card { background: rgba(30, 30, 46, 0.8); border: 1px solid rgba(99, 102, 241, 0.2); border-radius: 12px; padding: 1.5rem; margin: 1rem 0; }
+        .template-card h4 { color: #e2e8f0; margin-bottom: 0.5rem; }
+        .breadcrumb { margin-bottom: 2rem; }
+        .breadcrumb a { color: #6366f1; text-decoration: none; }
+        .breadcrumb span { color: #64748b; margin: 0 0.5rem; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .nav-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 8px; color: #e2e8f0; text-decoration: none; }
+        .tip-box { background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../../index.html" class="active">Agent OS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="tutorial-content">
+        <nav class="breadcrumb">
+            <a href="../../index.html">Agent OS</a>
+            <span>→</span>
+            <a href="index.html">VS Code Extension</a>
+            <span>→</span>
+            <span>Policy Editor</span>
+        </nav>
+
+        <h1>📜 Policy Editor</h1>
+        <p style="font-size: 1.2rem; color: #e2e8f0;">Visual interface for creating, editing, and testing safety policies with built-in templates.</p>
+
+        <h2>Open Policy Editor</h2>
+        <pre><code>Ctrl+Shift+P → "Agent OS: Open Policy Editor"</code></pre>
+
+        <h2>Available Templates</h2>
+
+        <div class="template-card">
+            <h4>🔒 Strict Security</h4>
+            <p>Maximum security for production environments. Blocks external APIs, restricts file operations, enforces rate limits.</p>
+        </div>
+
+        <div class="template-card">
+            <h4>📋 SOC 2 Compliance</h4>
+            <p>Enterprise compliance with audit logging, data encryption requirements, and access controls.</p>
+        </div>
+
+        <div class="template-card">
+            <h4>🇪🇺 GDPR Data Handling</h4>
+            <p>EU data protection rules including PII detection, consent verification, and data minimization.</p>
+        </div>
+
+        <div class="template-card">
+            <h4>🛠️ Development</h4>
+            <p>Permissive policy for local development. Allows most operations with warnings instead of blocks.</p>
+        </div>
+
+        <div class="template-card">
+            <h4>⏱️ Rate Limiting</h4>
+            <p>API call restrictions to prevent abuse. Configurable limits per minute/hour.</p>
+        </div>
+
+        <h2>Policy Structure</h2>
+        <pre><code>policy:
+  name: "Policy Name"
+  version: "1.0"
+  rules:
+    - name: "Rule name"
+      condition: "when to apply"
+      constraint: "what to check"
+      action: "deny | warn | allow"
+      message: "User-facing message"</code></pre>
+
+        <h2>Example: Custom Security Policy</h2>
+        <pre><code>policy:
+  name: "Custom Security Policy"
+  version: "1.0"
+  rules:
+    - name: "Block file writes outside /tmp"
+      condition: "agent.action == 'file.write'"
+      constraint: "not path.startsWith('/tmp/')"
+      action: "deny"
+      message: "File writes restricted to /tmp/"
+    
+    - name: "Block external APIs"
+      condition: "agent.action == 'http.request'"
+      constraint: "not url.host.endsWith('.internal.com')"
+      action: "deny"
+      message: "External API calls not allowed"
+    
+    - name: "Rate limit LLM calls"
+      condition: "agent.action == 'llm.call'"
+      constraint: "rate > 100 per minute"
+      action: "throttle"
+      message: "LLM calls rate limited"</code></pre>
+
+        <h2>Using the Editor</h2>
+        <table>
+            <tr><th>Action</th><th>How To</th></tr>
+            <tr><td>Load Template</td><td>Select from dropdown at top</td></tr>
+            <tr><td>Edit Policy</td><td>Modify YAML in editor</td></tr>
+            <tr><td>Validate</td><td>Click "Validate Policy" button</td></tr>
+            <tr><td>Save</td><td>Click "Save Policy" → choose location</td></tr>
+            <tr><td>Export</td><td>Click "Export" for different formats</td></tr>
+        </table>
+
+        <div class="tip-box">
+            <strong>💡 Tip:</strong> Use the Development template during local testing, then switch to Strict Security before deployment.
+        </div>
+
+        <div class="nav-buttons">
+            <a href="getting-started.html" class="nav-btn">← Getting Started</a>
+            <a href="workflow-designer.html" class="nav-btn">Next: Workflow Designer →</a>
+        </div>
+    </main>
+    <script src="../../../script.js"></script>
+</body>
+</html>
