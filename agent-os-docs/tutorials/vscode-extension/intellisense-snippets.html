@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IntelliSense & Snippets - 14 code snippets and context-aware completions for AgentOS APIs.">
+    <title>IntelliSense & Snippets - VS Code Extension | Agent OS</title>
+    <link rel="stylesheet" href="../../../styles-new.css">
+    <link rel="stylesheet" href="../../assets/agent-os.css">
+    <style>
+        .tutorial-content { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .tutorial-content h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .tutorial-content h2 { font-size: 1.8rem; margin: 2.5rem 0 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .tutorial-content p { color: #94a3b8; line-height: 1.8; margin-bottom: 1rem; }
+        .tutorial-content code { background: rgba(99, 102, 241, 0.15); padding: 0.2rem 0.5rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace; }
+        .tutorial-content pre { background: #0d0d14; padding: 1.5rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; }
+        .tutorial-content pre code { background: none; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.75rem 1rem; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        th { background: rgba(99, 102, 241, 0.15); }
+        .breadcrumb { margin-bottom: 2rem; }
+        .breadcrumb a { color: #6366f1; text-decoration: none; }
+        .breadcrumb span { color: #64748b; margin: 0 0.5rem; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .nav-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 8px; color: #e2e8f0; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links"><li><a href="../../index.html" class="active">Agent OS</a></li></ul>
+        </div>
+    </nav>
+
+    <main class="tutorial-content">
+        <nav class="breadcrumb">
+            <a href="../../index.html">Agent OS</a><span>→</span>
+            <a href="index.html">VS Code Extension</a><span>→</span>
+            <span>IntelliSense & Snippets</span>
+        </nav>
+
+        <h1>💡 IntelliSense & Snippets</h1>
+        <p style="font-size: 1.2rem; color: #e2e8f0;">14 code snippets and context-aware completions for faster development.</p>
+
+        <h2>Available Snippets</h2>
+        <p>Type the prefix and press <code>Tab</code> to expand:</p>
+        
+        <table>
+            <tr><th>Prefix</th><th>Description</th><th>Language</th></tr>
+            <tr><td><code>aos-agent</code></td><td>Complete agent template</td><td>Python</td></tr>
+            <tr><td><code>aos-policy</code></td><td>Policy YAML template</td><td>YAML</td></tr>
+            <tr><td><code>aos-kernel</code></td><td>Kernel initialization</td><td>Python</td></tr>
+            <tr><td><code>aos-workflow</code></td><td>Workflow function</td><td>Python</td></tr>
+            <tr><td><code>aos-cmvk</code></td><td>CMVK integration</td><td>Python</td></tr>
+            <tr><td><code>aos-langchain</code></td><td>LangChain integration</td><td>Python</td></tr>
+            <tr><td><code>aos-github-action</code></td><td>GitHub Actions workflow</td><td>YAML</td></tr>
+            <tr><td><code>aos-typescript</code></td><td>TypeScript SDK setup</td><td>TypeScript</td></tr>
+            <tr><td><code>aos-vfs</code></td><td>VFS memory access</td><td>Python</td></tr>
+            <tr><td><code>aos-signals</code></td><td>Signal handling</td><td>Python</td></tr>
+            <tr><td><code>aos-rate-limit</code></td><td>Rate limiting policy</td><td>YAML</td></tr>
+            <tr><td><code>aos-compliance</code></td><td>Compliance policy</td><td>YAML</td></tr>
+            <tr><td><code>aos-security</code></td><td>Security rule</td><td>YAML</td></tr>
+            <tr><td><code>aos-audit</code></td><td>Audit configuration</td><td>YAML</td></tr>
+        </table>
+
+        <h2>Example: aos-agent</h2>
+        <p>Type <code>aos-agent</code> and press Tab:</p>
+        <pre><code>from agent_os import KernelSpace, Policy
+from agent_os.tools import create_safe_toolkit
+
+kernel = KernelSpace(policy="strict")
+toolkit = create_safe_toolkit("standard")
+
+@kernel.agent
+async def my_agent(task: str):
+    """Agent with full safety guarantees"""
+    result = await kernel.execute(task, toolkit=toolkit)
+    return result
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(my_agent("your task here"))</code></pre>
+
+        <h2>Code Completion</h2>
+        <p>Get suggestions when typing AgentOS imports and APIs:</p>
+        <pre><code>from agentos import Agent, Policy, Kernel, CMVKClient
+#                   ↑ Autocomplete shows all available imports
+
+agent = Agent(
+    name="",       # ↑ Parameter hints shown
+    permissions=[] # ↑ Valid values suggested
+)</code></pre>
+
+        <div class="nav-buttons">
+            <a href="metrics-dashboard.html" class="nav-btn">← Metrics Dashboard</a>
+            <a href="enterprise-features.html" class="nav-btn">Next: Enterprise Features →</a>
+        </div>
+    </main>
+    <script src="../../../script.js"></script>
+</body>
+</html>
