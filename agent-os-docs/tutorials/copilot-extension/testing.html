@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AgentOS Testing & Simulation: Test your agents with scenarios, security audits, and sandbox simulation before deployment.">
+    <title>Testing & Simulation - AgentOS Copilot Extension</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../styles-new.css">
+    <link rel="stylesheet" href="../../assets/agent-os.css">
+    <style>
+        .tutorial-content { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .breadcrumb { display: flex; gap: 0.5rem; margin-bottom: 2rem; color: #94a3b8; font-size: 0.9rem; flex-wrap: wrap; }
+        .breadcrumb a { color: #10b981; text-decoration: none; }
+        .hero-section { background: linear-gradient(135deg, #1e1e2e 0%, #1a3a2e 50%, #1a1a2e 100%); padding: 4rem 2rem; border-radius: 16px; margin-bottom: 3rem; text-align: center; }
+        .hero-section h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .test-type-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .test-type-card { background: rgba(30, 30, 46, 0.8); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; transition: all 0.3s ease; }
+        .test-type-card:hover { border-color: rgba(16, 185, 129, 0.5); transform: translateY(-3px); }
+        .test-type-card h3 { color: #10b981; margin-bottom: 0.5rem; }
+        .test-type-card p { color: #94a3b8; font-size: 0.9rem; }
+        .step-box { background: rgba(30, 30, 46, 0.6); border-left: 3px solid #10b981; padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; }
+        .step-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: linear-gradient(135deg, #10b981, #059669); color: white; font-weight: bold; border-radius: 50%; margin-right: 0.75rem; font-size: 0.85rem; }
+        .command-box { background: #0d0d14; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; font-family: 'JetBrains Mono', monospace; overflow-x: auto; }
+        .command-box .prefix { color: #10b981; }
+        .command-box .cmd { color: #e2e8f0; }
+        .section { margin: 3rem 0; }
+        .section h2 { color: #e2e8f0; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .tip-box { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+        .tip-box strong { color: #10b981; }
+        .warning-box { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+        .warning-box strong { color: #f87171; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; gap: 1rem; }
+        .nav-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; color: #10b981; text-decoration: none; }
+        .nav-btn:hover { background: rgba(16, 185, 129, 0.2); }
+        pre { background: #0d0d14; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; line-height: 1.6; }
+        .result-card { background: rgba(30, 30, 46, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 1.5rem; margin: 1rem 0; }
+        .result-pass { border-color: rgba(16, 185, 129, 0.5); }
+        .result-fail { border-color: rgba(239, 68, 68, 0.5); }
+        .result-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+        .result-icon { font-size: 1.5rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../../../index.html">Home</a></li>
+                <li><a href="../../../about.html">About</a></li>
+                <li><a href="../../../projects.html">Projects</a></li>
+                <li><a href="../../index.html" class="active">Agent OS</a></li>
+                <li><a href="../../../writings.html">Writings</a></li>
+                <li><a href="../../../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="tutorial-content">
+            <div class="breadcrumb">
+                <a href="../../index.html">Agent OS</a> →
+                <a href="index.html">Copilot Extension</a> →
+                <span>Testing & Simulation</span>
+            </div>
+
+            <div class="hero-section">
+                <span style="font-size: 3rem;">🧪</span>
+                <h1><span class="text-gradient">Testing & Simulation</span></h1>
+                <p style="color: #94a3b8; max-width: 600px; margin: 0 auto;">Test your agents with realistic scenarios, security audits, and sandbox simulation before deploying to production.</p>
+            </div>
+
+            <h2>Testing Types</h2>
+            <div class="test-type-grid">
+                <div class="test-type-card">
+                    <h3>🎯 Scenario Testing</h3>
+                    <p>Run your agent against specific test scenarios with expected outcomes</p>
+                </div>
+                <div class="test-type-card">
+                    <h3>📦 Sandbox Simulation</h3>
+                    <p>Execute agent in an isolated environment with mock data</p>
+                </div>
+                <div class="test-type-card">
+                    <h3>🔒 Security Audit</h3>
+                    <p>Check for vulnerabilities, PII exposure, and security issues</p>
+                </div>
+                <div class="test-type-card">
+                    <h3>⚡ Performance Testing</h3>
+                    <p>Measure execution time, memory usage, and resource consumption</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Running Tests</h2>
+                
+                <div class="step-box">
+                    <h3><span class="step-number">1</span> Basic Test Command</h3>
+                    <div class="command-box">
+                        <span class="prefix">User:</span> <span class="cmd">@agentos test</span>
+                    </div>
+                    <p>Runs the default test suite against your currently open agent code.</p>
+                </div>
+
+                <div class="step-box">
+                    <h3><span class="step-number">2</span> Test with Scenario</h3>
+                    <div class="command-box">
+                        <span class="prefix">User:</span> <span class="cmd">@agentos test this agent with high-load scenario</span>
+                    </div>
+                    <pre><code><span style="color: #10b981;">AgentOS:</span> 🧪 Running Test: high-load scenario
+
+<b>Scenario Configuration:</b>
+- Concurrent requests: 100
+- Duration: 60 seconds
+- Data volume: 10,000 records
+
+<b>Test Results:</b>
+✅ All 100 concurrent requests completed
+✅ Average response time: 245ms
+✅ No policy violations detected
+✅ Memory usage stayed within limits (85MB peak)
+
+<b>Performance Metrics:</b>
+┌─────────────────┬───────────┐
+│ Metric          │ Value     │
+├─────────────────┼───────────┤
+│ Requests/sec    │ 156       │
+│ Avg latency     │ 245ms     │
+│ P95 latency     │ 412ms     │
+│ Error rate      │ 0%        │
+│ Peak memory     │ 85MB      │
+└─────────────────┴───────────┘
+
+✅ <b>Test Passed</b> - Agent is ready for deployment</code></pre>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Scenario Testing</h2>
+                <p>Test your agent against specific scenarios:</p>
+
+                <div class="command-box">
+                    <span class="prefix">User:</span> <span class="cmd">@agentos test this agent with malformed-input scenario</span>
+                </div>
+
+                <div class="result-card result-pass">
+                    <div class="result-header">
+                        <span class="result-icon">✅</span>
+                        <strong style="color: #6ee7b7;">Test Passed: Malformed Input Handling</strong>
+                    </div>
+                    <p style="color: #94a3b8;">Agent correctly rejected invalid JSON input with proper error message. No crash or unexpected behavior.</p>
+                </div>
+
+                <h3>Available Test Scenarios</h3>
+                <ul style="color: #94a3b8; line-height: 2;">
+                    <li><strong>high-load</strong> - Simulates 100 concurrent requests</li>
+                    <li><strong>malformed-input</strong> - Tests input validation</li>
+                    <li><strong>api-failure</strong> - Simulates external API failures</li>
+                    <li><strong>rate-limiting</strong> - Tests rate limit handling</li>
+                    <li><strong>data-edge-cases</strong> - Tests with edge case data</li>
+                    <li><strong>timeout</strong> - Tests timeout handling</li>
+                    <li><strong>auth-failure</strong> - Tests authentication failure handling</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>Sandbox Simulation</h2>
+                <p>Run your agent in an isolated environment with mock data:</p>
+
+                <div class="command-box">
+                    <span class="prefix">User:</span> <span class="cmd">@agentos simulate this agent</span>
+                </div>
+
+                <pre><code><span style="color: #10b981;">AgentOS:</span> 📦 Starting Sandbox Simulation
+
+<b>Sandbox Environment:</b>
+- Isolated container: sandbox-7f3a9b
+- Mock API endpoints: Active
+- Test database: Seeded with 1,000 records
+
+<b>Simulation Log:</b>
+[00:00.000] Agent initialized
+[00:00.125] Connected to mock API
+[00:00.250] Fetched 50 records from database
+[00:00.380] Processing record batch #1
+[00:01.200] Completed processing 50 records
+[00:01.250] Posted results to mock webhook
+[00:01.300] Agent completed successfully
+
+<b>Actions Taken:</b>
+- 1 API call (GET /data)
+- 50 database reads
+- 1 webhook POST
+
+<b>Policy Checks:</b>
+✅ No unauthorized API calls
+✅ Data stayed within sandbox
+✅ No PII leaked to logs
+
+✅ <b>Simulation Successful</b></code></pre>
+
+                <div class="tip-box">
+                    <strong>💡 Tip:</strong> Sandbox simulation uses mock endpoints that mimic real APIs. Your actual credentials and production data are never used during simulation.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Security Audit</h2>
+                <p>Run a comprehensive security audit on your agent:</p>
+
+                <div class="command-box">
+                    <span class="prefix">User:</span> <span class="cmd">@agentos security</span>
+                </div>
+
+                <pre><code><span style="color: #10b981;">AgentOS:</span> 🔒 Security Audit Results
+
+<b>Scan Completed:</b> 2.3 seconds
+
+<b>Vulnerability Check:</b>
+✅ No hardcoded credentials found
+✅ No SQL injection vulnerabilities
+✅ No command injection risks
+⚠️ 1 potential XSS vector (line 45)
+
+<b>PII Detection:</b>
+📧 Email patterns: 2 instances
+   - Line 23: user_email variable
+   - Line 67: email in log statement
+💳 Credit card patterns: 0 instances
+🔢 SSN patterns: 0 instances
+
+<b>Secret Scanning:</b>
+✅ No API keys in code
+✅ No passwords in code
+✅ No tokens in code
+
+<b>Security Score:</b> <span style="color: #fcd34d;">85/100</span>
+
+<b>Recommendations:</b>
+1. Line 45: Sanitize user input before rendering
+2. Line 67: Remove email from log statements
+3. Consider adding rate limiting to prevent abuse</code></pre>
+
+                <div class="warning-box">
+                    <strong>⚠️ Important:</strong> Security audits should be run before every deployment. Agents with critical vulnerabilities will be blocked from deployment.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Test Result Cards</h2>
+                <p>Understanding test results:</p>
+
+                <div class="result-card result-pass">
+                    <div class="result-header">
+                        <span class="result-icon">✅</span>
+                        <strong style="color: #6ee7b7;">Test Passed</strong>
+                    </div>
+                    <p style="color: #94a3b8;">All assertions passed. Agent behaved as expected.</p>
+                </div>
+
+                <div class="result-card result-fail">
+                    <div class="result-header">
+                        <span class="result-icon">❌</span>
+                        <strong style="color: #fca5a5;">Test Failed</strong>
+                    </div>
+                    <p style="color: #94a3b8;">Expected status 200, got 500. Check error handling for API failures.</p>
+                </div>
+
+                <div class="result-card" style="border-color: rgba(234, 179, 8, 0.5);">
+                    <div class="result-header">
+                        <span class="result-icon">⚠️</span>
+                        <strong style="color: #fcd34d;">Test Warning</strong>
+                    </div>
+                    <p style="color: #94a3b8;">Test passed but performance was below threshold (expected &lt;200ms, got 450ms).</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Continuous Testing</h2>
+                <p>Set up automatic testing for your agent:</p>
+
+                <pre><code><span style="color: #6ee7b7;"># .github/workflows/agent-tests.yml</span>
+name: Agent Tests
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run AgentOS Tests
+        uses: agentos/test-action@v1
+        with:
+          scenarios: high-load,malformed-input
+          security-audit: true
+          compliance-check: gdpr</code></pre>
+            </div>
+
+            <div class="nav-buttons">
+                <a href="compliance.html" class="nav-btn">← Compliance Frameworks</a>
+                <a href="debugging.html" class="nav-btn">Debugging & Optimization →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2026 Imran Siddique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.hamburger')?.addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

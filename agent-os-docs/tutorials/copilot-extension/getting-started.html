@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Getting Started with AgentOS GitHub Copilot Extension. Step-by-step guide to build safe AI agents using natural language commands.">
+    <meta name="keywords" content="AgentOS, GitHub Copilot, AI agents, getting started, tutorial, safety, compliance">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imransiddique.com/agent-os-docs/tutorials/copilot-extension/getting-started.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imransiddique.com/agent-os-docs/tutorials/copilot-extension/getting-started.html">
+    <meta property="og:title" content="Getting Started - AgentOS Copilot Extension">
+    <meta property="og:description" content="Build your first safe AI agent in minutes using natural language with GitHub Copilot.">
+    <meta property="og:site_name" content="Agent OS">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:title" content="Getting Started - AgentOS Copilot Extension">
+    <meta name="twitter:description" content="Build your first safe AI agent in minutes using natural language with GitHub Copilot.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <title>Getting Started - Copilot Extension | Agent OS</title>
+    <link rel="stylesheet" href="../../../styles-new.css">
+    <link rel="stylesheet" href="../../assets/agent-os.css">
+    <style>
+        .tutorial-content { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .tutorial-content h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .tutorial-content h2 { font-size: 1.8rem; margin: 2.5rem 0 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .tutorial-content h3 { font-size: 1.3rem; margin: 1.5rem 0 0.75rem; }
+        .tutorial-content p { color: #94a3b8; line-height: 1.8; margin-bottom: 1rem; }
+        .tutorial-content ul, .tutorial-content ol { color: #94a3b8; margin-bottom: 1rem; padding-left: 1.5rem; }
+        .tutorial-content li { margin-bottom: 0.5rem; line-height: 1.6; }
+        .tutorial-content code { background: rgba(16, 185, 129, 0.15); padding: 0.2rem 0.5rem; border-radius: 4px; font-family: 'JetBrains Mono', monospace; color: #6ee7b7; }
+        .tutorial-content pre { background: #0d0d14; padding: 1.5rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; border: 1px solid rgba(16, 185, 129, 0.2); }
+        .tutorial-content pre code { background: none; padding: 0; color: #e2e8f0; }
+        .step-box { background: rgba(30, 30, 46, 0.8); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .step-number { background: linear-gradient(135deg, #10b981, #059669); color: white; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 0.75rem; }
+        .tip-box { background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+        .tip-box strong { color: #6ee7b7; }
+        .warning-box { background: rgba(245, 158, 11, 0.1); border-left: 4px solid #f59e0b; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+        .warning-box strong { color: #fbbf24; }
+        .info-box { background: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+        .info-box strong { color: #60a5fa; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { padding: 0.75rem 1rem; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        th { background: rgba(16, 185, 129, 0.15); color: #e2e8f0; }
+        td { color: #94a3b8; }
+        .breadcrumb { margin-bottom: 2rem; }
+        .breadcrumb a { color: #10b981; text-decoration: none; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { color: #64748b; margin: 0 0.5rem; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); }
+        .nav-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; color: #e2e8f0; text-decoration: none; transition: all 0.3s ease; }
+        .nav-btn:hover { background: rgba(16, 185, 129, 0.25); transform: translateY(-2px); }
+        .hero-section { 
+            background: linear-gradient(135deg, #1e1e2e 0%, #1a3a2e 50%, #1e1e2e 100%);
+            padding: 4rem 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        .hero-section h1 { position: relative; z-index: 1; }
+        .hero-section p { position: relative; z-index: 1; font-size: 1.2rem; color: #e2e8f0; max-width: 600px; margin: 0 auto; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-badge .pulse {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .command-example {
+            background: #0d0d14;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .command-example .prompt { color: #10b981; }
+        .command-example .command { color: #e2e8f0; }
+        .command-example .response { color: #94a3b8; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed rgba(255,255,255,0.1); }
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .feature-item {
+            background: rgba(30, 30, 46, 0.6);
+            border: 1px solid rgba(16, 185, 129, 0.15);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .feature-item .icon { font-size: 1.5rem; }
+        .feature-item h4 { color: #e2e8f0; margin-bottom: 0.25rem; font-size: 1rem; }
+        .feature-item p { color: #94a3b8; font-size: 0.9rem; margin: 0; }
+        .best-practice-card {
+            background: rgba(30, 30, 46, 0.8);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        .best-practice-card h4 { color: #6ee7b7; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+        .best-practice-card p { margin-bottom: 0; }
+        .workflow-file {
+            background: #0d0d14;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .workflow-file .file-header {
+            background: rgba(16, 185, 129, 0.2);
+            padding: 0.5rem 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #6ee7b7;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .workflow-file pre { margin: 0; border: none; border-radius: 0; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../../../index.html">Home</a></li>
+                <li><a href="../../index.html" class="active">Agent OS</a></li>
+                <li><a href="../../../contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="tutorial-content">
+        <nav class="breadcrumb">
+            <a href="../../index.html">Agent OS</a>
+            <span>→</span>
+            <a href="../index.html">Tutorials</a>
+            <span>→</span>
+            <a href="index.html">Copilot Extension</a>
+            <span>→</span>
+            <span>Getting Started</span>
+        </nav>
+
+        <div class="hero-section">
+            <div class="hero-badge">
+                <span class="pulse"></span>
+                <span>GitHub Copilot Extension</span>
+            </div>
+            <h1>🚀 Getting Started with AgentOS</h1>
+            <p>Build your first safe AI agent in under 5 minutes using natural language commands directly in GitHub Copilot Chat.</p>
+        </div>
+
+        <h2>Prerequisites</h2>
+        <p>Before you begin, ensure you have the following:</p>
+        
+        <div class="feature-list">
+            <div class="feature-item">
+                <span class="icon">✅</span>
+                <div>
+                    <h4>GitHub Account</h4>
+                    <p>Active GitHub account with Copilot access</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <span class="icon">✅</span>
+                <div>
+                    <h4>GitHub Copilot</h4>
+                    <p>Copilot subscription (Individual, Business, or Enterprise)</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <span class="icon">✅</span>
+                <div>
+                    <h4>VS Code or GitHub.com</h4>
+                    <p>VS Code with Copilot Chat or GitHub.com web interface</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <span class="icon">✅</span>
+                <div>
+                    <h4>Python 3.9+</h4>
+                    <p>For running generated agent code locally</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <strong>💡 Tip:</strong> Don't have Copilot yet? Start a <a href="https://github.com/features/copilot" style="color: #6ee7b7;">free trial</a> to get started immediately.
+        </div>
+
+        <h2>Installation</h2>
+        
+        <h3>Step 1: Install the AgentOS Extension</h3>
+        <div class="step-box">
+            <p><span class="step-number">1</span> <strong>Open GitHub Copilot Extensions Marketplace</strong></p>
+            <p style="margin-left: 2.5rem;">Navigate to <a href="https://github.com/marketplace?type=apps&copilot_app=true" style="color: #10b981;">GitHub Marketplace → Copilot Extensions</a></p>
+        </div>
+
+        <div class="step-box">
+            <p><span class="step-number">2</span> <strong>Search for "AgentOS"</strong></p>
+            <p style="margin-left: 2.5rem;">Find the official AgentOS Copilot Extension in the marketplace</p>
+        </div>
+
+        <div class="step-box">
+            <p><span class="step-number">3</span> <strong>Click "Install" and authorize</strong></p>
+            <p style="margin-left: 2.5rem;">Grant the extension access to your GitHub account</p>
+        </div>
+
+        <div class="step-box">
+            <p><span class="step-number">4</span> <strong>Configure repository access</strong></p>
+            <p style="margin-left: 2.5rem;">Select which repositories the extension can access (recommended: start with a test repo)</p>
+        </div>
+
+        <h3>Step 2: Verify Installation</h3>
+        <p>Open GitHub Copilot Chat in VS Code or on GitHub.com and type:</p>
+        
+        <div class="command-example">
+            <code><span class="prompt">@agentos</span> <span class="command">help</span></code>
+        </div>
+
+        <p>You should see a response listing available commands and capabilities.</p>
+
+        <h2>Your First Command: @agentos help</h2>
+        <p>The <code>@agentos help</code> command displays all available commands and their descriptions.</p>
+
+        <div class="command-example">
+            <code><span class="prompt">@agentos</span> <span class="command">help</span></code>
+            <div class="response">
+<pre style="background: none; border: none; padding: 0; margin: 0;"><code>🤖 AgentOS Copilot Extension - Available Commands
+
+📋 AGENT COMMANDS
+  @agentos create agent [description]  - Create a new AI agent
+  @agentos list agents                 - List all agents in repository
+  @agentos describe [agent-name]       - Get detailed agent info
+  @agentos delete [agent-name]         - Remove an agent
+
+🔒 POLICY COMMANDS
+  @agentos create policy [type]        - Create safety policy
+  @agentos validate [agent-name]       - Validate agent against policies
+  @agentos audit [agent-name]          - Run security audit
+
+🚀 DEPLOYMENT COMMANDS
+  @agentos deploy [agent-name]         - Generate deployment config
+  @agentos test [agent-name]           - Run agent tests
+  @agentos status [agent-name]         - Check deployment status
+
+💡 EXAMPLES
+  @agentos create agent for processing customer support tickets
+  @agentos create policy strict-security
+  @agentos deploy support-agent to github-actions
+
+Type @agentos [command] --help for detailed usage.</code></pre>
+            </div>
+        </div>
+
+        <h2>Creating Your First Agent</h2>
+        <p>Let's create a simple agent that processes data files with built-in safety constraints.</p>
+
+        <h3>Step 1: Describe What You Need</h3>
+        <div class="step-box">
+            <p><span class="step-number">1</span> <strong>Use natural language to describe your agent</strong></p>
+            <div class="command-example" style="margin-top: 1rem;">
+                <code><span class="prompt">@agentos</span> <span class="command">create agent for processing CSV files, extracting key metrics, and generating summary reports</span></code>
+            </div>
+        </div>
+
+        <h3>Step 2: Review the Generated Agent</h3>
+        <div class="step-box">
+            <p><span class="step-number">2</span> <strong>AgentOS generates a complete agent with safety policies</strong></p>
+            <p style="margin-left: 2.5rem;">The extension creates the following files in your repository:</p>
+            <ul style="margin-left: 2.5rem;">
+                <li><code>agents/csv-processor/agent.py</code> - Main agent code</li>
+                <li><code>agents/csv-processor/policy.yaml</code> - Safety policy configuration</li>
+                <li><code>agents/csv-processor/tests/test_agent.py</code> - Unit tests</li>
+                <li><code>agents/csv-processor/README.md</code> - Documentation</li>
+            </ul>
+        </div>
+
+        <h3>Step 3: Examine the Generated Code</h3>
+        <div class="step-box">
+            <p><span class="step-number">3</span> <strong>Review the generated agent code</strong></p>
+        </div>
+
+        <div class="workflow-file">
+            <div class="file-header">📄 agents/csv-processor/agent.py</div>
+<pre><code>"""
+CSV Processor Agent
+Generated by AgentOS Copilot Extension
+Safety Level: Standard | Policy: data-processing-v1
+"""
+
+from agent_os import KernelSpace, Policy
+from agent_os.tools import create_safe_toolkit
+from agent_os.validators import DataValidator
+
+# Initialize kernel with safety guarantees
+kernel = KernelSpace(
+    policy="data-processing",
+    audit_log=True,
+    rate_limit="100/minute"
+)
+
+# Create toolkit with restricted file access
+toolkit = create_safe_toolkit(
+    preset="file-processor",
+    allowed_extensions=[".csv", ".json"],
+    max_file_size="50MB",
+    output_dir="/tmp/agent-output"
+)
+
+@kernel.agent(
+    name="csv-processor",
+    version="1.0.0",
+    description="Processes CSV files and generates summary reports"
+)
+async def csv_processor(input_path: str, output_format: str = "json"):
+    """
+    Process CSV files with full safety guarantees.
+    
+    Args:
+        input_path: Path to the input CSV file
+        output_format: Output format (json, markdown, html)
+    
+    Returns:
+        dict: Processing results with metrics and summary
+    """
+    
+    # Validate input (policy-checked)
+    validator = DataValidator(toolkit)
+    if not await validator.validate_file(input_path):
+        return {"status": "error", "message": "Invalid input file"}
+    
+    # Read CSV file (restricted to allowed paths)
+    data = await toolkit.file.read_csv(input_path)
+    
+    # Extract metrics using LLM (rate-limited, content-filtered)
+    analysis = await toolkit.llm.analyze(
+        model="gpt-4",
+        prompt=f"""Analyze this CSV data and extract key metrics:
+        Columns: {data.columns.tolist()}
+        Row count: {len(data)}
+        Sample: {data.head(5).to_dict()}
+        
+        Provide: summary statistics, trends, anomalies""",
+        max_tokens=1000
+    )
+    
+    # Generate report
+    report = {
+        "status": "success",
+        "input_file": input_path,
+        "row_count": len(data),
+        "column_count": len(data.columns),
+        "columns": data.columns.tolist(),
+        "analysis": analysis,
+        "generated_at": toolkit.utils.timestamp()
+    }
+    
+    # Write output (restricted to /tmp/agent-output)
+    output_path = f"/tmp/agent-output/report.{output_format}"
+    await toolkit.file.write(output_path, report, format=output_format)
+    
+    # Log completion for audit trail
+    kernel.audit.log("processing_complete", {
+        "input": input_path,
+        "output": output_path,
+        "metrics": report
+    })
+    
+    return report
+
+
+if __name__ == "__main__":
+    import asyncio
+    
+    result = asyncio.run(
+        kernel.execute(csv_processor, "data/sales.csv", "json")
+    )
+    print(f"Processing complete: {result['status']}")</code></pre>
+        </div>
+
+        <h3>Step 4: Review the Safety Policy</h3>
+        <div class="step-box">
+            <p><span class="step-number">4</span> <strong>Examine the auto-generated policy</strong></p>
+        </div>
+
+        <div class="workflow-file">
+            <div class="file-header">📄 agents/csv-processor/policy.yaml</div>
+<pre><code>policy:
+  name: "CSV Processor Policy"
+  version: "1.0"
+  agent: "csv-processor"
+  
+  # File System Rules
+  filesystem:
+    read:
+      - pattern: "data/**/*.csv"
+        action: allow
+      - pattern: "data/**/*.json"
+        action: allow
+      - pattern: "**/*"
+        action: deny
+        message: "File access restricted to data/ directory"
+    
+    write:
+      - pattern: "/tmp/agent-output/**"
+        action: allow
+      - pattern: "**/*"
+        action: deny
+        message: "Write access restricted to /tmp/agent-output/"
+  
+  # API Rules
+  api:
+    llm:
+      rate_limit: "100/minute"
+      max_tokens: 2000
+      allowed_models:
+        - "gpt-4"
+        - "gpt-3.5-turbo"
+      content_filter: true
+    
+    external:
+      - domain: "*.openai.com"
+        action: allow
+      - domain: "*"
+        action: deny
+        message: "External API calls restricted"
+  
+  # Data Rules
+  data:
+    pii_detection: true
+    pii_action: redact
+    max_file_size: "50MB"
+    allowed_formats:
+      - csv
+      - json
+  
+  # Audit Configuration
+  audit:
+    enabled: true
+    log_level: "info"
+    retention_days: 90
+    events:
+      - file_read
+      - file_write
+      - llm_call
+      - error</code></pre>
+        </div>
+
+        <h2>Testing Your Agent</h2>
+        <p>Before deploying, always test your agent locally and with the AgentOS validator.</p>
+
+        <h3>Local Testing</h3>
+        <div class="step-box">
+            <p><span class="step-number">1</span> <strong>Install dependencies</strong></p>
+<pre><code>cd agents/csv-processor
+pip install -r requirements.txt</code></pre>
+        </div>
+
+        <div class="step-box">
+            <p><span class="step-number">2</span> <strong>Run the agent locally</strong></p>
+<pre><code>python agent.py</code></pre>
+        </div>
+
+        <div class="step-box">
+            <p><span class="step-number">3</span> <strong>Run unit tests</strong></p>
+<pre><code>pytest tests/ -v</code></pre>
+        </div>
+
+        <h3>Policy Validation</h3>
+        <p>Use the Copilot extension to validate your agent against its policy:</p>
+
+        <div class="command-example">
+            <code><span class="prompt">@agentos</span> <span class="command">validate csv-processor</span></code>
+            <div class="response">
+<pre style="background: none; border: none; padding: 0; margin: 0;"><code>🔍 Validating agent: csv-processor
+
+✅ Policy Compliance Check
+   ├── File access rules: PASS
+   ├── API rate limits: PASS
+   ├── Data handling: PASS
+   └── Audit logging: PASS
+
+✅ Security Scan
+   ├── No hardcoded secrets: PASS
+   ├── Input validation: PASS
+   ├── Output sanitization: PASS
+   └── Dependency vulnerabilities: PASS (0 found)
+
+✅ Code Quality
+   ├── Type hints: PASS
+   ├── Error handling: PASS
+   └── Documentation: PASS
+
+📊 Validation Score: 100/100
+🎉 Agent csv-processor is ready for deployment!</code></pre>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ Warning:</strong> Always run validation before deploying to production. Agents that fail validation may have security vulnerabilities or policy violations.
+        </div>
+
+        <h2>Deploying to GitHub Actions</h2>
+        <p>Deploy your agent to run automatically using GitHub Actions.</p>
+
+        <h3>Generate Deployment Configuration</h3>
+        <div class="command-example">
+            <code><span class="prompt">@agentos</span> <span class="command">deploy csv-processor to github-actions</span></code>
+        </div>
+
+        <p>This generates a complete GitHub Actions workflow:</p>
+
+        <div class="workflow-file">
+            <div class="file-header">📄 .github/workflows/csv-processor.yml</div>
+<pre><code>name: CSV Processor Agent
+
+on:
+  workflow_dispatch:
+    inputs:
+      input_file:
+        description: 'Path to input CSV file'
+        required: true
+        default: 'data/sales.csv'
+      output_format:
+        description: 'Output format'
+        required: false
+        default: 'json'
+        type: choice
+        options:
+          - json
+          - markdown
+          - html
+  
+  # Optional: Run on schedule
+  schedule:
+    - cron: '0 6 * * 1'  # Every Monday at 6 AM
+
+  # Optional: Run on file changes
+  push:
+    paths:
+      - 'data/**/*.csv'
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      
+      - name: Install AgentOS
+        run: |
+          pip install agent-os
+          pip install -r agents/csv-processor/requirements.txt
+      
+      - name: Validate Agent Policy
+        run: |
+          agent-os validate agents/csv-processor/policy.yaml
+      
+      - name: Run CSV Processor Agent
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          AGENT_OS_AUDIT_LOG: true
+        run: |
+          python agents/csv-processor/agent.py \
+            --input "${{ github.event.inputs.input_file || 'data/sales.csv' }}" \
+            --format "${{ github.event.inputs.output_format || 'json' }}"
+      
+      - name: Upload Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: processing-results
+          path: /tmp/agent-output/
+          retention-days: 30
+      
+      - name: Upload Audit Log
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-log
+          path: /tmp/agent-output/.audit/
+          retention-days: 90</code></pre>
+        </div>
+
+        <h3>Configure Secrets</h3>
+        <div class="step-box">
+            <p><span class="step-number">1</span> <strong>Go to repository Settings → Secrets and variables → Actions</strong></p>
+        </div>
+
+        <div class="step-box">
+            <p><span class="step-number">2</span> <strong>Add required secrets</strong></p>
+            <table style="margin-left: 0; margin-top: 1rem;">
+                <tr>
+                    <th>Secret Name</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>OPENAI_API_KEY</code></td>
+                    <td>Your OpenAI API key for LLM calls</td>
+                </tr>
+                <tr>
+                    <td><code>AGENT_OS_TOKEN</code></td>
+                    <td>(Optional) AgentOS enterprise token</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="step-box">
+            <p><span class="step-number">3</span> <strong>Commit and push the workflow file</strong></p>
+<pre><code>git add .github/workflows/csv-processor.yml
+git commit -m "Add CSV processor agent workflow"
+git push</code></pre>
+        </div>
+
+        <div class="step-box">
+            <p><span class="step-number">4</span> <strong>Trigger the workflow</strong></p>
+            <p style="margin-left: 2.5rem;">Go to Actions tab → CSV Processor Agent → Run workflow</p>
+        </div>
+
+        <div class="tip-box">
+            <strong>💡 Tip:</strong> Use <code>@agentos status csv-processor</code> to check deployment status and view recent runs directly from Copilot Chat.
+        </div>
+
+        <h2>Tips and Best Practices</h2>
+
+        <div class="best-practice-card">
+            <h4>🎯 Be Specific in Descriptions</h4>
+            <p>The more specific your agent description, the better the generated code. Include details about data formats, expected outputs, and edge cases.</p>
+            <div class="command-example" style="margin-top: 1rem;">
+                <p style="color: #ef4444; margin-bottom: 0.5rem;">❌ Vague:</p>
+                <code><span class="prompt">@agentos</span> <span class="command">create agent for data processing</span></code>
+                <p style="color: #10b981; margin-top: 1rem; margin-bottom: 0.5rem;">✅ Specific:</p>
+                <code><span class="prompt">@agentos</span> <span class="command">create agent for processing daily sales CSV files from Shopify, calculating revenue metrics, and posting summaries to Slack</span></code>
+            </div>
+        </div>
+
+        <div class="best-practice-card">
+            <h4>🔒 Start with Strict Policies</h4>
+            <p>Begin with restrictive policies and loosen them only as needed. It's easier to grant additional permissions than to fix security issues later.</p>
+            <div class="command-example" style="margin-top: 1rem;">
+                <code><span class="prompt">@agentos</span> <span class="command">create policy strict-security for csv-processor</span></code>
+            </div>
+        </div>
+
+        <div class="best-practice-card">
+            <h4>🧪 Test Before Deploying</h4>
+            <p>Always validate your agent and run tests locally before deploying to production environments.</p>
+            <div class="command-example" style="margin-top: 1rem;">
+                <code><span class="prompt">@agentos</span> <span class="command">test csv-processor --coverage</span></code>
+            </div>
+        </div>
+
+        <div class="best-practice-card">
+            <h4>📊 Monitor and Audit</h4>
+            <p>Enable audit logging for all production agents. Review logs regularly to identify issues and optimize performance.</p>
+            <div class="command-example" style="margin-top: 1rem;">
+                <code><span class="prompt">@agentos</span> <span class="command">audit csv-processor --last 7d</span></code>
+            </div>
+        </div>
+
+        <div class="best-practice-card">
+            <h4>🔄 Use Version Control</h4>
+            <p>Keep agents and policies in version control. Use semantic versioning for agent releases.</p>
+            <div class="command-example" style="margin-top: 1rem;">
+                <code><span class="prompt">@agentos</span> <span class="command">version csv-processor --bump minor</span></code>
+            </div>
+        </div>
+
+        <div class="best-practice-card">
+            <h4>📚 Leverage Templates</h4>
+            <p>Use pre-built templates for common use cases. They include battle-tested policies and best practices.</p>
+            <div class="command-example" style="margin-top: 1rem;">
+                <code><span class="prompt">@agentos</span> <span class="command">list templates</span></code>
+            </div>
+        </div>
+
+        <h2>Quick Reference</h2>
+        <table>
+            <tr>
+                <th>Command</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td><code>@agentos help</code></td>
+                <td>Show all available commands</td>
+            </tr>
+            <tr>
+                <td><code>@agentos create agent [desc]</code></td>
+                <td>Create a new agent from description</td>
+            </tr>
+            <tr>
+                <td><code>@agentos validate [name]</code></td>
+                <td>Validate agent against policies</td>
+            </tr>
+            <tr>
+                <td><code>@agentos test [name]</code></td>
+                <td>Run agent tests</td>
+            </tr>
+            <tr>
+                <td><code>@agentos deploy [name] to [target]</code></td>
+                <td>Generate deployment configuration</td>
+            </tr>
+            <tr>
+                <td><code>@agentos status [name]</code></td>
+                <td>Check agent deployment status</td>
+            </tr>
+            <tr>
+                <td><code>@agentos audit [name]</code></td>
+                <td>View audit logs</td>
+            </tr>
+            <tr>
+                <td><code>@agentos list templates</code></td>
+                <td>Show available agent templates</td>
+            </tr>
+        </table>
+
+        <h2>Next Steps</h2>
+        <p>Now that you've created your first agent, explore more advanced features:</p>
+        <ul>
+            <li><a href="agent-creation.html" style="color: #10b981;">🤖 Agent Creation Deep Dive</a> - Advanced agent patterns and multi-agent systems</li>
+            <li><a href="policies.html" style="color: #10b981;">🔒 Policy Configuration</a> - Create custom security policies</li>
+            <li><a href="templates.html" style="color: #10b981;">📋 Using Templates</a> - Explore 50+ pre-built agent templates</li>
+            <li><a href="enterprise.html" style="color: #10b981;">🏢 Enterprise Features</a> - SSO, audit trails, and compliance</li>
+        </ul>
+
+        <div class="info-box">
+            <strong>ℹ️ Need Help?</strong> Join our <a href="https://github.com/agent-os/community/discussions" style="color: #60a5fa;">Community Discussions</a> or check out the <a href="../../docs/api.html" style="color: #60a5fa;">API Reference</a> for detailed documentation.
+        </div>
+
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn">← Back to Copilot Extension</a>
+            <a href="agent-creation.html" class="nav-btn">Next: Agent Creation →</a>
+        </div>
+    </main>
+
+    <script src="../../../script.js"></script>
+</body>
+</html>

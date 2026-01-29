@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AgentOS CMVK Review: Cross-Model Verification Kit for multi-model consensus on agent safety and correctness.">
+    <title>CMVK Review - AgentOS Copilot Extension</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../styles-new.css">
+    <link rel="stylesheet" href="../../assets/agent-os.css">
+    <style>
+        .tutorial-content { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .breadcrumb { display: flex; gap: 0.5rem; margin-bottom: 2rem; color: #94a3b8; font-size: 0.9rem; flex-wrap: wrap; }
+        .breadcrumb a { color: #10b981; text-decoration: none; }
+        .hero-section { background: linear-gradient(135deg, #1e1e2e 0%, #1a3a2e 50%, #1a1a2e 100%); padding: 4rem 2rem; border-radius: 16px; margin-bottom: 3rem; text-align: center; }
+        .hero-section h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .model-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+        .model-card { background: rgba(30, 30, 46, 0.8); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; }
+        .model-card:hover { border-color: rgba(16, 185, 129, 0.5); transform: translateY(-3px); }
+        .model-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .model-card h3 { color: #10b981; margin-bottom: 0.25rem; font-size: 1rem; }
+        .model-card p { color: #94a3b8; font-size: 0.8rem; }
+        .step-box { background: rgba(30, 30, 46, 0.6); border-left: 3px solid #10b981; padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 8px 8px 0; }
+        .step-number { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: linear-gradient(135deg, #10b981, #059669); color: white; font-weight: bold; border-radius: 50%; margin-right: 0.75rem; font-size: 0.85rem; }
+        .command-box { background: #0d0d14; border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; font-family: 'JetBrains Mono', monospace; overflow-x: auto; }
+        .command-box .prefix { color: #10b981; }
+        .command-box .cmd { color: #e2e8f0; }
+        .section { margin: 3rem 0; }
+        .section h2 { color: #e2e8f0; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .tip-box { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+        .tip-box strong { color: #10b981; }
+        .warning-box { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 1rem 1.5rem; margin: 1.5rem 0; }
+        .warning-box strong { color: #f87171; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; gap: 1rem; }
+        .nav-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; color: #10b981; text-decoration: none; }
+        .nav-btn:hover { background: rgba(16, 185, 129, 0.2); }
+        pre { background: #0d0d14; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; line-height: 1.6; }
+        .consensus-diagram { background: rgba(30, 30, 46, 0.6); border-radius: 12px; padding: 2rem; margin: 2rem 0; }
+        .consensus-row { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 1rem 0; flex-wrap: wrap; }
+        .consensus-model { padding: 0.5rem 1rem; background: rgba(16, 185, 129, 0.2); border-radius: 8px; color: #6ee7b7; font-size: 0.9rem; }
+        .consensus-arrow { color: #64748b; }
+        .consensus-result { padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #10b981, #059669); border-radius: 8px; color: white; font-weight: bold; }
+        .verdict-card { background: rgba(30, 30, 46, 0.6); border-radius: 12px; padding: 1.5rem; margin: 1rem 0; }
+        .verdict-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+        .verdict-approve { border-left: 4px solid #10b981; }
+        .verdict-reject { border-left: 4px solid #ef4444; }
+        .verdict-concern { border-left: 4px solid #eab308; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../../../index.html">Home</a></li>
+                <li><a href="../../../about.html">About</a></li>
+                <li><a href="../../../projects.html">Projects</a></li>
+                <li><a href="../../index.html" class="active">Agent OS</a></li>
+                <li><a href="../../../writings.html">Writings</a></li>
+                <li><a href="../../../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="tutorial-content">
+            <div class="breadcrumb">
+                <a href="../../index.html">Agent OS</a> →
+                <a href="index.html">Copilot Extension</a> →
+                <span>CMVK Review</span>
+            </div>
+
+            <div class="hero-section">
+                <span style="font-size: 3rem;">🔬</span>
+                <h1><span class="text-gradient">CMVK Review</span></h1>
+                <p style="color: #94a3b8; max-width: 600px; margin: 0 auto;">Cross-Model Verification Kit: Multi-model consensus for agent safety, correctness, and policy compliance.</p>
+            </div>
+
+            <div class="section">
+                <h2>What is CMVK?</h2>
+                <p style="color: #94a3b8; line-height: 1.8;">
+                    CMVK (Cross-Model Verification Kit) is AgentOS's unique approach to ensuring agent safety. Instead of relying on a single AI model's judgment, CMVK submits your agent code to multiple independent AI models for review. Only when all models reach consensus is the agent approved for deployment.
+                </p>
+
+                <div class="consensus-diagram">
+                    <h3 style="color: #e2e8f0; text-align: center; margin-bottom: 1.5rem;">Consensus Process</h3>
+                    <div class="consensus-row">
+                        <span class="consensus-model">GPT-4</span>
+                        <span class="consensus-model">Claude 3</span>
+                        <span class="consensus-model">Gemini Pro</span>
+                    </div>
+                    <div class="consensus-row">
+                        <span class="consensus-arrow">↓</span>
+                        <span class="consensus-arrow">↓</span>
+                        <span class="consensus-arrow">↓</span>
+                    </div>
+                    <div class="consensus-row">
+                        <span style="color: #6ee7b7;">✅ Safe</span>
+                        <span style="color: #6ee7b7;">✅ Safe</span>
+                        <span style="color: #6ee7b7;">✅ Safe</span>
+                    </div>
+                    <div class="consensus-row" style="margin-top: 1.5rem;">
+                        <span class="consensus-result">✅ Consensus Reached: Approved</span>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Participating Models</h2>
+            <div class="model-grid">
+                <div class="model-card">
+                    <div class="model-icon">🤖</div>
+                    <h3>GPT-4</h3>
+                    <p>OpenAI's flagship model</p>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon">🧠</div>
+                    <h3>Claude 3</h3>
+                    <p>Anthropic's safety-focused model</p>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon">💎</div>
+                    <h3>Gemini Pro</h3>
+                    <p>Google's advanced model</p>
+                </div>
+                <div class="model-card">
+                    <div class="model-icon">🦙</div>
+                    <h3>Llama 3</h3>
+                    <p>Meta's open model</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Running CMVK Review</h2>
+
+                <div class="step-box">
+                    <h3><span class="step-number">1</span> Request Review</h3>
+                    <div class="command-box">
+                        <span class="prefix">User:</span> <span class="cmd">@agentos review</span>
+                    </div>
+                    <pre><code><span style="color: #10b981;">AgentOS:</span> 🔬 Initiating CMVK Review
+
+<b>Submitting to verification models...</b>
+├── GPT-4: Analyzing...
+├── Claude 3: Analyzing...
+├── Gemini Pro: Analyzing...
+└── Llama 3: Analyzing...
+
+Please wait while models review your agent.
+This typically takes 10-30 seconds.</code></pre>
+                </div>
+
+                <div class="step-box">
+                    <h3><span class="step-number">2</span> Review Results</h3>
+                    <pre><code><span style="color: #10b981;">AgentOS:</span> 🔬 CMVK Review Complete
+
+<b>Consensus:</b> <span style="color: #6ee7b7;">✅ APPROVED</span> (4/4 models agree)
+
+<b>Individual Verdicts:</b></code></pre>
+
+                    <div class="verdict-card verdict-approve">
+                        <div class="verdict-header">
+                            <strong style="color: #6ee7b7;">✅ GPT-4: Approved</strong>
+                        </div>
+                        <p style="color: #94a3b8; margin: 0;">Agent follows best practices for data handling. No security concerns detected. Rate limiting is properly implemented.</p>
+                    </div>
+
+                    <div class="verdict-card verdict-approve">
+                        <div class="verdict-header">
+                            <strong style="color: #6ee7b7;">✅ Claude 3: Approved</strong>
+                        </div>
+                        <p style="color: #94a3b8; margin: 0;">Safety policies are comprehensive. Error handling prevents data leaks. Logging excludes PII as required.</p>
+                    </div>
+
+                    <div class="verdict-card verdict-approve">
+                        <div class="verdict-header">
+                            <strong style="color: #6ee7b7;">✅ Gemini Pro: Approved</strong>
+                        </div>
+                        <p style="color: #94a3b8; margin: 0;">Code structure is clean and maintainable. Resource usage is within acceptable limits.</p>
+                    </div>
+
+                    <div class="verdict-card verdict-approve">
+                        <div class="verdict-header">
+                            <strong style="color: #6ee7b7;">✅ Llama 3: Approved</strong>
+                        </div>
+                        <p style="color: #94a3b8; margin: 0;">No unsafe operations detected. API calls are properly authenticated.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Handling Rejections</h2>
+                <p>When models don't reach consensus, you'll see detailed feedback:</p>
+
+                <pre><code><span style="color: #10b981;">AgentOS:</span> 🔬 CMVK Review Complete
+
+<b>Consensus:</b> <span style="color: #f87171;">❌ NOT REACHED</span> (2/4 models raised concerns)
+
+<b>Individual Verdicts:</b></code></pre>
+
+                <div class="verdict-card verdict-approve">
+                    <div class="verdict-header">
+                        <strong style="color: #6ee7b7;">✅ GPT-4: Approved</strong>
+                    </div>
+                    <p style="color: #94a3b8; margin: 0;">Core functionality is safe and well-implemented.</p>
+                </div>
+
+                <div class="verdict-card verdict-reject">
+                    <div class="verdict-header">
+                        <strong style="color: #f87171;">❌ Claude 3: Rejected</strong>
+                    </div>
+                    <p style="color: #94a3b8; margin: 0;"><b>Concern:</b> Line 45 logs user email addresses without masking. This violates GDPR data minimization requirements.</p>
+                </div>
+
+                <div class="verdict-card verdict-concern">
+                    <div class="verdict-header">
+                        <strong style="color: #fcd34d;">⚠️ Gemini Pro: Concerns</strong>
+                    </div>
+                    <p style="color: #94a3b8; margin: 0;"><b>Concern:</b> No rate limiting on external API calls. Could lead to quota exhaustion or abuse.</p>
+                </div>
+
+                <div class="verdict-card verdict-approve">
+                    <div class="verdict-header">
+                        <strong style="color: #6ee7b7;">✅ Llama 3: Approved</strong>
+                    </div>
+                    <p style="color: #94a3b8; margin: 0;">No critical issues found.</p>
+                </div>
+
+                <pre><code><b>Required Actions:</b>
+1. Mask email addresses in log statements (line 45)
+2. Add rate limiting for external API calls
+
+Fix these issues and run @agentos review again.</code></pre>
+            </div>
+
+            <div class="section">
+                <h2>Review Categories</h2>
+                <p>CMVK evaluates agents across multiple dimensions:</p>
+
+                <div style="display: grid; gap: 1rem; margin: 1.5rem 0;">
+                    <div style="background: rgba(30, 30, 46, 0.6); border-radius: 8px; padding: 1rem 1.5rem;">
+                        <strong style="color: #10b981;">🔒 Security</strong>
+                        <p style="color: #94a3b8; margin: 0.5rem 0 0;">Credentials handling, injection vulnerabilities, authentication</p>
+                    </div>
+                    <div style="background: rgba(30, 30, 46, 0.6); border-radius: 8px; padding: 1rem 1.5rem;">
+                        <strong style="color: #10b981;">🛡️ Safety</strong>
+                        <p style="color: #94a3b8; margin: 0.5rem 0 0;">Policy compliance, action boundaries, failure modes</p>
+                    </div>
+                    <div style="background: rgba(30, 30, 46, 0.6); border-radius: 8px; padding: 1rem 1.5rem;">
+                        <strong style="color: #10b981;">📋 Compliance</strong>
+                        <p style="color: #94a3b8; margin: 0.5rem 0 0;">GDPR, HIPAA, SOC2, PCI-DSS requirements</p>
+                    </div>
+                    <div style="background: rgba(30, 30, 46, 0.6); border-radius: 8px; padding: 1rem 1.5rem;">
+                        <strong style="color: #10b981;">⚡ Reliability</strong>
+                        <p style="color: #94a3b8; margin: 0.5rem 0 0;">Error handling, retry logic, graceful degradation</p>
+                    </div>
+                    <div style="background: rgba(30, 30, 46, 0.6); border-radius: 8px; padding: 1rem 1.5rem;">
+                        <strong style="color: #10b981;">📊 Resources</strong>
+                        <p style="color: #94a3b8; margin: 0.5rem 0 0;">Memory usage, API quotas, execution time</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Configuration</h2>
+                <p>Customize CMVK review settings:</p>
+
+                <div class="command-box">
+                    <span class="prefix">User:</span> <span class="cmd">@agentos review --strict</span>
+                </div>
+
+                <pre><code><span style="color: #6ee7b7;"># Strict mode requires 100% consensus</span>
+<span style="color: #6ee7b7;"># Default mode allows 75% consensus (3/4 models)</span>
+
+<b>Review Modes:</b>
+--strict     All models must approve
+--standard   75% consensus required (default)
+--quick      Uses 2 models for faster review</code></pre>
+
+                <div class="tip-box">
+                    <strong>💡 Recommendation:</strong> Use <code>--strict</code> mode for production deployments and agents handling sensitive data. Use <code>--quick</code> mode during development for faster iteration.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Why Multi-Model?</h2>
+                <p style="color: #94a3b8; line-height: 1.8;">
+                    Different AI models have different strengths and blind spots. By requiring consensus across multiple models from different providers, CMVK catches issues that any single model might miss:
+                </p>
+                <ul style="color: #94a3b8; line-height: 2;">
+                    <li><strong>Claude</strong> excels at safety and ethical considerations</li>
+                    <li><strong>GPT-4</strong> is strong at code quality and best practices</li>
+                    <li><strong>Gemini</strong> catches performance and resource issues</li>
+                    <li><strong>Llama</strong> provides an open-source perspective</li>
+                </ul>
+
+                <div class="warning-box">
+                    <strong>⚠️ Important:</strong> CMVK review is required before deploying agents to production. Agents that bypass CMVK review will be automatically blocked by the AgentOS runtime.
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <a href="deployment.html" class="nav-btn">← GitHub Deployment</a>
+                <a href="index.html" class="nav-btn">Back to Overview →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>© 2026 Imran Siddique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.hamburger')?.addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
