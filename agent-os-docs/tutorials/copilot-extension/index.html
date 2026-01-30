@@ -80,6 +80,33 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
+        .coming-soon-banner {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: #000;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .coming-soon-banner a {
+            color: #000;
+            text-decoration: underline;
+        }
+        .coming-soon-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(245, 158, 11, 0.5);
+            color: #fbbf24;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
         .copilot-cta {
             display: flex;
             gap: 1rem;
@@ -309,13 +336,19 @@
     </nav>
 
     <main>
+        <!-- Coming Soon Banner -->
+        <div class="coming-soon-banner">
+            🚧 Coming Soon — This extension is under development and not yet available in GitHub Marketplace. 
+            <a href="https://github.com/imran-siddique/agent-os">Star the repo</a> to get notified when it launches!
+        </div>
+
         <!-- Hero Section -->
         <section class="copilot-hero">
             <div class="container">
                 <span class="copilot-icon">🤖</span>
                 <div class="copilot-badge">
                     <span class="pulse"></span>
-                    GitHub Copilot Extension
+                    GitHub Copilot Extension <span class="coming-soon-badge">🚧 Coming Soon</span>
                 </div>
                 <h1><span class="text-gradient">AgentOS for Copilot</span></h1>
                 <p style="font-size: 1.3rem; color: #94a3b8; max-width: 700px; margin: 0 auto 1rem;">
@@ -327,11 +360,11 @@
                 </p>
                 
                 <div class="copilot-cta">
-                    <a href="getting-started.html" class="copilot-btn copilot-btn-primary">
-                        🚀 Get Started
+                    <a href="https://github.com/imran-siddique/agent-os" target="_blank" class="copilot-btn copilot-btn-primary">
+                        ⭐ Star for Updates
                     </a>
-                    <a href="https://github.com/imran-siddique/agent-os" target="_blank" class="copilot-btn copilot-btn-secondary">
-                        ⭐ Star on GitHub
+                    <a href="getting-started.html" class="copilot-btn copilot-btn-secondary">
+                        📖 Preview Docs
                     </a>
                 </div>
             </div>
