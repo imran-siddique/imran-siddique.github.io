@@ -151,4 +151,20 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  
+  <!-- AgentMesh - Main -->
+  <url>
+    <loc>https://imran-siddique.github.io/agent-mesh-docs/</loc>
+    <lastmod>2026-02-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  
+  <!-- AgentMesh - Blog -->
+  <url>
+    <loc>https://imran-siddique.github.io/agent-mesh-docs/blog/launch.html</loc>
+    <lastmod>2026-02-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
 </urlset>
