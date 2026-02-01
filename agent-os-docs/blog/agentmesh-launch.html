@@ -1,0 +1,447 @@
+<!-- Deployed: 2026-02-01 -->
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Introducing AgentMesh: The first open-source governance platform for AI agent ecosystems. Identity, Trust, Reward, and Governance for multi-agent systems.">
+    <meta name="keywords" content="AgentMesh, AI Agents, Agent Governance, Trust, A2A, MCP, IATP, Agent Identity, Zero Trust, Compliance, SOC2, HIPAA, EU AI Act">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imransiddique.com/agent-os-docs/blog/agentmesh-launch.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imransiddique.com/agent-os-docs/blog/agentmesh-launch.html">
+    <meta property="og:title" content="Introducing AgentMesh: The Missing Trust Layer for AI Agents">
+    <meta property="og:description" content="The first platform purpose-built for governing multi-agent AI systems. Agents are shipping. The governance layer wasn't. Until now.">
+    <meta property="og:site_name" content="Imran Siddique">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:title" content="Introducing AgentMesh: The Missing Trust Layer for AI Agents">
+    <meta name="twitter:description" content="Open-source governance platform for AI agent ecosystems. Identity, Trust, Reward, Governance.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Introducing AgentMesh: The Missing Trust Layer for AI Agents",
+        "description": "The first platform purpose-built for governing multi-agent AI systems",
+        "author": {
+            "@type": "Person",
+            "name": "Imran Siddique",
+            "url": "https://imransiddique.com"
+        },
+        "datePublished": "2026-02-01",
+        "publisher": {
+            "@type": "Person",
+            "name": "Imran Siddique"
+        }
+    }
+    </script>
+    
+    <title>Introducing AgentMesh: The Missing Trust Layer for AI Agents | Imran Siddique</title>
+    <link rel="stylesheet" href="../../styles-new.css">
+    <link rel="stylesheet" href="../assets/agent-os.css">
+    <style>
+        .blog-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .blog-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 2rem;
+        }
+        .blog-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .blog-meta {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .blog-meta span {
+            margin: 0 0.5rem;
+        }
+        .blog-body h2 {
+            color: var(--accent);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .blog-body h3 {
+            color: var(--text);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        .blog-body p {
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+        .blog-body ul, .blog-body ol {
+            margin-bottom: 1.25rem;
+            padding-left: 1.5rem;
+        }
+        .blog-body li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        .blog-body code {
+            background: var(--bg-secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+        }
+        .blog-body pre {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        .blog-body pre code {
+            background: none;
+            padding: 0;
+        }
+        .architecture-diagram {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            white-space: pre;
+            line-height: 1.4;
+        }
+        .feature-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        .feature-table th, .feature-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .feature-table th {
+            background: var(--bg-secondary);
+            color: var(--accent);
+            font-weight: 600;
+        }
+        .cta-box {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(124, 58, 237, 0.1));
+            border: 1px solid var(--accent);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .cta-box h3 {
+            margin-top: 0;
+            color: var(--accent);
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .cta-buttons a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--accent);
+            color: var(--bg);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta-buttons a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+        }
+        .cta-buttons a.secondary {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+        .highlight-box {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .highlight-box strong {
+            color: var(--accent);
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            margin-bottom: 2rem;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../about.html">About</a></li>
+                <li><a href="../../projects.html">Projects</a></li>
+                <li><a href="../index.html" class="active">Agent OS</a></li>
+                <li><a href="../../writings.html">Writings</a></li>
+                <li><a href="../../contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="blog-content">
+        <a href="../index.html" class="back-link">← Back to Agent OS</a>
+        
+        <article>
+            <header class="blog-header">
+                <h1>Introducing AgentMesh: The Missing Trust Layer for AI Agents</h1>
+                <div class="blog-meta">
+                    <span>February 1, 2026</span>
+                    <span>•</span>
+                    <span>Imran Siddique</span>
+                    <span>•</span>
+                    <span>10 min read</span>
+                </div>
+            </header>
+
+            <div class="blog-body">
+                <div class="highlight-box">
+                    <strong>TL;DR:</strong> We're open-sourcing AgentMesh, the first platform purpose-built for governing multi-agent AI systems. Agents are shipping everywhere. The trust layer is not. Until now.
+                </div>
+
+                <pre><code>pip install agentmesh-platform
+agentmesh init --name my-agent --sponsor you@company.com</code></pre>
+
+                <h2>The Problem No One Is Solving</h2>
+                
+                <p>Here's a stat that should make every CISO nervous: <strong>non-human identities now outnumber human identities by ratios of 40:1 to 100:1</strong> inside enterprises. AI agents are the fastest-growing category. And the least governed.</p>
+
+                <p>The protocols exist. Google's A2A gives agents a common language. Anthropic's MCP gives agents access to tools. But neither answers the questions that matter:</p>
+
+                <ul>
+                    <li><strong>Who is this agent?</strong> What organization created it? What human is accountable?</li>
+                    <li><strong>What is it allowed to do?</strong> Has it stayed within those boundaries?</li>
+                    <li><strong>If it misbehaved, how do we prevent recurrence?</strong></li>
+                </ul>
+
+                <p>We built AgentMesh to answer these questions.</p>
+
+                <h2>What is AgentMesh?</h2>
+
+                <p>AgentMesh is a governance platform for AI agent ecosystems. It provides:</p>
+
+                <table class="feature-table">
+                    <thead>
+                        <tr>
+                            <th>Layer</th>
+                            <th>What It Does</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Identity</strong></td>
+                            <td>First-class agent identity with human sponsor accountability</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trust</strong></td>
+                            <td>Protocol-native verification for A2A, MCP, IATP</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Governance</strong></td>
+                            <td>Declarative policies with EU AI Act, SOC 2, HIPAA mapping</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reward</strong></td>
+                            <td>Continuous behavioral scoring that learns and adapts</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>Think of it as the "nervous system" for your agent mesh—continuously monitoring, learning, and enforcing trust.</p>
+
+                <h2>The Key Insight: Adaptive Governance</h2>
+
+                <p>Every other governance tool is built on static rules. Blocklists. Keyword filters. Permission matrices. These are necessary but insufficient. <strong>They cannot learn.</strong></p>
+
+                <p>AgentMesh introduces the <strong>Reward Engine</strong>—a lightweight evaluator that scores every agent action across five dimensions:</p>
+
+                <ol>
+                    <li><strong>Policy Compliance</strong> — Did it violate declared policies?</li>
+                    <li><strong>Resource Efficiency</strong> — Was compute usage proportionate?</li>
+                    <li><strong>Output Quality</strong> — Did downstream systems accept the output?</li>
+                    <li><strong>Security Posture</strong> — Did it stay in its trust boundary?</li>
+                    <li><strong>Collaboration Health</strong> — Did handoffs complete cleanly?</li>
+                </ol>
+
+                <p>These signals feed a per-agent <strong>trust score</strong> (0-1000) updated in real-time. When the score drops below threshold, credentials are automatically revoked. No human in the loop required.</p>
+
+                <p>This is the fundamental shift from <strong>static governance to adaptive governance</strong>.</p>
+
+                <h2>Architecture: Four Layers That Compound</h2>
+
+                <div class="architecture-diagram">┌─────────────────────────────────────────────────────────────────┐
+│  LAYER 4  │  Reward & Learning Engine                          │
+│           │  Trust scores · Multi-dimensional · Adaptive       │
+├───────────┼─────────────────────────────────────────────────────┤
+│  LAYER 3  │  Governance & Compliance Plane                     │
+│           │  Policy engine · EU AI Act / SOC2 · Merkle audit   │
+├───────────┼─────────────────────────────────────────────────────┤
+│  LAYER 2  │  Trust & Protocol Bridge                           │
+│           │  A2A · MCP · IATP · Capability scoping             │
+├───────────┼─────────────────────────────────────────────────────┤
+│  LAYER 1  │  Identity & Zero-Trust Core                        │
+│           │  Agent CA · Ephemeral creds · SPIFFE/SVID          │
+└───────────┴─────────────────────────────────────────────────────┘</div>
+
+                <p>Each layer is independently useful but compounds when used together. The Reward Engine only works because Identity provides accountability. Policy only matters because Trust verifies who's asking.</p>
+
+                <h2>Quick Start: 30 Seconds to Governed</h2>
+
+                <pre><code># Install
+pip install agentmesh-platform
+
+# Initialize a governed agent
+agentmesh init --name my-agent --sponsor alice@company.com
+
+# This creates:
+# - agentmesh.yaml (configuration)
+# - policies/default.yaml (security rules)
+# - src/main.py (agent code with governance built-in)</code></pre>
+
+                <p>The generated agent comes with:</p>
+                <ul>
+                    <li><strong>15-minute credential TTL</strong> (auto-rotation)</li>
+                    <li><strong>Human sponsor accountability</strong> (cryptographic chain)</li>
+                    <li><strong>Audit logging</strong> (tamper-evident Merkle chain)</li>
+                    <li><strong>Policy enforcement</strong> (< 5ms evaluation)</li>
+                </ul>
+
+                <h2>Why We Built This</h2>
+
+                <p>I've spent the last year watching the agent ecosystem explode. Everyone's building agents—Devin, AutoGPT, custom enterprise bots. But nobody trusts them to talk to each other.</p>
+
+                <p>If my Microsoft agent talks to an external vendor's agent:</p>
+                <ul>
+                    <li>How do I know it won't leak PII?</li>
+                    <li>How do I know it won't hallucinate?</li>
+                    <li>How do I prove compliance to auditors?</li>
+                </ul>
+
+                <p><strong>The answer today is: you don't.</strong></p>
+
+                <p>AgentMesh creates a forced network effect. An agent using AgentMesh will automatically reject connection requests from unverified agents. To communicate, external agents must register and earn reputation.</p>
+
+                <p>It's like the "blue checkmark" for agents—but cryptographic.</p>
+
+                <h2>What's In the Box</h2>
+
+                <p>The <code>agentmesh-platform</code> package (v1.0.0-alpha) includes:</p>
+
+                <h3>Identity Module</h3>
+                <ul>
+                    <li><code>AgentIdentity</code> — Ed25519 cryptographic identity</li>
+                    <li><code>DelegationChain</code> — Capabilities that can only narrow, never widen</li>
+                    <li><code>CredentialManager</code> — 15-minute TTL, auto-rotation</li>
+                </ul>
+
+                <h3>Trust Module</h3>
+                <ul>
+                    <li><code>TrustBridge</code> — Unified trust across A2A/MCP/IATP</li>
+                    <li><code>TrustHandshake</code> — < 200ms verification</li>
+                    <li><code>CapabilityRegistry</code> — Fine-grained resource/action control</li>
+                </ul>
+
+                <h3>Governance Module</h3>
+                <ul>
+                    <li><code>PolicyEngine</code> — YAML/JSON policies, < 5ms evaluation</li>
+                    <li><code>ComplianceEngine</code> — EU AI Act, SOC 2, HIPAA, GDPR mapping</li>
+                    <li><code>MerkleAuditChain</code> — Tamper-evident logging</li>
+                </ul>
+
+                <h3>Reward Module</h3>
+                <ul>
+                    <li><code>RewardEngine</code> — 5-dimension scoring</li>
+                    <li><code>AdaptiveLearner</code> — Pattern detection and recommendations</li>
+                    <li><code>WeightOptimizer</code> — A/B testing for tuning</li>
+                </ul>
+
+                <div class="cta-box">
+                    <h3>Get Started with AgentMesh</h3>
+                    <p>The agents are shipping. The governance layer wasn't. Now it is.</p>
+                    <pre style="background: var(--bg); padding: 1rem; border-radius: 8px; margin: 1rem 0;"><code>pip install agentmesh-platform</code></pre>
+                    <div class="cta-buttons">
+                        <a href="https://github.com/imran-siddique/agent-mesh" target="_blank">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                            GitHub
+                        </a>
+                        <a href="https://pypi.org/project/agentmesh-platform/" target="_blank" class="secondary">
+                            PyPI Package
+                        </a>
+                    </div>
+                </div>
+
+                <h2>Relationship to Agent OS</h2>
+
+                <p>AgentMesh is built on top of <a href="../index.html">Agent OS</a> (the kernel). The dependency chain:</p>
+
+                <pre><code>agentmesh-platform (1.0.0a1)
+└── agent-os-kernel[nexus,iatp] (1.2.0)
+    └── IATP protocol implementation
+    └── Nexus Trust Exchange</code></pre>
+
+                <p>Agent OS provides the low-level kernel primitives (signals, mute agents, control plane). AgentMesh provides the platform-level governance (identity, trust scoring, compliance automation).</p>
+
+                <p>Think of it like Linux (Agent OS) and Kubernetes (AgentMesh)—different layers of the stack, working together.</p>
+
+            </div>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 Imran Siddique. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../script.js"></script>
+</body>
+</html>
