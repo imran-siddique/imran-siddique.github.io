@@ -333,8 +333,81 @@ response = governed_engine.query("What are our Q4 results?")</code></pre>
                                 <td style="padding: var(--space-md); font-family: 'JetBrains Mono', monospace;">0.2.0+</td>
                                 <td style="padding: var(--space-md);">Query Engines, Agents, Retrieval</td>
                             </tr>
+                            <tr style="border-top: 2px solid var(--primary-color);">
+                                <td style="padding: var(--space-md);">🔌 MCP Server</td>
+                                <td style="padding: var(--space-md);"><span style="background: #10b981; color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">Stable</span></td>
+                                <td style="padding: var(--space-md); font-family: 'JetBrains Mono', monospace;">1.0.1</td>
+                                <td style="padding: var(--space-md);">Claude, Copilot, Cursor (MCP Protocol)</td>
+                            </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- MCP Server Section (NEW) -->
+        <section class="aos-section" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));">
+            <div class="container">
+                <h2 class="aos-section-title">⭐ MCP Server Integration</h2>
+                <p class="aos-section-subtitle">
+                    The recommended way to integrate Agent OS with AI assistants like Claude Desktop, GitHub Copilot, and Cursor.
+                </p>
+                
+                <div class="aos-features" style="grid-template-columns: 1fr;">
+                    <div class="aos-feature" style="max-width: 900px; margin: 0 auto;">
+                        <div style="display: flex; gap: var(--space-md); flex-wrap: wrap; margin-bottom: var(--space-lg);">
+                            <a href="https://www.npmjs.com/package/agentos-mcp-server" target="_blank" style="display: inline-block;">
+                                <img src="https://badge.fury.io/js/agentos-mcp-server.svg" alt="npm version">
+                            </a>
+                            <span style="background: var(--primary-color); color: white; padding: 4px 12px; border-radius: 4px; font-size: 0.85rem;">MCP Registry: io.github.imran-siddique/agentos</span>
+                        </div>
+                        
+                        <h3 class="aos-feature-title">Quick Install</h3>
+                        <div class="aos-code-block" style="margin: var(--space-md) 0;">
+                            <pre><code>npx agentos-mcp-server</code></pre>
+                        </div>
+                        
+                        <h3 class="aos-feature-title" style="margin-top: var(--space-lg);">Claude Desktop Configuration</h3>
+                        <p class="aos-feature-desc">Add to your <code>claude_desktop_config.json</code>:</p>
+                        <div class="aos-code-block" style="margin: var(--space-md) 0;">
+                            <pre><code>{
+  "mcpServers": {
+    "agentos": {
+      "command": "npx",
+      "args": ["-y", "agentos-mcp-server"],
+      "env": {
+        "AGENTOS_POLICY_MODE": "strict"
+      }
+    }
+  }
+}</code></pre>
+                        </div>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">
+                            <strong>Windows:</strong> <code>%APPDATA%\Claude\claude_desktop_config.json</code><br>
+                            <strong>macOS:</strong> <code>~/Library/Application Support/Claude/claude_desktop_config.json</code><br>
+                            <strong>Linux:</strong> <code>~/.config/Claude/claude_desktop_config.json</code>
+                        </p>
+                        
+                        <h3 class="aos-feature-title" style="margin-top: var(--space-lg);">Features</h3>
+                        <ul style="list-style: none; padding: 0; margin: var(--space-md) 0;">
+                            <li style="padding: var(--space-sm) 0;">✅ <strong>10 MCP Tools</strong> - create_agent, attach_policy, test_agent, deploy_agent, and more</li>
+                            <li style="padding: var(--space-sm) 0;">✅ <strong>Policy Enforcement</strong> - 6 built-in policies (PII, rate-limiting, cost-control, etc.)</li>
+                            <li style="padding: var(--space-sm) 0;">✅ <strong>Compliance Checking</strong> - SOC 2, GDPR, HIPAA, PCI DSS frameworks</li>
+                            <li style="padding: var(--space-sm) 0;">✅ <strong>Human-in-the-Loop</strong> - Approval workflows for sensitive actions</li>
+                            <li style="padding: var(--space-sm) 0;">✅ <strong>Complete Audit Trail</strong> - Every action logged for compliance</li>
+                        </ul>
+                        
+                        <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: var(--radius-md); padding: var(--space-md); margin-top: var(--space-lg);">
+                            <p style="margin: 0; font-size: 0.9rem;">
+                                <strong>⚠️ Note:</strong> The previous GitHub Copilot Extension (GitHub App) approach was <a href="https://github.blog/changelog/2025-09-24-deprecate-github-copilot-extensions-github-apps/" target="_blank" style="color: var(--primary-color);">deprecated on November 10, 2025</a>. 
+                                MCP is now the standard for extending AI assistants.
+                            </p>
+                        </div>
+                        
+                        <a href="https://github.com/imran-siddique/agent-os/tree/main/extensions/mcp-server" target="_blank" class="aos-btn-primary" style="margin-top: var(--space-lg); display: inline-block;">
+                            View Full Documentation →
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
