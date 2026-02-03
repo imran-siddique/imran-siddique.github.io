@@ -27,10 +27,10 @@ User-agent: PerplexityBot
 Allow: /
 
 # Sitemap location
-Sitemap: https://imran-siddique.github.io/sitemap.xml
+Sitemap: https://imransiddique.com/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
 
 # Host
-Host: https://imran-siddique.github.io
+Host: https://imransiddique.com
