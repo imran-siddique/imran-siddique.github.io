@@ -1,0 +1,37 @@
+name: IndexNow URL Submission
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**.html'
+      - 'sitemap.xml'
+      - 'llms.txt'
+
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Submit to IndexNow
+        run: |
+          KEY="0db30a2992b1c999e349f8e2a490b632"
+          SITE="https://imransiddique.com"
+          
+          # Extract URLs from sitemap
+          URLS=$(grep -oP '(?<=<loc>)[^<]+' sitemap.xml)
+          
+          # Build JSON payload
+          URL_ARRAY=$(echo "$URLS" | while read url; do echo "\"$url\""; done | paste -sd, -)
+          
+          PAYLOAD="{\"host\":\"imransiddique.com\",\"key\":\"$KEY\",\"keyLocation\":\"${SITE}/${KEY}.txt\",\"urlList\":[${URL_ARRAY}]}"
+          
+          # Submit to Bing IndexNow
+          curl -s -X POST "https://api.indexnow.org/indexnow" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD" \
+            -o /dev/null -w "IndexNow response: %{http_code}\n"
+          
+          echo "Submitted $(echo "$URLS" | wc -l) URLs to IndexNow"
