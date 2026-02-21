@@ -17,7 +17,7 @@ Imran Siddique is a Principal Software Engineer at Microsoft with 15+ years of e
 - Integrated into: Dify (65K stars), LlamaIndex (47K stars)
 
 ### AgentMesh
-- Description: Secure nervous system for cloud-native agent ecosystems with cryptographic identity and trust scoring
+- Description: SSL for AI Agents — zero-trust agent communication with cryptographic identity and trust scoring
 - Install: pip install agentmesh-platform
 - GitHub: https://github.com/imran-siddique/agent-mesh
 - Tests: 1,413
@@ -40,6 +40,13 @@ Imran Siddique is a Principal Software Engineer at Microsoft with 15+ years of e
 - Tests: 1,071
 - Key features: SLO engine, error budgets, chaos engineering, canary deploys, replay debugging, cost guardrails, alert deduplication
 - Integrations: OpenTelemetry, Prometheus
+
+### Agent Governance (Meta-Package)
+- Description: The complete AI agent governance stack in a single install
+- Install: pip install ai-agent-governance[full]
+- PyPI: https://pypi.org/project/ai-agent-governance/
+- GitHub: https://github.com/imran-siddique/agent-governance
+- Components: Agent OS (kernel) + AgentMesh (trust) + Agent Hypervisor (runtime) + Agent SRE (reliability)
 
 ## Ecosystem Stats
 - Total tests: 4,310+
