@@ -4,74 +4,40 @@
 
 ## About
 
-Imran Siddique is a Principal Software Engineer at Microsoft with 15+ years of experience and 20+ patents. He created the Agent Governance Ecosystem — four open-source projects that provide safety, trust, reliability, and runtime supervision for autonomous AI agents. His methodology, "Scale by Subtraction," advocates removing complexity rather than adding features to build reliable AI systems.
+Imran Siddique is a Principal Software Engineer at Microsoft with 15+ years of experience and 20+ patents. He created the Agent Governance Ecosystem — open-source projects that provide safety, trust, reliability, and runtime supervision for autonomous AI agents. His methodology, "Scale by Subtraction," advocates removing complexity rather than adding features to build reliable AI systems.
 
 ## Projects
 
 ### Agent OS
-- Description: Kernel architecture for governing autonomous AI agents with POSIX-inspired policy enforcement
+- Description: Kernel architecture for governing autonomous AI agents
 - Install: pip install agent-os-kernel
 - GitHub: https://github.com/imran-siddique/agent-os
-- Tests: 1,500+
-- Key features: 0% policy violations, 4-layer architecture, 14 framework adapters, VS Code extension, MCP server
-- Integrated into: Dify (65K stars), LlamaIndex (47K stars)
 
 ### AgentMesh
-- Description: SSL for AI Agents — zero-trust agent communication with cryptographic identity and trust scoring
+- Description: Governance platform for AI agent ecosystems
 - Install: pip install agentmesh-platform
 - GitHub: https://github.com/imran-siddique/agent-mesh
-- Tests: 1,413
-- Key features: DID-based identity, trust scoring (0-1000), A2A/MCP/IATP protocol bridging, EU AI Act compliance mapping
-- SDKs: Python, TypeScript, Go
 
 ### Agent Hypervisor
-- Description: Runtime supervisor for multi-agent Shared Sessions with Execution Rings and Saga Orchestration
+- Description: Runtime supervisor for multi-agent sessions
 - Install: pip install agent-hypervisor
 - GitHub: https://github.com/imran-siddique/agent-hypervisor
-- Tests: 326
-- Version: 2.0.0
-- Key features: CPU ring-inspired privilege isolation (Ring 0-3), Shapley-value fault attribution, saga orchestration with parallel fan-out, vector clocks, Merkle audit trails
-- Performance: 268 microsecond full governance pipeline, 2,983 ops/sec
 
 ### Agent SRE
 - Description: Site Reliability Engineering for AI agent systems
 - Install: pip install agent-sre
 - GitHub: https://github.com/imran-siddique/agent-sre
-- Tests: 1,071
-- Key features: SLO engine, error budgets, chaos engineering, canary deploys, replay debugging, cost guardrails, alert deduplication
-- Integrations: OpenTelemetry, Prometheus
 
 ### Agent Governance (Meta-Package)
 - Description: The complete AI agent governance stack in a single install
 - Install: pip install ai-agent-governance[full]
 - PyPI: https://pypi.org/project/ai-agent-governance/
 - GitHub: https://github.com/imran-siddique/agent-governance
-- Components: Agent OS (kernel) + AgentMesh (trust) + Agent Hypervisor (runtime) + Agent SRE (reliability)
-
-## Ecosystem Stats
-- Total tests: 4,310+
-- Total modules: 17
-- Framework integrations: 20+
-- Merged PRs: 7 (Dify, LlamaIndex, GitHub Copilot, Agent-Lightning, Awesome-AI-Agents)
-- Open PRs: 27
-- Open Issues: 95
 
 ## Key Concepts
 
-### Execution Rings
-CPU ring-inspired privilege isolation for AI agents. Ring 0 (root) through Ring 3 (sandbox). Dynamic elevation with TTL. Ring breach detection with circuit breakers.
-
-### Joint Liability
-Trust-as-collateral model where agents stake reputation to vouch for each other. Shapley-value fault attribution assigns proportional blame (50% direct cause, 30% enabling, 20% temporal proximity).
-
-### Saga Orchestration
-Multi-agent distributed transactions with automatic compensation. Parallel fan-out with ALL/MAJORITY/ANY failure policies. Semantic checkpoints for partial replay.
-
 ### Scale by Subtraction
 Methodology: deterministic control planes over probabilistic prompts, knowledge graphs over context windows, silent agent coordination over chat interfaces.
-
-### Zero Policy Violations
-Agent OS achieves 0% policy violations through deterministic POSIX-inspired enforcement, compared to 26.67% violation rate with prompt-based guardrails.
 
 ## Links
 - Website: https://imransiddique.com
@@ -79,4 +45,3 @@ Agent OS achieves 0% policy violations through deterministic POSIX-inspired enfo
 - LinkedIn: https://www.linkedin.com/in/imransiddique1986/
 - Medium: https://medium.com/@isiddique
 - Dev.to: https://dev.to/mosiddi
-- Documentation: https://imransiddique.com/agent-os-docs/

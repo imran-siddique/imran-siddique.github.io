@@ -1,27 +1,26 @@
-<!-- Deployed: 2026-02-01 -->
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AgentMesh: The Secure Nervous System for Cloud-Native Agent Ecosystems. Identity, Trust, Reward, and Governance for AI agents. Open source governance platform.">
-    <meta name="keywords" content="AgentMesh, AI Agents, Agent Governance, Trust, A2A, MCP, IATP, Agent Identity, Zero Trust, Compliance, SOC2, HIPAA, EU AI Act, agentmesh-platform">
+    <meta name="description" content="AgentMesh: Open source governance platform for AI agent ecosystems.">
+    <meta name="keywords" content="AgentMesh, AI Agents, Agent Governance, agentmesh-platform">
     <meta name="author" content="Imran Siddique">
-    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://imransiddique.com/agent-mesh-docs/">
     
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://imransiddique.com/agent-mesh-docs/">
-    <meta property="og:title" content="AgentMesh - The Secure Nervous System for AI Agents">
-    <meta property="og:description" content="Identity, Trust, Reward, Governance. The first platform purpose-built for governing multi-agent AI systems.">
+    <meta property="og:title" content="AgentMesh - Governance for AI Agents">
+    <meta property="og:description" content="Open source governance platform for AI agent ecosystems.">
     <meta property="og:site_name" content="AgentMesh">
     
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@mosiddi">
-    <meta name="twitter:title" content="AgentMesh - The Secure Nervous System for AI Agents">
-    <meta name="twitter:description" content="Identity, Trust, Reward, Governance. Open source governance for AI agent ecosystems.">
+    <meta name="twitter:title" content="AgentMesh - Governance for AI Agents">
+    <meta name="twitter:description" content="Open source governance platform for AI agent ecosystems.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +36,7 @@
         "alternateName": "agentmesh-platform",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Cross-platform",
-        "description": "The Secure Nervous System for Cloud-Native Agent Ecosystems. Identity, Trust, Reward, and Governance for AI agents.",
+        "description": "Open source governance platform for AI agent ecosystems.",
         "url": "https://imransiddique.com/agent-mesh-docs/",
         "downloadUrl": "https://pypi.org/project/agentmesh-platform/",
         "softwareVersion": "1.0.0-alpha",
@@ -50,19 +49,11 @@
         },
         "license": "https://opensource.org/licenses/Apache-2.0",
         "programmingLanguage": "Python",
-        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
-        "featureList": [
-            "First-class agent identity with human sponsor accountability",
-            "Protocol-native trust verification (A2A, MCP, IATP)",
-            "5-dimension adaptive reward scoring",
-            "Compliance automation (EU AI Act, SOC2, HIPAA, GDPR)",
-            "15-minute ephemeral credentials with auto-rotation",
-            "Tamper-evident Merkle audit chains"
-        ]
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
     }
     </script>
     
-    <title>AgentMesh - The Secure Nervous System for AI Agents | Imran Siddique</title>
+    <title>AgentMesh - Governance for AI Agents | Imran Siddique</title>
     <link rel="stylesheet" href="../styles-new.css">
     <link rel="stylesheet" href="assets/agent-mesh.css">
 </head>
@@ -75,7 +66,6 @@
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="../about.html">About</a></li>
                 <li><a href="../projects.html">Projects</a></li>
-                <li><a href="../agent-os-docs/index.html">Agent OS</a></li>
                 <li><a href="index.html" class="active">AgentMesh</a></li>
                 <li><a href="../writings.html">Writings</a></li>
                 <li><a href="../contact.html">Contact</a></li>
@@ -101,32 +91,12 @@
                     <span class="gradient">AgentMesh</span>
                 </h1>
                 
-                <p class="mesh-tagline">The Secure Nervous System for AI Agents</p>
+                <p class="mesh-tagline">Governance for AI Agent Ecosystems</p>
                 
                 <p class="mesh-description">
-                    The protocols exist. A2A gives agents a common language. MCP gives agents tools. 
-                    <strong>Neither enforces trust.</strong> AgentMesh is the governance layer that makes 
-                    multi-agent ecosystems safe to scale.
+                    An open source governance platform for multi-agent AI systems.
+                    See the GitHub repository for full documentation.
                 </p>
-                
-                <div class="mesh-stats">
-                    <div class="mesh-stat">
-                        <span class="mesh-stat-value">15min</span>
-                        <span class="mesh-stat-label">Credential TTL</span>
-                    </div>
-                    <div class="mesh-stat">
-                        <span class="mesh-stat-value">&lt;5ms</span>
-                        <span class="mesh-stat-label">Policy Evaluation</span>
-                    </div>
-                    <div class="mesh-stat">
-                        <span class="mesh-stat-value">&lt;200ms</span>
-                        <span class="mesh-stat-label">Trust Handshake</span>
-                    </div>
-                    <div class="mesh-stat">
-                        <span class="mesh-stat-value">5</span>
-                        <span class="mesh-stat-label">Reward Dimensions</span>
-                    </div>
-                </div>
                 
                 <div class="mesh-cta-group">
                     <a href="https://github.com/imran-siddique/agent-mesh" target="_blank" class="mesh-btn mesh-btn-primary">
@@ -135,244 +105,6 @@
                     </a>
                     <a href="https://pypi.org/project/agentmesh-platform/" target="_blank" class="mesh-btn mesh-btn-secondary">
                         pip install agentmesh-platform
-                    </a>
-                </div>
-                
-                <div class="mesh-code-preview">
-                    <code>
-                        <span class="comment"># Initialize a governed agent in 30 seconds</span><br>
-                        <span class="command">$ pip install agentmesh-platform</span><br>
-                        <span class="command">$ agentmesh init --name my-agent --sponsor alice@company.com</span><br><br>
-                        <span class="comment"># Your agent now has:</span><br>
-                        <span class="comment"># ✓ Cryptographic identity</span><br>
-                        <span class="comment"># ✓ 15-min credential rotation</span><br>
-                        <span class="comment"># ✓ Policy enforcement</span><br>
-                        <span class="comment"># ✓ Tamper-evident audit logs</span>
-                    </code>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4-Layer Architecture -->
-        <section class="mesh-layers-section">
-            <div class="container">
-                <h2 class="section-title" style="text-align: center;">
-                    <span class="gradient">Four Layers That Compound</span>
-                </h2>
-                <p class="section-subtitle" style="text-align: center; max-width: 600px; margin: 0 auto;">
-                    Each layer is independently useful but compounds when used together. 
-                    The Reward Engine only works because Identity provides accountability.
-                </p>
-                
-                <div class="mesh-layers-grid">
-                    <div class="mesh-layer-card">
-                        <div class="mesh-layer-number">4</div>
-                        <h3>Reward & Learning Engine</h3>
-                        <p>Continuous behavioral feedback loop with adaptive learning. Not static rules.</p>
-                        <ul class="mesh-layer-features">
-                            <li>5-dimension trust scoring</li>
-                            <li>Auto credential revocation</li>
-                            <li>A/B testing for weights</li>
-                            <li>Explainable scores</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="mesh-layer-card">
-                        <div class="mesh-layer-number">3</div>
-                        <h3>Governance & Compliance</h3>
-                        <p>Declarative policies with automated compliance mapping.</p>
-                        <ul class="mesh-layer-features">
-                            <li>YAML/JSON policies</li>
-                            <li>EU AI Act, SOC2, HIPAA</li>
-                            <li>Merkle audit chains</li>
-                            <li>Shadow mode testing</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="mesh-layer-card">
-                        <div class="mesh-layer-number">2</div>
-                        <h3>Trust & Protocol Bridge</h3>
-                        <p>Unified trust across all protocols. One model, any protocol.</p>
-                        <ul class="mesh-layer-features">
-                            <li>Native A2A support</li>
-                            <li>Native MCP support</li>
-                            <li>IATP handshakes</li>
-                            <li>Protocol translation</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="mesh-layer-card">
-                        <div class="mesh-layer-number">1</div>
-                        <h3>Identity & Zero-Trust Core</h3>
-                        <p>First-class agent identity with human sponsor accountability.</p>
-                        <ul class="mesh-layer-features">
-                            <li>Ed25519 cryptographic ID</li>
-                            <li>15-min credential TTL</li>
-                            <li>Delegation chains</li>
-                            <li>SPIFFE/SVID support</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Trust Score Demo -->
-        <section class="mesh-feature-section">
-            <div class="container">
-                <h2 class="section-title" style="text-align: center;">
-                    <span class="gradient">Adaptive Trust Scoring</span>
-                </h2>
-                <p class="section-subtitle" style="text-align: center; max-width: 600px; margin: 0 auto;">
-                    Every agent action is scored across 5 dimensions. When trust drops, credentials auto-revoke.
-                </p>
-                
-                <div class="mesh-trust-demo">
-                    <div class="mesh-trust-score">
-                        <div class="mesh-trust-value">847</div>
-                        <div class="mesh-trust-label">Trust Score</div>
-                        <div class="mesh-trust-tier">✓ Trusted</div>
-                    </div>
-                    
-                    <div class="mesh-trust-dimensions">
-                        <div class="mesh-dimension">
-                            <span class="mesh-dimension-label">Policy Compliance</span>
-                            <div class="mesh-dimension-bar">
-                                <div class="mesh-dimension-fill" style="width: 92%;"></div>
-                            </div>
-                            <span class="mesh-dimension-value">92</span>
-                        </div>
-                        <div class="mesh-dimension">
-                            <span class="mesh-dimension-label">Resource Efficiency</span>
-                            <div class="mesh-dimension-bar">
-                                <div class="mesh-dimension-fill" style="width: 78%;"></div>
-                            </div>
-                            <span class="mesh-dimension-value">78</span>
-                        </div>
-                        <div class="mesh-dimension">
-                            <span class="mesh-dimension-label">Output Quality</span>
-                            <div class="mesh-dimension-bar">
-                                <div class="mesh-dimension-fill" style="width: 95%;"></div>
-                            </div>
-                            <span class="mesh-dimension-value">95</span>
-                        </div>
-                        <div class="mesh-dimension">
-                            <span class="mesh-dimension-label">Security Posture</span>
-                            <div class="mesh-dimension-bar">
-                                <div class="mesh-dimension-fill" style="width: 88%;"></div>
-                            </div>
-                            <span class="mesh-dimension-value">88</span>
-                        </div>
-                        <div class="mesh-dimension">
-                            <span class="mesh-dimension-label">Collaboration Health</span>
-                            <div class="mesh-dimension-bar">
-                                <div class="mesh-dimension-fill" style="width: 82%;"></div>
-                            </div>
-                            <span class="mesh-dimension-value">82</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Grid -->
-        <section class="mesh-feature-section" style="background: var(--bg-secondary);">
-            <div class="container">
-                <h2 class="section-title" style="text-align: center;">
-                    <span class="gradient">Why AgentMesh?</span>
-                </h2>
-                
-                <div class="mesh-feature-grid">
-                    <div class="mesh-feature-card">
-                        <div class="mesh-feature-icon">🔐</div>
-                        <h3>Human Sponsor Accountability</h3>
-                        <p>Every agent identity is cryptographically linked to a human sponsor. Delegation chains can only narrow, never widen.</p>
-                    </div>
-                    
-                    <div class="mesh-feature-card">
-                        <div class="mesh-feature-icon">⚡</div>
-                        <h3>Ephemeral Credentials</h3>
-                        <p>15-minute TTL by default. Automatic rotation. Instant revocation. No long-lived secrets.</p>
-                    </div>
-                    
-                    <div class="mesh-feature-card">
-                        <div class="mesh-feature-icon">🌐</div>
-                        <h3>Protocol-Native Trust</h3>
-                        <p>Native support for A2A, MCP, and IATP. Unified trust model regardless of protocol.</p>
-                    </div>
-                    
-                    <div class="mesh-feature-card">
-                        <div class="mesh-feature-icon">📊</div>
-                        <h3>Adaptive Learning</h3>
-                        <p>The Reward Engine learns from agent behavior. Not just static blocklists—continuous improvement.</p>
-                    </div>
-                    
-                    <div class="mesh-feature-card">
-                        <div class="mesh-feature-icon">✅</div>
-                        <h3>Compliance Automation</h3>
-                        <p>Automatic mapping to EU AI Act, SOC 2, HIPAA, and GDPR. Generate audit reports instantly.</p>
-                    </div>
-                    
-                    <div class="mesh-feature-card">
-                        <div class="mesh-feature-icon">🔗</div>
-                        <h3>Tamper-Evident Audit</h3>
-                        <p>Merkle-chained audit logs. Any modification is detected. Verify integrity offline.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Relationship to Agent OS -->
-        <section class="mesh-feature-section">
-            <div class="container" style="max-width: 800px;">
-                <h2 class="section-title" style="text-align: center;">
-                    <span class="gradient">Built on Agent OS</span>
-                </h2>
-                <p style="text-align: center; color: var(--text-secondary); margin-bottom: var(--space-2xl);">
-                    AgentMesh is the platform layer built on top of the <a href="../agent-os-docs/index.html" style="color: var(--mesh-primary);">Agent OS</a> kernel.
-                </p>
-                
-                <div class="mesh-code-preview" style="max-width: 100%;">
-                    <code>
-                        <span class="comment"># Dependency chain</span><br><br>
-                        agentmesh-platform (1.0.0a1)<br>
-                        └── agent-os-kernel[nexus,iatp] (1.2.0)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;├── IATP protocol implementation<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;└── Nexus Trust Exchange<br><br>
-                        <span class="comment"># Think of it like:</span><br>
-                        <span class="comment"># Agent OS = Linux kernel (low-level primitives)</span><br>
-                        <span class="comment"># AgentMesh = Kubernetes (platform orchestration)</span>
-                    </code>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="mesh-feature-section" style="background: var(--bg-secondary);">
-            <div class="container" style="text-align: center; max-width: 700px;">
-                <h2 class="section-title">
-                    <span class="gradient">Get Started</span>
-                </h2>
-                <p style="color: var(--text-secondary); margin-bottom: var(--space-xl);">
-                    The agents are shipping. The governance layer wasn't. Now it is.
-                </p>
-                
-                <div class="mesh-code-preview" style="margin-bottom: var(--space-xl);">
-                    <code>
-                        <span class="command">$ pip install agentmesh-platform</span><br>
-                        <span class="command">$ agentmesh init --name my-agent --sponsor you@company.com</span>
-                    </code>
-                </div>
-                
-                <div class="mesh-cta-group">
-                    <a href="https://github.com/imran-siddique/agent-mesh" target="_blank" class="mesh-btn mesh-btn-primary">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                        GitHub Repository
-                    </a>
-                    <a href="https://pypi.org/project/agentmesh-platform/" target="_blank" class="mesh-btn mesh-btn-secondary">
-                        PyPI Package
-                    </a>
-                    <a href="docs/quickstart.html" class="mesh-btn mesh-btn-secondary">
-                        Documentation
                     </a>
                 </div>
             </div>
@@ -385,25 +117,13 @@
             <div class="mesh-footer-grid">
                 <div class="mesh-footer-brand">
                     <h4>AgentMesh</h4>
-                    <p>The Secure Nervous System for Cloud-Native Agent Ecosystems. Identity, Trust, Reward, Governance.</p>
+                    <p>Open source governance platform for AI agent ecosystems.</p>
                     <p style="color: var(--text-muted); margin-top: var(--space-sm);">v1.0.0-alpha • Apache 2.0 License</p>
-                </div>
-                
-                <div class="mesh-footer-section">
-                    <h5>Documentation</h5>
-                    <ul>
-                        <li><a href="docs/quickstart.html">Quickstart</a></li>
-                        <li><a href="docs/identity.html">Identity</a></li>
-                        <li><a href="docs/trust.html">Trust</a></li>
-                        <li><a href="docs/governance.html">Governance</a></li>
-                        <li><a href="docs/reward.html">Reward Engine</a></li>
-                    </ul>
                 </div>
                 
                 <div class="mesh-footer-section">
                     <h5>Related</h5>
                     <ul>
-                        <li><a href="../agent-os-docs/index.html">Agent OS (Kernel)</a></li>
                         <li><a href="https://github.com/imran-siddique/agent-os" target="_blank">agent-os GitHub</a></li>
                         <li><a href="https://pypi.org/project/agent-os-kernel/" target="_blank">agent-os-kernel PyPI</a></li>
                     </ul>
