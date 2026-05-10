@@ -1,47 +1,63 @@
-# Imran Siddique - Agent Governance Ecosystem
+# Imran Siddique - Agent Governance Toolkit
 
-> Principal Software Engineer at Microsoft building open-source infrastructure for governing autonomous AI agents.
+> Principal Software Engineer at Microsoft building the Agent Governance Toolkit — runtime governance for autonomous AI agents.
 
 ## About
 
-Imran Siddique is a Principal Software Engineer at Microsoft with 15+ years of experience and 20+ patents. He created the Agent Governance Ecosystem — open-source projects that provide safety, trust, reliability, and runtime supervision for autonomous AI agents. His methodology, "Scale by Subtraction," advocates removing complexity rather than adding features to build reliable AI systems.
+Imran Siddique is a Principal Software Engineer at Microsoft with 15+ years of experience and 20+ patents. He created the Agent Governance Toolkit (AGT), an open-source platform under Microsoft providing deterministic policy enforcement, zero-trust identity, execution sandboxing, and SRE for autonomous AI agents. AGT includes 8 packages, SDKs for 5 languages (Python, TypeScript, .NET, Rust, Go), 13,000+ tests, and 19 framework integrations covering all 10 OWASP Agentic AI risks. His methodology, "Scale by Subtraction," advocates removing complexity rather than adding features to build reliable AI systems.
 
 ## Projects
 
-### Agent OS
-- Description: Kernel architecture for governing autonomous AI agents
+### Agent Governance Toolkit (Flagship)
+- Description: Unified governance platform for AI agents under Microsoft
+- Packages: 8 (Agent OS, AgentMesh, Agent Runtime, Agent SRE, Agent Compliance, Agent Marketplace, Agent Lightning, Agent Hypervisor)
+- Languages: Python, TypeScript, .NET, Rust, Go
+- Tests: 13,000+
+- Integrations: 19 (LangChain, CrewAI, AutoGen, Google ADK, OpenAI Agents, LlamaIndex, Haystack, Mastra, MCP, A2A, and more)
+- Standards: OWASP Agentic AI Top 10, NIST AI RMF 1.0, RFC 8032 (Ed25519), RFC 9334 (RATS)
+- Install: pip install agent-governance-toolkit
+- GitHub: https://github.com/microsoft/agent-governance-toolkit
+- Docs: https://microsoft.github.io/agent-governance-toolkit/
+
+### Agent OS (Core Package)
+- Description: Policy engine and governance kernel with deterministic enforcement
 - Install: pip install agent-os-kernel
-- GitHub: https://github.com/imran-siddique/agent-os
+- Docs: https://microsoft.github.io/agent-governance-toolkit/packages/agent-os/
 
-### AgentMesh
-- Description: Governance platform for AI agent ecosystems
+### AgentMesh (Core Package)
+- Description: Zero-trust identity mesh with Ed25519 signatures and trust cards
 - Install: pip install agentmesh-platform
-- GitHub: https://github.com/imran-siddique/agent-mesh
+- Docs: https://microsoft.github.io/agent-governance-toolkit/packages/agent-mesh/
 
-### Agent Hypervisor
-- Description: Runtime supervisor for multi-agent sessions
-- Install: pip install agent-hypervisor
-- GitHub: https://github.com/imran-siddique/agent-hypervisor
-
-### Agent SRE
-- Description: Site Reliability Engineering for AI agent systems
+### Agent SRE (Core Package)
+- Description: Reliability engineering — kill switch, SLO monitoring, chaos testing, cost governance
 - Install: pip install agent-sre
-- GitHub: https://github.com/imran-siddique/agent-sre
+- Docs: https://microsoft.github.io/agent-governance-toolkit/packages/agent-sre/
 
-### Agent Governance (Meta-Package)
-- Description: The complete AI agent governance stack in a single install
-- Install: pip install ai-agent-governance[full]
-- PyPI: https://pypi.org/project/ai-agent-governance/
-- GitHub: https://github.com/imran-siddique/agent-governance
+### Agent Runtime (Core Package)
+- Description: Execution sandboxing with four privilege rings
+- Docs: https://microsoft.github.io/agent-governance-toolkit/packages/agent-runtime/
+
+### Agent Compliance (Core Package)
+- Description: Audit logging, compliance frameworks, integrity verification
+- Docs: https://microsoft.github.io/agent-governance-toolkit/packages/agent-compliance/
 
 ## Key Concepts
 
 ### Scale by Subtraction
 Methodology: deterministic control planes over probabilistic prompts, knowledge graphs over context windows, silent agent coordination over chat interfaces.
 
+### Standards Compliance
+- OWASP Agentic AI Top 10: All 10 risks covered with deterministic controls
+- NIST AI RMF 1.0: Full GOVERN, MAP, MEASURE, MANAGE alignment
+- Ed25519 (RFC 8032): Agent identity signatures
+- RFC 9334 (RATS): Remote attestation alignment
+
 ## Links
 - Website: https://imransiddique.com
 - GitHub: https://github.com/imran-siddique
+- AGT GitHub: https://github.com/microsoft/agent-governance-toolkit
+- AGT Docs: https://microsoft.github.io/agent-governance-toolkit/
 - LinkedIn: https://www.linkedin.com/in/imransiddique1986/
 - Medium: https://medium.com/@isiddique
 - Dev.to: https://dev.to/mosiddi
