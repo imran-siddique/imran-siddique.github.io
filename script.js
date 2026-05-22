@@ -139,22 +139,44 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ============================================
-    // TYPING EFFECT (for hero if needed)
+    // TYPING EFFECT - role cycling in hero
     // ============================================
     const typingElement = document.querySelector('.typing-text');
     if (typingElement) {
-        const text = typingElement.textContent;
-        typingElement.textContent = '';
-        let i = 0;
-        
-        function typeWriter() {
-            if (i < text.length) {
-                typingElement.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
+        const roles = [
+            'Autonomous AI Systems',
+            'Agent Governance',
+            'Trusted AI Infrastructure',
+            'Agentic Security'
+        ];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeRole() {
+            const current = roles[roleIndex];
+            if (!isDeleting) {
+                typingElement.textContent = current.substring(0, charIndex + 1);
+                charIndex++;
+                if (charIndex === current.length) {
+                    setTimeout(() => { isDeleting = true; typeRole(); }, 2000);
+                    return;
+                }
+                setTimeout(typeRole, 60);
+            } else {
+                typingElement.textContent = current.substring(0, charIndex - 1);
+                charIndex--;
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    roleIndex = (roleIndex + 1) % roles.length;
+                    setTimeout(typeRole, 400);
+                    return;
+                }
+                setTimeout(typeRole, 30);
             }
         }
-        typeWriter();
+        typingElement.textContent = '';
+        setTimeout(typeRole, 800);
     }
     
     // ============================================

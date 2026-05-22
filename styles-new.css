@@ -1312,3 +1312,116 @@ blockquote cite {
         order: -1;
     }
 }
+
+/* ============================================
+   INTEGRATED WITH SECTION
+   ============================================ */
+.integrated-section {
+    padding: var(--space-xl) 0;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+}
+
+.integrated-container {
+    text-align: center;
+}
+
+.integrated-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+}
+
+.integrated-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-xl);
+    align-items: center;
+    opacity: 0.8;
+}
+
+.integrated-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: var(--transition-fast);
+}
+
+.integrated-link:hover {
+    color: var(--accent-primary);
+    opacity: 1;
+}
+
+.integrated-stars {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 0.85rem;
+}
+
+.integrated-subtitle {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: var(--space-md);
+}
+
+/* ============================================
+   STANDARDS & COMMUNITY SECTION
+   ============================================ */
+.standards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-lg);
+}
+
+.standard-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    transition: var(--transition-normal);
+    backdrop-filter: var(--glass-blur);
+}
+
+.standard-card:hover {
+    border-color: var(--border-glow);
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-4px);
+}
+
+.standard-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-md);
+}
+
+.standard-card h3 {
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+}
+
+.standard-card p {
+    font-size: 0.9rem;
+    margin-bottom: var(--space-md);
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   TYPING CURSOR
+   ============================================ */
+.typing-text {
+    border-right: 3px solid var(--accent-primary);
+    animation: blink-cursor 0.75s step-end infinite;
+}
+
+.typing-text.done {
+    border-right: none;
+    animation: none;
+}
+
+@keyframes blink-cursor {
+    from, to { border-color: transparent; }
+    50% { border-color: var(--accent-primary); }
+}
