@@ -1,10 +1,10 @@
 # Imran Siddique - Agent Governance Toolkit
 
-> Principal Software Engineer at Microsoft building the Agent Governance Toolkit — runtime governance for autonomous AI agents.
+> Chief Product Officer at Opaque Systems; creator of the Agent Governance Toolkit — runtime governance for autonomous AI agents.
 
 ## About
 
-Imran Siddique is a Principal Software Engineer at Microsoft with 15+ years of experience and 20+ patents. He created the Agent Governance Toolkit (AGT), an open-source platform under Microsoft providing deterministic policy enforcement, zero-trust identity, execution sandboxing, and SRE for autonomous AI agents. AGT includes 8 packages, SDKs for 5 languages (Python, TypeScript, .NET, Rust, Go), 13,000+ tests, and 19 framework integrations covering all 10 OWASP Agentic AI risks. His methodology, "Scale by Subtraction," advocates removing complexity rather than adding features to build reliable AI systems.
+Imran Siddique is Chief Product Officer at Opaque Systems, and previously spent 18 years at Microsoft, where he earned 20+ patents. He created the Agent Governance Toolkit (AGT), an open-source platform (github.com/microsoft/agent-governance-toolkit) providing deterministic policy enforcement, zero-trust identity, execution sandboxing, and SRE for autonomous AI agents. AGT includes 8 packages, SDKs for 5 languages (Python, TypeScript, .NET, Rust, Go), 13,000+ tests, and 19 framework integrations covering all 10 OWASP Agentic AI risks. His methodology, "Scale by Subtraction," advocates removing complexity rather than adding features to build reliable AI systems.
 
 ## Projects
 
