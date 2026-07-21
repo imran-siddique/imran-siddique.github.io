@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Page not found - Imran Siddique">
+    <meta name="robots" content="noindex, follow">
+    <title>404 - Page Not Found | Imran Siddique</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .error-section {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 1.5rem;
+        }
+        .error-code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(4rem, 15vw, 8rem);
+            font-weight: 700;
+            line-height: 1;
+            margin: 0;
+        }
+        .error-title {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin: 1rem 0 0.5rem;
+        }
+        .error-text {
+            max-width: 32rem;
+            opacity: 0.8;
+            margin: 0 auto 2rem;
+        }
+        .error-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="agent-mesh-docs/index.html">AgentMesh</a></li>
+                <li><a href="writings.html">Writings</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="error-section">
+        <p class="error-code">404</p>
+        <h1 class="error-title">This page has moved on</h1>
+        <p class="error-text">The page you are looking for does not exist. It may have been renamed, retired, or you followed an outdated link.</p>
+        <div class="error-links">
+            <a href="/" class="btn-primary">Back to home</a>
+            <a href="projects.html" class="btn-outline">View projects</a>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
