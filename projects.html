@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Open source AI projects by Imran Siddique: Agent Governance Toolkit (8 packages, 13,000+ tests, 19 integrations), Agent OS (policy engine), AgentMesh (zero-trust identity), Agent SRE (reliability engineering), and Scale by Subtraction methodology. Under Microsoft, covering OWASP Top 10 and NIST AI RMF.">
+    <meta name="description" content="Open-source AI projects by Imran Siddique: the agentrust-io open standards (TRACE, cMCP, Agent Manifest, cA2A) for hardware-attested agent governance, and the Agent Governance Toolkit (hosted under Microsoft) covering the OWASP Agentic Top 10 and NIST AI RMF.">
     <meta name="keywords" content="Agent OS, AgentMesh, Agent SRE, AgentMesh Integrations, Agentic Architecture, Scale by Subtraction, AI Agents, Open Source, Python, LLM Governance, AI Safety, SRE, Chaos Testing, OpenTelemetry, Autonomous Systems, Imran Siddique, Dify, LlamaIndex, Agent-Lightning">
     <meta name="author" content="Imran Siddique">
     <meta name="robots" content="index, follow">
@@ -13,14 +13,14 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://imransiddique.com/projects.html">
     <meta property="og:title" content="Open Source AI Projects - Imran Siddique">
-    <meta property="og:description" content="Production-ready open source projects for autonomous AI systems: Agent OS (0% safety violations), AgentMesh (identity & trust), Agent SRE (reliability engineering), and community integrations.">
+    <meta property="og:description" content="Open standards for autonomous AI systems: TRACE attestation, Confidential MCP, and Agent Manifest, plus the Agent Governance Toolkit hosted under Microsoft.">
     <meta property="og:site_name" content="Imran Siddique">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@mosiddi">
     <meta name="twitter:title" content="Open Source AI Projects - Imran Siddique">
-    <meta name="twitter:description" content="Production-ready infrastructure for autonomous AI systems. Agent OS achieves 0% safety violations. AgentMesh provides identity & trust. Agent SRE adds reliability engineering.">
+    <meta name="twitter:description" content="Open standards for autonomous AI systems: TRACE attestation, Confidential MCP, and Agent Manifest, plus the Agent Governance Toolkit hosted under Microsoft.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,11 +42,11 @@
         "mainEntity": {
             "@type": "ItemList",
             "itemListElement": [
-                {"@type": "SoftwareSourceCode", "name": "Agent OS", "description": "Safety-First Kernel for Autonomous AI Agents with 0% policy violations, 734 tests, POSIX-inspired primitives, VS Code extension, and MCP server", "codeRepository": "https://github.com/imran-siddique/agent-os", "programmingLanguage": "Python"},
-                {"@type": "SoftwareSourceCode", "name": "AgentMesh", "description": "The secure nervous system for cloud-native agent ecosystems - Identity, Trust, Reward, Governance for AI agents", "codeRepository": "https://github.com/imran-siddique/agent-mesh", "programmingLanguage": "Python"},
-                {"@type": "SoftwareSourceCode", "name": "Agent SRE", "description": "Reliability engineering framework for AI agents - SLO engine, chaos engineering, replay debugging, cost guard. 878 tests, 20K+ lines", "codeRepository": "https://github.com/imran-siddique/agent-sre", "programmingLanguage": "Python"},
-                {"@type": "SoftwareSourceCode", "name": "Agentic Architecture", "description": "Comprehensive guide to modern agentic system design principles and patterns", "codeRepository": "https://github.com/imran-siddique/agentic-architecture"},
-                {"@type": "SoftwareSourceCode", "name": "AgentMesh Integrations", "description": "Community integrations for AgentMesh - platform plugins and trust providers", "codeRepository": "https://github.com/imran-siddique/agentmesh-integrations", "programmingLanguage": "Python"}
+                {"@type": "SoftwareSourceCode", "name": "TRACE", "description": "Trust Runtime Attestation and Compliance Evidence - an open standard for hardware-attested trust records for AI agents", "codeRepository": "https://github.com/agentrust-io/trace-spec"},
+                {"@type": "SoftwareSourceCode", "name": "cMCP", "description": "Confidential MCP gateway - enforces MCP tool-call policy inside a hardware TEE with signed per-session proofs", "codeRepository": "https://github.com/agentrust-io/cmcp", "programmingLanguage": "Python"},
+                {"@type": "SoftwareSourceCode", "name": "Agent Manifest", "description": "Cryptographic identity and provenance standard that hardware-anchors the artifacts defining an agent at deployment", "codeRepository": "https://github.com/agentrust-io/agent-manifest", "programmingLanguage": "Python"},
+                {"@type": "SoftwareSourceCode", "name": "cA2A", "description": "Confidential agent-to-agent - attested, attenuated delegation and sealed peer channels as a profile on A2A", "codeRepository": "https://github.com/agentrust-io/ca2a"},
+                {"@type": "SoftwareSourceCode", "name": "Agent Governance Toolkit", "description": "Open-source platform for runtime governance of AI agents, hosted under Microsoft: policy enforcement, identity, sandboxing, SRE. 4,877 stars, MIT", "codeRepository": "https://github.com/microsoft/agent-governance-toolkit", "programmingLanguage": "Python"}
             ]
         }
     }
@@ -92,221 +92,202 @@
         <section class="content-section">
             <div class="container">
                 <div class="projects-intro">
-                    <p class="lead">I build the <a href="https://github.com/microsoft/agent-governance-toolkit" target="_blank" style="color: var(--accent-primary);">Agent Governance Toolkit</a> under Microsoft: 8 packages, 5 SDKs, 13,000+ tests, 19 framework integrations. Runtime governance for autonomous AI agents.</p>
+                    <p class="lead">As Chief Platform Officer at <a href="https://www.opaque.co" target="_blank" style="color: var(--accent-primary);">Opaque Systems</a>, I build open standards for running autonomous agents with verifiable, hardware-attested trust. My current work lives in the <a href="https://agentrust-io.com" target="_blank" style="color: var(--accent-primary);">agentrust-io</a> project, and I created the <a href="https://github.com/microsoft/agent-governance-toolkit" target="_blank" style="color: var(--accent-primary);">Agent Governance Toolkit</a> hosted under Microsoft.</p>
                 </div>
 
+                <h2 style="margin-top: 2rem;">🔭 Current Work: agentrust-io Open Standards</h2>
+                <div class="projects-grid">
+                    <article class="project-card featured">
+                        <div class="project-header">
+                            <div class="project-icon">🧾</div>
+                            <div class="project-stars">Open Standard</div>
+                        </div>
+                        <h3>TRACE</h3>
+                        <p class="project-description">Trust Runtime Attestation and Compliance Evidence. A standard for hardware-attested trust records that a verifier can check without trusting the operator running the agent.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Attestation</span>
+                            <span class="tech-badge">Compliance</span>
+                            <span class="tech-badge">Python</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/agentrust-io/trace-spec" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                                View spec on GitHub →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card featured">
+                        <div class="project-header">
+                            <div class="project-icon">🔐</div>
+                            <div class="project-stars">Live</div>
+                        </div>
+                        <h3>cMCP</h3>
+                        <p class="project-description">Confidential MCP gateway. Every Model Context Protocol tool call is evaluated against a Cedar policy bundle inside a hardware TEE, with the bundle hash measured into the attestation report and a signed proof produced per session.</p>
+                        <div class="project-highlights">
+                            <h4>Key Ideas:</h4>
+                            <ul>
+                                <li><strong>TEE-enforced:</strong> policy runs where the governed process cannot reach it</li>
+                                <li><strong>Measured policy:</strong> Cedar bundle hash bound into the hardware attestation</li>
+                                <li><strong>Providers:</strong> TPM, AMD SEV-SNP, Intel TDX, OPAQUE</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-badge">MCP</span>
+                            <span class="tech-badge">TEE</span>
+                            <span class="tech-badge">Cedar</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://cmcp.agentrust-io.com" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                                cmcp.agentrust-io.com →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card featured">
+                        <div class="project-header">
+                            <div class="project-icon">🪪</div>
+                            <div class="project-stars">Live</div>
+                        </div>
+                        <h3>Agent Manifest</h3>
+                        <p class="project-description">A cryptographic identity and provenance standard for AI agents. It hardware-anchors the artifacts that define an agent at deployment, so what is actually running can be proven rather than asserted.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Identity</span>
+                            <span class="tech-badge">Provenance</span>
+                            <span class="tech-badge">Python · TS</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://manifest.agentrust-io.com" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                                manifest.agentrust-io.com →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card featured">
+                        <div class="project-header">
+                            <div class="project-icon">🤝</div>
+                            <div class="project-stars">Open Standard</div>
+                        </div>
+                        <h3>cA2A</h3>
+                        <p class="project-description">Confidential agent-to-agent. Attested, attenuated delegation and sealed peer channels expressed as a profile on the A2A protocol.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">A2A</span>
+                            <span class="tech-badge">Delegation</span>
+                            <span class="tech-badge">TEE</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/agentrust-io/ca2a" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                                View on GitHub →
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                <h2 style="margin-top: 3rem;">🏛️ Agent Governance Toolkit</h2>
                 <div class="projects-grid">
                     <article class="project-card featured">
                         <div class="project-header">
                             <div class="project-icon">🛡️</div>
-                            <div class="project-stars">⭐ Featured | 📦 v1.0.0</div>
+                            <div class="project-stars">⭐ 4,877 | MIT</div>
+                        </div>
+                        <h3>Agent Governance Toolkit</h3>
+                        <p class="project-description">The open-source platform I created for runtime governance of AI agents, now hosted under Microsoft. Policy enforcement, zero-trust identity, execution sandboxing, and reliability engineering for autonomous agents.</p>
+                        <div class="project-highlights">
+                            <h4>By the numbers:</h4>
+                            <ul>
+                                <li><strong>5</strong> top-level distributions (45 packages consolidated)</li>
+                                <li><strong>5</strong> language SDKs: Python, TypeScript, .NET, Rust, Go</li>
+                                <li><strong>992</strong> conformance tests</li>
+                                <li><strong>10/10</strong> OWASP Agentic AI Top 10, NIST AI RMF alignment</li>
+                            </ul>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">TypeScript</span>
+                            <span class="tech-badge">.NET</span>
+                            <span class="tech-badge">Rust</span>
+                            <span class="tech-badge">Go</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/microsoft/agent-governance-toolkit" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                                View on GitHub →
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                <h2 style="margin-top: 3rem;">🧱 Prior Work (consolidated into AGT)</h2>
+                <p style="margin-bottom: 1rem; color: var(--text-secondary);">These began as standalone projects and were folded into the Agent Governance Toolkit. Their original repositories are now marked deprecated and point to AGT.</p>
+                <div class="projects-grid">
+                    <article class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon">⚙️</div>
+                            <div class="project-stars">Consolidated → AGT</div>
                         </div>
                         <h3>Agent OS</h3>
-                        <p class="project-description">A Safety-First Kernel for Autonomous AI Agents. POSIX-inspired primitives with 0% policy violation guarantee. The operating system layer that treats LLMs as raw compute and provides deterministic governance.</p>
-                        
-                        <div class="project-highlights">
-                            <h4>Key Features:</h4>
-                            <ul>
-                                <li><strong>4-Layer Architecture:</strong> Primitives, Infrastructure, Control Plane, Intelligence</li>
-                                <li><strong>IDE Extensions:</strong> VS Code, Copilot, Cursor, JetBrains plugins</li>
-                                <li><strong>MCP Server:</strong> Works with Claude Desktop, Copilot, and Cursor</li>
-                            </ul>
-                        </div>
-
-                        <div class="project-benchmark">
-                            <strong>🎯 Results:</strong> 0% policy violations vs 26.67% for prompt-based safety • Part of AGT (13,000+ tests)
-                        </div>
-
+                        <p class="project-description">The policy engine and governance kernel: deterministic enforcement with POSIX-inspired primitives and a layered privilege architecture. Now the policy core of AGT.</p>
                         <div class="project-tech">
                             <span class="tech-badge">Python</span>
-                            <span class="tech-badge">PyPI</span>
                             <span class="tech-badge">MCP</span>
-                            <span class="tech-badge">VS Code</span>
+                            <span class="tech-badge">Policy</span>
                         </div>
-
                         <div class="project-links">
-                            <a href="https://github.com/imran-siddique/agent-os" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                                View on GitHub →
-                            </a>
-                        </div>
-                    </article>
-
-                    <article class="project-card featured">
-                        <div class="project-header">
-                            <div class="project-icon">🔗</div>
-                            <div class="project-stars">⭐ Featured | 🆕 New</div>
-                        </div>
-                        <h3>AgentMesh</h3>
-                        <p class="project-description">The Secure Nervous System for Cloud-Native Agent Ecosystems. Identity, Trust, Reward, and Governance for the governed agent mesh. The trust layer that A2A and MCP protocols are missing.</p>
-                        
-                        <div class="project-highlights">
-                            <h4>Key Features:</h4>
-                            <ul>
-                                <li><strong>Identity & Zero-Trust:</strong> Agent identity and ephemeral credentials</li>
-                                <li><strong>Trust & Protocol Bridge:</strong> A2A, MCP support</li>
-                                <li><strong>Governance & Compliance:</strong> EU AI Act, SOC 2, HIPAA, GDPR</li>
-                            </ul>
-                        </div>
-
-                        <div class="project-benchmark">
-                            <strong>🔒 Trust:</strong> Ephemeral credentials • Per-agent trust scores • Audit logs
-                        </div>
-
-                        <div class="project-tech">
-                            <span class="tech-badge">Python</span>
-                            <span class="tech-badge">A2A</span>
-                            <span class="tech-badge">MCP</span>
-                            <span class="tech-badge">Trust</span>
-                        </div>
-
-                        <div class="project-links">
-                            <a href="https://github.com/imran-siddique/agent-mesh" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                                View on GitHub →
-                            </a>
-                        </div>
-                    </article>
-
-                    <article class="project-card featured">
-                        <div class="project-header">
-                            <div class="project-icon">🔧</div>
-                            <div class="project-stars">⭐ Featured | 📦 v1.0.0</div>
-                        </div>
-                        <h3>Agent SRE</h3>
-                        <p class="project-description">Reliability engineering framework for AI agent systems. SLO engine, chaos engineering, replay debugging, progressive delivery, cost guard, and incident management—purpose-built for autonomous agents.</p>
-                        
-                        <div class="project-highlights">
-                            <h4>Key Features:</h4>
-                            <ul>
-                                <li><strong>SLO Engine:</strong> Reliability targets for task success rate, cost per task, hallucination rate</li>
-                                <li><strong>Replay Engine:</strong> Time-travel debugging with deterministic replay and trace diffing</li>
-                                <li><strong>Chaos Engineering:</strong> 9 pre-built fault injection templates with resilience scoring</li>
-                                <li><strong>Cost Guard:</strong> Per-task limits, anomaly detection, auto-throttle</li>
-                                <li><strong>Progressive Delivery:</strong> Shadow mode, canary rollouts, auto-rollback</li>
-                            </ul>
-                        </div>
-
-                        <div class="project-benchmark">
-                            <strong>📊 Scale:</strong> Part of AGT (13,000+ tests) • 20+ tool integrations (OTEL, Datadog, Prometheus)
-                        </div>
-
-                        <div class="project-tech">
-                            <span class="tech-badge">Python</span>
-                            <span class="tech-badge">OpenTelemetry</span>
-                            <span class="tech-badge">Prometheus</span>
-                            <span class="tech-badge">Kubernetes</span>
-                        </div>
-
-                        <div class="project-links">
-                            <a href="https://github.com/imran-siddique/agent-sre" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                                View on GitHub →
-                            </a>
-                        </div>
-                    </article>
-
-                    <article class="project-card featured">
-                        <div class="project-header">
-                            <div class="project-icon">📐</div>
-                            <div class="project-stars">⭐ 1</div>
-                        </div>
-                        <h3>Agentic Architecture</h3>
-                        <p class="project-description">A comprehensive guide to modern agentic system design. Documents revolutionary architectural patterns for building production-grade AI agent systems based on real-world experience.</p>
-                        
-                        <div class="project-highlights">
-                            <h4>Core Concepts:</h4>
-                            <ul>
-                                <li><strong>The Inference Trap:</strong> Why "thinking" is technical debt</li>
-                                <li><strong>The Guardrail Router:</strong> Intelligent request routing</li>
-                                <li><strong>Compute-to-Lookup Ratio:</strong> 90/10 rule for performance</li>
-                                <li><strong>Multidimensional Knowledge Graphs:</strong> Semantic firewalls</li>
-                                <li><strong>The Headless Agent:</strong> Silent swarms for coordination</li>
-                                <li><strong>Recursive Ontologies:</strong> Self-updating knowledge systems</li>
-                            </ul>
-                        </div>
-
-                        <div class="project-philosophy">
-                            <em>"If your agent is 'thinking' for every request, you haven't built an agent; you've built a philosophy major. In production, we need engineers, not philosophers."</em>
-                        </div>
-
-                        <div class="project-tech">
-                            <span class="tech-badge">Architecture</span>
-                            <span class="tech-badge">Documentation</span>
-                            <span class="tech-badge">Best Practices</span>
-                        </div>
-
-                        <div class="project-links">
-                            <a href="https://github.com/imran-siddique/agentic-architecture" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                                View on GitHub →
-                            </a>
-                        </div>
-                    </article>
-
-                    <article class="project-card featured">
-                        <div class="project-header">
-                            <div class="project-icon">📊</div>
-                            <div class="project-stars">⭐ Featured | ⭐ 2</div>
-                        </div>
-                        <h3>Agent SRE</h3>
-                        <p class="project-description">Reliability Engineering for AI Agent Systems. SLOs, error budgets, chaos testing, deterministic replay, and progressive delivery for multi-agent production environments. Part of the Agent OS + AgentMesh governance stack.</p>
-                        
-                        <div class="project-highlights">
-                            <h4>Core Capabilities:</h4>
-                            <ul>
-                                <li><strong>SLO Engine:</strong> Define reliability targets (task success, cost, latency, hallucination rate)</li>
-                                <li><strong>Replay Engine:</strong> Deterministic time-travel debugging for agent decisions</li>
-                                <li><strong>Progressive Delivery:</strong> Shadow mode, canary rollouts, auto-rollback</li>
-                                <li><strong>Chaos Testing:</strong> Fault injection, resilience scoring, 9 experiment templates</li>
-                                <li><strong>Cost Guard:</strong> Budgets, anomaly detection, auto-throttle, kill switch</li>
-                                <li><strong>Incident Manager:</strong> SLO breach detection, circuit breaker, postmortems</li>
-                            </ul>
-                        </div>
-
-                        <div class="project-benchmark">
-                            <strong>🎯 Production Ready:</strong> Part of AGT (13,000+ tests) • Full OpenTelemetry integration
-                        </div>
-
-                        <div class="project-tech">
-                            <span class="tech-badge">Python</span>
-                            <span class="tech-badge">SRE</span>
-                            <span class="tech-badge">OpenTelemetry</span>
-                            <span class="tech-badge">Chaos</span>
-                        </div>
-
-                        <div class="project-links">
-                            <a href="https://github.com/imran-siddique/agent-sre" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                                View on GitHub →
+                            <a href="https://microsoft.github.io/agent-governance-toolkit/packages/agent-os/" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                                Docs →
                             </a>
                         </div>
                     </article>
 
                     <article class="project-card">
                         <div class="project-header">
-                            <div class="project-icon">🔌</div>
-                            <div class="project-stars">Community</div>
+                            <div class="project-icon">🔗</div>
+                            <div class="project-stars">Consolidated → AGT</div>
                         </div>
-                        <h3>AgentMesh Integrations</h3>
-                        <p class="project-description">Community integrations for AgentMesh — platform plugins and trust providers. Dify, LangChain, LlamaIndex, Agent Lightning, Nostr Web of Trust, and Moltbook integrations for identity, trust, and governance.</p>
-                        
-                        <div class="project-highlights">
-                            <h4>Available Integrations:</h4>
-                            <ul>
-                                <li><strong>LangChain:</strong> Ed25519 identity, trust-gated tools, delegation chains</li>
-                                <li><strong>LlamaIndex:</strong> Trust-verified workers, identity-aware query engines</li>
-                                <li><strong>Dify Plugin:</strong> Packaged .difypkg with peer verification and trust scoring</li>
-                                <li><strong>Agent Lightning:</strong> Agent-OS governance adapters, reward shaping</li>
-                                <li><strong>Moltbook:</strong> AgentMesh governance skill for agent registry</li>
-                                <li><strong>Nostr WoT:</strong> Decentralized trust scoring integration</li>
-                            </ul>
-                        </div>
-
+                        <h3>AgentMesh</h3>
+                        <p class="project-description">Zero-trust identity mesh for AI agents: Ed25519 identity, trust cards, and cross-org federation. Now the identity layer of AGT.</p>
                         <div class="project-tech">
-                            <span class="tech-badge">Python</span>
-                            <span class="tech-badge">Integrations</span>
-                            <span class="tech-badge">Trust</span>
                             <span class="tech-badge">Identity</span>
+                            <span class="tech-badge">A2A</span>
+                            <span class="tech-badge">MCP</span>
                         </div>
-
                         <div class="project-links">
-                            <a href="https://github.com/imran-siddique/agentmesh-integrations" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                            <a href="https://microsoft.github.io/agent-governance-toolkit/packages/agent-mesh/" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                                Docs →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon">📊</div>
+                            <div class="project-stars">Consolidated → AGT</div>
+                        </div>
+                        <h3>Agent SRE</h3>
+                        <p class="project-description">Reliability engineering for AI agents: SLO engine, chaos testing, deterministic replay, cost guard, and progressive delivery. Now the reliability layer of AGT.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">SRE</span>
+                            <span class="tech-badge">OpenTelemetry</span>
+                            <span class="tech-badge">Chaos</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://microsoft.github.io/agent-governance-toolkit/packages/agent-sre/" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                                Docs →
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-header">
+                            <div class="project-icon">📐</div>
+                            <div class="project-stars">Reference</div>
+                        </div>
+                        <h3>Agentic Architecture</h3>
+                        <p class="project-description">A written guide to production agentic system design: the Inference Trap, the Guardrail Router, and the compute-to-lookup ratio.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Architecture</span>
+                            <span class="tech-badge">Patterns</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/imran-siddique/agentic-architecture" target="_blank" rel="noopener noreferrer" class="btn-primary">
                                 View on GitHub →
                             </a>
                         </div>
@@ -315,60 +296,17 @@
                     <article class="project-card">
                         <div class="project-header">
                             <div class="project-icon">🔬</div>
-                            <div class="project-stars">Research</div>
+                            <div class="project-stars">Methodology</div>
                         </div>
                         <h3>Scale by Subtraction</h3>
-                        <p class="project-description">My core methodology for building reliable AI systems. Focus on removing complexity rather than adding features. Via Negativa applied to software architecture and AI safety.</p>
-                        
-                        <div class="project-highlights">
-                            <h4>Key Principles:</h4>
-                            <ul>
-                                <li><strong>Control Planes over Prompts:</strong> Deterministic enforcement</li>
-                                <li><strong>Graphs over Context:</strong> Prevent hallucinations structurally</li>
-                                <li><strong>Silent Swarms over Chat:</strong> Structured data communication</li>
-                                <li><strong>Memory Hygiene:</strong> Agents that know how to forget</li>
-                            </ul>
-                        </div>
-
+                        <p class="project-description">My methodology for reliable AI systems: remove complexity rather than add features. Control planes over prompts, graphs over context, silent swarms over chat.</p>
                         <div class="project-tech">
                             <span class="tech-badge">Methodology</span>
                             <span class="tech-badge">AI Safety</span>
-                            <span class="tech-badge">Architecture</span>
                         </div>
-
                         <div class="project-links">
                             <a href="writings.html" class="btn-primary">
-                                Read About It →
-                            </a>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <div class="project-header">
-                            <div class="project-icon">📝</div>
-                            <div class="project-stars">Writing</div>
-                        </div>
-                        <h3>Technical Articles</h3>
-                        <p class="project-description">Deep dives into agentic systems, architectural patterns, and the philosophy of building AI that works. Published on Medium, Dev.to, and LinkedIn with practical, battle-tested approaches.</p>
-                        
-                        <div class="project-highlights">
-                            <h4>Featured Series:</h4>
-                            <ul>
-                                <li><strong>The Accumulation Paradox:</strong> Why agents degrade over time</li>
-                                <li><strong>The Mute Agent:</strong> Shut up and listen to the graph</li>
-                                <li><strong>The Agentic Architect:</strong> Building AI governance systems</li>
-                            </ul>
-                        </div>
-
-                        <div class="project-tech">
-                            <span class="tech-badge">Medium</span>
-                            <span class="tech-badge">Dev.to</span>
-                            <span class="tech-badge">LinkedIn</span>
-                        </div>
-
-                        <div class="project-links">
-                            <a href="https://medium.com/@isiddique" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                                Read on Medium →
+                                Read about it →
                             </a>
                         </div>
                     </article>
@@ -376,40 +314,16 @@
                     <article class="project-card">
                         <div class="project-header">
                             <div class="project-icon">🌐</div>
-                            <div class="project-stars">Ecosystem</div>
+                            <div class="project-stars">Curated</div>
                         </div>
                         <h3>Awesome AI Governance</h3>
-                        <p class="project-description">Curated list of tools, frameworks, and resources integrated with the Agent OS + AgentMesh + Agent SRE governance stack. The definitive resource for AI agent governance.</p>
-                        
+                        <p class="project-description">A curated list of tools, frameworks, standards, and resources for AI agent governance, safety, and compliance.</p>
                         <div class="project-tech">
                             <span class="tech-badge">Curated List</span>
-                            <span class="tech-badge">Ecosystem</span>
                             <span class="tech-badge">Resources</span>
                         </div>
-
                         <div class="project-links">
-                            <a href="https://github.com/imran-siddique/awesome-ai-governance" target="_blank" rel="noopener noreferrer" class="btn-primary">
-                                View on GitHub →
-                            </a>
-                        </div>
-                    </article>
-
-                    <article class="project-card">
-                        <div class="project-header">
-                            <div class="project-icon">🔌</div>
-                            <div class="project-stars">Plugins</div>
-                        </div>
-                        <h3>AgentMesh Integrations</h3>
-                        <p class="project-description">Platform plugins and trust providers for AgentMesh. Includes the Dify Trust Layer plugin (merged into Dify Marketplace) and framework-specific governance adapters.</p>
-                        
-                        <div class="project-tech">
-                            <span class="tech-badge">Dify</span>
-                            <span class="tech-badge">Plugins</span>
-                            <span class="tech-badge">Trust Providers</span>
-                        </div>
-
-                        <div class="project-links">
-                            <a href="https://github.com/imran-siddique/agentmesh-integrations" target="_blank" rel="noopener noreferrer" class="btn-primary">
+                            <a href="https://github.com/agentrust-io/awesome-ai-governance" target="_blank" rel="noopener noreferrer" class="btn-primary">
                                 View on GitHub →
                             </a>
                         </div>
@@ -417,47 +331,9 @@
                 </div>
 
                 <div class="ecosystem-section" style="margin-top: 4rem;">
-                    <h2>🌍 Ecosystem Integrations</h2>
-                    <p class="lead" style="margin-bottom: 1.5rem;">Our governance layer is integrated into major AI frameworks, with 19 integrations across LangChain, CrewAI, AutoGen, Google ADK, OpenAI Agents, LlamaIndex, Haystack, Mastra, MCP, A2A, and more.</p>
-                    
-                    <h3 style="margin-top: 1.5rem;">✅ Merged Contributions</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem;">
-                        <div style="padding: 1.5rem; border-radius: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color);">
-                            <h4 style="margin-bottom: 0.5rem;">🟢 Dify (65K ⭐)</h4>
-                            <p>AgentMesh Trust Layer plugin merged into the Dify Marketplace. Real-time trust scoring for Dify agent workflows.</p>
-                            <a href="https://github.com/langgenius/dify-plugins/pull/2060" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary);">PR #2060 →</a>
-                        </div>
-                        <div style="padding: 1.5rem; border-radius: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color);">
-                            <h4 style="margin-bottom: 0.5rem;">🟢 LlamaIndex (47K ⭐)</h4>
-                            <p>AgentMesh Trust Layer integration for LlamaIndex agent pipelines. Trust-verified tool calls and query routing.</p>
-                            <a href="https://github.com/run-llama/llama_index/pull/20644" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary);">PR #20644 →</a>
-                        </div>
-                        <div style="padding: 1.5rem; border-radius: 12px; background: var(--bg-secondary); border: 1px solid var(--border-color);">
-                            <h4 style="margin-bottom: 0.5rem;">🟢 Microsoft Agent-Lightning (15K ⭐)</h4>
-                            <p>Agent-OS governance integration for reinforcement learning training pipelines.</p>
-                            <a href="https://github.com/microsoft/agent-lightning/pull/478" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary);">PR #478 →</a>
-                        </div>
-                    </div>
-
-                    <h3 style="margin-top: 2rem;">🔄 Open Proposals (10 Frameworks)</h3>
-                    <p style="margin-bottom: 1rem;">Governance integration proposals filed across major frameworks:</p>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
-                        <span class="tech-badge">CrewAI (44K ⭐)</span>
-                        <span class="tech-badge">AutoGen (54K ⭐)</span>
-                        <span class="tech-badge">LangGraph (24K ⭐)</span>
-                        <span class="tech-badge">Google ADK (18K ⭐)</span>
-                        <span class="tech-badge">Semantic Kernel (27K ⭐)</span>
-                        <span class="tech-badge">smolagents (25K ⭐)</span>
-                        <span class="tech-badge">PydanticAI (15K ⭐)</span>
-                        <span class="tech-badge">OpenAI Swarm (21K ⭐)</span>
-                        <span class="tech-badge">AGENT.md Spec</span>
-                        <span class="tech-badge">Oracle Agent Spec</span>
-                    </div>
-                </div>
-
-                <div class="research-section" style="margin-top: 4rem;">
-                    <h2>📄 Research Papers</h2>
-                    <p class="lead" style="margin-bottom: 1.5rem;">Research papers spanning agent governance, trust protocols, and reliability engineering. See the GitHub repositories for details.</p>
+                    <h2>🌍 Ecosystem</h2>
+                    <p class="lead" style="margin-bottom: 1rem;">The Agent Governance Toolkit ships governed examples and adapters for around ten agent frameworks, including LangChain, CrewAI, AutoGen, Google ADK, OpenAI Agents, LlamaIndex, and smolagents, alongside MCP and A2A. See the toolkit repository for the current, authoritative list.</p>
+                    <a href="https://github.com/microsoft/agent-governance-toolkit" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary);">Framework integrations on GitHub →</a>
                 </div>
 
                 <div class="github-cta">
@@ -520,7 +396,7 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 Imran Siddique. All rights reserved.</p>
-                <p>Last updated: May 2026</p>
+                <p>Last updated: July 2026</p>
             </div>
         </div>
     </footer>
