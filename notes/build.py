@@ -307,26 +307,49 @@ def index_page(notes):
 """
 
 
+def feed_body(n):
+    """Full article HTML for content:encoded, with the sources list appended.
+
+    `description` alone is not enough. Feed *readers* are happy with a summary, but
+    importers treat description as the whole article: dev.to's RSS import produced a
+    post containing nothing but the title and the standfirst until this was added.
+    """
+    srcs = "".join(
+        f'<li><a href="{s["url"]}">{html.escape(s["label"])}</a></li>'
+        if s["url"] else f'<li>{html.escape(s["label"])}</li>'
+        for s in n["sources"])
+    return (f'<p><em>{html.escape(n["standfirst"])}</em></p>\n'
+            f'{n["html"]}\n'
+            f'<h2>Checked against</h2>\n<ul>{srcs}</ul>')
+
+
 def feed(notes):
     now = datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S +0000")
     items = []
     for n in notes[:30]:
         pub = datetime.strptime(n["date"], "%Y-%m-%d").strftime("%a, %d %b %Y 09:00:00 +0000")
+        cats = "".join(f"\n      <category>{html.escape(t)}</category>" for t in n["tags"])
+        body = feed_body(n).replace("]]>", "]]]]><![CDATA[>")
         items.append(f"""    <item>
       <title>{html.escape(n["title"])}</title>
       <link>{n["url"]}</link>
       <guid isPermaLink="true">{n["url"]}</guid>
-      <pubDate>{pub}</pubDate>
+      <pubDate>{pub}</pubDate>{cats}
       <description>{html.escape(n["standfirst"])}</description>
+      <content:encoded><![CDATA[{body}]]></content:encoded>
     </item>""")
     return f"""<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>Notes by Imran Siddique</title>
     <link>{SITE}/notes/</link>
     <atom:link href="{SITE}/notes/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Working notes on agent security, evidence and governance.</description>
     <language>en</language>
+    <dc:creator>Imran Siddique</dc:creator>
     <lastBuildDate>{now}</lastBuildDate>
 {chr(10).join(items)}
   </channel>
@@ -370,6 +393,14 @@ def load():
         if not meta["sources"]:
             problems.append(f"{path.name}: no sources listed. A note with nothing to check "
                             f"against does not belong in /notes/.")
+        # dev.to silently truncates tags at 20 characters on RSS import, which is how
+        # `confidentialcomputing` became the dead tag `confidentialcomputin` on six
+        # Medium cross-posts. Catch it here rather than downstream.
+        for tag in meta.get("tags", []):
+            if len(tag.replace("-", "")) > 20:
+                problems.append(f"{path.name}: tag `{tag}` is longer than 20 characters "
+                                f"once hyphens are stripped, so dev.to will truncate it "
+                                f"into a tag nobody follows. Shorten it.")
         dashes = "—–"
         scanned = body + meta.get("title", "") + meta.get("standfirst", "")
         if any(d in scanned for d in dashes):

@@ -1,32 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>Notes by Imran Siddique</title>
     <link>https://imransiddique.com/notes/</link>
     <atom:link href="https://imransiddique.com/notes/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Working notes on agent security, evidence and governance.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 14 Aug 2026 19:40:00 +0000</lastBuildDate>
+    <dc:creator>Imran Siddique</dc:creator>
+    <lastBuildDate>Fri, 14 Aug 2026 22:13:28 +0000</lastBuildDate>
     <item>
       <title>The LiteLLM compromise is not in any of the places you would look for it</title>
       <link>https://imransiddique.com/notes/2026-08-14-litellm-not-in-the-record.html</link>
       <guid isPermaLink="true">https://imransiddique.com/notes/2026-08-14-litellm-not-in-the-record.html</guid>
       <pubDate>Fri, 14 Aug 2026 09:00:00 +0000</pubDate>
+      <category>supply-chain</category>
+      <category>evidence</category>
+      <category>ci-cd</category>
       <description>Both poisoned versions 404 on PyPI, no CVE was ever issued, and the KEV entry filed two days later belongs to the scanner rather than the gateway.</description>
+      <content:encoded><![CDATA[<p><em>Both poisoned versions 404 on PyPI, no CVE was ever issued, and the KEV entry filed two days later belongs to the scanner rather than the gateway.</em></p>
+<p>In March, two poisoned releases of LiteLLM went up on PyPI. CloudSEK reported on 11 August that they may have reached more than 2,500 companies and 434,000 CI/CD pipelines. On 13 August Hudson Rock published its analysis of a 153GB archive taken in the attack: 433,909 files, of which 118,829 CI runner dumps were attributed to 2,488 corporate domains.</p>
+<p>I went to check the figures and found something more interesting than the figures. If you go looking for this incident in the three places an engineer would normally look, it is not in any of them.</p>
+<h2>PyPI</h2>
+<p><code>litellm</code> 1.82.7 and 1.82.8 are not on PyPI. Not yanked, which would leave them visible and installable by exact pin. Gone. Both return HTTP 404 from PyPI's own API, and neither appears anywhere in an index that currently lists 1,189 versions of the package.</p>
+<p>What the record shows instead is 1.82.6 on 22 March, then 1.83.0 on 31 March, with nothing between them and no 1.82.9 at all. A reader arriving at the release history today sees a nine day gap and a minor version bump. Nothing on that timeline says an incident happened.</p>
+<p>Removing the artifacts was right. Leaving no marker where they stood is a separate decision, and it is the one that makes the package's own history misleading.</p>
+<h2>The CVE</h2>
+<p>There is no CVE for the LiteLLM package compromise. Searching NVD across March and April 2026 returns only ordinary code vulnerabilities: an unauthenticated <code>/config/update</code> endpoint, a JWT authentication flaw, a guardrails sandbox escape. LiteLLM appears twice in CISA's Known Exploited Vulnerabilities catalog and both are red herrings, CVE-2026-42208 added on 8 May and CVE-2026-42271 on 8 June, unrelated injection bugs found months later.</p>
+<h2>The KEV entry that does exist</h2>
+<p>Two days after the poisoned releases there is a KEV entry, and it is worth being precise about whose it is. <strong>CVE-2026-33634, added 26 March, is Aqua Security's Trivy, not LiteLLM.</strong> CVSS 4.0 base score 9.4. CISA's own description: an embedded malicious code vulnerability that could allow an attacker to reach everything in the CI/CD environment, including all tokens, SSH keys, cloud credentials, database passwords and any sensitive configuration in memory.</p>
+<p>This matters because Trivy was the way in. CloudSEK describes a leaked automation token that was rotated but not fully revoked, leaving roughly a 20 day window in LiteLLM's release pipeline. The MITRE record for the Trivy CVE is more specific: on 19 March a threat actor published a malicious Trivy v0.69.4, <strong>force-pushed 76 of the 77 version tags in <code>aquasecurity/trivy-action</code></strong> to credential-stealing malware, and replaced all seven tags in <code>aquasecurity/setup-trivy</code>. It was a continuation of an attack that began in late February, and after the 1 March disclosure the credential rotation "was not atomic".</p>
+<p>The dates sit close enough that it is easy to file the 26 March listing under LiteLLM and move on, which inverts the lesson. The component that earned a critical CVE and a federal remediation deadline was the scanner inside the build.</p>
+<h2>What that does to the usual advice</h2>
+<p>The standard response to a poisoned package is to pin your dependencies, and for the PyPI half of this that holds. For the Trivy half it fails in the most literal way available: 76 of 77 tags were force-pushed. Anyone pinned to a version tag got the malware precisely because they were pinned. Only a commit SHA survives a force-push, and almost nobody pins actions by SHA.</p>
+<p>Pinning is not integrity. It is a stable name for something somebody else can still overwrite.</p>
+<h2>The part I cannot help with</h2>
+<p>Five months on, 2,488 organisations established their own exposure by reading someone else's analysis of a stolen archive. Kevin Beaumont tried the credentials belonging to one large US technology company and reported that almost every one still worked.</p>
+<p>That gap is not a detection failure. Detection worked, and the packages were live for about forty minutes. It is that nothing produced a durable record of what the build actually did while it ran, so the only surviving account of the incident is the attacker's copy.</p>
+<p>I should be straight that this sits outside everything I have built. cMCP records what crosses the gateway and TRACE signs the records so a third party can check them, and neither is anywhere near a CI runner at build time. A poisoned package executing inside your pipeline never touches either one.</p>
+<h2>What did not survive checking</h2>
+<ul><li><strong>"CISA added the CVE two days in."</strong> Cut. No CVE exists for this compromise. The 26 March KEV entry is Trivy's.</li><li><strong>"Shipped a clean version six days later."</strong> Corrected. 1.82.6 is 22 March and 1.83.0 is 31 March, so nine days after the last clean release and seven after the poisoned ones.</li><li><strong>"PyPI quarantined them inside forty minutes."</strong> Narrowed. CloudSEK gives forty minutes as the period the packages were live and does not say who removed them. No source I could reach names the actor.</li><li><strong>"An unpinned Trivy scanner."</strong> Corrected. The vector was a leaked automation token and a non-atomic rotation, not an unpinned dependency.</li><li><strong>"2,488 corporate domains" from 433,909 files.</strong> Scoped. The domains were attributed from the 118,829 CI runner dumps, a subset of the archive.</li><li>Whether LiteLLM's maintainers disclosed the same day: I could not verify it, so it is not here.</li></ul>
+<h2>Checked against</h2>
+<ul><li><a href="https://www.cloudsek.com/blog/ai-supply-chain-breach-2500-companies-434000-cicd-pipelines">CloudSEK, &quot;2,500+ Companies and 434,000 CI/CD Pipelines Exposed in the Largest AI Supply Chain Breach of 2026&quot;, 11 August 2026</a></li><li><a href="https://www.helpnetsecurity.com/2026/08/13/litellm-breach-stolen-credentials-leak/">Help Net Security on Hudson Rock&#x27;s archive analysis, 13 August 2026</a></li><li><a href="https://pypi.org/pypi/litellm/json">PyPI JSON API for litellm, read 14 August 2026</a></li><li><a href="https://cveawg.mitre.org/api/cve/CVE-2026-33634">CVE-2026-33634, &quot;Trivy ecosystem supply chain briefly compromised&quot;, MITRE record</a></li><li><a href="https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json">CISA Known Exploited Vulnerabilities catalog, version 2026.08.14</a></li></ul>]]></content:encoded>
     </item>
     <item>
       <title>What the encrypted reasoning paper actually counted</title>
       <link>https://imransiddique.com/notes/2026-08-13-encrypted-reasoning-denominators.html</link>
       <guid isPermaLink="true">https://imransiddique.com/notes/2026-08-13-encrypted-reasoning-denominators.html</guid>
       <pubDate>Thu, 13 Aug 2026 09:00:00 +0000</pubDate>
+      <category>agent-security</category>
+      <category>evidence</category>
+      <category>retention</category>
       <description>Coverage of the reasoning-trace harvest reported three different totals as if they disagreed. They are all the paper&#x27;s own numbers, at three different denominators.</description>
+      <content:encoded><![CDATA[<p><em>Coverage of the reasoning-trace harvest reported three different totals as if they disagreed. They are all the paper&#x27;s own numbers, at three different denominators.</em></p>
+<p>A paper posted on 10 August showed that the encrypted reasoning blocks Anthropic, OpenAI and Google hand back to API clients were interchangeable inside each provider. A block issued in one session could be replayed into a different session, a different account, a different model in the same family. Hand it to a weaker sibling model and ask it to transcribe, and it reads the contents back in plain text.</p>
+<p>No cipher was broken. The ciphertext was confidential and it was bound to nothing.</p>
+<p>I want to record two things that the coverage got wrong, because both are the kind of error that survives into everyone's slide deck.</p>
+<h2>The three totals are not a disagreement</h2>
+<p>Different outlets reported the harvest as 182 credentials plus 367 pieces of personal information, or as 704 artifacts, or as 912. Read side by side those look like sources contradicting each other, and at least one write-up said so.</p>
+<p>They are all in the paper, and they count different things:</p>
+<ul><li><strong>912</strong> is every privacy artifact recovered, including the ones that came from benchmark sources rather than real users.</li><li><strong>704</strong> is the subset from genuine, non-benchmark user sessions. That is the number that means something, because those are real people's secrets.</li><li><strong>182 credentials and 367 pieces of personal information</strong> are two of the paper's three artifact categories, which is what its abstract leads with.</li></ul>
+<p>Within the genuine-session set, the breakdown is 62 API keys, 33 passwords, 24 access tokens, 7 private keys and 30 personal email addresses. The scan covered 6,708 publicly posted agent trajectories and decoded 315,320 reasoning blocks.</p>
+<p>The lesson is not about this paper. It is that coverage reliably repeats a number and drops the scope attached to it, and two correctly-reported numbers at different denominators then read as a contradiction. If you find yourself adjudicating between outlets, the answer is usually that nobody disagreed and the denominators were thrown away in the retelling.</p>
+<h2>The dismissals were not a response to this paper</h2>
+<p>Matthew Green reported the replay behaviour on 29 May, three months earlier. His account of what came back is worth quoting exactly, because a shortened version of it is now circulating with the causality reversed:</p>
+<blockquote><p>OpenAI said my report was unreproducible</p></blockquote>
+<blockquote><p>Anthropic quite reasonably told me they don't see any security implications in side channels or replays</p></blockquote>
+<p>Several summaries have welded those quotes onto the August paper, producing a story where providers waved the researchers away and the team ran the harvest to force the issue. That story is not in the paper. Its disclosure section says all model providers acknowledged receipt of its report, and it attributes the earlier dismissals to Green's May disclosure by citation. Green himself calls Anthropic's answer a fine decision.</p>
+<p>So the honest version is duller and more interesting: a cryptographer flagged the primitive in May, the providers judged it low severity, and a paper in August measured what the primitive was costing in the wild. Nobody in that sequence behaved badly. The gap was that no one had counted.</p>
+<p>The paper's reproducibility statement notes that as of August the results no longer reproduce, because of mitigations the providers implemented following the disclosure. It does not date those mitigations, and I have not seen anyone who can.</p>
+<h2>The part that is mine</h2>
+<p>The missing control is a binding check at decrypt: this block was issued for this session, this account, this model, or it is refused. It runs at the provider's API boundary, because that is the only place the plaintext exists. No gateway, no agent framework and no policy layer can validate a binding on a payload it cannot open. That is enforcement, and it prevents the replay.</p>
+<p>The evidence layer has a different job and it does not prevent anything. It decides what is allowed into the record in the first place.</p>
+<p>Here is where that lands on my own work. The TRACE specification says, in its stated limitations:</p>
+<blockquote><p>does not record the model's internal chain-of-thought, intermediate reasoning, or context window contents</p></blockquote>
+<p>We file that under Known Limitations and it belongs there, because reasoning that changes behaviour without producing a tool call never reaches the record. It is also the reason a TRACE record contains nothing we cannot read back, which is the property this paper makes expensive to lack. Sixty-four of the recovered artifacts appeared only inside the opaque blocks and nowhere in the visible transcript. Some developers had cleaned the readable session before publishing it and shipped the secrets anyway.</p>
+<p>A retention policy is a claim about fields you can read. If your trace carries a field you cannot open, you do not have a retention policy for it. You have a hope.</p>
+<h2>Checked against</h2>
+<ul><li><a href="https://arxiv.org/abs/2608.09867">Panfilov et al., &quot;Stealing Reasoning Traces from Proprietary LLM APIs&quot;, arXiv 2608.09867, 10 August 2026</a></li><li><a href="https://blog.cryptographyengineering.com/2026/05/29/fooling-around-with-encrypted-reasoning-blobs/">Matthew Green, &quot;Let&#x27;s talk about encrypted reasoning&quot;, 29 May 2026</a></li><li><a href="https://github.com/agentrust-io/trace-spec/blob/main/LIMITATIONS.md">TRACE specification, LIMITATIONS.md</a></li></ul>]]></content:encoded>
     </item>
     <item>
       <title>Two of the three endpoints checked authorization</title>
       <link>https://imransiddique.com/notes/2026-08-12-two-of-three-endpoints.html</link>
       <guid isPermaLink="true">https://imransiddique.com/notes/2026-08-12-two-of-three-endpoints.html</guid>
       <pubDate>Wed, 12 Aug 2026 09:00:00 +0000</pubDate>
+      <category>agent-security</category>
+      <category>api</category>
+      <category>authorization</category>
       <description>The gym booking story is being told as an API with no authorization. The agent&#x27;s own account says two of the three operations it touched returned 403, and one did not.</description>
+      <content:encoded><![CDATA[<p><em>The gym booking story is being told as an API with no authorization. The agent&#x27;s own account says two of the three operations it touched returned 403, and one did not.</em></p>
+<p>An Australian man asked his personal assistant agent to book him a gym class. He was fourth on the waitlist. Minutes later he was third, because the agent had cancelled the booking of the person in first place.</p>
+<p>The agent explained itself in plain text, and its wording matters:</p>
+<blockquote><p>the API has zero authorisations checks on cancelling other people's reservations</p></blockquote>
+<p>Nothing was jailbroken. There was no prompt injection. The agent read the API and used it exactly as documented.</p>
+<h2>The detail that changes the story</h2>
+<p>Most coverage stopped at "the API had no authorization". The agent's second message, which one outlet carried and the rest did not, says something more specific: <code>createReservation</code> and <code>joinWaitlist</code> both returned 403 Forbidden. Only <code>cancelReservation</code> was missing the ownership check.</p>
+<p>So this was not a platform built without a security model. It was a platform with a security model and one handler where somebody forgot to apply it. Two of the three operations the agent touched behaved correctly.</p>
+<p>That is a much more uncomfortable finding, because "we never did authorization" is a project you can schedule and "one of our handlers is missing a check" is a condition every codebase is in right now and cannot easily prove it is not.</p>
+<p>I am scoping that carefully on purpose. Three operations were reported. That says nothing about how many endpoints the booking platform has, and I do not know the ratio. When I first wrote this up I said "two thirds of the API worked", which generalises three data points to a whole system, and I had to correct it after publishing. The honest statement is the narrow one.</p>
+<h2>What kind of bug this is</h2>
+<p>Broken Object Level Authorization: the caller is authenticated, the caller is permitted to invoke the operation, and nobody checks that the caller owns the specific object being operated on. It is the first entry on the OWASP API Security Top 10, and it has been for years.</p>
+<p>The gap was presumably always there. Human customers only ever clicked the buttons the web interface gave them, and the interface never offered to cancel a stranger's reservation. The agent is not a new class of attacker. It is the first client in that API's history that tried every request the API allowed.</p>
+<p>The missing control is per-request object authorization: does this caller own this object, not is this caller logged in. It has to run in the endpoint's own handler, on the server, next to the data that answers the question.</p>
+<h2>Why my own layer would not have caught it</h2>
+<p>AGT puts a deterministic policy engine between an agent and its tools, with no model anywhere in the safety path. On this incident it would have seen the agent issue a cancel call. It would not have known the reservation belonged to a stranger, because that fact lives in the gym's database and appears nowhere in the request.</p>
+<p>A governance layer on the agent's side cannot make a check that only the server can make. This is the boundary, and I would rather state it than let a diagram imply otherwise.</p>
+<p>There is a second thing worth separating, because I blurred it in the first version of this and it is worth not repeating. Enforcement runs at the service, before the operation executes, and it prevents. Evidence is written after the fact, it is tamper-evident, and it proves. A log would not have saved the person whose class was cancelled. It would only have made the conversation afterwards short.</p>
+<p>OpenClaw was at 385,960 stars when I read the repository. Every latent authorization gap in your API now has a client that will find it, and it will find it while trying to be helpful.</p>
+<h2>What did not survive checking</h2>
+<ul><li>One outlet placed the man in Melbourne. The Register says only "Australian" and the other coverage names no city, so the city is not here.</li><li>Reports of how far ahead the agent could book range from "several weeks" to "months", so no number is here either.</li><li>Several outlets called this Australia's first autonomous cyberattack. That is a characterisation and not a finding, and it argues the story on the wrong axis.</li><li>The original ABC News report is the primary source. abc.net.au blocks the crawler I use, so I have not read it directly. Everything above comes from two outlets that quote it and agree with each other.</li></ul>
+<h2>Checked against</h2>
+<ul><li><a href="https://thenextweb.com/">The Next Web, coverage carrying the agent&#x27;s second message</a></li><li><a href="https://www.theregister.com/">The Register, coverage quoting ABC News (Australia), 10 August 2026</a></li><li><a href="https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/">OWASP API Security Top 10, API1 Broken Object Level Authorization</a></li><li><a href="https://api.github.com/repos/openclaw/openclaw">openclaw/openclaw star count read at api.github.com, 12 August 2026</a></li></ul>]]></content:encoded>
     </item>
   </channel>
 </rss>
