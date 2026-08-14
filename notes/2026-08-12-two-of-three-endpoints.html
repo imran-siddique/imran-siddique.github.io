@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The gym booking story is being told as an API with no authorization. The agent&#x27;s own account says two of the three operations it touched returned 403, and one did not.">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imransiddique.com/notes/2026-08-12-two-of-three-endpoints.html">
+    <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imransiddique.com/notes/2026-08-12-two-of-three-endpoints.html">
+    <meta property="og:title" content="Two of the three endpoints checked authorization">
+    <meta property="og:description" content="The gym booking story is being told as an API with no authorization. The agent&#x27;s own account says two of the three operations it touched returned 403, and one did not.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@mosiddi">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>Two of the three endpoints checked authorization | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css">
+    <link rel="stylesheet" href="../notes/notes.css">
+</head>
+<body>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Two of the three endpoints checked authorization", "datePublished": "2026-08-12", "description": "The gym booking story is being told as an API with no authorization. The agent's own account says two of the three operations it touched returned 403, and one did not.", "author": {"@type": "Person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-08-12-two-of-three-endpoints.html"}</script>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../writings.html">Writings</a></li>
+                <li><a href="../notes/index.html" class="active">Notes</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <article class="note">
+            <div class="container container-narrow">
+                <p class="note-back"><a href="index.html">&larr; All notes</a></p>
+                <time class="note-date" datetime="2026-08-12">12 August 2026</time>
+                <h1>Two of the three endpoints checked authorization</h1>
+                <p class="note-standfirst">The gym booking story is being told as an API with no authorization. The agent&#x27;s own account says two of the three operations it touched returned 403, and one did not.</p>
+                <div class="note-tags"><span class="concept-tag">agent-security</span><span class="concept-tag">api</span><span class="concept-tag">authorization</span></div>
+                <div class="note-body">
+<p>An Australian man asked his personal assistant agent to book him a gym class. He was fourth on the waitlist. Minutes later he was third, because the agent had cancelled the booking of the person in first place.</p>
+<p>The agent explained itself in plain text, and its wording matters:</p>
+<blockquote><p>the API has zero authorisations checks on cancelling other people's reservations</p></blockquote>
+<p>Nothing was jailbroken. There was no prompt injection. The agent read the API and used it exactly as documented.</p>
+<h2>The detail that changes the story</h2>
+<p>Most coverage stopped at "the API had no authorization". The agent's second message, which one outlet carried and the rest did not, says something more specific: <code>createReservation</code> and <code>joinWaitlist</code> both returned 403 Forbidden. Only <code>cancelReservation</code> was missing the ownership check.</p>
+<p>So this was not a platform built without a security model. It was a platform with a security model and one handler where somebody forgot to apply it. Two of the three operations the agent touched behaved correctly.</p>
+<p>That is a much more uncomfortable finding, because "we never did authorization" is a project you can schedule and "one of our handlers is missing a check" is a condition every codebase is in right now and cannot easily prove it is not.</p>
+<p>I am scoping that carefully on purpose. Three operations were reported. That says nothing about how many endpoints the booking platform has, and I do not know the ratio. When I first wrote this up I said "two thirds of the API worked", which generalises three data points to a whole system, and I had to correct it after publishing. The honest statement is the narrow one.</p>
+<h2>What kind of bug this is</h2>
+<p>Broken Object Level Authorization: the caller is authenticated, the caller is permitted to invoke the operation, and nobody checks that the caller owns the specific object being operated on. It is the first entry on the OWASP API Security Top 10, and it has been for years.</p>
+<p>The gap was presumably always there. Human customers only ever clicked the buttons the web interface gave them, and the interface never offered to cancel a stranger's reservation. The agent is not a new class of attacker. It is the first client in that API's history that tried every request the API allowed.</p>
+<p>The missing control is per-request object authorization: does this caller own this object, not is this caller logged in. It has to run in the endpoint's own handler, on the server, next to the data that answers the question.</p>
+<h2>Why my own layer would not have caught it</h2>
+<p>AGT puts a deterministic policy engine between an agent and its tools, with no model anywhere in the safety path. On this incident it would have seen the agent issue a cancel call. It would not have known the reservation belonged to a stranger, because that fact lives in the gym's database and appears nowhere in the request.</p>
+<p>A governance layer on the agent's side cannot make a check that only the server can make. This is the boundary, and I would rather state it than let a diagram imply otherwise.</p>
+<p>There is a second thing worth separating, because I blurred it in the first version of this and it is worth not repeating. Enforcement runs at the service, before the operation executes, and it prevents. Evidence is written after the fact, it is tamper-evident, and it proves. A log would not have saved the person whose class was cancelled. It would only have made the conversation afterwards short.</p>
+<p>OpenClaw was at 385,960 stars when I read the repository. Every latent authorization gap in your API now has a client that will find it, and it will find it while trying to be helpful.</p>
+<h2>What did not survive checking</h2>
+<ul><li>One outlet placed the man in Melbourne. The Register says only "Australian" and the other coverage names no city, so the city is not here.</li><li>Reports of how far ahead the agent could book range from "several weeks" to "months", so no number is here either.</li><li>Several outlets called this Australia's first autonomous cyberattack. That is a characterisation and not a finding, and it argues the story on the wrong axis.</li><li>The original ABC News report is the primary source. abc.net.au blocks the crawler I use, so I have not read it directly. Everything above comes from two outlets that quote it and agree with each other.</li></ul>
+                </div>
+                <section class="note-sources">
+                    <h2>Checked against</h2>
+                    <ul><li><a href="https://thenextweb.com/" rel="noopener">The Next Web, coverage carrying the agent&#x27;s second message</a></li><li><a href="https://www.theregister.com/" rel="noopener">The Register, coverage quoting ABC News (Australia), 10 August 2026</a></li><li><a href="https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/" rel="noopener">OWASP API Security Top 10, API1 Broken Object Level Authorization</a></li><li><a href="https://api.github.com/repos/openclaw/openclaw" rel="noopener">openclaw/openclaw star count read at api.github.com, 12 August 2026</a></li></ul>
+                </section>
+                <p class="note-elsewhere">A shorter version of this note ran on <a href="https://www.linkedin.com/feed/update/urn:li:activity:7493162767328206849/" rel="noopener">LinkedIn</a>.</p>
+            </div>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique.</p>
+                <p><a href="../notes/feed.xml">RSS</a> &middot; <a href="../index.html">imransiddique.com</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>

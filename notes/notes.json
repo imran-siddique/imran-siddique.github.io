@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "2026-08-13-encrypted-reasoning-denominators",
+    "title": "What the encrypted reasoning paper actually counted",
+    "date": "2026-08-13",
+    "standfirst": "Coverage of the reasoning-trace harvest reported three different totals as if they disagreed. They are all the paper's own numbers, at three different denominators.",
+    "tags": [
+      "agent-security",
+      "evidence",
+      "retention"
+    ],
+    "sources": [
+      {
+        "label": "Panfilov et al., \"Stealing Reasoning Traces from Proprietary LLM APIs\", arXiv 2608.09867, 10 August 2026",
+        "url": "https://arxiv.org/abs/2608.09867"
+      },
+      {
+        "label": "Matthew Green, \"Let's talk about encrypted reasoning\", 29 May 2026",
+        "url": "https://blog.cryptographyengineering.com/2026/05/29/fooling-around-with-encrypted-reasoning-blobs/"
+      },
+      {
+        "label": "TRACE specification, LIMITATIONS.md",
+        "url": "https://github.com/agentrust-io/trace-spec/blob/main/LIMITATIONS.md"
+      }
+    ],
+    "linkedin": "https://www.linkedin.com/feed/update/urn:li:activity:7493711977589125120/",
+    "words": 791,
+    "url": "https://imransiddique.com/notes/2026-08-13-encrypted-reasoning-denominators.html"
+  },
+  {
+    "slug": "2026-08-12-two-of-three-endpoints",
+    "title": "Two of the three endpoints checked authorization",
+    "date": "2026-08-12",
+    "standfirst": "The gym booking story is being told as an API with no authorization. The agent's own account says two of the three operations it touched returned 403, and one did not.",
+    "tags": [
+      "agent-security",
+      "api",
+      "authorization"
+    ],
+    "sources": [
+      {
+        "label": "The Next Web, coverage carrying the agent's second message",
+        "url": "https://thenextweb.com/"
+      },
+      {
+        "label": "The Register, coverage quoting ABC News (Australia), 10 August 2026",
+        "url": "https://www.theregister.com/"
+      },
+      {
+        "label": "OWASP API Security Top 10, API1 Broken Object Level Authorization",
+        "url": "https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/"
+      },
+      {
+        "label": "openclaw/openclaw star count read at api.github.com, 12 August 2026",
+        "url": "https://api.github.com/repos/openclaw/openclaw"
+      }
+    ],
+    "linkedin": "https://www.linkedin.com/feed/update/urn:li:activity:7493162767328206849/",
+    "words": 742,
+    "url": "https://imransiddique.com/notes/2026-08-12-two-of-three-endpoints.html"
+  }
+]

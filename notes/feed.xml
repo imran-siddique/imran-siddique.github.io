@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Notes by Imran Siddique</title>
+    <link>https://imransiddique.com/notes/</link>
+    <atom:link href="https://imransiddique.com/notes/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Working notes on agent security, evidence and governance.</description>
+    <language>en</language>
+    <lastBuildDate>Fri, 14 Aug 2026 16:27:09 +0000</lastBuildDate>
+    <item>
+      <title>What the encrypted reasoning paper actually counted</title>
+      <link>https://imransiddique.com/notes/2026-08-13-encrypted-reasoning-denominators.html</link>
+      <guid isPermaLink="true">https://imransiddique.com/notes/2026-08-13-encrypted-reasoning-denominators.html</guid>
+      <pubDate>Thu, 13 Aug 2026 09:00:00 +0000</pubDate>
+      <description>Coverage of the reasoning-trace harvest reported three different totals as if they disagreed. They are all the paper&#x27;s own numbers, at three different denominators.</description>
+    </item>
+    <item>
+      <title>Two of the three endpoints checked authorization</title>
+      <link>https://imransiddique.com/notes/2026-08-12-two-of-three-endpoints.html</link>
+      <guid isPermaLink="true">https://imransiddique.com/notes/2026-08-12-two-of-three-endpoints.html</guid>
+      <pubDate>Wed, 12 Aug 2026 09:00:00 +0000</pubDate>
+      <description>The gym booking story is being told as an API with no authorization. The agent&#x27;s own account says two of the three operations it touched returned 403, and one did not.</description>
+    </item>
+  </channel>
+</rss>

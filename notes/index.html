@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Working notes on agent security, evidence and governance. Each one names the primary source it was checked against.">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imransiddique.com/notes/">
+    <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imransiddique.com/notes/">
+    <meta property="og:title" content="Notes">
+    <meta property="og:description" content="Working notes on agent security, evidence and governance. Each one names the primary source it was checked against.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@mosiddi">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>Notes | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css">
+    <link rel="stylesheet" href="../notes/notes.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../writings.html">Writings</a></li>
+                <li><a href="../notes/index.html" class="active">Notes</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <section class="hero-small">
+            <div class="container">
+                <h1 class="fade-in">Notes</h1>
+                <p class="hero-subtitle fade-in">Read the source, then write down what it actually says</p>
+            </div>
+        </section>
+        <section class="content-section">
+            <div class="container">
+                <div class="writings-intro">
+                    <p class="lead">Short working notes on agent security, evidence and governance. Every figure in
+                    a note has been read at its primary source, and every note lists what it was checked against.
+                    Where the source did not support a claim, the claim is not here.</p>
+                    <p class="feed-link"><a href="feed.xml">RSS</a></p>
+                </div>
+                <div class="articles-grid notes-grid">
+                    <article class="article-card note-card">
+                        <time class="note-date" datetime="2026-08-13">13 August 2026</time>
+                        <h3><a href="2026-08-13-encrypted-reasoning-denominators.html">What the encrypted reasoning paper actually counted</a></h3>
+                        <p class="article-tagline">Coverage of the reasoning-trace harvest reported three different totals as if they disagreed. They are all the paper&#x27;s own numbers, at three different denominators.</p>
+                        <div class="article-concepts"><span class="concept-tag">agent-security</span><span class="concept-tag">evidence</span><span class="concept-tag">retention</span></div>
+                    </article>
+                    <article class="article-card note-card">
+                        <time class="note-date" datetime="2026-08-12">12 August 2026</time>
+                        <h3><a href="2026-08-12-two-of-three-endpoints.html">Two of the three endpoints checked authorization</a></h3>
+                        <p class="article-tagline">The gym booking story is being told as an API with no authorization. The agent&#x27;s own account says two of the three operations it touched returned 403, and one did not.</p>
+                        <div class="article-concepts"><span class="concept-tag">agent-security</span><span class="concept-tag">api</span><span class="concept-tag">authorization</span></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique.</p>
+                <p><a href="../notes/feed.xml">RSS</a> &middot; <a href="../index.html">imransiddique.com</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>

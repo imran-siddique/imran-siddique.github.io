@@ -1,0 +1,195 @@
+/* /notes/ — reading typography for working notes.
+   Layered on styles-new.css, so it inherits the site's theme variables and
+   both themes work without redefining a palette here. */
+
+.container-narrow {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.note {
+    padding: 6rem 0 4rem;
+}
+
+.note-back {
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+    opacity: 0.7;
+}
+
+.note-date {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8125rem;
+    letter-spacing: 0.04em;
+    opacity: 0.6;
+    margin-bottom: 0.75rem;
+}
+
+.note h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.note-standfirst {
+    font-size: 1.1875rem;
+    line-height: 1.6;
+    opacity: 0.82;
+    margin-bottom: 1.5rem;
+}
+
+.note-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.22);
+}
+
+.note-body {
+    font-size: 1.0625rem;
+    line-height: 1.75;
+}
+
+.note-body p {
+    margin-bottom: 1.4rem;
+}
+
+.note-body h2 {
+    font-size: 1.375rem;
+    margin: 2.75rem 0 1rem;
+    line-height: 1.3;
+}
+
+.note-body h3 {
+    font-size: 1.125rem;
+    margin: 2rem 0 0.75rem;
+}
+
+.note-body ul {
+    margin: 0 0 1.4rem 1.25rem;
+    list-style: disc;
+}
+
+.note-body li {
+    margin-bottom: 0.5rem;
+}
+
+.note-body blockquote {
+    margin: 1.75rem 0;
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    border-left: 3px solid rgba(128, 128, 128, 0.35);
+    font-style: italic;
+    opacity: 0.9;
+}
+
+.note-body blockquote p {
+    margin-bottom: 0;
+}
+
+.note-body code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.875em;
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+    background: rgba(128, 128, 128, 0.16);
+}
+
+.note-body pre {
+    margin: 0 0 1.4rem;
+    padding: 1.1rem 1.25rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    background: rgba(128, 128, 128, 0.13);
+    border: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.note-body pre code {
+    padding: 0;
+    background: none;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+}
+
+.note-body hr {
+    border: 0;
+    border-top: 1px solid rgba(128, 128, 128, 0.22);
+    margin: 2.5rem 0;
+}
+
+.note-sources {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(128, 128, 128, 0.22);
+}
+
+.note-sources h2 {
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+    margin-bottom: 1rem;
+}
+
+.note-sources ul {
+    list-style: none;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+}
+
+.note-sources li {
+    margin-bottom: 0.4rem;
+    padding-left: 1.1rem;
+    text-indent: -1.1rem;
+}
+
+.note-sources li::before {
+    content: "\2192\00a0";
+    opacity: 0.45;
+}
+
+.note-elsewhere {
+    margin-top: 2rem;
+    font-size: 0.9375rem;
+    opacity: 0.7;
+}
+
+/* Index listing */
+
+.notes-grid {
+    grid-template-columns: 1fr;
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.note-card .article-concepts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.9rem;
+}
+
+.notes-grid + .writings-intro,
+.writings-intro .feed-link {
+    text-align: center;
+}
+
+.note-card .note-date {
+    margin-bottom: 0.5rem;
+}
+
+.note-card h3 {
+    font-size: 1.25rem;
+    line-height: 1.35;
+    margin-bottom: 0.6rem;
+}
+
+@media (max-width: 640px) {
+    .note {
+        padding: 4.5rem 0 3rem;
+    }
+}
