@@ -1,44 +1,49 @@
 /* ============================================
-   IMRAN SIDDIQUE - MODERN PORTFOLIO STYLES
-   A Premium Dark Theme with Glassmorphism
+   IMRAN SIDDIQUE - PORTFOLIO STYLES
+   Light by default, dark on request. Calm, readable, minimal motion.
    ============================================ */
 
-/* CSS Custom Properties */
+/* CSS Custom Properties.
+   Light is the base. Every colour token here is redefined under
+   [data-theme="dark"] below, so neither theme can inherit a value that was
+   only ever written for the other. */
 :root {
-    /* Dark Theme Colors */
-    --bg-primary: #0a0a0f;
-    --bg-secondary: #12121a;
-    --bg-tertiary: #1a1a25;
-    --bg-card: rgba(26, 26, 37, 0.7);
-    --bg-glass: rgba(255, 255, 255, 0.03);
-    
-    /* Accent Colors - Electric Blue & Purple Gradient */
-    --accent-primary: #6366f1;
-    --accent-secondary: #8b5cf6;
-    --accent-tertiary: #a855f7;
-    --accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
-    --accent-gradient-hover: linear-gradient(135deg, #818cf8 0%, #a78bfa 50%, #c084fc 100%);
-    
-    /* Text Colors */
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --text-accent: #a5b4fc;
-    
-    /* Borders & Shadows */
-    --border-color: rgba(99, 102, 241, 0.2);
-    --border-glow: rgba(99, 102, 241, 0.4);
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
-    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.5);
-    --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.3);
-    --shadow-glow-hover: 0 0 50px rgba(99, 102, 241, 0.5);
-    
-    /* Glassmorphism */
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-blur: blur(20px);
-    
+    /* Surfaces */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f6f7fb;
+    --bg-tertiary: #eceff7;
+    --bg-card: #ffffff;
+    --bg-glass: #f6f7fb;
+
+    /* Accent */
+    --accent-primary: #4f46e5;
+    --accent-secondary: #7c3aed;
+    --accent-tertiary: #9333ea;
+    --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 55%, #9333ea 100%);
+    --accent-gradient-hover: linear-gradient(135deg, #4338ca 0%, #6d28d9 55%, #7e22ce 100%);
+
+    /* Text. Secondary and muted are dark enough to pass AA on white at body
+       size. The old values were picked for a near-black background and were
+       the main reason body copy was hard to read. */
+    --text-primary: #111827;
+    --text-secondary: #3f4a5f;
+    --text-muted: #566072;
+    --text-accent: #4338ca;
+
+    /* Borders and shadows. Shadow is for depth, not glow. */
+    --border-color: #dfe3ec;
+    --border-glow: #b9c0d4;
+    --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.06);
+    --shadow-md: 0 2px 8px rgba(16, 24, 40, 0.07);
+    --shadow-lg: 0 10px 28px rgba(16, 24, 40, 0.10);
+    --shadow-glow: 0 2px 8px rgba(16, 24, 40, 0.07);
+    --shadow-glow-hover: 0 10px 28px rgba(16, 24, 40, 0.13);
+
+    /* Panels. No blur in light: it put text on top of mush. */
+    --glass-bg: #ffffff;
+    --glass-border: #e5e8f0;
+    --glass-blur: none;
+
     /* Spacing */
     --space-xs: 0.25rem;
     --space-sm: 0.5rem;
@@ -65,22 +70,37 @@
     --radius-full: 9999px;
 }
 
-/* Light Theme */
-[data-theme="light"] {
-    --bg-primary: #f8fafc;
-    --bg-secondary: #f1f5f9;
-    --bg-tertiary: #e2e8f0;
-    --bg-card: rgba(255, 255, 255, 0.9);
-    --bg-glass: rgba(0, 0, 0, 0.02);
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --text-muted: #64748b;
-    --border-color: rgba(99, 102, 241, 0.15);
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(0, 0, 0, 0.05);
+/* Dark theme, opt in through the header toggle. Complete, so nothing falls
+   back to a light value. */
+[data-theme="dark"] {
+    --bg-primary: #0e1116;
+    --bg-secondary: #151a21;
+    --bg-tertiary: #1c222b;
+    --bg-card: #151a21;
+    --bg-glass: #1a2029;
+
+    --accent-primary: #818cf8;
+    --accent-secondary: #a78bfa;
+    --accent-tertiary: #c084fc;
+    --accent-gradient: linear-gradient(135deg, #818cf8 0%, #a78bfa 55%, #c084fc 100%);
+    --accent-gradient-hover: linear-gradient(135deg, #a5b4fc 0%, #c4b5fd 55%, #d8b4fe 100%);
+
+    --text-primary: #f3f5f9;
+    --text-secondary: #b9c2d0;
+    --text-muted: #93a0b4;
+    --text-accent: #a5b4fc;
+
+    --border-color: #262d38;
+    --border-glow: #39424f;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 10px 28px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    --shadow-glow-hover: 0 10px 28px rgba(0, 0, 0, 0.55);
+
+    --glass-bg: #151a21;
+    --glass-border: #262d38;
+    --glass-blur: none;
 }
 
 /* Reset & Base */
@@ -105,36 +125,27 @@ body {
 }
 
 /* Background Effects */
+/* One faint wash behind the top of the page, nothing else. The three
+   overlapping colour fields and the 50px grid that used to sit here were the
+   bulk of the visual noise, and they fought every block of text on the page. */
 body::before {
     content: '';
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent),
-        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(139, 92, 246, 0.1), transparent),
-        radial-gradient(ellipse 50% 30% at 0% 100%, rgba(168, 85, 247, 0.08), transparent);
+    height: 420px;
+    background: linear-gradient(180deg, rgba(79, 70, 229, 0.05), transparent);
     pointer-events: none;
     z-index: -1;
 }
 
-/* Grid Pattern Overlay */
-body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
-    background-size: 50px 50px;
-    pointer-events: none;
-    z-index: -1;
+[data-theme="dark"] body::before {
+    background: linear-gradient(180deg, rgba(129, 140, 248, 0.09), transparent);
 }
+
+/* Grid Pattern Overlay */
+/* Grid overlay removed. */
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
@@ -176,7 +187,7 @@ a:hover {
     right: 0;
     z-index: 1000;
     padding: var(--space-md) 0;
-    background: rgba(10, 10, 15, 0.8);
+    background: var(--bg-primary);
     backdrop-filter: var(--glass-blur);
     border-bottom: 1px solid var(--border-color);
     transition: var(--transition-normal);
@@ -184,7 +195,7 @@ a:hover {
 
 .navbar.scrolled {
     padding: var(--space-sm) 0;
-    background: rgba(10, 10, 15, 0.95);
+    box-shadow: var(--shadow-sm);
 }
 
 .navbar .container {
@@ -290,48 +301,11 @@ a:hover {
     overflow: hidden;
 }
 
-/* Animated Background Orbs */
-.hero-orb {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.5;
-    animation: float 20s ease-in-out infinite;
-}
-
-.hero-orb-1 {
-    width: 600px;
-    height: 600px;
-    background: var(--accent-primary);
-    top: -200px;
-    right: -200px;
-    animation-delay: 0s;
-}
-
-.hero-orb-2 {
-    width: 400px;
-    height: 400px;
-    background: var(--accent-secondary);
-    bottom: -100px;
-    left: -100px;
-    animation-delay: -5s;
-}
-
-.hero-orb-3 {
-    width: 300px;
-    height: 300px;
-    background: var(--accent-tertiary);
-    top: 50%;
-    left: 50%;
-    animation-delay: -10s;
-}
-
-@keyframes float {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    25% { transform: translate(30px, -30px) scale(1.05); }
-    50% { transform: translate(-20px, 20px) scale(0.95); }
-    75% { transform: translate(20px, 30px) scale(1.02); }
-}
+/* The three blurred orbs that drifted around behind the hero are gone. They
+   were 600px of moving colour under the one paragraph a first-time visitor
+   actually needs to read. The markup is left in place so the pages do not
+   need editing; it simply renders nothing. */
+.hero-orb { display: none; }
 
 .hero-content {
     text-align: center;
@@ -351,7 +325,6 @@ a:hover {
     font-size: 0.875rem;
     color: var(--text-secondary);
     margin-bottom: var(--space-xl);
-    animation: fadeInUp 0.8s ease;
 }
 
 .hero-badge .badge-dot {
@@ -359,17 +332,11 @@ a:hover {
     height: 8px;
     background: #22c55e;
     border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
 }
 
-@keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.2); }
-}
 
 .hero-title {
     margin-bottom: var(--space-lg);
-    animation: fadeInUp 0.8s ease 0.1s both;
 }
 
 .hero-title .gradient-text {
@@ -383,7 +350,6 @@ a:hover {
     font-size: clamp(1.25rem, 2vw, 1.5rem);
     color: var(--text-secondary);
     margin-bottom: var(--space-md);
-    animation: fadeInUp 0.8s ease 0.2s both;
 }
 
 .hero-description {
@@ -391,7 +357,6 @@ a:hover {
     color: var(--text-muted);
     max-width: 700px;
     margin: 0 auto var(--space-2xl);
-    animation: fadeInUp 0.8s ease 0.3s both;
 }
 
 .hero-cta {
@@ -399,7 +364,6 @@ a:hover {
     gap: var(--space-md);
     justify-content: center;
     flex-wrap: wrap;
-    animation: fadeInUp 0.8s ease 0.4s both;
 }
 
 /* ============================================
@@ -576,8 +540,11 @@ section {
     opacity: 1;
 }
 
+/* Five of the cards carry .featured, so a full accent border on each made the
+   grid shout and marked nothing out. The 3px accent strip along the top is
+   enough; the border stays neutral like every other card. */
 .project-card.featured {
-    border-color: var(--accent-primary);
+    border-color: var(--border-color);
 }
 
 .project-card.featured::before {
@@ -910,37 +877,15 @@ footer {
 /* ============================================
    ANIMATIONS
    ============================================ */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
 
 .fade-in {
-    animation: fadeIn 0.8s ease;
 }
 
 .fade-in-up {
-    animation: fadeInUp 0.8s ease;
 }
 
-/* Staggered animations for grids */
-.projects-grid > *:nth-child(1) { animation: fadeInUp 0.6s ease 0.1s both; }
-.projects-grid > *:nth-child(2) { animation: fadeInUp 0.6s ease 0.2s both; }
-.projects-grid > *:nth-child(3) { animation: fadeInUp 0.6s ease 0.3s both; }
-.projects-grid > *:nth-child(4) { animation: fadeInUp 0.6s ease 0.4s both; }
-.projects-grid > *:nth-child(5) { animation: fadeInUp 0.6s ease 0.5s both; }
-.projects-grid > *:nth-child(6) { animation: fadeInUp 0.6s ease 0.6s both; }
+/* Staggered grid entrance animations removed. */
 
 /* ============================================
    RESPONSIVE DESIGN
@@ -1411,17 +1356,54 @@ blockquote cite {
 /* ============================================
    TYPING CURSOR
    ============================================ */
-.typing-text {
-    border-right: 3px solid var(--accent-primary);
-    animation: blink-cursor 0.75s step-end infinite;
-}
-
+/* The blinking cursor was the last piece of perpetual motion on the page.
+   The rule is kept as a no-op so the class in the markup stays harmless. */
+.typing-text,
 .typing-text.done {
     border-right: none;
-    animation: none;
+}
+/* ============================================
+   READABILITY AND MOTION, added 2026-08-14
+   ============================================ */
+
+/* Nothing on the page should move for a visitor who has asked it not to.
+   Also covers the smooth scroll set on html. */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
 }
 
-@keyframes blink-cursor {
-    from, to { border-color: transparent; }
-    50% { border-color: var(--accent-primary); }
+/* Long paragraphs were running the full width of a 1280px container, which is
+   roughly 150 characters a line. Around 70 is readable. */
+.hero-description,
+.section-subtitle,
+.about-content p,
+.writings-intro .lead {
+    max-width: 68ch;
+}
+
+.hero-description,
+.section-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Keyboard focus was invisible against the old dark background. */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Body copy sat at --text-muted on several pages, which is the lightest token
+   there is. Reserve muted for labels and metadata, not for prose. */
+.hero-description,
+.section-subtitle {
+    color: var(--text-secondary);
 }
