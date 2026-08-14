@@ -6,7 +6,7 @@
     <atom:link href="https://imransiddique.com/notes/feed.xml" rel="self" type="application/rss+xml"/>
     <description>Working notes on agent security, evidence and governance.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 14 Aug 2026 19:29:31 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 14 Aug 2026 19:40:00 +0000</lastBuildDate>
     <item>
       <title>The LiteLLM compromise is not in any of the places you would look for it</title>
       <link>https://imransiddique.com/notes/2026-08-14-litellm-not-in-the-record.html</link>
