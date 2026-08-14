@@ -160,8 +160,7 @@ def nav(prefix=""):
                 <li><a href="{prefix}index.html">Home</a></li>
                 <li><a href="{prefix}about.html">About</a></li>
                 <li><a href="{prefix}projects.html">Projects</a></li>
-                <li><a href="{prefix}writings.html">Writings</a></li>
-                <li><a href="{prefix}notes/index.html" class="active">Notes</a></li>
+                <li><a href="{prefix}notes/index.html" class="active">Writing</a></li>
                 <li><a href="{prefix}contact.html">Contact</a></li>
             </ul>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -266,37 +265,51 @@ def note_page(n):
 """
 
 
-def index_page(notes):
-    cards = []
-    for n in notes:
-        tags = "".join(f'<span class="concept-tag">{html.escape(t)}</span>' for t in n["tags"])
-        cards.append(f"""                    <article class="article-card note-card">
-                        <time class="note-date" datetime="{n["date"]}">{pretty(n["date"])}</time>
-                        <h3><a href="{n["slug"]}.html">{html.escape(n["title"])}</a></h3>
-                        <p class="article-tagline">{html.escape(n["standfirst"])}</p>
-                        <div class="article-concepts">{tags}</div>
-                    </article>""")
-    desc = ("Working notes on agent security, evidence and governance. Each one names "
-            "the primary source it was checked against.")
-    return f"""{head("Notes", desc, f"{SITE}/notes/", prefix="../")}
+def card(date, title, href, standfirst, tags, external=False):
+    chips = "".join(f'<span class="concept-tag">{html.escape(t)}</span>' for t in tags)
+    ext = ' target="_blank" rel="noopener"' if external else ""
+    return f"""                    <article class="article-card note-card">
+                        <time class="note-date" datetime="{date}">{pretty(date)}</time>
+                        <h3><a href="{href}"{ext}>{html.escape(title)}</a></h3>
+                        <p class="article-tagline">{html.escape(standfirst)}</p>
+                        <div class="article-concepts">{chips}</div>
+                    </article>"""
+
+
+def index_page(notes, essays):
+    note_cards = [card(n["date"], n["title"], f'{n["slug"]}.html',
+                       n["standfirst"], n["tags"]) for n in notes]
+    essay_cards = [card(e["date"], e["title"], e["url"], e["standfirst"],
+                        e.get("tags", []), external=True) for e in essays]
+    desc = ("Notes and essays on agent security, evidence and governance by Imran Siddique. "
+            "Every figure is checked against a named primary source.")
+    return f"""{head("Writing", desc, f"{SITE}/notes/", prefix="../")}
 {nav(prefix="../")}
     <main>
         <section class="hero-small">
             <div class="container">
-                <h1 class="fade-in">Notes</h1>
-                <p class="hero-subtitle fade-in">Read the source, then write down what it actually says</p>
+                <h1>Writing</h1>
+                <p class="hero-subtitle">Read the source, then write down what it actually says</p>
             </div>
         </section>
         <section class="content-section">
             <div class="container">
                 <div class="writings-intro">
-                    <p class="lead">Short working notes on agent security, evidence and governance. Every figure in
-                    a note has been read at its primary source, and every note lists what it was checked against.
-                    Where the source did not support a claim, the claim is not here.</p>
-                    <p class="feed-link"><a href="feed.xml">RSS</a></p>
+                    <p class="lead">I build the evidence layer for AI agents, and I write about where it does not
+                    hold yet. Every figure below was read at its primary source, every note lists what it was
+                    checked against, and where a source did not support a claim the claim is not here.</p>
                 </div>
+
+                <h2 class="section-heading">Notes</h2>
+                <p class="section-note">Short, dated, and sourced. <a href="feed.xml">RSS</a></p>
                 <div class="articles-grid notes-grid">
-{chr(10).join(cards)}
+{chr(10).join(note_cards)}
+                </div>
+
+                <h2 class="section-heading">Essays</h2>
+                <p class="section-note">Longer pieces, published on dev.to and cross-posted to Medium.</p>
+                <div class="articles-grid notes-grid">
+{chr(10).join(essay_cards)}
                 </div>
             </div>
         </section>
@@ -420,11 +433,30 @@ def load():
     return notes, problems
 
 
+def load_essays():
+    """Curated longer pieces. Every entry must resolve to a real article."""
+    path = NOTES / "essays.json"
+    if not path.exists():
+        return [], []
+    data = json.loads(path.read_text(encoding="utf-8")).get("essays", [])
+    problems = []
+    for e in data:
+        for field in ("title", "url", "date", "standfirst"):
+            if not e.get(field):
+                problems.append(f"essays.json: entry {e.get('title', '?')!r} is missing `{field}`")
+        if e.get("url") and not e["url"].startswith("http"):
+            problems.append(f"essays.json: {e['title']!r} has a url that is not a link")
+    data.sort(key=lambda e: e["date"], reverse=True)
+    return data, problems
+
+
 def main():
     check = "--check" in sys.argv
     if not SRC.exists():
         SRC.mkdir(parents=True)
     notes, problems = load()
+    essays, essay_problems = load_essays()
+    problems += essay_problems
 
     for p in problems:
         print(f"PROBLEM  {p}")
@@ -442,7 +474,7 @@ def main():
 
     for n in notes:
         (NOTES / f"{n['slug']}.html").write_text(note_page(n), encoding="utf-8")
-    (NOTES / "index.html").write_text(index_page(notes), encoding="utf-8")
+    (NOTES / "index.html").write_text(index_page(notes, essays), encoding="utf-8")
     (NOTES / "feed.xml").write_text(feed(notes), encoding="utf-8")
     sm_path, sm_xml = update_sitemap(notes)
     sm_path.write_text(sm_xml, encoding="utf-8")
@@ -451,7 +483,7 @@ def main():
                             "sources", "linkedin", "words", "url")} for n in notes],
         indent=2), encoding="utf-8")
 
-    print(f"Built {len(notes)} note(s):")
+    print(f"Built {len(notes)} note(s) and listed {len(essays)} essay(s):")
     for n in notes:
         print(f"  {n['date']}  {n['words']:>4}w  notes/{n['slug']}.html")
     print("Wrote notes/index.html, notes/feed.xml, notes/notes.json, sitemap.xml")

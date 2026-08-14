@@ -1,0 +1,47 @@
+{
+  "_comment": "Longer essays, listed under the notes on the Writing page. Every entry must resolve to a real article. The old writings.html listed six pieces of which four had no link at all and a fifth pointed at a Medium profile rather than a post; that is why this file exists and why build.py refuses to build an entry without a url.",
+  "essays": [
+    {
+      "title": "What a signature does not prove",
+      "url": "https://dev.to/mosiddi/what-a-signature-does-not-prove-314o",
+      "date": "2026-08-12",
+      "standfirst": "Three cases where a valid signature produced a false conclusion. Each one is a missing binding, not a missing signature.",
+      "tags": ["attestation", "evidence"]
+    },
+    {
+      "title": "The approval prompt stops working after fifty clicks",
+      "url": "https://dev.to/mosiddi/the-approval-prompt-stops-working-after-fifty-clicks-10n7",
+      "date": "2026-08-11",
+      "standfirst": "Human block rates fall from about 17 percent to about 5 percent inside a single session. A control that decays the more you use it is not a control.",
+      "tags": ["human-in-the-loop", "evidence"]
+    },
+    {
+      "title": "The best agent detector in production catches 67 percent. Plan for the rest.",
+      "url": "https://dev.to/mosiddi/the-best-agent-detector-in-production-catches-67-plan-for-the-rest-4nhp",
+      "date": "2026-08-04",
+      "standfirst": "The best published number in agent security, ten months in production with zero false positives, still misses one attack in three.",
+      "tags": ["detection", "agent-security"]
+    },
+    {
+      "title": "Nobody was negligent. The layer was missing.",
+      "url": "https://dev.to/mosiddi/nobody-was-negligent-the-layer-was-missing-2nk4",
+      "date": "2026-08-01",
+      "standfirst": "Every party did their job correctly and the incident happened anyway, because no layer owned the question.",
+      "tags": ["governance", "incident-response"]
+    },
+    {
+      "title": "The Mute Agent: why your AI needs to shut up and listen to the graph",
+      "url": "https://dev.to/mosiddi/the-mute-agent-why-your-ai-needs-to-shut-up-and-listen-to-the-graph-1j60",
+      "date": "2026-01-10",
+      "standfirst": "Stop prompt-engineering safety. Move the constraint off the probabilistic model and onto a deterministic knowledge graph.",
+      "tags": ["graphs", "hallucination"]
+    },
+    {
+      "title": "Stop begging your AI to be safe: the case for constraint engineering",
+      "url": "https://dev.to/mosiddi/stop-begging-your-ai-to-be-safe-the-case-for-constraint-engineering-pl",
+      "date": "2026-01-01",
+      "standfirst": "We do not ask microservices nicely to respect rate limits. Safety is an architectural constraint, not a request.",
+      "tags": ["control-planes", "enforcement"]
+    }
+  ]
+}
