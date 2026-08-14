@@ -1,5 +1,41 @@
 [
   {
+    "slug": "2026-08-14-litellm-not-in-the-record",
+    "title": "The LiteLLM compromise is not in any of the places you would look for it",
+    "date": "2026-08-14",
+    "standfirst": "Both poisoned versions 404 on PyPI, no CVE was ever issued, and the KEV entry filed two days later belongs to the scanner rather than the gateway.",
+    "tags": [
+      "supply-chain",
+      "evidence",
+      "ci-cd"
+    ],
+    "sources": [
+      {
+        "label": "CloudSEK, \"2,500+ Companies and 434,000 CI/CD Pipelines Exposed in the Largest AI Supply Chain Breach of 2026\", 11 August 2026",
+        "url": "https://www.cloudsek.com/blog/ai-supply-chain-breach-2500-companies-434000-cicd-pipelines"
+      },
+      {
+        "label": "Help Net Security on Hudson Rock's archive analysis, 13 August 2026",
+        "url": "https://www.helpnetsecurity.com/2026/08/13/litellm-breach-stolen-credentials-leak/"
+      },
+      {
+        "label": "PyPI JSON API for litellm, read 14 August 2026",
+        "url": "https://pypi.org/pypi/litellm/json"
+      },
+      {
+        "label": "CVE-2026-33634, \"Trivy ecosystem supply chain briefly compromised\", MITRE record",
+        "url": "https://cveawg.mitre.org/api/cve/CVE-2026-33634"
+      },
+      {
+        "label": "CISA Known Exploited Vulnerabilities catalog, version 2026.08.14",
+        "url": "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
+      }
+    ],
+    "linkedin": "",
+    "words": 891,
+    "url": "https://imransiddique.com/notes/2026-08-14-litellm-not-in-the-record.html"
+  },
+  {
     "slug": "2026-08-13-encrypted-reasoning-denominators",
     "title": "What the encrypted reasoning paper actually counted",
     "date": "2026-08-13",

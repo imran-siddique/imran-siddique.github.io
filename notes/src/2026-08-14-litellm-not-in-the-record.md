@@ -1,0 +1,64 @@
+---
+title: The LiteLLM compromise is not in any of the places you would look for it
+date: 2026-08-14
+standfirst: Both poisoned versions 404 on PyPI, no CVE was ever issued, and the KEV entry filed two days later belongs to the scanner rather than the gateway.
+tags: [supply-chain, evidence, ci-cd]
+sources:
+  - label: CloudSEK, "2,500+ Companies and 434,000 CI/CD Pipelines Exposed in the Largest AI Supply Chain Breach of 2026", 11 August 2026
+    url: https://www.cloudsek.com/blog/ai-supply-chain-breach-2500-companies-434000-cicd-pipelines
+  - label: Help Net Security on Hudson Rock's archive analysis, 13 August 2026
+    url: https://www.helpnetsecurity.com/2026/08/13/litellm-breach-stolen-credentials-leak/
+  - label: PyPI JSON API for litellm, read 14 August 2026
+    url: https://pypi.org/pypi/litellm/json
+  - label: CVE-2026-33634, "Trivy ecosystem supply chain briefly compromised", MITRE record
+    url: https://cveawg.mitre.org/api/cve/CVE-2026-33634
+  - label: CISA Known Exploited Vulnerabilities catalog, version 2026.08.14
+    url: https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
+---
+
+In March, two poisoned releases of LiteLLM went up on PyPI. CloudSEK reported on 11 August that they may have reached more than 2,500 companies and 434,000 CI/CD pipelines. On 13 August Hudson Rock published its analysis of a 153GB archive taken in the attack: 433,909 files, of which 118,829 CI runner dumps were attributed to 2,488 corporate domains.
+
+I went to check the figures and found something more interesting than the figures. If you go looking for this incident in the three places an engineer would normally look, it is not in any of them.
+
+## PyPI
+
+`litellm` 1.82.7 and 1.82.8 are not on PyPI. Not yanked, which would leave them visible and installable by exact pin. Gone. Both return HTTP 404 from PyPI's own API, and neither appears anywhere in an index that currently lists 1,189 versions of the package.
+
+What the record shows instead is 1.82.6 on 22 March, then 1.83.0 on 31 March, with nothing between them and no 1.82.9 at all. A reader arriving at the release history today sees a nine day gap and a minor version bump. Nothing on that timeline says an incident happened.
+
+Removing the artifacts was right. Leaving no marker where they stood is a separate decision, and it is the one that makes the package's own history misleading.
+
+## The CVE
+
+There is no CVE for the LiteLLM package compromise. Searching NVD across March and April 2026 returns only ordinary code vulnerabilities: an unauthenticated `/config/update` endpoint, a JWT authentication flaw, a guardrails sandbox escape. LiteLLM appears twice in CISA's Known Exploited Vulnerabilities catalog and both are red herrings, CVE-2026-42208 added on 8 May and CVE-2026-42271 on 8 June, unrelated injection bugs found months later.
+
+## The KEV entry that does exist
+
+Two days after the poisoned releases there is a KEV entry, and it is worth being precise about whose it is. **CVE-2026-33634, added 26 March, is Aqua Security's Trivy, not LiteLLM.** CVSS 4.0 base score 9.4. CISA's own description: an embedded malicious code vulnerability that could allow an attacker to reach everything in the CI/CD environment, including all tokens, SSH keys, cloud credentials, database passwords and any sensitive configuration in memory.
+
+This matters because Trivy was the way in. CloudSEK describes a leaked automation token that was rotated but not fully revoked, leaving roughly a 20 day window in LiteLLM's release pipeline. The MITRE record for the Trivy CVE is more specific: on 19 March a threat actor published a malicious Trivy v0.69.4, **force-pushed 76 of the 77 version tags in `aquasecurity/trivy-action`** to credential-stealing malware, and replaced all seven tags in `aquasecurity/setup-trivy`. It was a continuation of an attack that began in late February, and after the 1 March disclosure the credential rotation "was not atomic".
+
+The dates sit close enough that it is easy to file the 26 March listing under LiteLLM and move on, which inverts the lesson. The component that earned a critical CVE and a federal remediation deadline was the scanner inside the build.
+
+## What that does to the usual advice
+
+The standard response to a poisoned package is to pin your dependencies, and for the PyPI half of this that holds. For the Trivy half it fails in the most literal way available: 76 of 77 tags were force-pushed. Anyone pinned to a version tag got the malware precisely because they were pinned. Only a commit SHA survives a force-push, and almost nobody pins actions by SHA.
+
+Pinning is not integrity. It is a stable name for something somebody else can still overwrite.
+
+## The part I cannot help with
+
+Five months on, 2,488 organisations established their own exposure by reading someone else's analysis of a stolen archive. Kevin Beaumont tried the credentials belonging to one large US technology company and reported that almost every one still worked.
+
+That gap is not a detection failure. Detection worked, and the packages were live for about forty minutes. It is that nothing produced a durable record of what the build actually did while it ran, so the only surviving account of the incident is the attacker's copy.
+
+I should be straight that this sits outside everything I have built. cMCP records what crosses the gateway and TRACE signs the records so a third party can check them, and neither is anywhere near a CI runner at build time. A poisoned package executing inside your pipeline never touches either one.
+
+## What did not survive checking
+
+- **"CISA added the CVE two days in."** Cut. No CVE exists for this compromise. The 26 March KEV entry is Trivy's.
+- **"Shipped a clean version six days later."** Corrected. 1.82.6 is 22 March and 1.83.0 is 31 March, so nine days after the last clean release and seven after the poisoned ones.
+- **"PyPI quarantined them inside forty minutes."** Narrowed. CloudSEK gives forty minutes as the period the packages were live and does not say who removed them. No source I could reach names the actor.
+- **"An unpinned Trivy scanner."** Corrected. The vector was a leaked automation token and a non-atomic rotation, not an unpinned dependency.
+- **"2,488 corporate domains" from 433,909 files.** Scoped. The domains were attributed from the 118,829 CI runner dumps, a subset of the archive.
+- Whether LiteLLM's maintainers disclosed the same day: I could not verify it, so it is not here.
