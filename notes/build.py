@@ -370,7 +370,9 @@ def load():
         if not meta["sources"]:
             problems.append(f"{path.name}: no sources listed. A note with nothing to check "
                             f"against does not belong in /notes/.")
-        if "—" in body or "–" in body or "—" in meta.get("title", ""):
+        dashes = "—–"
+        scanned = body + meta.get("title", "") + meta.get("standfirst", "")
+        if any(d in scanned for d in dashes):
             problems.append(f"{path.name}: contains an em or en dash")
         words = len(body.split())
         if words > 900:
