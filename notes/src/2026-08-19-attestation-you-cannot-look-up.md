@@ -3,6 +3,7 @@ title: The attestation everyone cites cannot be looked up any more
 date: 2026-08-19
 standfirst: Thirty poisoned npm packages are gone along with their attestations, and the Sigstore copy that survives can only be fetched with a digest that no longer exists in any public place I could find.
 tags: [supply-chain, evidence, provenance]
+x: https://x.com/mosiddi/status/2090102601488425100
 sources:
   - label: Aikido, "Keyv and friends compromised in npm supply chain attack", 4 August 2026
     url: https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack

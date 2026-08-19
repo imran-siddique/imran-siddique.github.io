@@ -16,6 +16,7 @@ Note source format, notes/src/YYYY-MM-DD-slug.md:
     standfirst: One sentence that says what the note found.
     tags: [agent-security, evidence]
     linkedin: https://www.linkedin.com/feed/update/urn:li:activity:123/
+    x: https://x.com/mosiddi/status/123
     sources:
       - label: arXiv 2608.09867, the paper
         url: https://arxiv.org/abs/2608.09867
@@ -23,7 +24,9 @@ Note source format, notes/src/YYYY-MM-DD-slug.md:
 
     Body in markdown.
 
-`linkedin` is optional and only set once a note has been posted to the feed.
+`linkedin` and `x` are optional and only set once a note has actually been posted to
+that channel. They are what stops an automation recommending a share that already
+happened: notes.json is the only machine-readable record of where a note has been.
 `sources` is not optional. A note with no source it was checked against does
 not belong here.
 
@@ -430,6 +433,7 @@ def load():
             "slug": slug, "title": meta.get("title", ""), "date": meta.get("date", ""),
             "standfirst": meta.get("standfirst", ""), "tags": meta.get("tags", []),
             "sources": meta["sources"], "linkedin": meta.get("linkedin", ""),
+            "x": meta.get("x", ""),
             "words": words, "html": render(body),
             "url": f"{SITE}/notes/{slug}.html",
         })
@@ -484,7 +488,7 @@ def main():
     sm_path.write_text(sm_xml, encoding="utf-8")
     (NOTES / "notes.json").write_text(json.dumps(
         [{k: n[k] for k in ("slug", "title", "date", "standfirst", "tags",
-                            "sources", "linkedin", "words", "url")} for n in notes],
+                            "sources", "linkedin", "x", "words", "url")} for n in notes],
         indent=2), encoding="utf-8")
 
     print(f"Built {len(notes)} note(s) and listed {len(essays)} essay(s):")

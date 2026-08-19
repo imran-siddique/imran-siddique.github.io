@@ -4,6 +4,7 @@ date: 2026-08-12
 standfirst: The gym booking story is being told as an API with no authorization. The agent's own account says two of the three operations it touched returned 403, and one did not.
 tags: [agent-security, api, authorization]
 linkedin: https://www.linkedin.com/feed/update/urn:li:activity:7493162767328206849/
+x: https://x.com/mosiddi/status/2088751249713934410
 sources:
   - label: The Next Web, coverage carrying the agent's second message
     url: https://thenextweb.com/

@@ -4,6 +4,7 @@ date: 2026-08-14
 standfirst: Both poisoned versions 404 on PyPI, no CVE was ever issued, and the KEV entry filed two days later belongs to the scanner rather than the gateway.
 tags: [supply-chain, evidence, ci-cd]
 linkedin: https://www.linkedin.com/feed/update/urn:li:activity:7494104610559832064/
+x: https://x.com/mosiddi/status/2088358975763087528
 sources:
   - label: CloudSEK, "2,500+ Companies and 434,000 CI/CD Pipelines Exposed in the Largest AI Supply Chain Breach of 2026", 11 August 2026
     url: https://www.cloudsek.com/blog/ai-supply-chain-breach-2500-companies-434000-cicd-pipelines
