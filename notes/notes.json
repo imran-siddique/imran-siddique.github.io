@@ -1,5 +1,53 @@
 [
   {
+    "slug": "2026-08-19-attestation-you-cannot-look-up",
+    "title": "The attestation everyone cites cannot be looked up any more",
+    "date": "2026-08-19",
+    "standfirst": "Thirty poisoned npm packages are gone along with their attestations, and the Sigstore copy that survives can only be fetched with a digest that no longer exists in any public place I could find.",
+    "tags": [
+      "supply-chain",
+      "evidence",
+      "provenance"
+    ],
+    "sources": [
+      {
+        "label": "Aikido, \"Keyv and friends compromised in npm supply chain attack\", 4 August 2026",
+        "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"
+      },
+      {
+        "label": "Snyk, \"Inside the keyv npm compromise\", read 19 August 2026",
+        "url": "https://snyk.io/blog/inside-keyv-npm-compromise-preinstall-malware-trusted-provenance-ide-hooks/"
+      },
+      {
+        "label": "VentureBeat, \"The Shai-Hulud npm worm didn't fake its security check, it earned a legitimate one\"",
+        "url": "https://venturebeat.com/security/the-shai-hulud-npm-worm-didnt-fake-its-security-check-it-earned-a-legitimate-one"
+      },
+      {
+        "label": "nulltap, \"Keyv's signed npm releases carried a credential-stealing worm\"",
+        "url": "https://nulltap.sh/p/keyv-shai-hulud-provenance/"
+      },
+      {
+        "label": "npm registry packuments and attestation endpoints, read 19 August 2026",
+        "url": "https://registry.npmjs.org/keyv"
+      },
+      {
+        "label": "Sigstore Rekor transparency log, search index API",
+        "url": "https://rekor.sigstore.dev/api/v1/log/entries?logIndex=2336496546"
+      },
+      {
+        "label": "GitHub docs, retention period for Actions artifacts and logs",
+        "url": "https://docs.github.com/en/organizations/managing-organization-settings/configuring-the-retention-period-for-github-actions-artifacts-and-logs-in-your-organization"
+      },
+      {
+        "label": "TRACE specification, LIMITATIONS.md",
+        "url": "https://github.com/agentrust-io/trace-spec/blob/main/LIMITATIONS.md"
+      }
+    ],
+    "linkedin": "",
+    "words": 878,
+    "url": "https://imransiddique.com/notes/2026-08-19-attestation-you-cannot-look-up.html"
+  },
+  {
     "slug": "2026-08-14-litellm-not-in-the-record",
     "title": "The LiteLLM compromise is not in any of the places you would look for it",
     "date": "2026-08-14",

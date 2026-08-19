@@ -138,7 +138,11 @@ def render(md):
             out.append("<hr>")
             i += 1
         else:
-            block = []
+            # Consume the first line unconditionally. A paragraph opening with
+            # bold ("**Like this.** ...") starts with * and would otherwise fail
+            # this branch's own guard, leaving the cursor where it was.
+            block = [inline(lines[i])]
+            i += 1
             while i < len(lines) and lines[i].strip() and not re.match(r"([-*>#]|```)", lines[i]):
                 block.append(inline(lines[i]))
                 i += 1
