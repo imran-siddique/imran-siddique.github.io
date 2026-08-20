@@ -1,5 +1,50 @@
 [
   {
+    "slug": "2026-08-20-platform-bit-opposite",
+    "title": "The platform bit that means the opposite of what the doc says",
+    "date": "2026-08-20",
+    "standfirst": "Google Cloud tells you to update go-sev-guest so your parser stops breaking on v4 attestation reports. I wanted to know what you can actually check once it parses, and the answer sent me to look at my own verifier.",
+    "tags": [
+      "attestation",
+      "sev-snp",
+      "evidence"
+    ],
+    "sources": [
+      {
+        "label": "google/go-sev-guest validate.go at c930ed67, read 20 August 2026",
+        "url": "https://github.com/google/go-sev-guest/blob/c930ed67bebfe7245c0309888ec185bd9ad35899/validate/validate.go"
+      },
+      {
+        "label": "google/go-sev-guest abi.go at c930ed67, the SnpPlatformInfo struct",
+        "url": "https://github.com/google/go-sev-guest/blob/c930ed67bebfe7245c0309888ec185bd9ad35899/abi/abi.go"
+      },
+      {
+        "label": "Issue 195, the doc bug I filed against go-sev-guest",
+        "url": "https://github.com/google/go-sev-guest/issues/195"
+      },
+      {
+        "label": "Issue 187, milesdai on TSME polarity, open since April 2026",
+        "url": "https://github.com/google/go-sev-guest/issues/187"
+      },
+      {
+        "label": "Google Cloud Confidential VM release notes, entry of 27 October 2025",
+        "url": "https://docs.cloud.google.com/confidential-computing/confidential-vm/docs/release-notes"
+      },
+      {
+        "label": "BadRAM",
+        "url": "https://badram.eu/"
+      },
+      {
+        "label": "AMD security bulletin SB-3015",
+        "url": "https://www.amd.com/en/resources/product-security/bulletin/amd-sb-3015.html"
+      }
+    ],
+    "linkedin": "",
+    "x": "",
+    "words": 888,
+    "url": "https://imransiddique.com/notes/2026-08-20-platform-bit-opposite.html"
+  },
+  {
     "slug": "2026-08-19-attestation-you-cannot-look-up",
     "title": "The attestation everyone cites cannot be looked up any more",
     "date": "2026-08-19",

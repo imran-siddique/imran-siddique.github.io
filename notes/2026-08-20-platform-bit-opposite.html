@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Google Cloud tells you to update go-sev-guest so your parser stops breaking on v4 attestation reports. I wanted to know what you can actually check once it parses, and the answer sent me to look at my own verifier.">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imransiddique.com/notes/2026-08-20-platform-bit-opposite.html">
+    <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imransiddique.com/notes/2026-08-20-platform-bit-opposite.html">
+    <meta property="og:title" content="The platform bit that means the opposite of what the doc says">
+    <meta property="og:description" content="Google Cloud tells you to update go-sev-guest so your parser stops breaking on v4 attestation reports. I wanted to know what you can actually check once it parses, and the answer sent me to look at my own verifier.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@mosiddi">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>The platform bit that means the opposite of what the doc says | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css?v=34db634">
+    <link rel="stylesheet" href="../notes/notes.css">
+</head>
+<body>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "The platform bit that means the opposite of what the doc says", "datePublished": "2026-08-20", "description": "Google Cloud tells you to update go-sev-guest so your parser stops breaking on v4 attestation reports. I wanted to know what you can actually check once it parses, and the answer sent me to look at my own verifier.", "author": {"@type": "Person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-08-20-platform-bit-opposite.html"}</script>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../notes/index.html" class="active">Writing</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <article class="note">
+            <div class="container container-narrow">
+                <p class="note-back"><a href="index.html">&larr; All notes</a></p>
+                <time class="note-date" datetime="2026-08-20">20 August 2026</time>
+                <h1>The platform bit that means the opposite of what the doc says</h1>
+                <p class="note-standfirst">Google Cloud tells you to update go-sev-guest so your parser stops breaking on v4 attestation reports. I wanted to know what you can actually check once it parses, and the answer sent me to look at my own verifier.</p>
+                <div class="note-tags"><span class="concept-tag">attestation</span><span class="concept-tag">sev-snp</span><span class="concept-tag">evidence</span></div>
+                <div class="note-body">
+<p>I set out to answer a small question this morning, and it cost me more than I expected.</p>
+<p>Google Cloud's Confidential VM release notes, in an entry dated 27 October 2025, say that after a firmware update SEV-SNP instances generate v4 attestation reports and that parsers written for v3 might break. The fix offered is to update go-sev-guest to v0.14.0 or above. That advice is correct. I wanted to know what you can check once the thing parses.</p>
+<h2>The version the advice names cannot check what it reads</h2>
+<p>The v4 report added two mitigation vectors, <code>LAUNCH_MIT_VECTOR</code> and <code>CURRENT_MIT_VECTOR</code>, at offsets 0x1F8 and 0x200. They carry which platform-level mitigations were in force at launch and which are in force now.</p>
+<p>At v0.14.0, tagged 9 October 2025, the <code>abi</code> package reads both. The <code>validate</code> package does not contain the string "mitigation" anywhere. There is no option to require anything of those vectors and no function that looks at them. Same at v0.14.1.</p>
+<p>The policy hooks arrive in v0.15.0, tagged 9 June 2026 and still the latest release: <code>MinimumLaunchMitigationVector</code>, <code>MinimumCurrentMitigationVector</code>, and a check wired into the main validation path.</p>
+<p>That is not a scandal. Libraries grow, and the option did not exist anywhere in the interval, so nobody was exposed by choosing wrongly. But "update to v0.14.0 or above" answers the question people asked, which was why their parser crashed, and not the question worth asking, which is what the new report says and whether anyone is reading it.</p>
+<h2>Four of seven fields mean the opposite of the documentation</h2>
+<p>The second half is a documentation problem rather than a code one.</p>
+<p>The library's platform-info policy field is documented as a ceiling. The doc comment says <code>PlatformInfo</code> is the maximum of acceptable data. The README says each true field is permission for the corresponding report bit to be set. Read that and you build a policy by deciding what you will tolerate.</p>
+<p>Then read the function. The struct has seven fields. Three behave that way: SMT, TSME and SEV-TIO all fail with "unauthorized" when the report carries a bit your policy did not grant.</p>
+<p>The other four are reversed. ECC, RAPL disabled, ciphertext hiding and alias-check-complete all fail when the report is <em>missing</em> something your policy asked for. For those, setting the bit true is not permission. It is a demand.</p>
+<p>The one I care about is alias-check-complete. The comment above it in the source names what it is for and links to BadRAM and AMD's bulletin SB-3015. The firmware's alias check is the thing that prevents. The bit in the report only proves the firmware ran it. A verifier can require that proof, and under the documented model an operator has no reason to, because they are not trying to authorise anything. They leave it false and the requirement never runs.</p>
+<h2>What did not survive checking</h2>
+<p>The morning brief that pointed me here claimed nobody had made this argument before. Wrong. Issue 187 has been open since 16 April, unanswered, reporting the same confusion from the other end: that TSME can only be required to be off. I read that as evidence for the doc being the cause, and cited it.</p>
+<p>It also had three of the four error strings wrong, and counted thirteen references where there are fifteen. I could not treat any of it as read.</p>
+<p>I could not date the release note from search results either. It turned out to be ten months old, which is worth knowing before deciding anything is news.</p>
+<h2>What this cost me</h2>
+<p>I went to check my own verifier before writing a word of this, and I did not enjoy the result.</p>
+<p><code>_snp_verify.py</code> in agent-manifest does not parse <code>PLATFORM_INFO</code> at all. The field sits at offset 0x40. My offset table goes from the signature algorithm at 0x34 straight to report data at 0x50. It is not in the table, not in the parsed struct, and across every first-party file in agent-manifest, cmcp, ca2a and trace-spec the terms <code>platform_info</code>, <code>alias_check</code>, <code>mit_vector</code> and <code>badram</code> appear zero times each.</p>
+<p>So this is not a case of my documents failing to mention a check that the code performs. The bytes are never read. What my verifiers do establish is real and fail-closed: report signature, the VCEK to ASK to ARK chain with the root pinned by the operator, measurement binding. That is authenticity and identity. None of those four asks the report what kind of machine it came from.</p>
+<p>I have written the honest limit the same way for months, that no confidential computing silicon is custody grade against an adversary who owns the machine, with BadRAM as the reason. I treated it as a boundary to state and live with. Part of it is a boundary you can assert on, and AMD put the bit in the report to let you.</p>
+<h2>What changed today</h2>
+<p>I filed issue 195 against go-sev-guest, proposing the doc comment and the README bullet be split into the ceiling set and the floor set, with the fields named in each.</p>
+<p>Parsing <code>PLATFORM_INFO</code> and exposing an appraisal policy over it goes into agent-manifest next, and the limitations files across all four repos get a line naming what is not checked. Not everything unenforced is unenforceable. Sometimes the check is sitting in the struct and nobody wired it up.</p>
+                </div>
+                <section class="note-sources">
+                    <h2>Checked against</h2>
+                    <ul><li><a href="https://github.com/google/go-sev-guest/blob/c930ed67bebfe7245c0309888ec185bd9ad35899/validate/validate.go" rel="noopener">google/go-sev-guest validate.go at c930ed67, read 20 August 2026</a></li><li><a href="https://github.com/google/go-sev-guest/blob/c930ed67bebfe7245c0309888ec185bd9ad35899/abi/abi.go" rel="noopener">google/go-sev-guest abi.go at c930ed67, the SnpPlatformInfo struct</a></li><li><a href="https://github.com/google/go-sev-guest/issues/195" rel="noopener">Issue 195, the doc bug I filed against go-sev-guest</a></li><li><a href="https://github.com/google/go-sev-guest/issues/187" rel="noopener">Issue 187, milesdai on TSME polarity, open since April 2026</a></li><li><a href="https://docs.cloud.google.com/confidential-computing/confidential-vm/docs/release-notes" rel="noopener">Google Cloud Confidential VM release notes, entry of 27 October 2025</a></li><li><a href="https://badram.eu/" rel="noopener">BadRAM</a></li><li><a href="https://www.amd.com/en/resources/product-security/bulletin/amd-sb-3015.html" rel="noopener">AMD security bulletin SB-3015</a></li></ul>
+                </section>
+                
+            </div>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique.</p>
+                <p><a href="../notes/feed.xml">RSS</a> &middot; <a href="../index.html">imransiddique.com</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>
