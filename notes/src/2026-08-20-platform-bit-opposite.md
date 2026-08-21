@@ -4,6 +4,7 @@ date: 2026-08-20
 standfirst: Google Cloud tells you to update go-sev-guest so your parser stops breaking on v4 attestation reports. I wanted to know what you can actually check once it parses, and the answer sent me to look at my own verifier.
 tags: [attestation, sev-snp, evidence]
 linkedin: https://www.linkedin.com/feed/update/urn:li:activity:7496285113891057664/
+x: https://x.com/mosiddi/status/2090951455545163867
 sources:
   - label: google/go-sev-guest validate.go at c930ed67, read 20 August 2026
     url: https://github.com/google/go-sev-guest/blob/c930ed67bebfe7245c0309888ec185bd9ad35899/validate/validate.go
