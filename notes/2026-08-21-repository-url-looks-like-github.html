@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Publishing proves you own the namespace and you own the package. The repository URL next to them gets a regex, 498 entries name a repo owned by someone other than the publisher, and the one a vendor flagged twelve days ago is still marked active.">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imransiddique.com/notes/2026-08-21-repository-url-looks-like-github.html">
+    <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imransiddique.com/notes/2026-08-21-repository-url-looks-like-github.html">
+    <meta property="og:title" content="The MCP registry checks that the repository URL looks like GitHub">
+    <meta property="og:description" content="Publishing proves you own the namespace and you own the package. The repository URL next to them gets a regex, 498 entries name a repo owned by someone other than the publisher, and the one a vendor flagged twelve days ago is still marked active.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@mosiddi">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>The MCP registry checks that the repository URL looks like GitHub | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css?v=34db634">
+    <link rel="stylesheet" href="../notes/notes.css">
+</head>
+<body>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "The MCP registry checks that the repository URL looks like GitHub", "datePublished": "2026-08-21", "description": "Publishing proves you own the namespace and you own the package. The repository URL next to them gets a regex, 498 entries name a repo owned by someone other than the publisher, and the one a vendor flagged twelve days ago is still marked active.", "author": {"@type": "Person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-08-21-repository-url-looks-like-github.html"}</script>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../notes/index.html" class="active">Writing</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <article class="note">
+            <div class="container container-narrow">
+                <p class="note-back"><a href="index.html">&larr; All notes</a></p>
+                <time class="note-date" datetime="2026-08-21">21 August 2026</time>
+                <h1>The MCP registry checks that the repository URL looks like GitHub</h1>
+                <p class="note-standfirst">Publishing proves you own the namespace and you own the package. The repository URL next to them gets a regex, 498 entries name a repo owned by someone other than the publisher, and the one a vendor flagged twelve days ago is still marked active.</p>
+                <div class="note-tags"><span class="concept-tag">agent-security</span><span class="concept-tag">provenance</span><span class="concept-tag">registries</span></div>
+                <div class="note-body">
+<p>The official MCP registry holds 24,615 server records. Of the 16,850 published under an <code>io.github.*</code> namespace, 15,235 name a GitHub repository, and 498 of those name a repository owned by a different GitHub account than the namespace the publisher authenticated as.</p>
+<p>Most of those 498 are almost certainly innocent. A personal account publishing an organisation's code, a monorepo, an account rename. That is the point. Nothing checked, so nothing distinguishes them.</p>
+<h2>What publishing actually proves</h2>
+<p>The requirements document is clear and short. Four validations: namespace authentication, package ownership verification, restricted registry base URLs, and <code>_meta</code> namespace restrictions. Grep it for "repositor" and you get nothing.</p>
+<p>The code is not silent, though, and the difference matters. <code>validateRepository</code> calls <code>IsValidRepositoryURL</code>, which is this:</p>
+<pre><code>^https?://(www\.)?github\.com/[\w.-]+/[\w.-]+/?$</code></pre>
+<p>A shape check. Not whether the repository exists, not whether it resolves, not whether the publisher owns it, not whether it has anything to do with the package sitting beside it in the same record. If the field is absent the validator returns early, which is how 5,258 entries have no repository at all.</p>
+<p>So the record proves two things and asserts a third. The namespace is proven. The package is proven. The repository is typed in.</p>
+<p>None of which is news to the maintainers. Issue 395 was opened in September 2025 by someone who found a live entry pointing at a GitHub URL that would not load, and the first reply, from a maintainer, is that the registry should "go one step further" and validate that the repository is "not only valid/publicly accessible but also actually owned by the publisher". Eleven months later the thread has eight comments, the URL in question turned out to be a private repo rather than a broken link, and PR 1266 has had a publish-time reachability probe waiting since May. The check the maintainer asked for on day one has not been built.</p>
+<h2>What used the gap</h2>
+<p>On 8 August at 20:58 UTC, <code>io.github.jUXTAPOSITION1/vape</code> was published. On 9 August, one day later, OX Security reported it. Their account: the PyPI package is clean, deliberately, to get past automated scanners, and the payload sits in the linked repository in <code>.vscode/settings.json</code> and <code>.claude/settings.json</code>, which run when a developer opens or clones the project in a coding client. They describe it as the first time they had observed this worm delivered through the official registry.</p>
+<p>Every prior version of this story ran the other way. Honest repository, poisoned package. Here the clean package is the alibi and the pointer is the weapon, and the pointer is the field that gets the regex.</p>
+<p>GitHub blocked the repository for terms-of-service violation on 15 August. The PyPI package is still installable, both releases, neither yanked. The registry entry is still <code>active</code>, and its <code>statusChangedAt</code> is identical to the microsecond to its <code>publishedAt</code>.</p>
+<h2>Why nobody attached a warning</h2>
+<p>There are three statuses. <code>active</code>, visible by default. <code>deprecated</code>, visible with a message. <code>deleted</code>, hidden by default. <code>statusMessage</code> is capped at 500 characters and rejected with a 400 when the status is <code>active</code>.</p>
+<p>I read all 735 status messages in the registry. Not one describes a moderation action. They are renames, consolidations, accidental version bumps, republications under a new namespace. That is not a failure, it is the feature working as designed: <code>statusMessage</code> was introduced to carry a publisher's deprecation reason, and issue 623 was closed on exactly that ground.</p>
+<p>Which leaves the vocabulary with no way to say the thing this entry needs said. An aggregator mirroring the feed cannot tell a publisher's rename from a registry takedown, because both are a status plus free text, and there is no actor on the record.</p>
+<h2>What did not survive checking</h2>
+<p>"The registry does not validate the repository field." Cut. It validates the shape. One grep would have refuted the stronger claim in public.</p>
+<p>"The choice is silence or removal." Cut. <code>deprecated</code> is documented as visible with a warning. The measured claim replaces it: the warning tier exists and has never once been used for this.</p>
+<p>"The repository was deleted." Corrected. GitHub's API records it as blocked for terms of service since 15 August, which is a stronger fact than the 404 I started from.</p>
+<p>"The maintainers deferred ownership binding." Cut, and it was nearly the worst error here. That is PR 1266's characterisation of the thread. The thread itself has a maintainer asking for ownership validation in the first reply. Nobody decided against it.</p>
+<p>I have not run the payload or read the repository, which is disabled. The attribution is OX Security's and I am reporting it as theirs.</p>
+<h2>Where I sit in this</h2>
+<p>cMCP's own limitations file says the gateway cannot detect a look-alike package added to the catalog in the first place, because catalog approval is human-gated. This is a case study in what that human is handed: a green status, a proven package name, and a repository URL that was checked for punctuation.</p>
+<p>Filed today as issue 1563, a takedown request against the entry, citing the moderation policy's malware clause. The reachability gap is already in 395 and 1266 and does not need me to file it again.</p>
+                </div>
+                <section class="note-sources">
+                    <h2>Checked against</h2>
+                    <ul><li><a href="https://registry.modelcontextprotocol.io/v0/servers?search=vape" rel="noopener">MCP registry, the io.github.jUXTAPOSITION1/vape entry, read 21 August 2026</a></li><li><a href="https://github.com/modelcontextprotocol/registry/blob/main/docs/reference/server-json/official-registry-requirements.md" rel="noopener">Official registry requirements, the four validations enforced on publish</a></li><li><a href="https://github.com/modelcontextprotocol/registry/blob/main/internal/validators/validators.go" rel="noopener">internal/validators/validators.go, validateRepository</a></li><li><a href="https://github.com/modelcontextprotocol/registry/blob/main/internal/validators/utils.go" rel="noopener">internal/validators/utils.go, IsValidRepositoryURL and the two regexes</a></li><li><a href="https://github.com/modelcontextprotocol/registry/blob/main/docs/reference/api/official-registry-api.md" rel="noopener">Official registry API reference, status values and the statusMessage restriction</a></li><li><a href="https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/moderation-policy.mdx" rel="noopener">The MCP Registry moderation policy</a></li><li><a href="https://github.com/modelcontextprotocol/registry/issues/395" rel="noopener">Issue 395, validate provided repositories are publicly reachable, open since September 2025</a></li><li><a href="https://github.com/modelcontextprotocol/registry/pull/1266" rel="noopener">PR 1266, probe repository URL reachability at publish</a></li><li><a href="https://www.ox.security/blog/shai-hulud-outbreak-debrief-the-worm-evolves-into-mcp/" rel="noopener">OX Security, Shai-Hulud outbreak debrief, 9 August 2026</a></li><li><a href="https://pypi.org/pypi/vape-mcp-server/json" rel="noopener">PyPI JSON API, vape-mcp-server</a></li><li><a href="https://github.com/agentrust-io/cmcp/blob/main/LIMITATIONS.md" rel="noopener">cMCP LIMITATIONS.md, tool name collision via malicious catalog entries</a></li><li><a href="https://github.com/modelcontextprotocol/registry/issues/1563" rel="noopener">Issue 1563, the takedown request I filed against the entry</a></li></ul>
+                </section>
+                
+            </div>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique.</p>
+                <p><a href="../notes/feed.xml">RSS</a> &middot; <a href="../index.html">imransiddique.com</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>

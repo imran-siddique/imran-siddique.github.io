@@ -1,5 +1,70 @@
 [
   {
+    "slug": "2026-08-21-repository-url-looks-like-github",
+    "title": "The MCP registry checks that the repository URL looks like GitHub",
+    "date": "2026-08-21",
+    "standfirst": "Publishing proves you own the namespace and you own the package. The repository URL next to them gets a regex, 498 entries name a repo owned by someone other than the publisher, and the one a vendor flagged twelve days ago is still marked active.",
+    "tags": [
+      "agent-security",
+      "provenance",
+      "registries"
+    ],
+    "sources": [
+      {
+        "label": "MCP registry, the io.github.jUXTAPOSITION1/vape entry, read 21 August 2026",
+        "url": "https://registry.modelcontextprotocol.io/v0/servers?search=vape"
+      },
+      {
+        "label": "Official registry requirements, the four validations enforced on publish",
+        "url": "https://github.com/modelcontextprotocol/registry/blob/main/docs/reference/server-json/official-registry-requirements.md"
+      },
+      {
+        "label": "internal/validators/validators.go, validateRepository",
+        "url": "https://github.com/modelcontextprotocol/registry/blob/main/internal/validators/validators.go"
+      },
+      {
+        "label": "internal/validators/utils.go, IsValidRepositoryURL and the two regexes",
+        "url": "https://github.com/modelcontextprotocol/registry/blob/main/internal/validators/utils.go"
+      },
+      {
+        "label": "Official registry API reference, status values and the statusMessage restriction",
+        "url": "https://github.com/modelcontextprotocol/registry/blob/main/docs/reference/api/official-registry-api.md"
+      },
+      {
+        "label": "The MCP Registry moderation policy",
+        "url": "https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/moderation-policy.mdx"
+      },
+      {
+        "label": "Issue 395, validate provided repositories are publicly reachable, open since September 2025",
+        "url": "https://github.com/modelcontextprotocol/registry/issues/395"
+      },
+      {
+        "label": "PR 1266, probe repository URL reachability at publish",
+        "url": "https://github.com/modelcontextprotocol/registry/pull/1266"
+      },
+      {
+        "label": "OX Security, Shai-Hulud outbreak debrief, 9 August 2026",
+        "url": "https://www.ox.security/blog/shai-hulud-outbreak-debrief-the-worm-evolves-into-mcp/"
+      },
+      {
+        "label": "PyPI JSON API, vape-mcp-server",
+        "url": "https://pypi.org/pypi/vape-mcp-server/json"
+      },
+      {
+        "label": "cMCP LIMITATIONS.md, tool name collision via malicious catalog entries",
+        "url": "https://github.com/agentrust-io/cmcp/blob/main/LIMITATIONS.md"
+      },
+      {
+        "label": "Issue 1563, the takedown request I filed against the entry",
+        "url": "https://github.com/modelcontextprotocol/registry/issues/1563"
+      }
+    ],
+    "linkedin": "",
+    "x": "",
+    "words": 858,
+    "url": "https://imransiddique.com/notes/2026-08-21-repository-url-looks-like-github.html"
+  },
+  {
     "slug": "2026-08-20-platform-bit-opposite",
     "title": "The platform bit that means the opposite of what the doc says",
     "date": "2026-08-20",
