@@ -3,6 +3,7 @@ title: The MCP registry checks that the repository URL looks like GitHub
 date: 2026-08-21
 standfirst: Publishing proves you own the namespace and you own the package. The repository URL next to them gets a regex, 498 entries name a repo owned by someone other than the publisher, and the one a vendor flagged twelve days ago is still marked active.
 tags: [agent-security, provenance, registries]
+x: https://x.com/mosiddi/status/2090860776785645777
 sources:
   - label: MCP registry, the io.github.jUXTAPOSITION1/vape entry, read 21 August 2026
     url: https://registry.modelcontextprotocol.io/v0/servers?search=vape
