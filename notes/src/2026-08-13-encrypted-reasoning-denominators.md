@@ -4,6 +4,7 @@ date: 2026-08-13
 standfirst: Coverage of the reasoning-trace harvest reported three different totals as if they disagreed. They are all the paper's own numbers, at three different denominators.
 tags: [agent-security, evidence, retention]
 linkedin: https://www.linkedin.com/feed/update/urn:li:activity:7493711977589125120/
+x: https://x.com/mosiddi/status/2091274249931829397
 sources:
   - label: Panfilov et al., "Stealing Reasoning Traces from Proprietary LLM APIs", arXiv 2608.09867, 10 August 2026
     url: https://arxiv.org/abs/2608.09867
