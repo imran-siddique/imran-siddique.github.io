@@ -27,9 +27,15 @@ Record format:
 
 Keep it ordered newest first; the build sorts anyway, so appending anywhere is fine.
 
-`status` matters. Only `delivered` counts as a prior talk when a CFP asks for
-speaking history. `submitted` means it has not been accepted yet and must never be
-presented as a credential.
+`status` matters, and it controls publication.
+
+    delivered  published, and counts as a prior talk when a CFP asks for history
+    scheduled  published; accepted or self-hosted, confirmed but not yet given
+    submitted  NOT PUBLISHED. Tracked here only, hidden from the page entirely.
+
+A submitted talk is a pending CFP entry, not a credential and not news. It stays in
+this file so there is one record of what is outstanding, and it appears on the site
+only once its status changes to `scheduled`.
 
 Deliberately dependency-free, matching notes/build.py: this runs on a bare Python 3
 with no pip install.
@@ -119,7 +125,7 @@ def render_entry(r):
 
 def render(records):
     delivered = [r for r in records if r["status"] == "delivered"]
-    upcoming = [r for r in records if r["status"] in ("scheduled", "submitted")]
+    upcoming = [r for r in records if r["status"] == "scheduled"]
 
     def block(items):
         return "\n\n".join(render_entry(r) for r in items)
@@ -130,7 +136,6 @@ def render(records):
         <section class="section">
             <div class="container">
                 <h2>Upcoming</h2>
-                <p class="section-intro">Submitted talks are listed as submitted until they are accepted. They are not speaking credentials.</p>
                 <div class="projects-grid">
 {block(upcoming)}
                 </div>
@@ -225,15 +230,17 @@ def main():
         for p in problems:
             print(f"PROBLEM: {p}")
         return 1
-    out = render(records)
     counts = {}
     for r in records:
         counts[r["status"]] = counts.get(r["status"], 0) + 1
+    out = render(records)
+    hidden = counts.get("submitted", 0)
+    published = len(records) - hidden
     if check:
-        print(f"OK: {len(records)} talks, would write {OUT.relative_to(ROOT)}")
+        print(f"OK: {published} talks would be published, {hidden} withheld as submitted")
     else:
         OUT.write_text(out, encoding="utf-8")
-        print(f"wrote {OUT.relative_to(ROOT)}")
+        print(f"wrote {OUT.relative_to(ROOT)}: {published} published, {hidden} withheld as submitted")
     print("  " + ", ".join(f"{v} {k}" for k, v in sorted(counts.items())))
     print("  " + update_sitemap(check))
     return 0

@@ -9,7 +9,10 @@
     "summary": "In-person summit on verifiable agent control. TRACE is the evidence, ATF is the judgment, AAuth is the delivery.",
     "url": "",
     "recording": "",
-    "tags": ["trace", "verifiable-agents"]
+    "tags": [
+      "trace",
+      "verifiable-agents"
+    ]
   },
   {
     "date": "2026-10-27",
@@ -21,7 +24,11 @@
     "summary": "The official MCP registry checks the repository field with a shape regex. 498 entries name a repository owned by a different account than the publisher authenticated as, and a worm shipped through the gap.",
     "url": "https://unpromptedcon.org/",
     "recording": "",
-    "tags": ["supply-chain", "mcp", "provenance"]
+    "tags": [
+      "supply-chain",
+      "mcp",
+      "provenance"
+    ]
   },
   {
     "date": "2026-09-30",
@@ -33,7 +40,26 @@
     "summary": "Every model-weight protection tool protects the customer from the model. None protect the builder from the customer.",
     "url": "https://aaif.live/events/7tp1ev",
     "recording": "",
-    "tags": ["weight-custody", "confidential-computing"]
+    "tags": [
+      "weight-custody",
+      "confidential-computing"
+    ]
+  },
+  {
+    "date": "2026-09-15",
+    "title": "AgenTrust: From Governance Decisions to Verifiable Agent Actions",
+    "event": "GenAI Gurus",
+    "location": "Online",
+    "format": "Community talk, 19:00 CEST",
+    "status": "scheduled",
+    "summary": "Most agent governance tools can decide whether an action should be allowed. Far fewer can prove what was actually requested, authorised and executed across agents, tools and infrastructure. This is about closing that gap.",
+    "url": "https://genai-gurus.com/",
+    "recording": "",
+    "tags": [
+      "agent-governance",
+      "trace",
+      "verifiable-agents"
+    ]
   },
   {
     "date": "2026-09-09",
@@ -45,7 +71,10 @@
     "summary": "Virtual edition of the summit, covering the TRACE evidence layer and how it composes with judgment and delivery.",
     "url": "",
     "recording": "",
-    "tags": ["trace", "verifiable-agents"]
+    "tags": [
+      "trace",
+      "verifiable-agents"
+    ]
   },
   {
     "date": "2026-07-29",
@@ -57,7 +86,11 @@
     "summary": "The gap between software-based AI governance and verifiable, hardware-enforced agent control, and the four open projects that close it: Agent Manifest, Confidential MCP, Confidential A2A, and TRACE.",
     "url": "",
     "recording": "",
-    "tags": ["agent-governance", "confidential-computing", "trace"]
+    "tags": [
+      "agent-governance",
+      "confidential-computing",
+      "trace"
+    ]
   },
   {
     "date": "2026-06-23",
@@ -69,6 +102,9 @@
     "summary": "Bridging agent governance policy and verifiable hardware enforcement, delivered the same day OPAQUE 3.0 and Confidential MCP were announced.",
     "url": "https://ccsummit2026.sched.com/",
     "recording": "",
-    "tags": ["confidential-computing", "agent-governance"]
+    "tags": [
+      "confidential-computing",
+      "agent-governance"
+    ]
   }
 ]
