@@ -77,6 +77,22 @@
     ]
   },
   {
+    "date": "2026-08-17",
+    "title": "Policy Enforcement and Tamper-Evident Audit Chains",
+    "event": "MCP Release Party, Seattle",
+    "location": "Seattle, WA",
+    "format": "Community talk",
+    "status": "delivered",
+    "summary": "Enforcing policy at the MCP tool-call boundary, and producing an audit chain a third party can check rather than a log the operator writes about itself.",
+    "url": "",
+    "recording": "https://www.youtube.com/watch?v=ynodEQABIJk",
+    "tags": [
+      "mcp",
+      "policy-enforcement",
+      "evidence"
+    ]
+  },
+  {
     "date": "2026-07-29",
     "title": "Verifiable, Hardware-Enforced Agent Control",
     "event": "Webinar",
@@ -93,6 +109,21 @@
     ]
   },
   {
+    "date": "2026-06-24",
+    "title": "Cloud Native Seattle Meetup, June 2026",
+    "event": "Cloud Native Seattle",
+    "location": "Seattle, WA",
+    "format": "Meetup talk",
+    "status": "delivered",
+    "summary": "Agent governance and verifiable enforcement for a cloud native audience. Segment begins around 32 minutes into the recording.",
+    "url": "",
+    "recording": "https://www.youtube.com/watch?v=NbZf6OyuSy0&t=1929s",
+    "tags": [
+      "agent-governance",
+      "cloud-native"
+    ]
+  },
+  {
     "date": "2026-06-23",
     "title": "Governing AI Agents at the Hardware Boundary",
     "event": "Confidential Computing Summit 2026",
@@ -105,6 +136,52 @@
     "tags": [
       "confidential-computing",
       "agent-governance"
+    ]
+  },
+  {
+    "date": "2026-06-05",
+    "title": "Governance for AI Agents",
+    "event": "Open Source Friday, GitHub",
+    "location": "Online",
+    "format": "Live stream",
+    "status": "delivered",
+    "summary": "GitHub's Open Source Friday livestream on governing AI agents with open-source tooling.",
+    "url": "",
+    "recording": "https://www.youtube.com/watch?v=bIioEmT2KEM",
+    "tags": [
+      "agent-governance",
+      "open-source"
+    ]
+  },
+  {
+    "date": "2026-05-28",
+    "title": "Governing AI Agents at Runtime: Open Source Zero-Trust with AGT",
+    "event": "Ubuntu Summit 26.04",
+    "location": "London, broadcast online",
+    "format": "Session, 25 minutes",
+    "status": "delivered",
+    "summary": "Zero-trust principles applied to AI agent systems at runtime, using the open-source Agent Governance Toolkit.",
+    "url": "https://ubuntu.com/summit",
+    "recording": "https://www.youtube.com/watch?v=YtjjoPTN0U8&t=108s",
+    "tags": [
+      "agent-governance",
+      "zero-trust",
+      "agt"
+    ]
+  },
+  {
+    "date": "2026-05-07",
+    "title": "Building Governed AI Agents with the Microsoft Agent Governance Toolkit",
+    "event": "GenAI Gurus",
+    "location": "Online",
+    "format": "Community talk",
+    "status": "delivered",
+    "summary": "Enterprise AI governance in practice: defining agent policy and enforcing it with the Agent Governance Toolkit.",
+    "url": "https://genai-gurus.com/",
+    "recording": "https://www.youtube.com/watch?v=uDQBqp9Om5s",
+    "tags": [
+      "agent-governance",
+      "agt"
     ]
   }
 ]
