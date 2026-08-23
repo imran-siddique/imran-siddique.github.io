@@ -215,7 +215,7 @@ def head(title, desc, canonical, prefix=""):
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <title>{html.escape(title, quote=True)} | Imran Siddique</title>
-    <link rel="stylesheet" href="{prefix}styles-new.css?v=a8a4c5f">
+    <link rel="stylesheet" href="{prefix}styles-new.css?v=b7c31d2">
     <link rel="stylesheet" href="{prefix}notes/notes.css">
 </head>
 <body>"""
