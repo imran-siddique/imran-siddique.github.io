@@ -168,6 +168,7 @@ def nav(prefix=""):
                 <li><a href="{prefix}about.html">About</a></li>
                 <li><a href="{prefix}projects.html">Projects</a></li>
                 <li><a href="{prefix}notes/index.html" class="active">Writing</a></li>
+                <li><a href="{prefix}speaking/index.html">Speaking</a></li>
                 <li><a href="{prefix}contact.html">Contact</a></li>
             </ul>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -214,7 +215,7 @@ def head(title, desc, canonical, prefix=""):
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <title>{html.escape(title, quote=True)} | Imran Siddique</title>
-    <link rel="stylesheet" href="{prefix}styles-new.css?v=34db634">
+    <link rel="stylesheet" href="{prefix}styles-new.css?v=a8a4c5f">
     <link rel="stylesheet" href="{prefix}notes/notes.css">
 </head>
 <body>"""

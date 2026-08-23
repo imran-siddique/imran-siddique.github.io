@@ -1,0 +1,74 @@
+[
+  {
+    "date": "2026-10-30",
+    "title": "Verifiable Agent Summit",
+    "event": "Verifiable Agent Summit",
+    "location": "San Francisco, CA",
+    "format": "Summit",
+    "status": "scheduled",
+    "summary": "In-person summit on verifiable agent control. TRACE is the evidence, ATF is the judgment, AAuth is the delivery.",
+    "url": "",
+    "recording": "",
+    "tags": ["trace", "verifiable-agents"]
+  },
+  {
+    "date": "2026-10-27",
+    "title": "498 MCP Registry Entries Point at a Repository the Publisher Does Not Own",
+    "event": "[un]prompted II, The AI Security Practitioner Conference",
+    "location": "San Francisco, CA",
+    "format": "Standard session, 20 minutes",
+    "status": "submitted",
+    "summary": "The official MCP registry checks the repository field with a shape regex. 498 entries name a repository owned by a different account than the publisher authenticated as, and a worm shipped through the gap.",
+    "url": "https://unpromptedcon.org/",
+    "recording": "",
+    "tags": ["supply-chain", "mcp", "provenance"]
+  },
+  {
+    "date": "2026-09-30",
+    "title": "Weight Custody Manifest: When the Model Leaves Your Data Center, the Threat Model Flips",
+    "event": "AAIF Community Showcase, Agentic AI Foundation",
+    "location": "Online",
+    "format": "Showcase session",
+    "status": "submitted",
+    "summary": "Every model-weight protection tool protects the customer from the model. None protect the builder from the customer.",
+    "url": "https://aaif.live/events/7tp1ev",
+    "recording": "",
+    "tags": ["weight-custody", "confidential-computing"]
+  },
+  {
+    "date": "2026-09-09",
+    "title": "Verifiable Agent Summit, virtual edition",
+    "event": "Verifiable Agent Summit",
+    "location": "Online",
+    "format": "60 minutes",
+    "status": "scheduled",
+    "summary": "Virtual edition of the summit, covering the TRACE evidence layer and how it composes with judgment and delivery.",
+    "url": "",
+    "recording": "",
+    "tags": ["trace", "verifiable-agents"]
+  },
+  {
+    "date": "2026-07-29",
+    "title": "Verifiable, Hardware-Enforced Agent Control",
+    "event": "Webinar",
+    "location": "Online",
+    "format": "Webinar",
+    "status": "delivered",
+    "summary": "The gap between software-based AI governance and verifiable, hardware-enforced agent control, and the four open projects that close it: Agent Manifest, Confidential MCP, Confidential A2A, and TRACE.",
+    "url": "",
+    "recording": "",
+    "tags": ["agent-governance", "confidential-computing", "trace"]
+  },
+  {
+    "date": "2026-06-23",
+    "title": "Governing AI Agents at the Hardware Boundary",
+    "event": "Confidential Computing Summit 2026",
+    "location": "San Francisco, CA",
+    "format": "Breakout session",
+    "status": "delivered",
+    "summary": "Bridging agent governance policy and verifiable hardware enforcement, delivered the same day OPAQUE 3.0 and Confidential MCP were announced.",
+    "url": "https://ccsummit2026.sched.com/",
+    "recording": "",
+    "tags": ["confidential-computing", "agent-governance"]
+  }
+]
