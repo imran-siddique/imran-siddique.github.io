@@ -1745,6 +1745,34 @@ footer a:hover { color: #fff; }
 .talk-row a { text-decoration: none; }
 .talk-row a:hover { text-decoration: underline; }
 
+/* Proof videos: the recurring evidence-led YouTube series. */
+.proof-video-section { padding-top: 3.75rem; }
+.proof-video-head { justify-content: space-between; align-items: end; }
+.proof-video-head > div { max-width: 42rem; }
+.proof-video-intro { margin: .55rem 0 0; font-size: .95rem; line-height: 1.55; opacity: .68; }
+.proof-video-channel {
+    flex: 0 0 auto;
+    color: inherit;
+    font-size: .82rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+.proof-video-channel:hover { text-decoration: underline; text-underline-offset: 3px; }
+.proof-video-short img { object-position: center 34%; }
+.proof-video-badge {
+    position: absolute;
+    right: .7rem;
+    top: .7rem;
+    padding: .28rem .5rem;
+    border-radius: 999px;
+    background: rgba(0,0,0,.75);
+    color: #fff;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
 /* Past talks: thumbnail grid. */
 .talk-grid {
     display: grid;
@@ -1825,6 +1853,8 @@ a.talk-card:hover .talk-thumb img { transform: scale(1.04); }
 
 @media (max-width: 600px) {
     .talk-row { flex-direction: column; gap: .25rem; }
+    .proof-video-head { align-items: flex-start; flex-direction: column; }
+    .proof-video-channel { margin-top: -.35rem; }
     .talk-row-date { flex: none; }
 }
 
