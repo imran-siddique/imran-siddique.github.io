@@ -3,6 +3,7 @@ title: The tool list was advertised, the resolver decided
 date: 2026-08-24
 standfirst: Spring AI released a fix on 21 August for a bug where a tool absent from the request could still be called. The vulnerable dispatch is one line. The public fix exists on one of the three affected release lines, and the fallback left almost nothing useful in the log.
 tags: [agent-security, tool-calling, enforcement]
+x: https://x.com/mosiddi/status/2091964432389964121
 sources:
   - label: Spring advisory CVE-2026-59318, published 20 August 2026
     url: https://spring.io/security/cve-2026-59318/
