@@ -94,14 +94,14 @@
   },
   {
     "date": "2026-07-29",
-    "title": "Verifiable, Hardware-Enforced Agent Control",
-    "event": "Webinar",
+    "title": "From Trust to Proof: The Next Generation of AI Agent Governance",
+    "event": "OPAQUE AI Confidential Webinar",
     "location": "Online",
     "format": "Webinar",
     "status": "delivered",
     "summary": "The gap between software-based AI governance and verifiable, hardware-enforced agent control, and the four open projects that close it: Agent Manifest, Confidential MCP, Confidential A2A, and TRACE.",
     "url": "",
-    "recording": "",
+    "recording": "https://www.youtube.com/watch?v=uz4absejhHc",
     "tags": [
       "agent-governance",
       "confidential-computing",
