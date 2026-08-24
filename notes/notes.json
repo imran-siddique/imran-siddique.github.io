@@ -1,5 +1,54 @@
 [
   {
+    "slug": "2026-08-24-tool-list-advertised-resolver-decided",
+    "title": "The tool list was advertised, the resolver decided",
+    "date": "2026-08-24",
+    "standfirst": "Spring AI released a fix on 21 August for a bug where a tool absent from the request could still be called. The vulnerable dispatch is one line. The public fix exists on one of the three affected release lines, and the fallback left almost nothing useful in the log.",
+    "tags": [
+      "agent-security",
+      "tool-calling",
+      "enforcement"
+    ],
+    "sources": [
+      {
+        "label": "Spring advisory CVE-2026-59318, published 20 August 2026",
+        "url": "https://spring.io/security/cve-2026-59318/"
+      },
+      {
+        "label": "Spring AI 2.0.1 release announcement, 21 August 2026",
+        "url": "https://spring.io/blog/2026/08/21/spring-ai-2-0-1-available-now/"
+      },
+      {
+        "label": "Spring AI 2.0.1 upgrade notes, tool resolution fallback",
+        "url": "https://docs.spring.io/spring-ai/reference/upgrade-notes.html#_tool_resolution_fallback_disabled_by_default"
+      },
+      {
+        "label": "DefaultToolCallingManager at v2.0.0, the vulnerable fallback",
+        "url": "https://github.com/spring-projects/spring-ai/blob/v2.0.0/spring-ai-model/src/main/java/org/springframework/ai/model/tool/DefaultToolCallingManager.java"
+      },
+      {
+        "label": "DefaultToolCallingManager at v2.0.1, the disabled-by-default fallback",
+        "url": "https://github.com/spring-projects/spring-ai/blob/v2.0.1/spring-ai-model/src/main/java/org/springframework/ai/model/tool/DefaultToolCallingManager.java"
+      },
+      {
+        "label": "StaticToolCallbackResolver at v2.0.1, registry lookup and debug log",
+        "url": "https://github.com/spring-projects/spring-ai/blob/v2.0.1/spring-ai-model/src/main/java/org/springframework/ai/tool/resolution/StaticToolCallbackResolver.java"
+      },
+      {
+        "label": "Maven Central, public spring-ai-model versions",
+        "url": "https://repo1.maven.org/maven2/org/springframework/ai/spring-ai-model/"
+      },
+      {
+        "label": "cMCP LIMITATIONS.md, gateway enforcement boundary",
+        "url": "https://github.com/agentrust-io/cmcp/blob/main/LIMITATIONS.md"
+      }
+    ],
+    "linkedin": "",
+    "x": "",
+    "words": 622,
+    "url": "https://imransiddique.com/notes/2026-08-24-tool-list-advertised-resolver-decided.html"
+  },
+  {
     "slug": "2026-08-21-repository-url-looks-like-github",
     "title": "The MCP registry checks that the repository URL looks like GitHub",
     "date": "2026-08-21",
