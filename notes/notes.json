@@ -1,5 +1,54 @@
 [
   {
+    "slug": "2026-08-31-two-sentences-lost-in-supersession",
+    "title": "Two normative sentences went missing when one tasks spec superseded another",
+    "date": "2026-08-31",
+    "standfirst": "The MCP tasks extension requires an authorization check on every task request. Its own rationale says that check is often impossible, the sentence that used to make servers disclose that is gone, and no error code represents a denial. One of the two losses was already found and fixed by somebody else three weeks ago.",
+    "tags": [
+      "mcp",
+      "agent-security",
+      "spec-review"
+    ],
+    "sources": [
+      {
+        "label": "SEP-2663 Tasks Extension, merged 15 May 2026",
+        "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/seps/2663-tasks-extension.md"
+      },
+      {
+        "label": "ext-tasks specification/draft/tasks.md, Security Considerations and Protocol Errors",
+        "url": "https://github.com/modelcontextprotocol/ext-tasks/blob/main/specification/draft/tasks.md"
+      },
+      {
+        "label": "ext-tasks PR 9, restore auth binding requirement dropped during SEP-2663 port",
+        "url": "https://github.com/modelcontextprotocol/ext-tasks/pull/9"
+      },
+      {
+        "label": "SEP-1686 tasks proposal, section 8.1 Task Isolation and Access Control",
+        "url": "https://github.com/modelcontextprotocol/agents-wg/blob/main/proposals/1686-tasks.md"
+      },
+      {
+        "label": "Agents WG meeting notes, 28 August 2026, error contracts for agent operations",
+        "url": "https://github.com/modelcontextprotocol/agents-wg/blob/main/meetings/2026-08-28.md"
+      },
+      {
+        "label": "ext-tasks schema/draft/schema.ts, Task interface and ttlMs",
+        "url": "https://github.com/modelcontextprotocol/ext-tasks/blob/main/schema/draft/schema.ts"
+      },
+      {
+        "label": "MCP roadmap, 22 August 2026",
+        "url": "https://blog.modelcontextprotocol.io/posts/mcp-roadmap/"
+      },
+      {
+        "label": "ext-tasks issue 20, filed 31 August 2026",
+        "url": "https://github.com/modelcontextprotocol/ext-tasks/issues/20"
+      }
+    ],
+    "linkedin": "",
+    "x": "",
+    "words": 893,
+    "url": "https://imransiddique.com/notes/2026-08-31-two-sentences-lost-in-supersession.html"
+  },
+  {
     "slug": "2026-08-24-tool-list-advertised-resolver-decided",
     "title": "The tool list was advertised, the resolver decided",
     "date": "2026-08-24",
