@@ -3,6 +3,7 @@ title: Two normative sentences went missing when one tasks spec superseded anoth
 date: 2026-08-31
 standfirst: The MCP tasks extension requires an authorization check on every task request. Its own rationale says that check is often impossible, the sentence that used to make servers disclose that is gone, and no error code represents a denial. One of the two losses was already found and fixed by somebody else three weeks ago.
 tags: [mcp, agent-security, spec-review]
+x: https://x.com/mosiddi/status/2094492168077627816
 sources:
   - label: SEP-2663 Tasks Extension, merged 15 May 2026
     url: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/seps/2663-tasks-extension.md
