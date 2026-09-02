@@ -6,6 +6,14 @@
 
 Imran Siddique is Chief Platform Officer at Opaque Systems, the confidential AI company. He previously spent 18 years at Microsoft, where he holds granted and published patents in data platforms, sustainability, and AI systems. He created the Agent Governance Toolkit (AGT), an open-source platform (github.com/microsoft/agent-governance-toolkit, MIT) providing deterministic policy enforcement, zero-trust identity, execution sandboxing, and reliability engineering for autonomous AI agents. AGT consolidates 45 packages into 5 top-level distributions, ships SDKs for 5 languages (Python, TypeScript, .NET, Rust, Go), covers all 10 OWASP Agentic AI risks, and has 4,877 GitHub stars. His methodology, "Scale by Subtraction," advocates removing complexity rather than adding features to build reliable AI systems.
 
+## New Book: Architecting at Scale
+
+Published September 1, 2026 by Packt. Architecting at Scale is Imran Siddique's practical field guide to designing large-scale AI-native systems. It covers the architectural decisions that become expensive in production: state, failure, evolution, runtime control, governance, and removing unnecessary complexity.
+
+- Amazon: https://www.amazon.com/Architecting-Scale-Practical-Large-Scale-AI-Native/dp/1807420973
+- Packt: https://www.packtpub.com/en-in/product/architecting-at-scale-9781807420963
+- Companion code: https://github.com/imran-siddique/Architecting-at-Scale
+
 ## Current Work: agentrust-io Open Standards
 
 ### TRACE
