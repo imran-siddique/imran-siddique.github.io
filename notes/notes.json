@@ -1,5 +1,54 @@
 [
   {
+    "slug": "2026-09-02-already-said-eight-weeks-earlier",
+    "title": "The finding was correct and eight weeks late",
+    "date": "2026-09-02",
+    "standfirst": "A gap in the SEAT post-handshake attestation draft turned out to have been argued on the working group list in July, and specified in a closed issue a year before that. What I filed instead came from reading the RFCs the draft already cites.",
+    "tags": [
+      "attestation",
+      "tls",
+      "spec-review"
+    ],
+    "sources": [
+      {
+        "label": "draft-fossati-seat-expat, source on GitHub",
+        "url": "https://github.com/tls-attestation/exported-attestation/blob/main/draft-fossati-seat-expat.md"
+      },
+      {
+        "label": "SEAT list, The Passport Model-sized elephant in the room, 10 July 2026",
+        "url": "https://mailarchive.ietf.org/arch/msg/seat/Xwf2c1jfUWeGgHjWGFliKqtqANM/"
+      },
+      {
+        "label": "exported-attestation issue 21, comment of 4 August 2025",
+        "url": "https://github.com/tls-attestation/exported-attestation/issues/21"
+      },
+      {
+        "label": "exported-attestation issue 58, why the public key is hashed into the binder",
+        "url": "https://github.com/tls-attestation/exported-attestation/issues/58"
+      },
+      {
+        "label": "RFC 8446 section 7.5, Exporters",
+        "url": "https://www.rfc-editor.org/rfc/rfc8446.html#section-7.5"
+      },
+      {
+        "label": "RFC 5705 sections 4 and 6, exporter label format and registry",
+        "url": "https://www.rfc-editor.org/rfc/rfc5705.html#section-4"
+      },
+      {
+        "label": "IANA TLS Parameters, Exporter Labels registry",
+        "url": "https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml"
+      },
+      {
+        "label": "exported-attestation issue 63, filed 2 September 2026",
+        "url": "https://github.com/tls-attestation/exported-attestation/issues/63"
+      }
+    ],
+    "linkedin": "",
+    "x": "",
+    "words": 757,
+    "url": "https://imransiddique.com/notes/2026-09-02-already-said-eight-weeks-earlier.html"
+  },
+  {
     "slug": "2026-08-31-two-sentences-lost-in-supersession",
     "title": "Two normative sentences went missing when one tasks spec superseded another",
     "date": "2026-08-31",

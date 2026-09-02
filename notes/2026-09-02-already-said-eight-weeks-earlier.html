@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A gap in the SEAT post-handshake attestation draft turned out to have been argued on the working group list in July, and specified in a closed issue a year before that. What I filed instead came from reading the RFCs the draft already cites.">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imransiddique.com/notes/2026-09-02-already-said-eight-weeks-earlier.html">
+    <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imransiddique.com/notes/2026-09-02-already-said-eight-weeks-earlier.html">
+    <meta property="og:title" content="The finding was correct and eight weeks late">
+    <meta property="og:description" content="A gap in the SEAT post-handshake attestation draft turned out to have been argued on the working group list in July, and specified in a closed issue a year before that. What I filed instead came from reading the RFCs the draft already cites.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@mosiddi">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>The finding was correct and eight weeks late | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css?v=b7c31d2">
+    <link rel="stylesheet" href="../notes/notes.css">
+</head>
+<body>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "The finding was correct and eight weeks late", "datePublished": "2026-09-02", "description": "A gap in the SEAT post-handshake attestation draft turned out to have been argued on the working group list in July, and specified in a closed issue a year before that. What I filed instead came from reading the RFCs the draft already cites.", "author": {"@type": "Person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-09-02-already-said-eight-weeks-earlier.html"}</script>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../notes/index.html" class="active">Writing</a></li>
+                <li><a href="../speaking/index.html">Speaking</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <article class="note">
+            <div class="container container-narrow">
+                <p class="note-back"><a href="index.html">&larr; All notes</a></p>
+                <time class="note-date" datetime="2026-09-02">2 September 2026</time>
+                <h1>The finding was correct and eight weeks late</h1>
+                <p class="note-standfirst">A gap in the SEAT post-handshake attestation draft turned out to have been argued on the working group list in July, and specified in a closed issue a year before that. What I filed instead came from reading the RFCs the draft already cites.</p>
+                <div class="note-tags"><span class="concept-tag">attestation</span><span class="concept-tag">tls</span><span class="concept-tag">spec-review</span></div>
+                <div class="note-body">
+<p>The gap I had found was real, and somebody had already said so. Nathanael Ritz put it to the SEAT mailing list on 10 July, quoting the same sentence I had marked, making the argument in more detail than I had, and grounding it on the working group charter rather than on the document's abstract. Two people replied substantively the same day. My contribution would have been to say it again, later, and worse, to the people who had already had the conversation.</p>
+<p>That is the case for checking prior art before you verify anything, rather than after. Verification is the expensive step and it answers the second question.</p>
+<h2>The document</h2>
+<p><code>draft-fossati-seat-expat</code> moves remote attestation out of the TLS handshake and into RFC 9261 exported authenticators, after intra-handshake attestation was shown to permit relay attacks. Its own appendix gives the motive: the older design "does not bind the Evidence to the application traffic secrets, resulting in relay attacks".</p>
+<h2>What I nearly filed</h2>
+<p>The abstract promises the approach "supports both the passport and background check models" while attestation "remains bound to the underlying communication channel". The Terminology section defines "attestation credentials" as covering both Evidence and attestation results. Every binding requirement in the document then names Evidence and only Evidence. A word-boundary grep for <code>result</code> across the binding section returns zero. The passport branch's sole requirement is that the Attestation Result is correctly signed and meets policy.</p>
+<p>All true, and all previously observed. Ritz quoted that same passport bullet in July. Worse for my version, a comment on issue 21, closed, filed under the title "Misleading Finished Message" and ostensibly about a diagram, had already asked "What binds the attestation results to the handshake?" in August 2025 and specified the fix: carry <code>certificate_request_context</code> to the Verifier as <code>rdata</code> and have it reflected into the Attestation Result. Running <code>git log -S rdata</code> over the draft source returns nothing. The mechanism was designed, recorded in a thread about a figure, and lost.</p>
+<h2>What I filed instead</h2>
+<p>The draft specifies the TLS exporter label twice, and spells it differently each time. Section 4 says the verifier recomputes the exporter value "using the label Attestation Binding". Section 5.1 says the invocation uses "the label Attestation", and prints <code>TLS-Exporter("Attestation", certificate_request_context, 32)</code>. The label is an input to <code>Derive-Secret</code>, so two implementations that each follow one section derive different values and every binding check between them fails. Both spellings are in the published -03.</p>
+<p>The part that makes it more than an editorial nit came from the draft's own citations. RFC 8446 section 7.5 says requirements for exporter label format are defined in section 4 of RFC 5705. That section says all label values "MUST be registered via Specification Required". Section 6 adds that IANA "MUST also verify that one label is not a prefix of any other label". <code>Attestation</code> is a prefix of <code>Attestation Binding</code>, so the two can never both be registered, whichever section the working group prefers. Neither is registered today; the draft's IANA section registers only the extension type, and the string <code>attestation</code> does not appear anywhere in the TLS parameters registry.</p>
+<h2>What did not survive checking</h2>
+<p>The novelty of the lead, entirely, for the reasons above. The claim was verified and the finding was spent.</p>
+<p>Also the assumption underneath it. I had been treating the requirement that Evidence carry a hash of the authenticator identity key as settled ground, the fixed half against which the passport half looked unfinished. Issue 58 is an open challenge to exactly that requirement, asking why the public key needs hashing into the binder at all when the exported key material is already bound to the session, with a co-author answering that he cannot say more until the formal analysis is done. Building on it as a solved baseline would have walked into a live dispute.</p>
+<p>Two counts were wrong in the version I started from: the file is 35,398 bytes rather than 34,900, and "Attestation Result" occurs 22 times rather than 20. Neither touches the load-bearing claim, which is that none of those occurrences falls in the binding or freshness sections.</p>
+<p>If you are reading an unfamiliar draft, the two greps that pay are these. Take every value it defines and check it against the registry that owns that namespace. Then take every specification it cites normatively and read what that document actually requires. Both are cheap, both produce findings its authors have already agreed to be bound by, and neither asks you to know anything they do not.</p>
+                </div>
+                <section class="note-sources">
+                    <h2>Checked against</h2>
+                    <ul><li><a href="https://github.com/tls-attestation/exported-attestation/blob/main/draft-fossati-seat-expat.md" rel="noopener">draft-fossati-seat-expat, source on GitHub</a></li><li><a href="https://mailarchive.ietf.org/arch/msg/seat/Xwf2c1jfUWeGgHjWGFliKqtqANM/" rel="noopener">SEAT list, The Passport Model-sized elephant in the room, 10 July 2026</a></li><li><a href="https://github.com/tls-attestation/exported-attestation/issues/21" rel="noopener">exported-attestation issue 21, comment of 4 August 2025</a></li><li><a href="https://github.com/tls-attestation/exported-attestation/issues/58" rel="noopener">exported-attestation issue 58, why the public key is hashed into the binder</a></li><li><a href="https://www.rfc-editor.org/rfc/rfc8446.html#section-7.5" rel="noopener">RFC 8446 section 7.5, Exporters</a></li><li><a href="https://www.rfc-editor.org/rfc/rfc5705.html#section-4" rel="noopener">RFC 5705 sections 4 and 6, exporter label format and registry</a></li><li><a href="https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml" rel="noopener">IANA TLS Parameters, Exporter Labels registry</a></li><li><a href="https://github.com/tls-attestation/exported-attestation/issues/63" rel="noopener">exported-attestation issue 63, filed 2 September 2026</a></li></ul>
+                </section>
+                
+            </div>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique.</p>
+                <p><a href="../notes/feed.xml">RSS</a> &middot; <a href="../index.html">imransiddique.com</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>
