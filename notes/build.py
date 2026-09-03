@@ -167,6 +167,7 @@ def nav(prefix=""):
                 <li><a href="{prefix}index.html">Home</a></li>
                 <li><a href="{prefix}about.html">About</a></li>
                 <li><a href="{prefix}projects.html">Projects</a></li>
+                <li><a href="{prefix}index.html#book">Book</a></li>
                 <li><a href="{prefix}notes/index.html" class="active">Writing</a></li>
                 <li><a href="{prefix}speaking/index.html">Speaking</a></li>
                 <li><a href="{prefix}contact.html">Contact</a></li>

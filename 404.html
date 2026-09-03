@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles-new.css?v=b7c31d2">
     <style>
         .error-section {
             min-height: 70vh;
@@ -44,6 +44,22 @@
             flex-wrap: wrap;
             gap: 1rem;
             justify-content: center;
+        }
+        .btn-outline {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+        .btn-outline:hover {
+            background: var(--accent-primary);
+            color: #fff;
+            border-color: var(--accent-primary);
         }
     </style>
 </head>
