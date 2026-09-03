@@ -57,6 +57,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 HERE = ROOT / "speaking"
 DATA = HERE / "speaking.json"
+VIDEOS = HERE / "videos.json"
 OUT = HERE / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
 CSS_VERSION = "b7c31d2"
@@ -85,6 +86,15 @@ def load():
             problems.append(f"{where}: date must be YYYY-MM-DD")
     records.sort(key=lambda r: r.get("date", ""), reverse=True)
     return records, problems
+
+
+def load_videos():
+    """Proof videos. A separate series from talks, so a separate file."""
+    if not VIDEOS.exists():
+        return []
+    vids = json.loads(VIDEOS.read_text(encoding="utf-8"))
+    vids.sort(key=lambda v: v.get("date", ""), reverse=True)
+    return vids
 
 
 def fmt_date(iso, short=False):
@@ -134,6 +144,24 @@ def render_delivered(r):
                 </{tag}>"""
 
 
+def render_video(v):
+    """A proof-video card. Local art if given, else the YouTube thumbnail."""
+    thumb = v.get("thumb") or ""
+    if not thumb:
+        vid = video_id(v.get("url"))
+        thumb = f"https://img.youtube.com/vi/{vid}/hqdefault.jpg" if vid else ""
+    cls = "talk-thumb proof-video-short" if v.get("short") else "talk-thumb"
+    badge = '<span class="proof-video-badge">Short</span>' if v.get("short") else ""
+    return f"""                <a class="talk-card" href="{esc(v["url"])}" target="_blank" rel="noopener noreferrer">
+                    <div class="{cls}"><img src="{esc(thumb)}" alt="" loading="lazy"><span class="talk-play" aria-hidden="true">&#9654;</span>{badge}</div>
+                    <div class="talk-body">
+                        <p class="talk-meta">{esc(fmt_date(v["date"]))} &middot; Proof video {esc(v["number"])}</p>
+                        <h3>{v["title"]}</h3>
+                        <p class="talk-event">{esc(v["subtitle"])}</p>
+                    </div>
+                </a>"""
+
+
 def render_upcoming(r):
     """A compact row. No art, because there is nothing to watch yet."""
     href = r.get("url") or ""
@@ -148,9 +176,24 @@ def render_upcoming(r):
                 </li>"""
 
 
-def render(records):
+def render(records, videos=(), _stale_out=None):
+    today = datetime.now().strftime("%Y-%m-%d")
     delivered = [r for r in records if r["status"] == "delivered"]
-    upcoming = [r for r in records if r["status"] == "scheduled"]
+    # Upcoming is date-gated, not status-gated. A scheduled talk whose date has
+    # passed used to sit under "Coming up" until somebody hand-edited the JSON.
+    # "submitted" stays withheld. A submission is not a booking, and listing one
+    # would advertise a talk that may never happen.
+    upcoming = [
+        r for r in records if r["status"] == "scheduled" and r["date"] >= today
+    ]
+    upcoming.sort(key=lambda r: r["date"])
+    stale = [
+        r
+        for r in records
+        if r["status"] in ("scheduled", "submitted") and r["date"] < today
+    ]
+    if _stale_out is not None:
+        _stale_out.extend(stale)
 
     upcoming_section = ""
     if upcoming:
@@ -162,6 +205,26 @@ def render(records):
                 <ul class="talk-rows">
 {rows}
                 </ul>
+            </div>
+        </section>
+"""
+
+    videos_section = ""
+    if videos:
+        cards = "\n\n".join(render_video(v) for v in videos)
+        videos_section = f"""
+        <section class="talk-section proof-video-section" aria-labelledby="proof-videos-heading">
+            <div class="container">
+                <div class="talk-head proof-video-head">
+                    <div>
+                        <h2 class="talk-h2" id="proof-videos-heading">Proof videos</h2>
+                        <p class="proof-video-intro">Short, evidence-led demonstrations of what trustworthy AI systems can actually prove.</p>
+                    </div>
+                    <a class="proof-video-channel" href="https://www.youtube.com/@imransiddiqueai" target="_blank" rel="noopener noreferrer">View all on YouTube <span aria-hidden="true">&rarr;</span></a>
+                </div>
+                <div class="talk-grid">
+{cards}
+                </div>
             </div>
         </section>
 """
@@ -221,7 +284,7 @@ def render(records):
                 <p class="hero-subtitle">Agent governance, confidential computing, and what a system can actually prove.</p>
             </div>
         </section>
-{upcoming_section}{delivered_section}
+{upcoming_section}{videos_section}{delivered_section}
     </main>
 </body>
 </html>
@@ -257,7 +320,9 @@ def main():
     counts = {}
     for r in records:
         counts[r["status"]] = counts.get(r["status"], 0) + 1
-    out = render(records)
+    videos = load_videos()
+    stale = []
+    out = render(records, videos, _stale_out=stale)
     hidden = counts.get("submitted", 0)
     published = len(records) - hidden
     art = sum(
@@ -272,6 +337,12 @@ def main():
         print(
             f"wrote {OUT.relative_to(ROOT)}: {published} published, "
             f"{hidden} withheld, {art} with card art"
+        )
+    print(f"  {len(videos)} proof videos")
+    for r in stale:
+        print(
+            f"  STALE: {r['date']} {r['title'][:48]!r} is still {r['status']} "
+            f"but the date has passed. Set it to delivered, or move the date."
         )
     print("  " + ", ".join(f"{v} {k}" for k, v in sorted(counts.items())))
     print("  " + update_sitemap(check))

@@ -36,7 +36,7 @@
     "event": "AAIF Community Showcase, Agentic AI Foundation",
     "location": "Online",
     "format": "Showcase session",
-    "status": "submitted",
+    "status": "scheduled",
     "summary": "Every model-weight protection tool protects the customer from the model. None protect the builder from the customer.",
     "url": "https://aaif.live/events/7tp1ev",
     "recording": "",
@@ -182,6 +182,36 @@
     "tags": [
       "agent-governance",
       "agt"
+    ]
+  },
+  {
+    "date": "2026-09-04",
+    "title": "AGT (Agent Governance Toolkit): The Runtime Guardrail, What and Why",
+    "event": "PRONATIVE AI Keynote Series",
+    "location": "Online",
+    "format": "Featured live session",
+    "status": "scheduled",
+    "summary": "AI Governance, Security and Compliance in 2026, part 1. Where the runtime guardrail sits between an agent's decision and its action, and what it can enforce that a prompt cannot.",
+    "url": "",
+    "recording": "",
+    "tags": [
+      "agt",
+      "governance"
+    ]
+  },
+  {
+    "date": "2026-09-01",
+    "title": "Proof, Not Promises: Attesting What Your AI Agent Is",
+    "event": "Identerati Office Hours, episode 220",
+    "location": "Online",
+    "format": "Livestream",
+    "status": "delivered",
+    "summary": "Identity infrastructure answers who called. Agentic systems also have to answer what was actually running. How hardware attestation verifies an agent's runtime state beyond tokens and audit logs. Hosted by Mike Schwartz, sponsored by Gluu.",
+    "url": "https://gluu.co/ioh-220",
+    "recording": "",
+    "tags": [
+      "attestation",
+      "identity"
     ]
   }
 ]
