@@ -1,0 +1,31 @@
+{
+  "intro": "I speak about what agent systems can actually prove, not what they claim. Talks are technical, demo-led, and usually carry a negative result alongside the working one.",
+  "topics": [
+    {
+      "title": "Runtime governance for AI agents",
+      "detail": "Where enforcement sits between an agent's decision and its action, and what a policy gate can express that a prompt cannot."
+    },
+    {
+      "title": "Hardware attestation, and its limits",
+      "detail": "Validated on live SEV-SNP, TDX and H100. Including the part most talks skip: no confidential computing silicon is proof against someone who owns the machine."
+    },
+    {
+      "title": "Verifiable evidence and audit chains",
+      "detail": "Tamper-evident records a third party can check offline, and the difference between proving what happened and preventing it."
+    },
+    {
+      "title": "Model weight custody",
+      "detail": "What changes when the model leaves your data center, and why open weights do not end the custody problem."
+    }
+  ],
+  "book": {
+    "title": "Architecting at Scale",
+    "line": "Author of Architecting at Scale (Packt, 2026), a field guide to large-scale AI-native system design.",
+    "url": "https://www.amazon.com/Architecting-Scale-Practical-Large-Scale-AI-Native/dp/1807420973"
+  },
+  "booking": {
+    "line": "Organising something and think this fits? Get in touch.",
+    "url": "/contact.html",
+    "cta": "Contact"
+  }
+}

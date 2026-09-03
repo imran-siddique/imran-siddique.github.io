@@ -58,9 +58,10 @@ ROOT = Path(__file__).resolve().parent.parent
 HERE = ROOT / "speaking"
 DATA = HERE / "speaking.json"
 VIDEOS = HERE / "videos.json"
+SPEAKER = HERE / "speaker.json"
 OUT = HERE / "index.html"
 SITEMAP = ROOT / "sitemap.xml"
-CSS_VERSION = "b7c31d2"
+CSS_VERSION = "f44781a"
 
 REQUIRED = ("date", "title", "event", "location", "format", "status", "summary")
 VALID_STATUS = {"delivered", "scheduled", "submitted"}
@@ -95,6 +96,13 @@ def load_videos():
     vids = json.loads(VIDEOS.read_text(encoding="utf-8"))
     vids.sort(key=lambda v: v.get("date", ""), reverse=True)
     return vids
+
+
+def load_speaker():
+    """Topics, the book line, and how to book him. Optional."""
+    if not SPEAKER.exists():
+        return {}
+    return json.loads(SPEAKER.read_text(encoding="utf-8"))
 
 
 def fmt_date(iso, short=False):
@@ -144,6 +152,48 @@ def render_delivered(r):
                 </{tag}>"""
 
 
+def render_speaker(sp):
+    """What he speaks about, and how to ask. Sits under the hero."""
+    if not sp:
+        return ""
+    topics = "\n".join(
+        f"""                    <div class="speak-topic">
+                        <h3>{esc(t["title"])}</h3>
+                        <p>{esc(t["detail"])}</p>
+                    </div>"""
+        for t in sp.get("topics", [])
+    )
+    book = sp.get("book") or {}
+    book_html = (
+        f"""
+                <p class="speak-book"><a href="{esc(book["url"])}" target="_blank" rel="noopener noreferrer">{esc(book["line"])}</a></p>"""
+        if book.get("url") and book.get("line")
+        else ""
+    )
+    booking = sp.get("booking") or {}
+    booking_html = (
+        f"""
+                <p class="speak-booking">{esc(booking["line"])} <a href="{esc(booking["url"])}">{esc(booking.get("cta", "Contact"))}</a></p>"""
+        if booking.get("url") and booking.get("line")
+        else ""
+    )
+    intro = (
+        f'\n                <p class="speak-intro">{esc(sp["intro"])}</p>'
+        if sp.get("intro")
+        else ""
+    )
+    return f"""
+        <section class="talk-section speak-about">
+            <div class="container">
+                <h2 class="talk-h2">What I speak about</h2>{intro}
+                <div class="speak-topics">
+{topics}
+                </div>{book_html}{booking_html}
+            </div>
+        </section>
+"""
+
+
 def render_video(v):
     """A proof-video card. Local art if given, else the YouTube thumbnail."""
     thumb = v.get("thumb") or ""
@@ -176,7 +226,7 @@ def render_upcoming(r):
                 </li>"""
 
 
-def render(records, videos=(), _stale_out=None):
+def render(records, videos=(), speaker=None, _stale_out=None):
     today = datetime.now().strftime("%Y-%m-%d")
     delivered = [r for r in records if r["status"] == "delivered"]
     # Upcoming is date-gated, not status-gated. A scheduled talk whose date has
@@ -208,6 +258,8 @@ def render(records, videos=(), _stale_out=None):
             </div>
         </section>
 """
+
+    speaker_section = render_speaker(speaker or {})
 
     videos_section = ""
     if videos:
@@ -285,7 +337,7 @@ def render(records, videos=(), _stale_out=None):
                 <p class="hero-subtitle">Agent governance, confidential computing, and what a system can actually prove.</p>
             </div>
         </section>
-{upcoming_section}{videos_section}{delivered_section}
+{speaker_section}{upcoming_section}{videos_section}{delivered_section}
     </main>
 </body>
 </html>
@@ -323,7 +375,8 @@ def main():
         counts[r["status"]] = counts.get(r["status"], 0) + 1
     videos = load_videos()
     stale = []
-    out = render(records, videos, _stale_out=stale)
+    speaker = load_speaker()
+    out = render(records, videos, speaker, _stale_out=stale)
     hidden = counts.get("submitted", 0)
     published = len(records) - hidden
     art = sum(
