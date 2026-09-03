@@ -1,0 +1,38 @@
+[
+  {
+    "number": "004",
+    "date": "2026-09-03",
+    "title": "AGT Runtime Guardrail: A Fully Offline Demo",
+    "subtitle": "Enforcement with no network",
+    "url": "https://www.youtube.com/watch?v=VvDsHqLYuXA",
+    "thumb": "",
+    "short": false
+  },
+  {
+    "number": "003",
+    "date": "2026-08-31",
+    "title": "Your Policy Engine Can Lie &mdash; Verify the Policy Hash",
+    "subtitle": "Checking the policy the engine actually loaded",
+    "url": "https://www.youtube.com/watch?v=Ir62ElWwv1M",
+    "thumb": "",
+    "short": false
+  },
+  {
+    "number": "002",
+    "date": "2026-08-27",
+    "title": "Change One Byte. This Model Refuses to Load.",
+    "subtitle": "Tamper detection in under a minute",
+    "url": "https://youtube.com/shorts/7o3jjn8Wy3M",
+    "thumb": "/speaking/assets/proof-video-002.png",
+    "short": true
+  },
+  {
+    "number": "001",
+    "date": "2026-08-24",
+    "title": "Open Weights Don't End the Custody Problem &mdash; Watch Tampering Fail",
+    "subtitle": "Model custody, demonstrated",
+    "url": "https://www.youtube.com/watch?v=hIh6XsrPDgQ",
+    "thumb": "/speaking/assets/proof-video-001.png",
+    "short": false
+  }
+]
