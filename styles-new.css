@@ -1863,3 +1863,57 @@ a.talk-card:hover .talk-thumb img { transform: scale(1.04); }
 .talk-hero { padding: calc(80px + 3rem) 0 2.75rem; }
 .talk-hero h1 { margin: 0 0 1.15rem; }
 .talk-hero .hero-subtitle { margin-bottom: 0; opacity: .75; }
+
+
+/* Speaking: what I speak about. Added 2026-09-03. */
+.speak-intro {
+    max-width: 46rem;
+    color: var(--text-secondary);
+    margin: 0 0 var(--space-xl);
+}
+
+.speak-topics {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    gap: var(--space-lg);
+}
+
+.speak-topic {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: var(--space-lg);
+}
+
+.speak-topic h3 {
+    font-size: 1.05rem;
+    margin: 0 0 var(--space-sm);
+}
+
+.speak-topic p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.speak-book,
+.speak-booking {
+    margin: var(--space-xl) 0 0;
+    color: var(--text-secondary);
+}
+
+.speak-booking {
+    margin-top: var(--space-sm);
+}
+
+.speak-book a,
+.speak-booking a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.speak-book a:hover,
+.speak-booking a:hover {
+    text-decoration: underline;
+}
