@@ -3,6 +3,7 @@ title: The finding was correct and eight weeks late
 date: 2026-09-02
 standfirst: A gap in the SEAT post-handshake attestation draft turned out to have been argued on the working group list in July, and specified in a closed issue a year before that. What I filed instead came from reading the RFCs the draft already cites.
 tags: [attestation, tls, spec-review]
+x: https://x.com/mosiddi/status/2095958403831226472
 sources:
   - label: draft-fossati-seat-expat, source on GitHub
     url: https://github.com/tls-attestation/exported-attestation/blob/main/draft-fossati-seat-expat.md
