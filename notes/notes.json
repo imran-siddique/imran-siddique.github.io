@@ -1,5 +1,42 @@
 [
   {
+    "slug": "2026-09-07-filed-under-bug-fixes",
+    "title": "The fix shipped three weeks before the bug had a name",
+    "date": "2026-09-07",
+    "standfirst": "One coding agent answered repo-controlled git config with a confirmation prompt in August. Another answered the neighbouring case with a refusal. The gap between those two choices is the whole argument, and neither public record tells you which one you are running.",
+    "tags": [
+      "agent-security",
+      "supply-chain",
+      "coding-agents"
+    ],
+    "sources": [
+      {
+        "label": "Qwen Code CHANGELOG, v0.21.9 (2026-08-10), the diff.external and core.fsmonitor line, PR 8645",
+        "url": "https://raw.githubusercontent.com/QwenLM/qwen-code/main/CHANGELOG.md"
+      },
+      {
+        "label": "Claude Code CHANGELOG, v2.1.196, the single line marked Security",
+        "url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md"
+      },
+      {
+        "label": "CVE-2026-72718, goose CLI arbitrary command execution via git core.fsmonitor, fixed 1.44.0",
+        "url": "https://api.osv.dev/v1/vulns/CVE-2026-72718"
+      },
+      {
+        "label": "CVE-2026-71963, Hermes Agent RCE via git core.fsmonitor config injection",
+        "url": "https://api.osv.dev/v1/vulns/CVE-2026-71963"
+      },
+      {
+        "label": "CVE-2026-33068, Claude Code workspace trust dialog bypass via repo-controlled .claude/settings.json, fixed 2.1.53",
+        "url": "https://api.osv.dev/v1/vulns/GHSA-mmgp-wc2j-qcv7"
+      }
+    ],
+    "linkedin": "",
+    "x": "",
+    "words": 807,
+    "url": "https://imransiddique.com/notes/2026-09-07-filed-under-bug-fixes.html"
+  },
+  {
     "slug": "2026-09-02-already-said-eight-weeks-earlier",
     "title": "The finding was correct and eight weeks late",
     "date": "2026-09-02",
