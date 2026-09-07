@@ -66,7 +66,9 @@ CSS_VERSION = "f44781a"
 REQUIRED = ("date", "title", "event", "location", "format", "status", "summary")
 VALID_STATUS = {"delivered", "scheduled", "submitted"}
 
-YT = re.compile(r"(?:youtube\.com/watch\?v=|youtu\.be/)([A-Za-z0-9_-]{11})")
+YT = re.compile(
+    r"(?:youtube\.com/(?:watch\?v=|live/|shorts/|embed/)|youtu\.be/)([A-Za-z0-9_-]{11})"
+)
 
 
 def load():

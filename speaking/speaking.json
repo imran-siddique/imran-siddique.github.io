@@ -31,6 +31,39 @@
     ]
   },
   {
+    "date": "2026-10-15",
+    "title": "Your Root of Trust Is an Unhardened Parser: A Post-Mortem on My Own Attestation Code",
+    "event": "AI Security Summit, San Francisco",
+    "location": "San Francisco, CA",
+    "format": "Standard session, 20 minutes",
+    "status": "scheduled",
+    "summary": "Four defects found in the speaker's own shipped attestation verifier, all fixed in public commits: a declared length inside a TDX quote that overran its buffer, an invalid EAT profile URI that shipped in signed claims, documentation asserting hardware attestation for a path that did not have it, and nonce binding that does not stop a relayed quote. Live: replay a recorded SEV-SNP quote offline, then tamper, then relay.",
+    "url": "https://aisecuritysummit.com/",
+    "recording": "",
+    "tags": [
+      "attestation",
+      "confidential-computing",
+      "agent-manifest"
+    ]
+  },
+  {
+    "date": "2026-10-06",
+    "title": "Governed MCP: Cedar Policy Enforcement and TEE Attestation for Enterprise Tool Calls",
+    "event": "MCP Dev Summit Toronto 2026",
+    "location": "Toronto, Canada",
+    "format": "Session, 25 minutes",
+    "status": "scheduled",
+    "summary": "cMCP wraps any MCP server without changing the server or the agent: Cedar policies evaluated before a tool call runs, structured denials an agent can reason from, every call chained into a Merkle structure, and the chain root sealed into a hardware measurement so the receipt is verifiable without trusting the operator.",
+    "url": "https://sessionize.com/mcp-dev-summit-toronto-2026",
+    "recording": "",
+    "tags": [
+      "cmcp",
+      "mcp",
+      "trace",
+      "confidential-computing"
+    ]
+  },
+  {
     "date": "2026-09-30",
     "title": "Weight Custody Manifest: When the Model Leaves Your Data Center, the Threat Model Flips",
     "event": "AAIF Community Showcase, Agentic AI Foundation",
@@ -63,17 +96,47 @@
   },
   {
     "date": "2026-09-09",
-    "title": "Verifiable Agent Summit, virtual edition",
+    "title": "The Verifiable Agent Virtual Briefing",
     "event": "Verifiable Agent Summit",
     "location": "Online",
     "format": "60 minutes",
     "status": "scheduled",
     "summary": "Virtual edition of the summit, covering the TRACE evidence layer and how it composes with judgment and delivery.",
-    "url": "",
+    "url": "https://events.zoom.us/ev/AgDWjou0XV5sV7CwcKrmYTfVMXxsVAhy7vzW2QhyrCBmxovbc836~AvAb5btHOWkp2sLG95f9qd3yrZt7rIp_Hv4-_QI6yYMOSjwhUcI2Cwg-cQ",
     "recording": "",
     "tags": [
       "trace",
       "verifiable-agents"
+    ]
+  },
+  {
+    "date": "2026-09-04",
+    "title": "AGT (Agent Governance Toolkit): The Runtime Guardrail, What and Why",
+    "event": "PRONATIVE AI Keynote Series",
+    "location": "Online",
+    "format": "Featured live session",
+    "status": "delivered",
+    "summary": "AI Governance, Security and Compliance in 2026, part 1. Where the runtime guardrail sits between an agent's decision and its action, and what it can enforce that a prompt cannot.",
+    "url": "",
+    "recording": "https://www.youtube.com/watch?v=pjTty4H7_go",
+    "tags": [
+      "agt",
+      "governance"
+    ]
+  },
+  {
+    "date": "2026-09-01",
+    "title": "Proof, Not Promises: Attesting What Your AI Agent Is",
+    "event": "Identerati Office Hours, episode 220",
+    "location": "Online",
+    "format": "Livestream",
+    "status": "delivered",
+    "summary": "Identity infrastructure answers who called. Agentic systems also have to answer what was actually running. How hardware attestation verifies an agent's runtime state beyond tokens and audit logs. Hosted by Mike Schwartz, sponsored by Gluu.",
+    "url": "https://gluu.co/ioh-220",
+    "recording": "https://www.youtube.com/live/-tX_YeaxFMc",
+    "tags": [
+      "attestation",
+      "identity"
     ]
   },
   {
@@ -182,36 +245,6 @@
     "tags": [
       "agent-governance",
       "agt"
-    ]
-  },
-  {
-    "date": "2026-09-04",
-    "title": "AGT (Agent Governance Toolkit): The Runtime Guardrail, What and Why",
-    "event": "PRONATIVE AI Keynote Series",
-    "location": "Online",
-    "format": "Featured live session",
-    "status": "scheduled",
-    "summary": "AI Governance, Security and Compliance in 2026, part 1. Where the runtime guardrail sits between an agent's decision and its action, and what it can enforce that a prompt cannot.",
-    "url": "",
-    "recording": "",
-    "tags": [
-      "agt",
-      "governance"
-    ]
-  },
-  {
-    "date": "2026-09-01",
-    "title": "Proof, Not Promises: Attesting What Your AI Agent Is",
-    "event": "Identerati Office Hours, episode 220",
-    "location": "Online",
-    "format": "Livestream",
-    "status": "delivered",
-    "summary": "Identity infrastructure answers who called. Agentic systems also have to answer what was actually running. How hardware attestation verifies an agent's runtime state beyond tokens and audit logs. Hosted by Mike Schwartz, sponsored by Gluu.",
-    "url": "https://gluu.co/ioh-220",
-    "recording": "",
-    "tags": [
-      "attestation",
-      "identity"
     ]
   }
 ]
