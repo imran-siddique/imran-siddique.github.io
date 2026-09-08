@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MCP 2026-07-28 made it a protocol violation for a server to change its tool list as a side effect of what you just did. The same release forbade the server from telling you the list changed unless you subscribed, and neither official SDK subscribes by default.">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imransiddique.com/notes/2026-09-08-forbade-the-swap-kept-the-signal-optional.html">
+    <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imransiddique.com/notes/2026-09-08-forbade-the-swap-kept-the-signal-optional.html">
+    <meta property="og:title" content="The release forbade the swap and left the signal opt-in">
+    <meta property="og:description" content="MCP 2026-07-28 made it a protocol violation for a server to change its tool list as a side effect of what you just did. The same release forbade the server from telling you the list changed unless you subscribed, and neither official SDK subscribes by default.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@mosiddi">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>The release forbade the swap and left the signal opt-in | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css?v=f44781a">
+    <link rel="stylesheet" href="../notes/notes.css">
+</head>
+<body>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "The release forbade the swap and left the signal opt-in", "datePublished": "2026-09-08", "description": "MCP 2026-07-28 made it a protocol violation for a server to change its tool list as a side effect of what you just did. The same release forbade the server from telling you the list changed unless you subscribed, and neither official SDK subscribes by default.", "author": {"@type": "Person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-09-08-forbade-the-swap-kept-the-signal-optional.html"}</script>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../index.html#book">Book</a></li>
+                <li><a href="../notes/index.html" class="active">Writing</a></li>
+                <li><a href="../speaking/index.html">Speaking</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <article class="note">
+            <div class="container container-narrow">
+                <p class="note-back"><a href="index.html">&larr; All notes</a></p>
+                <time class="note-date" datetime="2026-09-08">8 September 2026</time>
+                <h1>The release forbade the swap and left the signal opt-in</h1>
+                <p class="note-standfirst">MCP 2026-07-28 made it a protocol violation for a server to change its tool list as a side effect of what you just did. The same release forbade the server from telling you the list changed unless you subscribed, and neither official SDK subscribes by default.</p>
+                <div class="note-tags"><span class="concept-tag">mcp</span><span class="concept-tag">agent-security</span><span class="concept-tag">spec-review</span></div>
+                <div class="note-body">
+<p>The Model Context Protocol release of 28 July 2026 added a sentence to the tools page that reads like a security fix, because it is one:</p>
+<blockquote><p>This set <strong>MAY</strong> be empty and <strong>MAY</strong> change over time [...] but <strong>MUST NOT</strong> vary per-connection or as a side effect of other requests on the connection.</p></blockquote>
+<p>That clause is new. I grepped the 2025-11-25 and 2025-06-18 tools pages for <code>per-connection</code> and <code>side effect of other requests</code>: zero hits in either, and no equivalent paragraph. It arrived with SEP-2567, which removed protocol-level sessions, and appears verbatim on the prompts and resources pages too.</p>
+<p>Read it as a security property and it is a good one. A server that offers a few harmless tools, waits until you have used them, and then serves a different list is doing exactly what that sentence forbids.</p>
+<h2>The signal it would take to notice</h2>
+<p>The same release, on the subscriptions page: "The server <strong>MUST NOT</strong> send notification types the client has not explicitly requested." That came with SEP-2575, which replaced the HTTP GET endpoint and the resource subscribe calls with one opt-in stream.</p>
+<p>The only push signal that a tool list changed is <code>notifications/tools/list_changed</code>, and the schema says what that now means: it "is only delivered on a <code>subscriptions/listen</code> stream when the client requested it via the <code>toolsListChanged</code> filter field". A server that never sends it to an unsubscribed client is not cutting a corner. It is conforming.</p>
+<p>So the question is what real clients do by default, and both official SDKs answer it in one file each. The TypeScript SDK auto-opens the stream, but the block is gated on <code>if (this._listChangedConfig)</code>, assigned in exactly one place: the constructor's <code>options.listChanged</code>, with no default. In the Python SDK, <code>listen()</code> is a method you call, and its filter starts at <code>tools_list_changed: bool = False</code>.</p>
+<p><strong>The default in both is not subscribed.</strong> A client built that way can still notice a change by refetching <code>tools/list</code> and diffing it. That is evidence rather than judgment, and it is the only route left, because the two freshness cues the spec does give it are both set by the party the rule constrains. <code>ttlMs</code> is server-supplied, servers <strong>MUST</strong> provide a value, and clients <strong>SHOULD</strong> assume 0 when it is absent. The notification invalidates the cache, and only reaches a client that asked for it.</p>
+<h2>The same release knows how to write this requirement</h2>
+<p>Multi Round-Trip Requests, new in 2026-07-28, has the server hand the client an opaque <code>requestState</code> and take it back on a retry. The spec's instruction there is not a logging bullet:</p>
+<blockquote><p>servers <strong>MUST</strong> treat <code>requestState</code> as an attacker-controlled input. If <code>requestState</code> influences authorization, resource access, or business logic, servers <strong>MUST</strong> protect its integrity (e.g. HMAC or AEAD) and <strong>MUST</strong> reject state that fails verification.</p></blockquote>
+<p>It goes on to require principal binding, a TTL and a digest of the originating request, to stop replay.</p>
+<p>That is one direction. In the other direction, the one the new MUST NOT actually governs, the tools page offers six client SHOULD bullets, and the closest to the point is "Log tool usage for audit purposes". A log tells you afterwards which tool ran. It cannot decline a tool whose description changed while you were not subscribed to hear that it had. The page also tells clients to treat annotations as untrusted "unless they come from trusted servers", which is a property of the identity, not of the bytes this particular response carried.</p>
+<h2>What is unmade, and what is not</h2>
+<p>Most of this argument is already open. SEP-3140, Signed Capability Declarations and Trustworthy Trust Labels, has been on the repository since 27 July, the day before the release. It proposes a signed manifest over the <code>tools/list</code> outputs, with change semantics for rug pulls. Its author established the need in July and I am not restating it.</p>
+<p>What has not been said is that the release changed the case for it. SEP-3140 was drafted against the previous wire model: across its body and all fifteen comments, <code>subscriptions/listen</code>, <code>subscribe</code> and <code>opt-in</code> appear zero times, and it cites the 2025-11-25 security page. Its threat model describes a server that "emits <code>notifications/tools/list_changed</code> and silently swaps in malicious definitions", which is the behaviour the new release forbids toward a client that never subscribed. The attack it defends against got quieter on 28 July. That is the thing worth adding to the review, and it is the argument for pairing SEP-2567, which wrote the rule, with SEP-2575, which made the signal conditional, and SEP-3140, which would supply the check.</p>
+<p>Three things I had wrong going in. An absence claim covering <code>integrity</code>, <code>signature</code> and <code>attest</code> across four spec pages was false: <code>attestation</code> appears once, in <code>basic/authorization/security-considerations.mdx</code>, on localhost redirect URIs. The tools page carries six client SHOULD bullets, not five. And the 2 September activity on SEP-3140 is a cross-reference in the timeline, not a comment; the last comment is 26 August, by the author. Following that cross-reference killed my second story, a scope-filtered tool list labelled <code>cacheScope: "public"</code>: issue 3207 reported it as MCP-2026-008 on 7 August, and issue 3213 extends it.</p>
+<p>The check a team can run today is small. Grep your client for <code>subscriptions/listen</code>. If it is not there, you are on refetch-and-diff, and you should know that rather than discover it.</p>
+                </div>
+                <section class="note-sources">
+                    <h2>Checked against</h2>
+                    <ul><li><a href="https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/server/tools.mdx" rel="noopener">MCP 2026-07-28, server/tools.mdx, the new MUST NOT and the six client SHOULD bullets</a></li><li><a href="https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/basic/patterns/subscriptions.mdx" rel="noopener">MCP 2026-07-28, basic/patterns/subscriptions.mdx, the opt-in rule</a></li><li><a href="https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/basic/patterns/mrtr.mdx" rel="noopener">MCP 2026-07-28, basic/patterns/mrtr.mdx, the requestState integrity requirement</a></li><li><a href="https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/changelog.mdx" rel="noopener">MCP 2026-07-28 changelog, SEP-2567 and SEP-2575</a></li><li><a href="https://github.com/modelcontextprotocol/modelcontextprotocol/pull/3140" rel="noopener">SEP-3140, Signed Capability Declarations and Trustworthy Trust Labels, open since 27 July</a></li><li><a href="https://github.com/modelcontextprotocol/typescript-sdk/blob/main/packages/client/src/client/client.ts" rel="noopener">TypeScript SDK, packages/client/src/client/client.ts, the auto-open gate</a></li><li><a href="https://github.com/modelcontextprotocol/python-sdk/blob/main/src/mcp/client/client.py" rel="noopener">Python SDK, src/mcp/client/client.py, listen() and its defaults</a></li><li><a href="https://github.com/modelcontextprotocol/modelcontextprotocol/issues/3213" rel="noopener">Issue 3207 (MCP-2026-008) and issue 3213, the cacheScope public reports</a></li></ul>
+                </section>
+                
+            </div>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique.</p>
+                <p><a href="../notes/feed.xml">RSS</a> &middot; <a href="../index.html">imransiddique.com</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>

@@ -1,5 +1,54 @@
 [
   {
+    "slug": "2026-09-08-forbade-the-swap-kept-the-signal-optional",
+    "title": "The release forbade the swap and left the signal opt-in",
+    "date": "2026-09-08",
+    "standfirst": "MCP 2026-07-28 made it a protocol violation for a server to change its tool list as a side effect of what you just did. The same release forbade the server from telling you the list changed unless you subscribed, and neither official SDK subscribes by default.",
+    "tags": [
+      "mcp",
+      "agent-security",
+      "spec-review"
+    ],
+    "sources": [
+      {
+        "label": "MCP 2026-07-28, server/tools.mdx, the new MUST NOT and the six client SHOULD bullets",
+        "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/server/tools.mdx"
+      },
+      {
+        "label": "MCP 2026-07-28, basic/patterns/subscriptions.mdx, the opt-in rule",
+        "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/basic/patterns/subscriptions.mdx"
+      },
+      {
+        "label": "MCP 2026-07-28, basic/patterns/mrtr.mdx, the requestState integrity requirement",
+        "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/basic/patterns/mrtr.mdx"
+      },
+      {
+        "label": "MCP 2026-07-28 changelog, SEP-2567 and SEP-2575",
+        "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/changelog.mdx"
+      },
+      {
+        "label": "SEP-3140, Signed Capability Declarations and Trustworthy Trust Labels, open since 27 July",
+        "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/pull/3140"
+      },
+      {
+        "label": "TypeScript SDK, packages/client/src/client/client.ts, the auto-open gate",
+        "url": "https://github.com/modelcontextprotocol/typescript-sdk/blob/main/packages/client/src/client/client.ts"
+      },
+      {
+        "label": "Python SDK, src/mcp/client/client.py, listen() and its defaults",
+        "url": "https://github.com/modelcontextprotocol/python-sdk/blob/main/src/mcp/client/client.py"
+      },
+      {
+        "label": "Issue 3207 (MCP-2026-008) and issue 3213, the cacheScope public reports",
+        "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/issues/3213"
+      }
+    ],
+    "linkedin": "",
+    "x": "",
+    "words": 885,
+    "url": "https://imransiddique.com/notes/2026-09-08-forbade-the-swap-kept-the-signal-optional.html"
+  },
+  {
     "slug": "2026-09-07-filed-under-bug-fixes",
     "title": "The fix shipped three weeks before the bug had a name",
     "date": "2026-09-07",
