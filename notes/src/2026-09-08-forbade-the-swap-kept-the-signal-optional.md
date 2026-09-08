@@ -3,6 +3,7 @@ title: The release forbade the swap and left the signal opt-in
 date: 2026-09-08
 standfirst: MCP 2026-07-28 made it a protocol violation for a server to change its tool list as a side effect of what you just did. The same release forbade the server from telling you the list changed unless you subscribed, and neither official SDK subscribes by default.
 tags: [mcp, agent-security, spec-review]
+x: https://x.com/mosiddi/status/2097427875075096940
 sources:
   - label: MCP 2026-07-28, server/tools.mdx, the new MUST NOT and the six client SHOULD bullets
     url: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/server/tools.mdx
