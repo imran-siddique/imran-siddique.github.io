@@ -3,6 +3,7 @@ title: The fix shipped three weeks before the bug had a name
 date: 2026-09-07
 standfirst: One coding agent answered repo-controlled git config with a confirmation prompt in August. Another answered the neighbouring case with a refusal. The gap between those two choices is the whole argument, and neither public record tells you which one you are running.
 tags: [agent-security, supply-chain, coding-agents]
+x: https://x.com/mosiddi/status/2097738166488969237
 sources:
   - label: Qwen Code CHANGELOG, v0.21.9 (2026-08-10), the diff.external and core.fsmonitor line, PR 8645
     url: https://raw.githubusercontent.com/QwenLM/qwen-code/main/CHANGELOG.md
