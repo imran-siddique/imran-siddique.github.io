@@ -1,5 +1,50 @@
 [
   {
+    "slug": "2026-09-11-fix-changed-no-authentication",
+    "title": "The authentication fix that changed no authentication",
+    "date": "2026-09-11",
+    "standfirst": "CVE-2026-86121 is filed as missing authentication in a computer-use agent sandbox, critical, fixed in 0.3.42. The release named as the fix changes which interface the server listens on. Its authentication path is byte-identical to the version before it, and the same allow-all branch shipped again yesterday.",
+    "tags": [
+      "agent-security",
+      "cve",
+      "computer-use"
+    ],
+    "sources": [
+      {
+        "label": "CVE-2026-86121, CVE Program record, VulnCheck as assigner",
+        "url": "https://cveawg.mitre.org/api/cve/CVE-2026-86121"
+      },
+      {
+        "label": "NVD entry for CVE-2026-86121, CVSS 3.1 9.8, status Received",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-86121"
+      },
+      {
+        "label": "trycua/cua issue 1892, the original report of 13 June 2026",
+        "url": "https://github.com/trycua/cua/issues/1892"
+      },
+      {
+        "label": "trycua/cua PR 1845, fix(computer-server) default to localhost binding, four files",
+        "url": "https://github.com/trycua/cua/pull/1845"
+      },
+      {
+        "label": "GHSA-pccw-h89v-h9cj, unreviewed, empty affected-package block",
+        "url": "https://github.com/advisories/GHSA-pccw-h89v-h9cj"
+      },
+      {
+        "label": "OSV record for CVE-2026-86121, GIT range only, no PyPI package",
+        "url": "https://api.osv.dev/v1/vulns/CVE-2026-86121"
+      },
+      {
+        "label": "cua-computer-server on PyPI, 76 releases, 0.3.46 published 10 September 2026",
+        "url": "https://pypi.org/project/cua-computer-server/"
+      }
+    ],
+    "linkedin": "",
+    "x": "",
+    "words": 815,
+    "url": "https://imransiddique.com/notes/2026-09-11-fix-changed-no-authentication.html"
+  },
+  {
     "slug": "2026-09-08-forbade-the-swap-kept-the-signal-optional",
     "title": "The release forbade the swap and left the signal opt-in",
     "date": "2026-09-08",

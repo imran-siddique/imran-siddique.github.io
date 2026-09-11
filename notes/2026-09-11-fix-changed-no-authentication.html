@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CVE-2026-86121 is filed as missing authentication in a computer-use agent sandbox, critical, fixed in 0.3.42. The release named as the fix changes which interface the server listens on. Its authentication path is byte-identical to the version before it, and the same allow-all branch shipped again yesterday.">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imransiddique.com/notes/2026-09-11-fix-changed-no-authentication.html">
+    <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imransiddique.com/notes/2026-09-11-fix-changed-no-authentication.html">
+    <meta property="og:title" content="The authentication fix that changed no authentication">
+    <meta property="og:description" content="CVE-2026-86121 is filed as missing authentication in a computer-use agent sandbox, critical, fixed in 0.3.42. The release named as the fix changes which interface the server listens on. Its authentication path is byte-identical to the version before it, and the same allow-all branch shipped again yesterday.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@mosiddi">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>The authentication fix that changed no authentication | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css?v=f44781a">
+    <link rel="stylesheet" href="../notes/notes.css">
+</head>
+<body>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "The authentication fix that changed no authentication", "datePublished": "2026-09-11", "description": "CVE-2026-86121 is filed as missing authentication in a computer-use agent sandbox, critical, fixed in 0.3.42. The release named as the fix changes which interface the server listens on. Its authentication path is byte-identical to the version before it, and the same allow-all branch shipped again yesterday.", "author": {"@type": "Person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-09-11-fix-changed-no-authentication.html"}</script>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../index.html#book">Book</a></li>
+                <li><a href="../notes/index.html" class="active">Writing</a></li>
+                <li><a href="../speaking/index.html">Speaking</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <article class="note">
+            <div class="container container-narrow">
+                <p class="note-back"><a href="index.html">&larr; All notes</a></p>
+                <time class="note-date" datetime="2026-09-11">11 September 2026</time>
+                <h1>The authentication fix that changed no authentication</h1>
+                <p class="note-standfirst">CVE-2026-86121 is filed as missing authentication in a computer-use agent sandbox, critical, fixed in 0.3.42. The release named as the fix changes which interface the server listens on. Its authentication path is byte-identical to the version before it, and the same allow-all branch shipped again yesterday.</p>
+                <div class="note-tags"><span class="concept-tag">agent-security</span><span class="concept-tag">cve</span><span class="concept-tag">computer-use</span></div>
+                <div class="note-body">
+<p>The advisory reads simply enough. CVE-2026-86121, assigned by VulnCheck and published on 5 September, says cua-computer-server skips authentication when the <code>CONTAINER_NAME</code> environment variable is unset, binds to every interface, and hands an unauthenticated caller shell commands, arbitrary file read and write, and an interactive PTY. It is classed CWE-306, Missing Authentication for Critical Function, at CVSS 3.1 9.8. Everything below 0.3.42 is affected. So you upgrade past 0.3.42 and you are done.</p>
+<p>I pulled eight source distributions off PyPI and diffed them.</p>
+<p>Between 0.3.41 and 0.3.42, eight files differ: package metadata, the README, a generated protobuf stub, two test files, the CLI module and the server module. The authentication code lives in <code>computer_server/main.py</code>. That file has the same MD5 in both releases, <code>c124c604</code>. Nothing in it moved.</p>
+<p>The change is two default values. <code>--host</code> goes from <code>0.0.0.0</code> to <code>127.0.0.1</code> in the CLI, and the <code>Server</code> constructor takes the same flip. The pull request that made it, #1845, is titled "fix(computer-server): default to localhost binding" and touches four files: a changelog entry, the README, <code>cli.py</code> and <code>server.py</code>. It contains no authentication code because it was never about authentication. The listener moved to loopback. That is the whole patch, and the CVE's own reference list labels it accurately: "Bind default changed to 127.0.0.1".</p>
+<p>Now the gate, in 0.3.46, published on 10 September, at <code>main.py</code> line 498:</p>
+<pre><code># If no CONTAINER_NAME is set, always allow access (local development)
+if not self.container_name:
+    logger.info(
+        &quot;No CONTAINER_NAME set in environment. Allowing access (local development mode)&quot;
+    )
+    return True</code></pre>
+<p>The same test is repeated at the HTTP, WebSocket and PTY entry points, and every one of them takes that road.</p>
+<p>So one clause of the advisory was answered and the other was not. Binding to loopback decides who can reach the service. It does not decide whether an arriving request is allowed. Only one of those layers moved, and the one that did not is the one the advisory's title names.</p>
+<p>This matters because of where a version number travels. Scanners and inventories consume the boundary and nothing else: below 0.3.42 vulnerable, at or above it fixed. A host on 0.3.46 reads clean, and its authentication behaviour is what it was in the spring.</p>
+<p>And the default that did move is a default, not a constraint. The new help text tells you how to undo it: use <code>0.0.0.0</code> for external access. Anyone running this sandbox on a VM so an agent can drive it will pass that flag, because that is the point of running it. The network mitigation is then gone and the gate is the only thing left.</p>
+<h2>The boundary does not reach the tools that read boundaries</h2>
+<p>That was the argument I expected to make. Checking it produced a second one.</p>
+<p>The GitHub advisory for this CVE, GHSA-pccw-h89v-h9cj, is marked <code>unreviewed</code> and its affected-package block is empty. The OSV record exists but carries no package at all: its only range is a GIT range over the monorepo, with 655 release tags listed and no PyPI entry. PyPI's own vulnerability field for 0.3.41 is an empty list.</p>
+<p>The practical result, measured rather than inferred. <code>pip-audit</code> on a pinned <code>cua-computer-server==0.3.41</code>, the version everyone agrees is vulnerable, resolves 110 packages, flags protobuf, fastmcp and diskcache, and reports zero vulnerabilities for cua-computer-server. The CNA record carries the correct package URL, <code>pkg:pypi/cua-computer-server</code>. It was dropped somewhere between the record and the ecosystem databases.</p>
+<h2>The maintainers documented this, and so did the reporter</h2>
+<p>The allow-all path is deliberate and documented. A shipped test file calls it backwards compatibility: when neither variable is set, "the server continues to operate in local development mode (no auth required, requests succeed)". There is a flag, <code>UNAVAILABLE_WITHOUT_CONTAINER_NAME</code>, that makes the server refuse instead, answering 503. It has existed since 0.3.35 in April, two months before the report, and it is off by default.</p>
+<p>The reporter knew. George Chen's issue names that flag in its summary paragraph. The issue, #1892, is still open, with zero comments, unchanged since 13 June.</p>
+<h2>What did not survive checking</h2>
+<p>I thought the CVE's patch reference pointed at a commit containing no server code. It does not. Commit <code>59cf25c0ec54</code> is the lint-baseline PR #1846, merged eighteen seconds after #1845, and it carries #1845's changes among its sixteen files. The reference is correct.</p>
+<p>I also thought 0.3.42's dependency re-pin, fastmcp from <code>&gt;=2.0,&lt;3</code> to <code>&gt;=3.2.0,&lt;3.3.0</code>, might be quiet security content, since 3.2.0 is the fix version for two fastmcp advisories. Those advisories were published on 13 July, three weeks after 0.3.42 shipped. Coincidence, not a fix.</p>
+<p>A project is entitled to a local development mode. What a project cannot control is how a version range is read once it becomes a CVE, and this one is being read two ways at once: as an authentication fix that contains no authentication change, and as a boundary that the ecosystem databases never learned to apply.</p>
+                </div>
+                <section class="note-sources">
+                    <h2>Checked against</h2>
+                    <ul><li><a href="https://cveawg.mitre.org/api/cve/CVE-2026-86121" rel="noopener">CVE-2026-86121, CVE Program record, VulnCheck as assigner</a></li><li><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-86121" rel="noopener">NVD entry for CVE-2026-86121, CVSS 3.1 9.8, status Received</a></li><li><a href="https://github.com/trycua/cua/issues/1892" rel="noopener">trycua/cua issue 1892, the original report of 13 June 2026</a></li><li><a href="https://github.com/trycua/cua/pull/1845" rel="noopener">trycua/cua PR 1845, fix(computer-server) default to localhost binding, four files</a></li><li><a href="https://github.com/advisories/GHSA-pccw-h89v-h9cj" rel="noopener">GHSA-pccw-h89v-h9cj, unreviewed, empty affected-package block</a></li><li><a href="https://api.osv.dev/v1/vulns/CVE-2026-86121" rel="noopener">OSV record for CVE-2026-86121, GIT range only, no PyPI package</a></li><li><a href="https://pypi.org/project/cua-computer-server/" rel="noopener">cua-computer-server on PyPI, 76 releases, 0.3.46 published 10 September 2026</a></li></ul>
+                </section>
+                
+            </div>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique.</p>
+                <p><a href="../notes/feed.xml">RSS</a> &middot; <a href="../index.html">imransiddique.com</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>
