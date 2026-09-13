@@ -3,6 +3,7 @@ title: The authentication fix that changed no authentication
 date: 2026-09-11
 standfirst: CVE-2026-86121 is filed as missing authentication in a computer-use agent sandbox, critical, fixed in 0.3.42. The release named as the fix changes which interface the server listens on. Its authentication path is byte-identical to the version before it, and the same allow-all branch shipped again yesterday.
 tags: [agent-security, cve, computer-use]
+x: https://x.com/mosiddi/status/2099234467093381327
 sources:
   - label: CVE-2026-86121, CVE Program record, VulnCheck as assigner
     url: https://cveawg.mitre.org/api/cve/CVE-2026-86121
