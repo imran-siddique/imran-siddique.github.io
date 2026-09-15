@@ -144,12 +144,15 @@ def render_delivered(r):
             f'<span>{esc(fmt_date(r["date"], short=True))}</span></div>'
         )
 
+    action = "Watch recording" if r.get("recording") else "Recording not yet linked"
+
     return f"""                <{tag} class="talk-card"{attrs}>
                     {art}
                     <div class="talk-body">
                         <p class="talk-meta">{esc(fmt_date(r["date"]))} &middot; {esc(r["location"])}</p>
                         <h3>{esc(r["title"])}</h3>
                         <p class="talk-event">{esc(r["event"])}</p>
+                        <p class="talk-meta">{action}</p>
                     </div>
                 </{tag}>"""
 
@@ -222,9 +225,17 @@ def render_upcoming(r):
         title = (
             f'<a href="{esc(href)}" target="_blank" rel="noopener noreferrer">{title}</a>'
         )
+    registration = r.get("registration")
+    action = (
+        f'<a href="{esc(registration)}" target="_blank" rel="noopener noreferrer">Register</a>'
+        if registration else
+        (f'<a href="{esc(href)}" target="_blank" rel="noopener noreferrer">Event details</a>'
+         if href else 'Registration link to follow')
+    )
+    timing = f'<span>{esc(r["time"])}</span>' if r.get("time") else ""
     return f"""                <li class="talk-row">
                     <span class="talk-row-date">{esc(fmt_date(r["date"]))}</span>
-                    <span class="talk-row-main"><strong>{title}</strong><span>{esc(r["event"])} &middot; {esc(r["location"])}</span></span>
+                    <span class="talk-row-main"><strong>{title}</strong><span>{esc(r["event"])} &middot; {esc(r["location"])}</span>{timing}<span>{action}</span></span>
                 </li>"""
 
 

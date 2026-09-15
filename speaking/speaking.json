@@ -54,14 +54,15 @@
     "format": "Session, 25 minutes",
     "status": "scheduled",
     "summary": "cMCP wraps any MCP server without changing the server or the agent: Cedar policies evaluated before a tool call runs, structured denials an agent can reason from, every call chained into a Merkle structure, and the chain root sealed into a hardware measurement so the receipt is verifiable without trusting the operator.",
-    "url": "https://sessionize.com/mcp-dev-summit-toronto-2026",
+    "url": "https://events.linuxfoundation.org/mcp-dev-summit-toronto/program/schedule/?id=1260306",
     "recording": "",
     "tags": [
       "cmcp",
       "mcp",
       "trace",
       "confidential-computing"
-    ]
+    ],
+    "registration": "https://events.linuxfoundation.org/mcp-dev-summit-toronto/register/"
   },
   {
     "date": "2026-09-30",
@@ -71,11 +72,30 @@
     "format": "Showcase session",
     "status": "scheduled",
     "summary": "Every model-weight protection tool protects the customer from the model. None protect the builder from the customer.",
-    "url": "https://aaif.live/events/7tp1ev",
+    "url": "https://home.mlops.community/public/events/aaif-community-showcase-whats-being-built-in-agentic-ai-rqxg6cupet",
     "recording": "",
     "tags": [
       "weight-custody",
       "confidential-computing"
+    ],
+    "registration": "https://aaif.live/go/7tp1ev-imran-siddique",
+    "time": "Showcase: 8:00–11:00 AM PDT / 3:00–6:00 PM UTC"
+  },
+  {
+    "date": "2026-09-22",
+    "title": "Prove What Your Agent Did",
+    "event": "OPAQUE Systems × Action State · Hosted by Mark Hinkle",
+    "location": "Online",
+    "format": "Webinar, 30 minutes",
+    "status": "scheduled",
+    "summary": "Two companies, one receipt, verified on your machine. Live offline verification of a TRACE Registry checkpoint witnessed by Action State, followed by questions.",
+    "url": "https://event.webinarjam.com/462og/register/v1w8vs7v",
+    "registration": "https://event.webinarjam.com/462og/register/v1w8vs7v",
+    "time": "9:00–9:30 AM PDT / 12:00–12:30 PM EDT",
+    "recording": "",
+    "tags": [
+      "trace",
+      "verifiable-agents"
     ]
   },
   {
@@ -86,21 +106,23 @@
     "format": "Community talk, 19:00 CEST",
     "status": "scheduled",
     "summary": "Most agent governance tools can decide whether an action should be allowed. Far fewer can prove what was actually requested, authorised and executed across agents, tools and infrastructure. This is about closing that gap.",
-    "url": "https://genai-gurus.com/",
+    "url": "https://www.meetup.com/genai-gurus/events/315720631/",
     "recording": "",
     "tags": [
       "agent-governance",
       "trace",
       "verifiable-agents"
-    ]
+    ],
+    "registration": "https://www.meetup.com/genai-gurus/events/315720631/",
+    "time": "10:00 AM PDT / 7:00 PM CEST"
   },
   {
     "date": "2026-09-09",
     "title": "The Verifiable Agent Virtual Briefing",
-    "event": "Verifiable Agent Summit",
+    "event": "Cloud Security Alliance · Verifiable Agent Virtual Briefing",
     "location": "Online",
     "format": "60 minutes",
-    "status": "scheduled",
+    "status": "delivered",
     "summary": "Virtual edition of the summit, covering the TRACE evidence layer and how it composes with judgment and delivery.",
     "url": "https://events.zoom.us/ev/AgDWjou0XV5sV7CwcKrmYTfVMXxsVAhy7vzW2QhyrCBmxovbc836~AvAb5btHOWkp2sLG95f9qd3yrZt7rIp_Hv4-_QI6yYMOSjwhUcI2Cwg-cQ",
     "recording": "",
