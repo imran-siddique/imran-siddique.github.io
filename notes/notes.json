@@ -1,5 +1,54 @@
 [
   {
+    "slug": "2026-09-15-alias-check-already-bypassed",
+    "title": "The alias check I wired up was bypassed in September 2025",
+    "date": "2026-09-15",
+    "standfirst": "DDRop landed on 14 September and walks past the platform appraisal policy I shipped three weeks ago. Reading it sent me to a paper from last year that had already walked past the same check, by the same four people, for under $50.",
+    "tags": [
+      "attestation",
+      "sev-snp",
+      "evidence"
+    ],
+    "sources": [
+      {
+        "label": "DDRop paper, read 15 September 2026",
+        "url": "https://ddropattack.eu/ddrop.pdf"
+      },
+      {
+        "label": "ddropattack/ddrop, the authors' repository",
+        "url": "https://github.com/ddropattack/ddrop"
+      },
+      {
+        "label": "Battering RAM, disclosed 30 September 2025",
+        "url": "https://batteringram.eu/"
+      },
+      {
+        "label": "AMD security bulletin SB-3048, revision 1.0 of 14 September 2026",
+        "url": "https://www.amd.com/en/resources/product-security/bulletin/amd-sb-3048.html"
+      },
+      {
+        "label": "AMD security bulletin SB-3024, the Battering RAM advisory",
+        "url": "https://www.amd.com/en/resources/product-security/bulletin/amd-sb-3024.html"
+      },
+      {
+        "label": "Intel security announcement INTEL-2026-08-11-001-DDROP",
+        "url": "https://www.intel.com/content/www/us/en/security-center/announcement/intel-security-announcement-2026-08-11-001.html"
+      },
+      {
+        "label": "agent-manifest LIMITATIONS.md, the platform appraisal section",
+        "url": "https://github.com/agentrust-io/agent-manifest/blob/main/LIMITATIONS.md"
+      },
+      {
+        "label": "go-sev-guest PR 200, merged 14 September 2026",
+        "url": "https://github.com/google/go-sev-guest/pull/200"
+      }
+    ],
+    "linkedin": "",
+    "x": "",
+    "words": 882,
+    "url": "https://imransiddique.com/notes/2026-09-15-alias-check-already-bypassed.html"
+  },
+  {
     "slug": "2026-09-11-fix-changed-no-authentication",
     "title": "The authentication fix that changed no authentication",
     "date": "2026-09-11",
