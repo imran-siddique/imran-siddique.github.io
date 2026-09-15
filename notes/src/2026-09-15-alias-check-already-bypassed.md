@@ -3,6 +3,7 @@ title: The alias check I wired up was bypassed in September 2025
 date: 2026-09-15
 standfirst: DDRop landed on 14 September and walks past the platform appraisal policy I shipped three weeks ago. Reading it sent me to a paper from last year that had already walked past the same check, by the same four people, for under $50.
 tags: [attestation, sev-snp, evidence]
+x: https://x.com/mosiddi/status/2099950158092140998
 sources:
   - label: DDRop paper, read 15 September 2026
     url: https://ddropattack.eu/ddrop.pdf
