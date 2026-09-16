@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Four hours apart, awslabs/mcp merged a parser-based read-only policy for one database server and twenty more regex keywords for another. I installed the published package and found the keyword answer still has a gap the parser answer cannot have.">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imransiddique.com/notes/2026-09-16-answered-the-same-question-twice.html">
+    <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imransiddique.com/notes/2026-09-16-answered-the-same-question-twice.html">
+    <meta property="og:title" content="One repository answered the same question twice on 11 September">
+    <meta property="og:description" content="Four hours apart, awslabs/mcp merged a parser-based read-only policy for one database server and twenty more regex keywords for another. I installed the published package and found the keyword answer still has a gap the parser answer cannot have.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@mosiddi">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>One repository answered the same question twice on 11 September | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css?v=f44781a">
+    <link rel="stylesheet" href="../notes/notes.css">
+</head>
+<body>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "One repository answered the same question twice on 11 September", "datePublished": "2026-09-16", "description": "Four hours apart, awslabs/mcp merged a parser-based read-only policy for one database server and twenty more regex keywords for another. I installed the published package and found the keyword answer still has a gap the parser answer cannot have.", "author": {"@type": "Person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-09-16-answered-the-same-question-twice.html"}</script>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../index.html#book">Book</a></li>
+                <li><a href="../notes/index.html" class="active">Writing</a></li>
+                <li><a href="../speaking/index.html">Speaking</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <article class="note">
+            <div class="container container-narrow">
+                <p class="note-back"><a href="index.html">&larr; All notes</a></p>
+                <time class="note-date" datetime="2026-09-16">16 September 2026</time>
+                <h1>One repository answered the same question twice on 11 September</h1>
+                <p class="note-standfirst">Four hours apart, awslabs/mcp merged a parser-based read-only policy for one database server and twenty more regex keywords for another. I installed the published package and found the keyword answer still has a gap the parser answer cannot have.</p>
+                <div class="note-tags"><span class="concept-tag">agent-security</span><span class="concept-tag">mcp</span><span class="concept-tag">sql</span></div>
+                <div class="note-body">
+<p>On 11 September, four hours apart, the awslabs/mcp repository merged two fixes for the same class of problem, and they do not agree with each other.</p>
+<p>At 15:31 UTC, commit f6aec97 landed a parser-based read-only policy for the Postgres server (#4575). It deletes that server's regex mutable-SQL detector and replaces it with a guard built on pglast, which is PostgreSQL's own parser compiled in. The module says why in one line: identifiers, quoting, comments and Unicode escapes can no longer disguise an operation, because <em>the guard and the database read the same bytes the same way.</em> The check for the statement behind CVE-2026-87911 is now a field on a parse-tree node, not a pattern.</p>
+<p>At 19:22 UTC, commit a55a1a8 answered the same problem for the MySQL server (#4615) by adding roughly twenty more keywords to a regex.</p>
+<p>Both are on main. Both are real work. Only one of them changes what kind of thing the control is.</p>
+<h2>Why the difference is measurable</h2>
+<p>The MySQL gate already took a CVE for this, CVE-2026-85788. AWS described it exactly: the check matches SQL text with patterns that expect literal whitespace between keywords, MySQL treats a comment as whitespace, so a comment wedged between two words walked straight through. The fix strips comments before the scan. It works. I checked it.</p>
+<p>The class is not closed, because a comment is not the only thing MySQL treats as whitespace. A second space is too.</p>
+<p>I installed the current published package, version 1.1.2, uploaded 8 September, and called the shipped read-only gate directly. It is two functions, and nothing else stands between a tool call and the database. One space between the two words of a multi-word keyword is rejected. Two spaces, a tab or a newline between the same two words returns an empty list from the keyword scan and an empty list from the injection heuristic, which together are the server's whole rejection path. I have sent the specific statements to the AWS vulnerability reporting page, which is where the repository's own contributing guide says security findings go instead of a public issue, so they are not in this note.</p>
+<p>The cause is one expression. The pattern is built by escaping the whole phrase, which bakes a single literal space into the middle of it. Most entries survive that because their first word is blocked on its own. <code>CREATE FUNCTION</code> is covered because <code>CREATE</code> is. A couple have no such cover.</p>
+<h2>The repository already contains the fix</h2>
+<p>Two of the four keyword detectors in the same monorepo, for SQL Server and Oracle, build the identical pattern by splitting the phrase on spaces and joining the words with a whitespace class. I ran Oracle's detector against every multi-word keyword it has, under one space, two spaces and a newline. Blocked every time.</p>
+<p>So the regex approach can be made whitespace-correct, and somebody in this repository already did it, in a file next door. The small fix is a two-line copy.</p>
+<p>Worth saying: the Aurora DSQL detector uses the same escape-the-whole-phrase construction as MySQL, and gets away with it only because a second set of anchored regexes catches the same statements a different way. It is the same latent bug, one server over, currently masked. All of this is still a small fix to a text filter.</p>
+<h2>What the parser commit says about itself</h2>
+<p>The Postgres guard is careful about its own status. It calls itself defense-in-depth, not a security boundary, and names the authoritative control as the least-privilege database role. AWS says the same in both advisories. That is the correct position, and it is worth sitting with, because it means the read-only switch in a tool server was never the enforcement point. The grant is. A log of what the agent asked for proves what happened; only the role decides what can happen.</p>
+<p>Which leaves a question the repository has now put to itself twice. The Redshift server switched to a parser in June. Postgres switched on 11 September. A parse tree cannot be fooled by whitespace, comments, case or Unicode escapes, because it is not reading text. A keyword list can be fooled by all four, and each one costs an advisory and a release to find out about. Four of these servers are still on the keyword list. Two of them have stopped, and the newer one's own comment explains why.</p>
+                </div>
+                <section class="note-sources">
+                    <h2>Checked against</h2>
+                    <ul><li><a href="https://github.com/awslabs/mcp/commit/f6aec97d0aa3b9caae0cd131dda4a63be5709f64" rel="noopener">awslabs/mcp commit f6aec97, parser-based sql policy (#4575)</a></li><li><a href="https://github.com/awslabs/mcp/commit/a55a1a8da1991767e114a7039b7245992b900b4b" rel="noopener">awslabs/mcp commit a55a1a8, statement-leading mutating verbs (#4615)</a></li><li><a href="https://github.com/awslabs/mcp/security/advisories/GHSA-x25m-ph3m-3r9q" rel="noopener">CVE-2026-85788, GHSA-x25m-ph3m-3r9q, mysql read-only via inline comments</a></li><li><a href="https://github.com/awslabs/mcp/security/advisories/GHSA-fph8-pg5w-78fv" rel="noopener">CVE-2026-87911, GHSA-fph8-pg5w-78fv, postgres COPY TO PROGRAM</a></li><li><a href="https://aws.amazon.com/security/vulnerability-reporting/" rel="noopener">AWS vulnerability reporting page, where this finding went</a></li></ul>
+                </section>
+                
+            </div>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique.</p>
+                <p><a href="../notes/feed.xml">RSS</a> &middot; <a href="../index.html">imransiddique.com</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>

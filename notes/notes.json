@@ -1,5 +1,42 @@
 [
   {
+    "slug": "2026-09-16-answered-the-same-question-twice",
+    "title": "One repository answered the same question twice on 11 September",
+    "date": "2026-09-16",
+    "standfirst": "Four hours apart, awslabs/mcp merged a parser-based read-only policy for one database server and twenty more regex keywords for another. I installed the published package and found the keyword answer still has a gap the parser answer cannot have.",
+    "tags": [
+      "agent-security",
+      "mcp",
+      "sql"
+    ],
+    "sources": [
+      {
+        "label": "awslabs/mcp commit f6aec97, parser-based sql policy (#4575)",
+        "url": "https://github.com/awslabs/mcp/commit/f6aec97d0aa3b9caae0cd131dda4a63be5709f64"
+      },
+      {
+        "label": "awslabs/mcp commit a55a1a8, statement-leading mutating verbs (#4615)",
+        "url": "https://github.com/awslabs/mcp/commit/a55a1a8da1991767e114a7039b7245992b900b4b"
+      },
+      {
+        "label": "CVE-2026-85788, GHSA-x25m-ph3m-3r9q, mysql read-only via inline comments",
+        "url": "https://github.com/awslabs/mcp/security/advisories/GHSA-x25m-ph3m-3r9q"
+      },
+      {
+        "label": "CVE-2026-87911, GHSA-fph8-pg5w-78fv, postgres COPY TO PROGRAM",
+        "url": "https://github.com/awslabs/mcp/security/advisories/GHSA-fph8-pg5w-78fv"
+      },
+      {
+        "label": "AWS vulnerability reporting page, where this finding went",
+        "url": "https://aws.amazon.com/security/vulnerability-reporting/"
+      }
+    ],
+    "linkedin": "",
+    "x": "",
+    "words": 732,
+    "url": "https://imransiddique.com/notes/2026-09-16-answered-the-same-question-twice.html"
+  },
+  {
     "slug": "2026-09-15-alias-check-already-bypassed",
     "title": "The alias check I wired up was bypassed in September 2025",
     "date": "2026-09-15",
