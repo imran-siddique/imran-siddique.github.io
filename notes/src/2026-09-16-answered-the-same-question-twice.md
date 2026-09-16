@@ -3,6 +3,7 @@ title: One repository answered the same question twice on 11 September
 date: 2026-09-16
 standfirst: Four hours apart, awslabs/mcp merged a parser-based read-only policy for one database server and twenty more regex keywords for another. I installed the published package and found the keyword answer still has a gap the parser answer cannot have.
 tags: [agent-security, mcp, sql]
+x: https://x.com/mosiddi/status/2100318071307309221
 sources:
   - label: awslabs/mcp commit f6aec97, parser-based sql policy (#4575)
     url: https://github.com/awslabs/mcp/commit/f6aec97d0aa3b9caae0cd131dda4a63be5709f64
