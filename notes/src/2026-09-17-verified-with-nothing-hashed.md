@@ -12,6 +12,8 @@ sources:
     url: https://github.com/modelcontextprotocol/inspector/pull/2293
   - label: SEP-2640, the Skills extension, merged 13 September 2026
     url: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/seps/2640-skills-extension.md
+  - label: Inspector issue 2405, where this went
+    url: https://github.com/modelcontextprotocol/inspector/issues/2405
 ---
 
 Three runs against a stdio server I wrote, one skill served three ways, same command each time.

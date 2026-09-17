@@ -10,7 +10,7 @@
     <description>Working notes on agent security, evidence and governance.</description>
     <language>en</language>
     <dc:creator>Imran Siddique</dc:creator>
-    <lastBuildDate>Thu, 17 Sep 2026 16:07:59 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 17 Sep 2026 16:16:56 +0000</lastBuildDate>
     <item>
       <title>Verified, with nothing hashed</title>
       <link>https://imransiddique.com/notes/2026-09-17-verified-with-nothing-hashed.html</link>
@@ -44,7 +44,7 @@ is advertised and integrity cannot be verified.&quot;}],
 <pre><code>... --method skills/list --verify | jq -e &#x27;select(.files | length == 0)&#x27;</code></pre>
 <p>A hit means a skill in that catalog was approved by a verifier that checked no bytes of it.</p>
 <h2>Checked against</h2>
-<ul><li><a href="https://www.npmjs.com/package/@modelcontextprotocol/inspector">&quot;@modelcontextprotocol/inspector on npm, 2.6.0 and 2.7.0 publish times&quot;</a></li><li><a href="https://github.com/modelcontextprotocol/inspector/blob/main/clients/cli/README.md">The CLI README&#x27;s Skill verification section, where the outcome table lives</a></li><li><a href="https://github.com/modelcontextprotocol/inspector/pull/2293">Inspector PR 2293, the review round that introduced the three outcomes</a></li><li><a href="https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/seps/2640-skills-extension.md">SEP-2640, the Skills extension, merged 13 September 2026</a></li></ul>]]></content:encoded>
+<ul><li><a href="https://www.npmjs.com/package/@modelcontextprotocol/inspector">&quot;@modelcontextprotocol/inspector on npm, 2.6.0 and 2.7.0 publish times&quot;</a></li><li><a href="https://github.com/modelcontextprotocol/inspector/blob/main/clients/cli/README.md">The CLI README&#x27;s Skill verification section, where the outcome table lives</a></li><li><a href="https://github.com/modelcontextprotocol/inspector/pull/2293">Inspector PR 2293, the review round that introduced the three outcomes</a></li><li><a href="https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/seps/2640-skills-extension.md">SEP-2640, the Skills extension, merged 13 September 2026</a></li><li><a href="https://github.com/modelcontextprotocol/inspector/issues/2405">Inspector issue 2405, where this went</a></li></ul>]]></content:encoded>
     </item>
     <item>
       <title>One repository answered the same question twice on 11 September</title>
