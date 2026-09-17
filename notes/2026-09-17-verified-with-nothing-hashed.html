@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="I ran the MCP Inspector&#x27;s skill verifier against a server I wrote. A skill that advertises no digests gets the same word, the same JSON and the same exit code as one whose every file hashed clean.">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://imransiddique.com/notes/2026-09-17-verified-with-nothing-hashed.html">
+    <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://imransiddique.com/notes/2026-09-17-verified-with-nothing-hashed.html">
+    <meta property="og:title" content="Verified, with nothing hashed">
+    <meta property="og:description" content="I ran the MCP Inspector&#x27;s skill verifier against a server I wrote. A skill that advertises no digests gets the same word, the same JSON and the same exit code as one whose every file hashed clean.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@mosiddi">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>Verified, with nothing hashed | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css?v=f44781a">
+    <link rel="stylesheet" href="../notes/notes.css">
+</head>
+<body>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Verified, with nothing hashed", "datePublished": "2026-09-17", "description": "I ran the MCP Inspector's skill verifier against a server I wrote. A skill that advertises no digests gets the same word, the same JSON and the same exit code as one whose every file hashed clean.", "author": {"@type": "Person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-09-17-verified-with-nothing-hashed.html"}</script>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../index.html#book">Book</a></li>
+                <li><a href="../notes/index.html" class="active">Writing</a></li>
+                <li><a href="../speaking/index.html">Speaking</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <article class="note">
+            <div class="container container-narrow">
+                <p class="note-back"><a href="index.html">&larr; All notes</a></p>
+                <time class="note-date" datetime="2026-09-17">17 September 2026</time>
+                <h1>Verified, with nothing hashed</h1>
+                <p class="note-standfirst">I ran the MCP Inspector&#x27;s skill verifier against a server I wrote. A skill that advertises no digests gets the same word, the same JSON and the same exit code as one whose every file hashed clean.</p>
+                <div class="note-tags"><span class="concept-tag">agent-security</span><span class="concept-tag">mcp</span><span class="concept-tag">evidence</span></div>
+                <div class="note-body">
+<p>Three runs against a stdio server I wrote, one skill served three ways, same command each time.</p>
+<p>A manifest with a wrong digest: <code>mismatch</code>, exit 7. The same manifest with the right digest: <code>verified</code>, one file, exit 0. The checker works.</p>
+<p>Then the third case. The skill declares <code>"resources": "dynamic"</code>, which SEP-2640 defines as generated content with no digests to publish. Stdout:</p>
+<pre><code>&quot;conformance&quot;:[{&quot;code&quot;:&quot;dynamic-resources&quot;,&quot;severity&quot;:&quot;warning&quot;,
+&quot;message&quot;:&quot;resources is \&quot;dynamic\&quot;: the file set is generated, so no digest
+is advertised and integrity cannot be verified.&quot;}],
+&quot;frontmatter&quot;:[],&quot;files&quot;:[],&quot;ok&quot;:true,&quot;outcome&quot;:&quot;verified&quot;</code></pre>
+<p>Stderr reads <code>Verified 1 skill and 0 files: no conformance errors.</code> Exit 0.</p>
+<p>Integrity cannot be verified, and the outcome is verified. One JSON line, both statements.</p>
+<p>The flag is <code>--verify</code> on the Inspector's CLI. Point it at a server and it runs SEP-2640's conformance, digest and frontmatter checks over the whole catalog and turns the answer into an exit code, which is the useful part: a server author can gate CI on it. Exit 7 is a violation, 8 is a catalog it could not finish reading.</p>
+<p>To that CI job, the dynamic case and the fully checked case are one event. Same exit code, same <code>ok</code>, same <code>outcome</code>. What carries the difference is a file count in a line on stderr and a warning row a consumer has to go looking for by severity. A pipeline reads the exit code.</p>
+<p>The tool's own README settles what the word is supposed to mean. Its outcome table defines <code>verified</code> and exit 0 as <em>"Everything was checked and everything passed."</em> In the dynamic report, <code>files</code> is the empty array.</p>
+<p>It is worth being exact about what the run does. The Inspector did call <code>resources/read</code>, and my server logged serving the 129 bytes. Those bytes are parsed for the frontmatter cross check and then dropped without being hashed, because the manifest declined to say what the hash should be. So something happened. Nothing was verified.</p>
+<p>This project has already ruled on this shape once, in its own code. <code>EXIT_CODES.SKILL_INCOMPLETE</code> exists because a read that stopped at the size bound leaves entries unfetched, and <em>"reporting success for a manifest whose unread entries were never fetched is a false pass."</em> That is a third outcome and a third exit code, invented so a job that tolerates oversized catalogs can allow 8 and still fail on 7. A catalog advertising no digests at all reaches the same false pass down a different road, and it is still filed under <code>verified</code>.</p>
+<p>The spec has a word for the state, and it is not that one. SEP-2640 says the <code>"dynamic"</code> marker exists so a host "can tell a deliberately unverifiable skill from a malformed entry", and calls a <code>SKILL.md</code> fetched under it "unverifiable" in the same sentence where an array-backed one is "digest-verified".</p>
+<p>Worth saying where the ceiling is even when the digest does check out. A match proves the listing and the body agree with each other. SEP-2640 states the limit in its own text: digests are unsigned and supplied by the same server that supplies the content, a match proves the two are consistent rather than that either is trustworthy, and hosts MUST NOT treat it as a security boundary. I word boundary grepped the whole 673,250 byte CLI bundle: <code>signature</code> twice, both in comments about TypeScript types. <code>signed</code>, <code>provenance</code>, <code>attestation</code>, <code>publisher</code>: zero each. Nothing in this path carries authorship.</p>
+<h2>What did not survive checking</h2>
+<p>The brief I started from said this landed in 2.7.0, published on 16 September. It did not. I installed 2.6.0, from 9 September, and its <code>--verify</code> help text, its <code>dynamic-resources</code> message and its summary headline are the same strings. The behaviour is eight days old. What 2.7.0 actually changed on this path was the client capability declaration, the configurable catalog budget and a path-less URI fix.</p>
+<p>I also drafted the fix as "add a third outcome value" before reading the review thread on PR 2293. There are already three. Round 15 replaced a two-state verdict with <code>verified</code>, <code>failed</code> and <code>incomplete</code> for exactly this class of reason. The ask is a fourth, and the reason it is a small ask is that the precedent is theirs.</p>
+<p>Until something changes, the difference is readable today, and it is one field. If you gate CI on <code>--verify</code>, exit 0 does not tell you that anything was hashed. This does:</p>
+<pre><code>... --method skills/list --verify | jq -e &#x27;select(.files | length == 0)&#x27;</code></pre>
+<p>A hit means a skill in that catalog was approved by a verifier that checked no bytes of it.</p>
+                </div>
+                <section class="note-sources">
+                    <h2>Checked against</h2>
+                    <ul><li><a href="https://www.npmjs.com/package/@modelcontextprotocol/inspector" rel="noopener">&quot;@modelcontextprotocol/inspector on npm, 2.6.0 and 2.7.0 publish times&quot;</a></li><li><a href="https://github.com/modelcontextprotocol/inspector/blob/main/clients/cli/README.md" rel="noopener">The CLI README&#x27;s Skill verification section, where the outcome table lives</a></li><li><a href="https://github.com/modelcontextprotocol/inspector/pull/2293" rel="noopener">Inspector PR 2293, the review round that introduced the three outcomes</a></li><li><a href="https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/seps/2640-skills-extension.md" rel="noopener">SEP-2640, the Skills extension, merged 13 September 2026</a></li></ul>
+                </section>
+                
+            </div>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique.</p>
+                <p><a href="../notes/feed.xml">RSS</a> &middot; <a href="../index.html">imransiddique.com</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>
