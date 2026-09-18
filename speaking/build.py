@@ -239,6 +239,66 @@ def render_upcoming(r):
                 </li>"""
 
 
+SITE = "https://imransiddique.com"
+PAGE = f"{SITE}/speaking/"
+PERSON_ID = f"{SITE}/#person"
+DESC = ("Talks by Imran Siddique on AI agent governance, confidential computing, and "
+        "verifiable evidence. Conference sessions, summits and community talks, most with "
+        "recordings.")
+
+
+def event_ld(r):
+    """One published talk as a schema.org Event. Only called for what the page shows."""
+    online = r["location"] == "Online"
+    link = r.get("recording") or r.get("url") or PAGE
+    ev = {
+        "@type": "Event", "name": r["title"], "startDate": r["date"],
+        "description": r["summary"],
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventAttendanceMode": "https://schema.org/" + (
+            "OnlineEventAttendanceMode" if online else "OfflineEventAttendanceMode"),
+        "location": ({"@type": "VirtualLocation", "url": link} if online else
+                     {"@type": "Place", "name": r["location"], "address": r["location"]}),
+        "organizer": {"@type": "Organization", "name": r["event"],
+                      **({"url": r["url"]} if r.get("url") else {})},
+        "performer": {"@id": PERSON_ID},
+        "url": r.get("url") or link,
+    }
+    if r.get("recording"):
+        ev["recordedIn"] = {"@type": "CreativeWork", "url": r["recording"]}
+    return ev
+
+
+def video_ld(v):
+    vid = video_id(v.get("url"))
+    thumb = v.get("thumb") or (f"https://img.youtube.com/vi/{vid}/hqdefault.jpg" if vid else "")
+    out = {"@type": "VideoObject", "name": html.unescape(re.sub(r"<[^>]+>", "", v["title"])),
+           "description": v.get("subtitle") or v["title"], "uploadDate": v["date"],
+           "url": v["url"], "creator": {"@id": PERSON_ID}}
+    if thumb:
+        out["thumbnailUrl"] = thumb if thumb.startswith("http") else f"{PAGE}{thumb}"
+    if vid:
+        out["embedUrl"] = f"https://www.youtube.com/embed/{vid}"
+    return out
+
+
+def structured_data(delivered, upcoming, videos):
+    """Talks and videos on the page, tied to the one Person declared on the home page.
+
+    Built from the same lists render() publishes, so a `submitted` talk, or a
+    scheduled one whose date has passed, can never leak into the markup either.
+    """
+    items = [event_ld(r) for r in upcoming + delivered] + [video_ld(v) for v in videos]
+    return json.dumps({
+        "@context": "https://schema.org", "@type": "ProfilePage", "@id": PAGE,
+        "url": PAGE, "name": "Speaking | Imran Siddique", "description": DESC,
+        "mainEntity": {"@id": PERSON_ID},
+        "about": {"@type": "Person", "@id": PERSON_ID, "name": "Imran Siddique", "url": SITE},
+        "hasPart": {"@type": "ItemList", "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "item": it} for i, it in enumerate(items)]},
+    }, ensure_ascii=False).replace("</", "<\\/")
+
+
 def render(records, videos=(), speaker=None, _stale_out=None):
     today = datetime.now().strftime("%Y-%m-%d")
     delivered = [r for r in records if r["status"] == "delivered"]
@@ -320,8 +380,26 @@ def render(records, videos=(), speaker=None, _stale_out=None):
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speaking | Imran Siddique</title>
-    <meta name="description" content="Talks by Imran Siddique on AI agent governance, confidential computing, and verifiable evidence. Conference sessions, summits and community talks, most with recordings.">
-    <link rel="canonical" href="https://imransiddique.com/speaking/">
+    <meta name="description" content="{esc(DESC)}">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="{PAGE}">
+    <meta property="og:type" content="profile">
+    <meta property="og:site_name" content="Imran Siddique">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="{PAGE}">
+    <meta property="og:title" content="Speaking | Imran Siddique">
+    <meta property="og:description" content="{esc(DESC)}">
+    <meta property="og:image" content="{PAGE}card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:creator" content="@mosiddi">
+    <meta name="twitter:title" content="Speaking | Imran Siddique">
+    <meta name="twitter:description" content="{esc(DESC)}">
+    <meta name="twitter:image" content="{PAGE}card.png">
+    <script type="application/ld+json">{structured_data(delivered, upcoming, videos)}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">

@@ -54,6 +54,12 @@ OG_IMAGE = f"{SITE}/og-image.png"
 PERSON = {"@type": "Person", "@id": f"{SITE}/#person", "name": "Imran Siddique", "url": SITE}
 BLOG_ID = f"{SITE}/notes/#blog"
 
+
+def card_url(slug):
+    """A note's own share card if cards.py has rendered it, else the site card."""
+    return f"{SITE}/notes/cards/{slug}.png" if (NOTES / "cards" / f"{slug}.png").exists() else OG_IMAGE
+
+
 MONTHS = ["January", "February", "March", "April", "May", "June", "July",
           "August", "September", "October", "November", "December"]
 
@@ -202,7 +208,7 @@ def footer(prefix=""):
     <script src="{prefix}script.js"></script>"""
 
 
-def head(title, desc, canonical, prefix="", og_type="article", article=None):
+def head(title, desc, canonical, prefix="", og_type="article", article=None, image=OG_IMAGE):
     """`article` is the note dict on a note page, None elsewhere."""
     esc = lambda s: html.escape(s, quote=True)
     art = ""
@@ -228,7 +234,7 @@ def head(title, desc, canonical, prefix="", og_type="article", article=None):
     <meta property="og:url" content="{canonical}">
     <meta property="og:title" content="{esc(title)}">
     <meta property="og:description" content="{esc(desc)}">
-    <meta property="og:image" content="{OG_IMAGE}">
+    <meta property="og:image" content="{image}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">{art}
     <meta name="twitter:card" content="summary_large_image">
@@ -236,7 +242,7 @@ def head(title, desc, canonical, prefix="", og_type="article", article=None):
     <meta name="twitter:creator" content="@mosiddi">
     <meta name="twitter:title" content="{esc(title)}">
     <meta name="twitter:description" content="{esc(desc)}">
-    <meta name="twitter:image" content="{OG_IMAGE}">
+    <meta name="twitter:image" content="{image}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -270,7 +276,7 @@ def note_page(n):
             "headline": n["title"], "description": n["standfirst"],
             "datePublished": n["date"], "dateModified": n["updated"],
             "inLanguage": "en-US", "wordCount": n["words"],
-            "keywords": n["tags"], "image": OG_IMAGE,
+            "keywords": n["tags"], "image": card_url(n["slug"]),
             "author": PERSON, "publisher": PERSON,
             "isPartOf": {"@type": "Blog", "@id": BLOG_ID, "name": "Notes by Imran Siddique",
                          "url": f"{SITE}/notes/"},
@@ -288,7 +294,7 @@ def note_page(n):
             ],
         },
     ]}, indent=None)
-    return f"""{head(n["title"], n["standfirst"], n["url"], prefix="../", article=n)}
+    return f"""{head(n["title"], n["standfirst"], n["url"], prefix="../", article=n, image=card_url(n["slug"]))}
     <script type="application/ld+json">{ld}</script>
 {nav(prefix="../")}
     <main>
