@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Docker published two more CVEs against its agent sandbox on 15 September. Read alongside the three it published in June and August, all five sit in the two controls its README sells, and three of them fail the same way.">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://imransiddique.com/notes/2026-09-18-five-cves-all-in-the-doors.html">
+    <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Imran Siddique">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://imransiddique.com/notes/2026-09-18-five-cves-all-in-the-doors.html">
+    <meta property="og:title" content="Five Docker Sandboxes CVEs this year, all in the doors">
+    <meta property="og:description" content="Docker published two more CVEs against its agent sandbox on 15 September. Read alongside the three it published in June and August, all five sit in the two controls its README sells, and three of them fail the same way.">
+    <meta property="og:image" content="https://imransiddique.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-09-18">
+    <meta property="article:modified_time" content="2026-09-18">
+    <meta property="article:author" content="https://imransiddique.com/about.html">
+    <meta property="article:tag" content="agent-security">
+    <meta property="article:tag" content="sandboxing">
+    <meta property="article:tag" content="enforcement">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:creator" content="@mosiddi">
+    <meta name="twitter:title" content="Five Docker Sandboxes CVEs this year, all in the doors">
+    <meta name="twitter:description" content="Docker published two more CVEs against its agent sandbox on 15 September. Read alongside the three it published in June and August, all five sit in the two controls its README sells, and three of them fail the same way.">
+    <meta name="twitter:image" content="https://imransiddique.com/og-image.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>Five Docker Sandboxes CVEs this year, all in the doors | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css?v=f44781a">
+    <link rel="stylesheet" href="../notes/notes.css">
+</head>
+<body>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "@id": "https://imransiddique.com/notes/2026-09-18-five-cves-all-in-the-doors.html#article", "headline": "Five Docker Sandboxes CVEs this year, all in the doors", "description": "Docker published two more CVEs against its agent sandbox on 15 September. Read alongside the three it published in June and August, all five sit in the two controls its README sells, and three of them fail the same way.", "datePublished": "2026-09-18", "dateModified": "2026-09-18", "inLanguage": "en-US", "wordCount": 875, "keywords": ["agent-security", "sandboxing", "enforcement"], "image": "https://imransiddique.com/og-image.png", "author": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "publisher": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "isPartOf": {"@type": "Blog", "@id": "https://imransiddique.com/notes/#blog", "name": "Notes by Imran Siddique", "url": "https://imransiddique.com/notes/"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-09-18-five-cves-all-in-the-doors.html", "url": "https://imransiddique.com/notes/2026-09-18-five-cves-all-in-the-doors.html", "citation": [{"@type": "CreativeWork", "name": "CVE-2026-77179, CVE Program record (virtio-fs, macOS, CVSS 4.0 9.4)", "url": "https://github.com/CVEProject/cvelistV5/blob/main/cves/2026/77xxx/CVE-2026-77179.json"}, {"@type": "CreativeWork", "name": "CVE-2026-79994, CVE Program record (Unix socket relay, CVSS 4.0 8.7)", "url": "https://github.com/CVEProject/cvelistV5/blob/main/cves/2026/79xxx/CVE-2026-79994.json"}, {"@type": "CreativeWork", "name": "CVE-2026-12039, NVD (DNS not covered by the egress allowlist)", "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12039"}, {"@type": "CreativeWork", "name": "CVE-2026-12539, NVD (ICMP authorizer not re-applied after daemon restart)", "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-12539"}, {"@type": "CreativeWork", "name": "CVE-2026-18171, NVD (read-only mount writable at the virtio-fs export)", "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-18171"}, {"@type": "CreativeWork", "name": "Docker Sandboxes v0.42.0 release notes, 7 September 2026", "url": "https://github.com/docker/sbx-releases/releases/tag/v0.42.0"}, {"@type": "CreativeWork", "name": "docker/sbx-releases README, read 18 September 2026", "url": "https://github.com/docker/sbx-releases/blob/main/README.md"}, {"@type": "CreativeWork", "name": "trace-spec LIMITATIONS.md, \"Pure offline verification cannot prove non-revocation\"", "url": "https://github.com/agentrust-io/trace-spec/blob/main/LIMITATIONS.md"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://imransiddique.com/"}, {"@type": "ListItem", "position": 2, "name": "Notes", "item": "https://imransiddique.com/notes/"}, {"@type": "ListItem", "position": 3, "name": "Five Docker Sandboxes CVEs this year, all in the doors", "item": "https://imransiddique.com/notes/2026-09-18-five-cves-all-in-the-doors.html"}]}]}</script>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../index.html#book">Book</a></li>
+                <li><a href="../notes/index.html" class="active">Writing</a></li>
+                <li><a href="../speaking/index.html">Speaking</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <article class="note">
+            <div class="container container-narrow">
+                <p class="note-back"><a href="index.html">&larr; All notes</a></p>
+                <time class="note-date" datetime="2026-09-18">18 September 2026</time>
+                <h1>Five Docker Sandboxes CVEs this year, all in the doors</h1>
+                <p class="note-standfirst">Docker published two more CVEs against its agent sandbox on 15 September. Read alongside the three it published in June and August, all five sit in the two controls its README sells, and three of them fail the same way.</p>
+                <div class="note-tags"><span class="concept-tag">agent-security</span><span class="concept-tag">sandboxing</span><span class="concept-tag">enforcement</span></div>
+                <div class="note-body">
+<p>Five CVEs have been published against Docker Sandboxes this year, all by Docker as its own CNA. Two landed on 15 September, CVE-2026-77179 at CVSS 4.0 9.4 and CVE-2026-79994 at 8.7. Three came earlier: CVE-2026-12039 and CVE-2026-12539 in June, CVE-2026-18171 in August.</p>
+<p>Docker Sandboxes runs each coding agent in its own microVM, which is the right design, and none of the five is in the hypervisor. Every one is in a component that exists to let something through it: the embedded DNS server, the ICMP egress authorizer, the virtio-fs host server (twice), and the guest to host Unix socket relay. Isolation in an agent sandbox is the wall minus every door you cut into it, and the doors are where this product has been breaking.</p>
+<h2>The README names the doors</h2>
+<p>The README lists four things under "What you get". Two of them are "File access controls between host and sandbox" and "Network access control". Sort the five records by those two lines and nothing is left over. DNS and ICMP are network access. The two virtio-fs bugs and the socket relay are file access, the relay because it reaches host sockets by filesystem path.</p>
+<p>The first item on the same list is "YOLO mode by default: agents work without asking permission." That is a reasonable default for a product whose pitch is that the agent can run unattended, and it means those two controls are standing in for the human who would otherwise approve each action. That is my reading of the document, not something Docker says.</p>
+<h2>Three of the five made a decision once</h2>
+<p>This is the part worth taking to any sandbox, not only this one.</p>
+<ul><li>CVE-2026-12539: ICMP egress is blocked "with an authorizer applied only at network-creation time", and not re-applied to networks rebuilt from disk after the Docker daemon restarts.</li><li>CVE-2026-79994: the socket relay "validates that a socket path is inside an authorized workspace, but later reconnects using the pathname." A guest swaps an intermediate directory for a symlink in between.</li><li>CVE-2026-77179: the virtio-fs server "improperly follows symlinks when reopening an unlinked file from a stored path."</li></ul>
+<p>None of these is a missing control. The relay's check ran and was correct when it ran. The ICMP authorizer ran and was correct when it ran. Each failed because its answer was treated as durable past the moment something could change underneath it: a path that can be relinked, a network that can be rebuilt. <strong>An enforcement decision has a lifetime</strong>, and in all three the lifetime was shorter than the code assumed.</p>
+<p>I have the same shape written down about my own work. The trace-spec LIMITATIONS file says "Signature validity is permanent; trust is not", and requires a verifier to consult revocation status at verification time, with <code>verify_record()</code> failing closed when the revocation store cannot answer. Different substrate, same rule. The two honest fixes are the same in both places: bind the decision to the object you act on (an open file descriptor, not a name), or re-make it at the moment of use and fail closed when you cannot.</p>
+<h2>What to ask on Monday</h2>
+<p>For each door a sandbox advertises, ask one question: when is this decision re-made? At creation only, at every connection, at every open, after a restart? If the vendor cannot answer, treat the control as holding until the first event that can invalidate it, and find out what those events are.</p>
+<p>Two narrower things a team running this product can check today.</p>
+<p>Platform scope. CVE-2026-77179 carries a platforms field set to MacOS and opens "On macOS". CVE-2026-79994 has no platforms field, and neither macOS nor Darwin appears anywhere in it. The README installs on macOS, Windows, Ubuntu and Rocky Linux 8. The record does not say the socket bug reaches Linux or Windows; it also does not say it is Mac only. If you run it off a Mac, read that record as applying to you.</p>
+<p>Version. v0.42.0, released 7 September, fixes both new CVEs; the current stable is v0.43.0. The same 0.42.0 notes also say "Fixed a vulnerability where a sandboxed process could get the daemon to open a host D-Bus transport and execute an arbitrary command on the host." An NVD keyword search for Docker Sandboxes returns five records and none of them mentions D-Bus. That may simply not be assigned yet. It is a question for Docker, not a finding.</p>
+<h2>What did not survive checking</h2>
+<p>"Neither is a VM escape." Both 15 September bugs let a malicious guest act on the host, and 77179 reaches arbitrary host files "potentially achieving host code execution". They are guest to host escapes. What holds is narrower: neither is in the hypervisor.</p>
+<p>"Both helpers checked." Only the socket relay record describes a check. The virtio-fs record describes acting on a stored path, which is the same lifetime failure without a stated validation step.</p>
+<p>"The 9.4 record points at no code, unlike the 8.7." True, and the wrong frame. None of the three earlier records points at code either. 79994 is the exception, citing a pull request in docker/sailor and one in docker/sandboxes, and neither repository resolves for an outside account, so the code is not public in any of the five.</p>
+                </div>
+                <section class="note-sources">
+                    <h2>Checked against</h2>
+                    <ul><li><a href="https://github.com/CVEProject/cvelistV5/blob/main/cves/2026/77xxx/CVE-2026-77179.json" rel="noopener">CVE-2026-77179, CVE Program record (virtio-fs, macOS, CVSS 4.0 9.4)</a></li><li><a href="https://github.com/CVEProject/cvelistV5/blob/main/cves/2026/79xxx/CVE-2026-79994.json" rel="noopener">CVE-2026-79994, CVE Program record (Unix socket relay, CVSS 4.0 8.7)</a></li><li><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-12039" rel="noopener">CVE-2026-12039, NVD (DNS not covered by the egress allowlist)</a></li><li><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-12539" rel="noopener">CVE-2026-12539, NVD (ICMP authorizer not re-applied after daemon restart)</a></li><li><a href="https://nvd.nist.gov/vuln/detail/CVE-2026-18171" rel="noopener">CVE-2026-18171, NVD (read-only mount writable at the virtio-fs export)</a></li><li><a href="https://github.com/docker/sbx-releases/releases/tag/v0.42.0" rel="noopener">Docker Sandboxes v0.42.0 release notes, 7 September 2026</a></li><li><a href="https://github.com/docker/sbx-releases/blob/main/README.md" rel="noopener">docker/sbx-releases README, read 18 September 2026</a></li><li><a href="https://github.com/agentrust-io/trace-spec/blob/main/LIMITATIONS.md" rel="noopener">trace-spec LIMITATIONS.md, &quot;Pure offline verification cannot prove non-revocation&quot;</a></li></ul>
+                </section>
+                
+            </div>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique.</p>
+                <p><a href="../notes/feed.xml">RSS</a> &middot; <a href="../index.html">imransiddique.com</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>
