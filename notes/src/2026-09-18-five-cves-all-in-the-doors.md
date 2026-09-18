@@ -3,6 +3,7 @@ title: Five Docker Sandboxes CVEs this year, all in the doors
 date: 2026-09-18
 standfirst: Docker published two more CVEs against its agent sandbox on 15 September. Read alongside the three it published in June and August, all five sit in the two controls its README sells, and three of them fail the same way.
 tags: [agent-security, sandboxing, enforcement]
+x: https://x.com/mosiddi/status/2101013726761832902
 sources:
   - label: CVE-2026-77179, CVE Program record (virtio-fs, macOS, CVSS 4.0 9.4)
     url: https://github.com/CVEProject/cvelistV5/blob/main/cves/2026/77xxx/CVE-2026-77179.json
