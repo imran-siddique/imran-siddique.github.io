@@ -104,7 +104,7 @@
     "event": "GenAI Gurus",
     "location": "Online",
     "format": "Community talk, 19:00 CEST",
-    "status": "scheduled",
+    "status": "delivered",
     "summary": "Most agent governance tools can decide whether an action should be allowed. Far fewer can prove what was actually requested, authorised and executed across agents, tools and infrastructure. This is about closing that gap.",
     "url": "https://www.meetup.com/genai-gurus/events/315720631/",
     "recording": "",
