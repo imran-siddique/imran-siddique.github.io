@@ -5,15 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="One coding agent answered repo-controlled git config with a confirmation prompt in August. Another answered the neighbouring case with a refusal. The gap between those two choices is the whole argument, and neither public record tells you which one you are running.">
     <meta name="author" content="Imran Siddique">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="https://imransiddique.com/notes/2026-09-07-filed-under-bug-fixes.html">
     <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
     <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Imran Siddique">
+    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://imransiddique.com/notes/2026-09-07-filed-under-bug-fixes.html">
     <meta property="og:title" content="The fix shipped three weeks before the bug had a name">
     <meta property="og:description" content="One coding agent answered repo-controlled git config with a confirmation prompt in August. Another answered the neighbouring case with a refusal. The gap between those two choices is the whole argument, and neither public record tells you which one you are running.">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://imransiddique.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-09-07">
+    <meta property="article:modified_time" content="2026-09-07">
+    <meta property="article:author" content="https://imransiddique.com/about.html">
+    <meta property="article:tag" content="agent-security">
+    <meta property="article:tag" content="supply-chain">
+    <meta property="article:tag" content="coding-agents">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:creator" content="@mosiddi">
+    <meta name="twitter:title" content="The fix shipped three weeks before the bug had a name">
+    <meta name="twitter:description" content="One coding agent answered repo-controlled git config with a confirmation prompt in August. Another answered the neighbouring case with a refusal. The gap between those two choices is the whole argument, and neither public record tells you which one you are running.">
+    <meta name="twitter:image" content="https://imransiddique.com/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -22,7 +37,7 @@
     <link rel="stylesheet" href="../notes/notes.css">
 </head>
 <body>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "The fix shipped three weeks before the bug had a name", "datePublished": "2026-09-07", "description": "One coding agent answered repo-controlled git config with a confirmation prompt in August. Another answered the neighbouring case with a refusal. The gap between those two choices is the whole argument, and neither public record tells you which one you are running.", "author": {"@type": "Person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-09-07-filed-under-bug-fixes.html"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "@id": "https://imransiddique.com/notes/2026-09-07-filed-under-bug-fixes.html#article", "headline": "The fix shipped three weeks before the bug had a name", "description": "One coding agent answered repo-controlled git config with a confirmation prompt in August. Another answered the neighbouring case with a refusal. The gap between those two choices is the whole argument, and neither public record tells you which one you are running.", "datePublished": "2026-09-07", "dateModified": "2026-09-07", "inLanguage": "en-US", "wordCount": 807, "keywords": ["agent-security", "supply-chain", "coding-agents"], "image": "https://imransiddique.com/og-image.png", "author": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "publisher": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "isPartOf": {"@type": "Blog", "@id": "https://imransiddique.com/notes/#blog", "name": "Notes by Imran Siddique", "url": "https://imransiddique.com/notes/"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-09-07-filed-under-bug-fixes.html", "url": "https://imransiddique.com/notes/2026-09-07-filed-under-bug-fixes.html", "citation": [{"@type": "CreativeWork", "name": "Qwen Code CHANGELOG, v0.21.9 (2026-08-10), the diff.external and core.fsmonitor line, PR 8645", "url": "https://raw.githubusercontent.com/QwenLM/qwen-code/main/CHANGELOG.md"}, {"@type": "CreativeWork", "name": "Claude Code CHANGELOG, v2.1.196, the single line marked Security", "url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md"}, {"@type": "CreativeWork", "name": "CVE-2026-72718, goose CLI arbitrary command execution via git core.fsmonitor, fixed 1.44.0", "url": "https://api.osv.dev/v1/vulns/CVE-2026-72718"}, {"@type": "CreativeWork", "name": "CVE-2026-71963, Hermes Agent RCE via git core.fsmonitor config injection", "url": "https://api.osv.dev/v1/vulns/CVE-2026-71963"}, {"@type": "CreativeWork", "name": "CVE-2026-33068, Claude Code workspace trust dialog bypass via repo-controlled .claude/settings.json, fixed 2.1.53", "url": "https://api.osv.dev/v1/vulns/GHSA-mmgp-wc2j-qcv7"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://imransiddique.com/"}, {"@type": "ListItem", "position": 2, "name": "Notes", "item": "https://imransiddique.com/notes/"}, {"@type": "ListItem", "position": 3, "name": "The fix shipped three weeks before the bug had a name", "item": "https://imransiddique.com/notes/2026-09-07-filed-under-bug-fixes.html"}]}]}</script>
     <nav class="navbar">
         <div class="container">
             <a href="../index.html" class="logo">Imran Siddique</a>

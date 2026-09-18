@@ -1,0 +1,1159 @@
+# Notes by Imran Siddique
+
+> Full text of every note published at https://imransiddique.com/notes/. Author: Imran Siddique, Chief Platform Officer at Opaque Systems. Each note lists the primary sources it was checked against.
+
+## Five Docker Sandboxes CVEs this year, all in the doors
+
+URL: https://imransiddique.com/notes/2026-09-18-five-cves-all-in-the-doors.html  
+Published: 2026-09-18  
+Tags: agent-security, sandboxing, enforcement
+
+> Docker published two more CVEs against its agent sandbox on 15 September. Read alongside the three it published in June and August, all five sit in the two controls its README sells, and three of them fail the same way.
+
+Five CVEs have been published against Docker Sandboxes this year, all by Docker as its own CNA. Two landed on 15 September, CVE-2026-77179 at CVSS 4.0 9.4 and CVE-2026-79994 at 8.7. Three came earlier: CVE-2026-12039 and CVE-2026-12539 in June, CVE-2026-18171 in August.
+
+Docker Sandboxes runs each coding agent in its own microVM, which is the right design, and none of the five is in the hypervisor. Every one is in a component that exists to let something through it: the embedded DNS server, the ICMP egress authorizer, the virtio-fs host server (twice), and the guest to host Unix socket relay. Isolation in an agent sandbox is the wall minus every door you cut into it, and the doors are where this product has been breaking.
+
+## The README names the doors
+
+The README lists four things under "What you get". Two of them are "File access controls between host and sandbox" and "Network access control". Sort the five records by those two lines and nothing is left over. DNS and ICMP are network access. The two virtio-fs bugs and the socket relay are file access, the relay because it reaches host sockets by filesystem path.
+
+The first item on the same list is "YOLO mode by default: agents work without asking permission." That is a reasonable default for a product whose pitch is that the agent can run unattended, and it means those two controls are standing in for the human who would otherwise approve each action. That is my reading of the document, not something Docker says.
+
+## Three of the five made a decision once
+
+This is the part worth taking to any sandbox, not only this one.
+
+- CVE-2026-12539: ICMP egress is blocked "with an authorizer applied only at network-creation time", and not re-applied to networks rebuilt from disk after the Docker daemon restarts.
+- CVE-2026-79994: the socket relay "validates that a socket path is inside an authorized workspace, but later reconnects using the pathname." A guest swaps an intermediate directory for a symlink in between.
+- CVE-2026-77179: the virtio-fs server "improperly follows symlinks when reopening an unlinked file from a stored path."
+
+None of these is a missing control. The relay's check ran and was correct when it ran. The ICMP authorizer ran and was correct when it ran. Each failed because its answer was treated as durable past the moment something could change underneath it: a path that can be relinked, a network that can be rebuilt. **An enforcement decision has a lifetime**, and in all three the lifetime was shorter than the code assumed.
+
+I have the same shape written down about my own work. The trace-spec LIMITATIONS file says "Signature validity is permanent; trust is not", and requires a verifier to consult revocation status at verification time, with `verify_record()` failing closed when the revocation store cannot answer. Different substrate, same rule. The two honest fixes are the same in both places: bind the decision to the object you act on (an open file descriptor, not a name), or re-make it at the moment of use and fail closed when you cannot.
+
+## What to ask on Monday
+
+For each door a sandbox advertises, ask one question: when is this decision re-made? At creation only, at every connection, at every open, after a restart? If the vendor cannot answer, treat the control as holding until the first event that can invalidate it, and find out what those events are.
+
+Two narrower things a team running this product can check today.
+
+Platform scope. CVE-2026-77179 carries a platforms field set to MacOS and opens "On macOS". CVE-2026-79994 has no platforms field, and neither macOS nor Darwin appears anywhere in it. The README installs on macOS, Windows, Ubuntu and Rocky Linux 8. The record does not say the socket bug reaches Linux or Windows; it also does not say it is Mac only. If you run it off a Mac, read that record as applying to you.
+
+Version. v0.42.0, released 7 September, fixes both new CVEs; the current stable is v0.43.0. The same 0.42.0 notes also say "Fixed a vulnerability where a sandboxed process could get the daemon to open a host D-Bus transport and execute an arbitrary command on the host." An NVD keyword search for Docker Sandboxes returns five records and none of them mentions D-Bus. That may simply not be assigned yet. It is a question for Docker, not a finding.
+
+## What did not survive checking
+
+"Neither is a VM escape." Both 15 September bugs let a malicious guest act on the host, and 77179 reaches arbitrary host files "potentially achieving host code execution". They are guest to host escapes. What holds is narrower: neither is in the hypervisor.
+
+"Both helpers checked." Only the socket relay record describes a check. The virtio-fs record describes acting on a stored path, which is the same lifetime failure without a stated validation step.
+
+"The 9.4 record points at no code, unlike the 8.7." True, and the wrong frame. None of the three earlier records points at code either. 79994 is the exception, citing a pull request in docker/sailor and one in docker/sandboxes, and neither repository resolves for an outside account, so the code is not public in any of the five.
+
+### Checked against
+
+- CVE-2026-77179, CVE Program record (virtio-fs, macOS, CVSS 4.0 9.4): https://github.com/CVEProject/cvelistV5/blob/main/cves/2026/77xxx/CVE-2026-77179.json
+- CVE-2026-79994, CVE Program record (Unix socket relay, CVSS 4.0 8.7): https://github.com/CVEProject/cvelistV5/blob/main/cves/2026/79xxx/CVE-2026-79994.json
+- CVE-2026-12039, NVD (DNS not covered by the egress allowlist): https://nvd.nist.gov/vuln/detail/CVE-2026-12039
+- CVE-2026-12539, NVD (ICMP authorizer not re-applied after daemon restart): https://nvd.nist.gov/vuln/detail/CVE-2026-12539
+- CVE-2026-18171, NVD (read-only mount writable at the virtio-fs export): https://nvd.nist.gov/vuln/detail/CVE-2026-18171
+- Docker Sandboxes v0.42.0 release notes, 7 September 2026: https://github.com/docker/sbx-releases/releases/tag/v0.42.0
+- docker/sbx-releases README, read 18 September 2026: https://github.com/docker/sbx-releases/blob/main/README.md
+- trace-spec LIMITATIONS.md, "Pure offline verification cannot prove non-revocation": https://github.com/agentrust-io/trace-spec/blob/main/LIMITATIONS.md
+
+---
+
+## Verified, with nothing hashed
+
+URL: https://imransiddique.com/notes/2026-09-17-verified-with-nothing-hashed.html  
+Published: 2026-09-17  
+Tags: agent-security, mcp, evidence
+
+> I ran the MCP Inspector's skill verifier against a server I wrote. A skill that advertises no digests gets the same word, the same JSON and the same exit code as one whose every file hashed clean.
+
+Three runs against a stdio server I wrote, one skill served three ways, same command each time.
+
+A manifest with a wrong digest: `mismatch`, exit 7. The same manifest with the right digest: `verified`, one file, exit 0. The checker works.
+
+Then the third case. The skill declares `"resources": "dynamic"`, which SEP-2640 defines as generated content with no digests to publish. Stdout:
+
+```
+"conformance":[{"code":"dynamic-resources","severity":"warning",
+"message":"resources is \"dynamic\": the file set is generated, so no digest
+is advertised and integrity cannot be verified."}],
+"frontmatter":[],"files":[],"ok":true,"outcome":"verified"
+```
+
+Stderr reads `Verified 1 skill and 0 files: no conformance errors.` Exit 0.
+
+Integrity cannot be verified, and the outcome is verified. One JSON line, both statements.
+
+The flag is `--verify` on the Inspector's CLI. Point it at a server and it runs SEP-2640's conformance, digest and frontmatter checks over the whole catalog and turns the answer into an exit code, which is the useful part: a server author can gate CI on it. Exit 7 is a violation, 8 is a catalog it could not finish reading.
+
+To that CI job, the dynamic case and the fully checked case are one event. Same exit code, same `ok`, same `outcome`. What carries the difference is a file count in a line on stderr and a warning row a consumer has to go looking for by severity. A pipeline reads the exit code.
+
+The tool's own README settles what the word is supposed to mean. Its outcome table defines `verified` and exit 0 as *"Everything was checked and everything passed."* In the dynamic report, `files` is the empty array.
+
+It is worth being exact about what the run does. The Inspector did call `resources/read`, and my server logged serving the 129 bytes. Those bytes are parsed for the frontmatter cross check and then dropped without being hashed, because the manifest declined to say what the hash should be. So something happened. Nothing was verified.
+
+This project has already ruled on this shape once, in its own code. `EXIT_CODES.SKILL_INCOMPLETE` exists because a read that stopped at the size bound leaves entries unfetched, and *"reporting success for a manifest whose unread entries were never fetched is a false pass."* That is a third outcome and a third exit code, invented so a job that tolerates oversized catalogs can allow 8 and still fail on 7. A catalog advertising no digests at all reaches the same false pass down a different road, and it is still filed under `verified`.
+
+The spec has a word for the state, and it is not that one. SEP-2640 says the `"dynamic"` marker exists so a host "can tell a deliberately unverifiable skill from a malformed entry", and calls a `SKILL.md` fetched under it "unverifiable" in the same sentence where an array-backed one is "digest-verified".
+
+Worth saying where the ceiling is even when the digest does check out. A match proves the listing and the body agree with each other. SEP-2640 states the limit in its own text: digests are unsigned and supplied by the same server that supplies the content, a match proves the two are consistent rather than that either is trustworthy, and hosts MUST NOT treat it as a security boundary. I word boundary grepped the whole 673,250 byte CLI bundle: `signature` twice, both in comments about TypeScript types. `signed`, `provenance`, `attestation`, `publisher`: zero each. Nothing in this path carries authorship.
+
+## What did not survive checking
+
+The brief I started from said this landed in 2.7.0, published on 16 September. It did not. I installed 2.6.0, from 9 September, and its `--verify` help text, its `dynamic-resources` message and its summary headline are the same strings. The behaviour is eight days old. What 2.7.0 actually changed on this path was the client capability declaration, the configurable catalog budget and a path-less URI fix.
+
+I also drafted the fix as "add a third outcome value" before reading the review thread on PR 2293. There are already three. Round 15 replaced a two-state verdict with `verified`, `failed` and `incomplete` for exactly this class of reason. The ask is a fourth, and the reason it is a small ask is that the precedent is theirs.
+
+Until something changes, the difference is readable today, and it is one field. If you gate CI on `--verify`, exit 0 does not tell you that anything was hashed. This does:
+
+```
+... --method skills/list --verify | jq -e 'select(.files | length == 0)'
+```
+
+A hit means a skill in that catalog was approved by a verifier that checked no bytes of it.
+
+### Checked against
+
+- "@modelcontextprotocol/inspector on npm, 2.6.0 and 2.7.0 publish times": https://www.npmjs.com/package/@modelcontextprotocol/inspector
+- The CLI README's Skill verification section, where the outcome table lives: https://github.com/modelcontextprotocol/inspector/blob/main/clients/cli/README.md
+- Inspector PR 2293, the review round that introduced the three outcomes: https://github.com/modelcontextprotocol/inspector/pull/2293
+- SEP-2640, the Skills extension, merged 13 September 2026: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/seps/2640-skills-extension.md
+- Inspector issue 2405, where this went: https://github.com/modelcontextprotocol/inspector/issues/2405
+
+---
+
+## One repository answered the same question twice on 11 September
+
+URL: https://imransiddique.com/notes/2026-09-16-answered-the-same-question-twice.html  
+Published: 2026-09-16  
+Tags: agent-security, mcp, sql
+
+> Four hours apart, awslabs/mcp merged a parser-based read-only policy for one database server and twenty more regex keywords for another. I installed the published package and found the keyword answer still has a gap the parser answer cannot have.
+
+On 11 September, four hours apart, the awslabs/mcp repository merged two fixes for the same class of problem, and they do not agree with each other.
+
+At 15:31 UTC, commit f6aec97 landed a parser-based read-only policy for the Postgres server (#4575). It deletes that server's regex mutable-SQL detector and replaces it with a guard built on pglast, which is PostgreSQL's own parser compiled in. The module says why in one line: identifiers, quoting, comments and Unicode escapes can no longer disguise an operation, because *the guard and the database read the same bytes the same way.* The check for the statement behind CVE-2026-87911 is now a field on a parse-tree node, not a pattern.
+
+At 19:22 UTC, commit a55a1a8 answered the same problem for the MySQL server (#4615) by adding roughly twenty more keywords to a regex.
+
+Both are on main. Both are real work. Only one of them changes what kind of thing the control is.
+
+## Why the difference is measurable
+
+The MySQL gate already took a CVE for this, CVE-2026-85788. AWS described it exactly: the check matches SQL text with patterns that expect literal whitespace between keywords, MySQL treats a comment as whitespace, so a comment wedged between two words walked straight through. The fix strips comments before the scan. It works. I checked it.
+
+The class is not closed, because a comment is not the only thing MySQL treats as whitespace. A second space is too.
+
+I installed the current published package, version 1.1.2, uploaded 8 September, and called the shipped read-only gate directly. It is two functions, and nothing else stands between a tool call and the database. One space between the two words of a multi-word keyword is rejected. Two spaces, a tab or a newline between the same two words returns an empty list from the keyword scan and an empty list from the injection heuristic, which together are the server's whole rejection path. I have sent the specific statements to the AWS vulnerability reporting page, which is where the repository's own contributing guide says security findings go instead of a public issue, so they are not in this note.
+
+The cause is one expression. The pattern is built by escaping the whole phrase, which bakes a single literal space into the middle of it. Most entries survive that because their first word is blocked on its own. `CREATE FUNCTION` is covered because `CREATE` is. A couple have no such cover.
+
+## The repository already contains the fix
+
+Two of the four keyword detectors in the same monorepo, for SQL Server and Oracle, build the identical pattern by splitting the phrase on spaces and joining the words with a whitespace class. I ran Oracle's detector against every multi-word keyword it has, under one space, two spaces and a newline. Blocked every time.
+
+So the regex approach can be made whitespace-correct, and somebody in this repository already did it, in a file next door. The small fix is a two-line copy.
+
+Worth saying: the Aurora DSQL detector uses the same escape-the-whole-phrase construction as MySQL, and gets away with it only because a second set of anchored regexes catches the same statements a different way. It is the same latent bug, one server over, currently masked. All of this is still a small fix to a text filter.
+
+## What the parser commit says about itself
+
+The Postgres guard is careful about its own status. It calls itself defense-in-depth, not a security boundary, and names the authoritative control as the least-privilege database role. AWS says the same in both advisories. That is the correct position, and it is worth sitting with, because it means the read-only switch in a tool server was never the enforcement point. The grant is. A log of what the agent asked for proves what happened; only the role decides what can happen.
+
+Which leaves a question the repository has now put to itself twice. The Redshift server switched to a parser in June. Postgres switched on 11 September. A parse tree cannot be fooled by whitespace, comments, case or Unicode escapes, because it is not reading text. A keyword list can be fooled by all four, and each one costs an advisory and a release to find out about. Four of these servers are still on the keyword list. Two of them have stopped, and the newer one's own comment explains why.
+
+### Checked against
+
+- awslabs/mcp commit f6aec97, parser-based sql policy (#4575): https://github.com/awslabs/mcp/commit/f6aec97d0aa3b9caae0cd131dda4a63be5709f64
+- awslabs/mcp commit a55a1a8, statement-leading mutating verbs (#4615): https://github.com/awslabs/mcp/commit/a55a1a8da1991767e114a7039b7245992b900b4b
+- CVE-2026-85788, GHSA-x25m-ph3m-3r9q, mysql read-only via inline comments: https://github.com/awslabs/mcp/security/advisories/GHSA-x25m-ph3m-3r9q
+- CVE-2026-87911, GHSA-fph8-pg5w-78fv, postgres COPY TO PROGRAM: https://github.com/awslabs/mcp/security/advisories/GHSA-fph8-pg5w-78fv
+- AWS vulnerability reporting page, where this finding went: https://aws.amazon.com/security/vulnerability-reporting/
+
+---
+
+## The alias check I wired up was bypassed in September 2025
+
+URL: https://imransiddique.com/notes/2026-09-15-alias-check-already-bypassed.html  
+Published: 2026-09-15  
+Tags: attestation, sev-snp, evidence
+
+> DDRop landed on 14 September and walks past the platform appraisal policy I shipped three weeks ago. Reading it sent me to a paper from last year that had already walked past the same check, by the same four people, for under $50.
+
+Two things happened on 14 September. Google merged my documentation fix to go-sev-guest, closing the issue I filed in August about which `PlatformInfo` fields are ceilings and which are floors. And DDRop was published.
+
+DDRop is a DDR5 RDIMM interposer from KU Leuven, ETH Zurich, Durham and Google, going to CCS in November. It injects parity errors on the command and address lines so the register clock driver rejects the command, then disconnects the ALERT line so the CPU is never told to re-issue it. Writes are silently discarded. The paper's first contribution line puts the build at under $200. Table 1 puts the commercial equivalent, Membuster on DDR4, at about $170,000.
+
+Intel TDX, Intel Scalable SGX and AMD SEV-SNP are all affected, because, in the authors' words, "to maintain memory performance, scalable cloud TEEs omit cryptographic freshness guarantees". The processor can tell that memory is encrypted. It cannot tell that it is current.
+
+Three weeks ago I shipped `appraise_platform_info` into agent-manifest so a verifier could require `alias_check_complete`, the bit where AMD firmware reports that its boot-time DRAM alias check finished and found nothing. I wrote in LIMITATIONS.md that this "lets a verifier insist the silicon says it did its own check".
+
+## The part I got wrong, and it is not DDRop
+
+DDRop has overtaken the check. That framing also lets me off.
+
+The check was already bypassed when I shipped it. Battering RAM, disclosed on 30 September 2025, is a $47.62 DDR4 interposer that sits in the memory path "behaving transparently during startup and passing all trust checks", then flips to malicious at runtime. Its own summary says it "can circumvent Intel's and AMD's boot-time alias checks" and that it "breaks SEV's attestation feature on fully patched systems". AMD advised on it as SB-3024. Four of its authors are DDRop authors.
+
+So on 20 August I required a bit whose published bypass was ten months old, and I described it as the one platform assertion bearing on physical access. Across agent-manifest, trace-spec, cmcp and ca2a, and across all twelve notes on this site, the string `battering` appears zero times. I had read about BadRAM and cited SB-3015. I had not read the paper that followed it.
+
+## What DDRop adds
+
+DDRop is not the same attack. Aliasing by grounding address lines does not work on DDR5, where commands are multi-cycle and grounding two lines corrupts eight logical bits. Write suppression is the way in instead, at native bus speed with no downclocking.
+
+Then section 6.3 does something the alias check was never in the conversation for. Using injected secure page table entries, an attacker gets plaintext write access to its own TD's control structure, overwrites its own MRTD at offset 0x240 with the victim workload's expected measurement, and clears a validity flag at 0x3F2 to force a recompute. The authors confirm "the quote returned by TDG.MR.REPORT now contains the maliciously injected launch measurement". Every check my offline TDX verifier performs still passes, because the report is genuine and it is the measurement that is a lie. The paper also notes that cryptographic integrity mode would stop its other two case studies and not this one, since the forged structure is written under the correct key, and that its own test BIOS could not confirm that.
+
+## What the vendors actually said
+
+The two responses are not the same and they are being reported as though they were.
+
+AMD SB-3048 says the technique "falls outside the scope of the published threat model for SEV-SNP" and that AMD "does not plan to assign a CVE or release mitigations in response to this report". Intel's announcement also puts it outside the standard threat model, says nothing about CVEs either way, and then says Intel is evaluating hardening and detection, "including the development of Platform Owner Endorsements which enable remote parties to establish who is in physical possession of the hardware sensitive workloads are running on".
+
+The out-of-scope position is not news from this week either. Both vendors took it a year ago, for Battering RAM.
+
+## Where I land
+
+The policy stays. It does what it says, and requiring the bit is still better than not requiring it, because it catches the lie BadRAM told, an SPD chip reporting a module larger than it is. What changes is the sentence around it, and LIMITATIONS.md now owes a line naming Battering RAM, which is the honest version of "does its own check".
+
+The mitigation vectors I declined to appraise in August are the next question rather than a closed one. I said I would be guessing without hardware; I have SEV-SNP silicon and go-sev-guest v0.15.0 ships reference minimums to validate a mask against.
+
+And I have been writing for months that no confidential computing silicon is custody grade against an adversary who owns the machine, treating custody as the thing outside the report by definition. A vendor has now said in a security advisory that it intends to put custody in the report. I do not know whether Platform Owner Endorsements will work, and a verifier cannot appraise a field that does not exist yet. But I stated that boundary as permanent, twice, and it is the second time in a month that something I filed under unattestable turned out to be somebody's roadmap.
+
+### Checked against
+
+- DDRop paper, read 15 September 2026: https://ddropattack.eu/ddrop.pdf
+- ddropattack/ddrop, the authors' repository: https://github.com/ddropattack/ddrop
+- Battering RAM, disclosed 30 September 2025: https://batteringram.eu/
+- AMD security bulletin SB-3048, revision 1.0 of 14 September 2026: https://www.amd.com/en/resources/product-security/bulletin/amd-sb-3048.html
+- AMD security bulletin SB-3024, the Battering RAM advisory: https://www.amd.com/en/resources/product-security/bulletin/amd-sb-3024.html
+- Intel security announcement INTEL-2026-08-11-001-DDROP: https://www.intel.com/content/www/us/en/security-center/announcement/intel-security-announcement-2026-08-11-001.html
+- agent-manifest LIMITATIONS.md, the platform appraisal section: https://github.com/agentrust-io/agent-manifest/blob/main/LIMITATIONS.md
+- go-sev-guest PR 200, merged 14 September 2026: https://github.com/google/go-sev-guest/pull/200
+
+---
+
+## The authentication fix that changed no authentication
+
+URL: https://imransiddique.com/notes/2026-09-11-fix-changed-no-authentication.html  
+Published: 2026-09-11  
+Tags: agent-security, cve, computer-use
+
+> CVE-2026-86121 is filed as missing authentication in a computer-use agent sandbox, critical, fixed in 0.3.42. The release named as the fix changes which interface the server listens on. Its authentication path is byte-identical to the version before it, and the same allow-all branch shipped again yesterday.
+
+The advisory reads simply enough. CVE-2026-86121, assigned by VulnCheck and published on 5 September, says cua-computer-server skips authentication when the `CONTAINER_NAME` environment variable is unset, binds to every interface, and hands an unauthenticated caller shell commands, arbitrary file read and write, and an interactive PTY. It is classed CWE-306, Missing Authentication for Critical Function, at CVSS 3.1 9.8. Everything below 0.3.42 is affected. So you upgrade past 0.3.42 and you are done.
+
+I pulled eight source distributions off PyPI and diffed them.
+
+Between 0.3.41 and 0.3.42, eight files differ: package metadata, the README, a generated protobuf stub, two test files, the CLI module and the server module. The authentication code lives in `computer_server/main.py`. That file has the same MD5 in both releases, `c124c604`. Nothing in it moved.
+
+The change is two default values. `--host` goes from `0.0.0.0` to `127.0.0.1` in the CLI, and the `Server` constructor takes the same flip. The pull request that made it, #1845, is titled "fix(computer-server): default to localhost binding" and touches four files: a changelog entry, the README, `cli.py` and `server.py`. It contains no authentication code because it was never about authentication. The listener moved to loopback. That is the whole patch, and the CVE's own reference list labels it accurately: "Bind default changed to 127.0.0.1".
+
+Now the gate, in 0.3.46, published on 10 September, at `main.py` line 498:
+
+```
+# If no CONTAINER_NAME is set, always allow access (local development)
+if not self.container_name:
+    logger.info(
+        "No CONTAINER_NAME set in environment. Allowing access (local development mode)"
+    )
+    return True
+```
+
+The same test is repeated at the HTTP, WebSocket and PTY entry points, and every one of them takes that road.
+
+So one clause of the advisory was answered and the other was not. Binding to loopback decides who can reach the service. It does not decide whether an arriving request is allowed. Only one of those layers moved, and the one that did not is the one the advisory's title names.
+
+This matters because of where a version number travels. Scanners and inventories consume the boundary and nothing else: below 0.3.42 vulnerable, at or above it fixed. A host on 0.3.46 reads clean, and its authentication behaviour is what it was in the spring.
+
+And the default that did move is a default, not a constraint. The new help text tells you how to undo it: use `0.0.0.0` for external access. Anyone running this sandbox on a VM so an agent can drive it will pass that flag, because that is the point of running it. The network mitigation is then gone and the gate is the only thing left.
+
+## The boundary does not reach the tools that read boundaries
+
+That was the argument I expected to make. Checking it produced a second one.
+
+The GitHub advisory for this CVE, GHSA-pccw-h89v-h9cj, is marked `unreviewed` and its affected-package block is empty. The OSV record exists but carries no package at all: its only range is a GIT range over the monorepo, with 655 release tags listed and no PyPI entry. PyPI's own vulnerability field for 0.3.41 is an empty list.
+
+The practical result, measured rather than inferred. `pip-audit` on a pinned `cua-computer-server==0.3.41`, the version everyone agrees is vulnerable, resolves 110 packages, flags protobuf, fastmcp and diskcache, and reports zero vulnerabilities for cua-computer-server. The CNA record carries the correct package URL, `pkg:pypi/cua-computer-server`. It was dropped somewhere between the record and the ecosystem databases.
+
+## The maintainers documented this, and so did the reporter
+
+The allow-all path is deliberate and documented. A shipped test file calls it backwards compatibility: when neither variable is set, "the server continues to operate in local development mode (no auth required, requests succeed)". There is a flag, `UNAVAILABLE_WITHOUT_CONTAINER_NAME`, that makes the server refuse instead, answering 503. It has existed since 0.3.35 in April, two months before the report, and it is off by default.
+
+The reporter knew. George Chen's issue names that flag in its summary paragraph. The issue, #1892, is still open, with zero comments, unchanged since 13 June.
+
+## What did not survive checking
+
+I thought the CVE's patch reference pointed at a commit containing no server code. It does not. Commit `59cf25c0ec54` is the lint-baseline PR #1846, merged eighteen seconds after #1845, and it carries #1845's changes among its sixteen files. The reference is correct.
+
+I also thought 0.3.42's dependency re-pin, fastmcp from `>=2.0,<3` to `>=3.2.0,<3.3.0`, might be quiet security content, since 3.2.0 is the fix version for two fastmcp advisories. Those advisories were published on 13 July, three weeks after 0.3.42 shipped. Coincidence, not a fix.
+
+A project is entitled to a local development mode. What a project cannot control is how a version range is read once it becomes a CVE, and this one is being read two ways at once: as an authentication fix that contains no authentication change, and as a boundary that the ecosystem databases never learned to apply.
+
+### Checked against
+
+- CVE-2026-86121, CVE Program record, VulnCheck as assigner: https://cveawg.mitre.org/api/cve/CVE-2026-86121
+- NVD entry for CVE-2026-86121, CVSS 3.1 9.8, status Received: https://nvd.nist.gov/vuln/detail/CVE-2026-86121
+- trycua/cua issue 1892, the original report of 13 June 2026: https://github.com/trycua/cua/issues/1892
+- trycua/cua PR 1845, fix(computer-server) default to localhost binding, four files: https://github.com/trycua/cua/pull/1845
+- GHSA-pccw-h89v-h9cj, unreviewed, empty affected-package block: https://github.com/advisories/GHSA-pccw-h89v-h9cj
+- OSV record for CVE-2026-86121, GIT range only, no PyPI package: https://api.osv.dev/v1/vulns/CVE-2026-86121
+- cua-computer-server on PyPI, 76 releases, 0.3.46 published 10 September 2026: https://pypi.org/project/cua-computer-server/
+
+---
+
+## The release forbade the swap and left the signal opt-in
+
+URL: https://imransiddique.com/notes/2026-09-08-forbade-the-swap-kept-the-signal-optional.html  
+Published: 2026-09-08  
+Tags: mcp, agent-security, spec-review
+
+> MCP 2026-07-28 made it a protocol violation for a server to change its tool list as a side effect of what you just did. The same release forbade the server from telling you the list changed unless you subscribed, and neither official SDK subscribes by default.
+
+The Model Context Protocol release of 28 July 2026 added a sentence to the tools page that reads like a security fix, because it is one:
+
+> This set **MAY** be empty and **MAY** change over time [...] but **MUST NOT** vary per-connection or as a side effect of other requests on the connection.
+
+That clause is new. I grepped the 2025-11-25 and 2025-06-18 tools pages for `per-connection` and `side effect of other requests`: zero hits in either, and no equivalent paragraph. It arrived with SEP-2567, which removed protocol-level sessions, and appears verbatim on the prompts and resources pages too.
+
+Read it as a security property and it is a good one. A server that offers a few harmless tools, waits until you have used them, and then serves a different list is doing exactly what that sentence forbids.
+
+## The signal it would take to notice
+
+The same release, on the subscriptions page: "The server **MUST NOT** send notification types the client has not explicitly requested." That came with SEP-2575, which replaced the HTTP GET endpoint and the resource subscribe calls with one opt-in stream.
+
+The only push signal that a tool list changed is `notifications/tools/list_changed`, and the schema says what that now means: it "is only delivered on a `subscriptions/listen` stream when the client requested it via the `toolsListChanged` filter field". A server that never sends it to an unsubscribed client is not cutting a corner. It is conforming.
+
+So the question is what real clients do by default, and both official SDKs answer it in one file each. The TypeScript SDK auto-opens the stream, but the block is gated on `if (this._listChangedConfig)`, assigned in exactly one place: the constructor's `options.listChanged`, with no default. In the Python SDK, `listen()` is a method you call, and its filter starts at `tools_list_changed: bool = False`.
+
+**The default in both is not subscribed.** A client built that way can still notice a change by refetching `tools/list` and diffing it. That is evidence rather than judgment, and it is the only route left, because the two freshness cues the spec does give it are both set by the party the rule constrains. `ttlMs` is server-supplied, servers **MUST** provide a value, and clients **SHOULD** assume 0 when it is absent. The notification invalidates the cache, and only reaches a client that asked for it.
+
+## The same release knows how to write this requirement
+
+Multi Round-Trip Requests, new in 2026-07-28, has the server hand the client an opaque `requestState` and take it back on a retry. The spec's instruction there is not a logging bullet:
+
+> servers **MUST** treat `requestState` as an attacker-controlled input. If `requestState` influences authorization, resource access, or business logic, servers **MUST** protect its integrity (e.g. HMAC or AEAD) and **MUST** reject state that fails verification.
+
+It goes on to require principal binding, a TTL and a digest of the originating request, to stop replay.
+
+That is one direction. In the other direction, the one the new MUST NOT actually governs, the tools page offers six client SHOULD bullets, and the closest to the point is "Log tool usage for audit purposes". A log tells you afterwards which tool ran. It cannot decline a tool whose description changed while you were not subscribed to hear that it had. The page also tells clients to treat annotations as untrusted "unless they come from trusted servers", which is a property of the identity, not of the bytes this particular response carried.
+
+## What is unmade, and what is not
+
+Most of this argument is already open. SEP-3140, Signed Capability Declarations and Trustworthy Trust Labels, has been on the repository since 27 July, the day before the release. It proposes a signed manifest over the `tools/list` outputs, with change semantics for rug pulls. Its author established the need in July and I am not restating it.
+
+What has not been said is that the release changed the case for it. SEP-3140 was drafted against the previous wire model: across its body and all fifteen comments, `subscriptions/listen`, `subscribe` and `opt-in` appear zero times, and it cites the 2025-11-25 security page. Its threat model describes a server that "emits `notifications/tools/list_changed` and silently swaps in malicious definitions", which is the behaviour the new release forbids toward a client that never subscribed. The attack it defends against got quieter on 28 July. That is the thing worth adding to the review, and it is the argument for pairing SEP-2567, which wrote the rule, with SEP-2575, which made the signal conditional, and SEP-3140, which would supply the check.
+
+Three things I had wrong going in. An absence claim covering `integrity`, `signature` and `attest` across four spec pages was false: `attestation` appears once, in `basic/authorization/security-considerations.mdx`, on localhost redirect URIs. The tools page carries six client SHOULD bullets, not five. And the 2 September activity on SEP-3140 is a cross-reference in the timeline, not a comment; the last comment is 26 August, by the author. Following that cross-reference killed my second story, a scope-filtered tool list labelled `cacheScope: "public"`: issue 3207 reported it as MCP-2026-008 on 7 August, and issue 3213 extends it.
+
+The check a team can run today is small. Grep your client for `subscriptions/listen`. If it is not there, you are on refetch-and-diff, and you should know that rather than discover it.
+
+### Checked against
+
+- MCP 2026-07-28, server/tools.mdx, the new MUST NOT and the six client SHOULD bullets: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/server/tools.mdx
+- MCP 2026-07-28, basic/patterns/subscriptions.mdx, the opt-in rule: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/basic/patterns/subscriptions.mdx
+- MCP 2026-07-28, basic/patterns/mrtr.mdx, the requestState integrity requirement: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/basic/patterns/mrtr.mdx
+- MCP 2026-07-28 changelog, SEP-2567 and SEP-2575: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/docs/specification/2026-07-28/changelog.mdx
+- SEP-3140, Signed Capability Declarations and Trustworthy Trust Labels, open since 27 July: https://github.com/modelcontextprotocol/modelcontextprotocol/pull/3140
+- TypeScript SDK, packages/client/src/client/client.ts, the auto-open gate: https://github.com/modelcontextprotocol/typescript-sdk/blob/main/packages/client/src/client/client.ts
+- Python SDK, src/mcp/client/client.py, listen() and its defaults: https://github.com/modelcontextprotocol/python-sdk/blob/main/src/mcp/client/client.py
+- Issue 3207 (MCP-2026-008) and issue 3213, the cacheScope public reports: https://github.com/modelcontextprotocol/modelcontextprotocol/issues/3213
+
+---
+
+## The fix shipped three weeks before the bug had a name
+
+URL: https://imransiddique.com/notes/2026-09-07-filed-under-bug-fixes.html  
+Published: 2026-09-07  
+Tags: agent-security, supply-chain, coding-agents
+
+> One coding agent answered repo-controlled git config with a confirmation prompt in August. Another answered the neighbouring case with a refusal. The gap between those two choices is the whole argument, and neither public record tells you which one you are running.
+
+On 10 August, Qwen Code shipped v0.21.9. One line in its changelog, filed under Bug Fixes:
+
+> Requires explicit confirmation for read-only Git commands when repository configuration executes external programs via `diff.external` or `core.fsmonitor`.
+
+Three weeks later that shape of bug got a name and a list of affected coding agents.
+
+The mechanism is not in dispute. Two CVE records describe it in the same terms. In goose, a
+repository whose `.git/config` sets `core.fsmonitor` to a command causes git to run that command
+during the index refresh that `git diff HEAD` performs, before the agent contacts a model at all.
+In Hermes Agent, the same key fires on the `git status` refresh triggered by sending any message.
+Both were fixed. Neither fix required the researchers to be clever; the repository simply supplies
+part of the command line.
+
+## Two vendors, one bug class, two different controls
+
+Qwen's answer is a confirmation prompt. Claude Code's changelog gives the other answer, from a
+neighbouring case. In v2.1.196 there is exactly one line marked Security:
+
+> `claude mcp list`/`get` no longer spawn `.mcp.json` servers that a repo self-approved via a
+> committed `.claude/settings.json`; untrusted workspaces show Pending approval
+
+Same class. A file committed inside a repository causes the agent to spawn a process during a
+command whose name suggests it only reads. `list` and `get` sound as passive as `status` and
+`diff`. The control chosen is different. It does not ask the developer whether this repository
+should be allowed to configure itself. It refuses, and marks the workspace pending.
+
+That gap is the argument. A confirmation prompt asks a developer to adjudicate `core.fsmonitor` in
+a repository they opened ninety seconds ago, before they have read a line of it, while the thing
+they wanted was to start work. Everything needed to answer the question sits inside the artifact
+the question is about. Prompts of that shape get approved, and the people most likely to approve
+them are the ones who have seen the prompt before and had it be fine every previous time. A prompt
+is a control that degrades with familiarity. The control that holds is the one that never asks:
+run git with the repository's values for those keys unset, and the question does not arise.
+
+## What the public record cannot tell you
+
+Coverage credits Claude Code v2.1.196 with fixing the `core.fsmonitor` issue. Two records a
+careful user would check disagree by saying nothing at all.
+
+The changelog is silent. I grepped the published file, all 6,362 lines. `fsmonitor` does not
+appear. Neither does `diff.external`, nor the string `core.` anywhere in the file.
+
+The advisory database is also silent. goose and Hermes both have CVE records naming this exact
+mechanism. For Claude Code there is no advisory published in August or September 2026, and none
+listing a fixed version anywhere in the 2.1.19x range. The most recent is from 24 July.
+
+That is not evidence that no fix shipped. Silent fixes are ordinary and often correct. It is
+evidence of something narrower: from the changelog and the advisory database together, a person
+running v2.1.196 cannot establish whether they have this fix, while a person running goose or
+Hermes can establish it in one query. Anyone diffing changelogs to decide whether to upgrade gets
+no answer, and diffing changelogs is what most teams actually do.
+
+Worth adding that `.claude/settings.json` has been an attacker-controlled trust input before. In
+March, CVE-2026-33068 described a malicious repository setting `permissions.defaultMode` to
+`bypassPermissions` in that committed file, silently skipping the trust dialog. Fixed in 2.1.53.
+The September line is the second time the same repo-controlled file has had to be defended against
+the same idea.
+
+## What did not survive checking
+
+The researchers' report is not in here. Their domain, and three write-ups of it, were unreachable,
+so every claim that originates with them stayed out: the name given to the disclosure, the count
+of affected agents, the tally of unpatched issues, and the specific claim that Qwen Code remains
+affected at v0.22.3. That last one is why this note does not tell you whether the August prompt
+held. Nine stable releases separate v0.21.9 from v0.22.3, and I can see the mitigation shipped and
+cannot see whether it was enough.
+
+One figure was wrong on the way in. The single Security line in v2.1.196 is one of **nine** such
+lines in that changelog, not seven; the first count matched only the unbolded form and missed two
+written as `**Security:**`.
+
+Pull request 8645 landed on 10 August. Whoever wrote it was not responding to a disclosure,
+because there was not one yet. They found it, wrote one sentence, and shipped. That sentence then
+sat in a public changelog, naming both configuration keys, for three weeks, while the same key was
+still live in other agents. It was never hidden. It was filed under Bug Fixes.
+
+### Checked against
+
+- Qwen Code CHANGELOG, v0.21.9 (2026-08-10), the diff.external and core.fsmonitor line, PR 8645: https://raw.githubusercontent.com/QwenLM/qwen-code/main/CHANGELOG.md
+- Claude Code CHANGELOG, v2.1.196, the single line marked Security: https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md
+- CVE-2026-72718, goose CLI arbitrary command execution via git core.fsmonitor, fixed 1.44.0: https://api.osv.dev/v1/vulns/CVE-2026-72718
+- CVE-2026-71963, Hermes Agent RCE via git core.fsmonitor config injection: https://api.osv.dev/v1/vulns/CVE-2026-71963
+- CVE-2026-33068, Claude Code workspace trust dialog bypass via repo-controlled .claude/settings.json, fixed 2.1.53: https://api.osv.dev/v1/vulns/GHSA-mmgp-wc2j-qcv7
+
+---
+
+## The finding was correct and eight weeks late
+
+URL: https://imransiddique.com/notes/2026-09-02-already-said-eight-weeks-earlier.html  
+Published: 2026-09-02  
+Tags: attestation, tls, spec-review
+
+> A gap in the SEAT post-handshake attestation draft turned out to have been argued on the working group list in July, and specified in a closed issue a year before that. What I filed instead came from reading the RFCs the draft already cites.
+
+The gap I had found was real, and somebody had already said so. Nathanael Ritz put it to the SEAT
+mailing list on 10 July, quoting the same sentence I had marked, making the argument in more detail
+than I had, and grounding it on the working group charter rather than on the document's abstract.
+Two people replied substantively the same day. My contribution would have been to say it again,
+later, and worse, to the people who had already had the conversation.
+
+That is the case for checking prior art before you verify anything, rather than after. Verification
+is the expensive step and it answers the second question.
+
+## The document
+
+`draft-fossati-seat-expat` moves remote attestation out of the TLS handshake and into RFC 9261
+exported authenticators, after intra-handshake attestation was shown to permit relay attacks. Its
+own appendix gives the motive: the older design "does not bind the Evidence to the application
+traffic secrets, resulting in relay attacks".
+
+## What I nearly filed
+
+The abstract promises the approach "supports both the passport and background check models" while
+attestation "remains bound to the underlying communication channel". The Terminology section defines
+"attestation credentials" as covering both Evidence and attestation results. Every binding
+requirement in the document then names Evidence and only Evidence. A word-boundary grep for `result`
+across the binding section returns zero. The passport branch's sole requirement is that the
+Attestation Result is correctly signed and meets policy.
+
+All true, and all previously observed. Ritz quoted that same passport bullet in July. Worse for my
+version, a comment on issue 21, closed, filed under the title "Misleading Finished Message" and
+ostensibly about a diagram, had already asked "What binds the attestation results to the handshake?"
+in August 2025 and specified the fix: carry `certificate_request_context` to the Verifier as `rdata`
+and have it reflected into the Attestation Result. Running `git log -S rdata` over the draft source
+returns nothing. The mechanism was designed, recorded in a thread about a figure, and lost.
+
+## What I filed instead
+
+The draft specifies the TLS exporter label twice, and spells it differently each time. Section 4
+says the verifier recomputes the exporter value "using the label Attestation Binding". Section 5.1
+says the invocation uses "the label Attestation", and prints
+`TLS-Exporter("Attestation", certificate_request_context, 32)`. The label is an input to
+`Derive-Secret`, so two implementations that each follow one section derive different values and
+every binding check between them fails. Both spellings are in the published -03.
+
+The part that makes it more than an editorial nit came from the draft's own citations. RFC 8446
+section 7.5 says requirements for exporter label format are defined in section 4 of RFC 5705. That
+section says all label values "MUST be registered via Specification Required". Section 6 adds that
+IANA "MUST also verify that one label is not a prefix of any other label". `Attestation` is a prefix
+of `Attestation Binding`, so the two can never both be registered, whichever section the working
+group prefers. Neither is registered today; the draft's IANA section registers only the extension
+type, and the string `attestation` does not appear anywhere in the TLS parameters registry.
+
+## What did not survive checking
+
+The novelty of the lead, entirely, for the reasons above. The claim was verified and the finding was
+spent.
+
+Also the assumption underneath it. I had been treating the requirement that Evidence carry a hash of
+the authenticator identity key as settled ground, the fixed half against which the passport half
+looked unfinished. Issue 58 is an open challenge to exactly that requirement, asking why the public
+key needs hashing into the binder at all when the exported key material is already bound to the
+session, with a co-author answering that he cannot say more until the formal analysis is done.
+Building on it as a solved baseline would have walked into a live dispute.
+
+Two counts were wrong in the version I started from: the file is 35,398 bytes rather than 34,900,
+and "Attestation Result" occurs 22 times rather than 20. Neither touches the load-bearing claim,
+which is that none of those occurrences falls in the binding or freshness sections.
+
+If you are reading an unfamiliar draft, the two greps that pay are these. Take every value it
+defines and check it against the registry that owns that namespace. Then take every specification it
+cites normatively and read what that document actually requires. Both are cheap, both produce
+findings its authors have already agreed to be bound by, and neither asks you to know anything they
+do not.
+
+### Checked against
+
+- draft-fossati-seat-expat, source on GitHub: https://github.com/tls-attestation/exported-attestation/blob/main/draft-fossati-seat-expat.md
+- SEAT list, The Passport Model-sized elephant in the room, 10 July 2026: https://mailarchive.ietf.org/arch/msg/seat/Xwf2c1jfUWeGgHjWGFliKqtqANM/
+- exported-attestation issue 21, comment of 4 August 2025: https://github.com/tls-attestation/exported-attestation/issues/21
+- exported-attestation issue 58, why the public key is hashed into the binder: https://github.com/tls-attestation/exported-attestation/issues/58
+- RFC 8446 section 7.5, Exporters: https://www.rfc-editor.org/rfc/rfc8446.html#section-7.5
+- RFC 5705 sections 4 and 6, exporter label format and registry: https://www.rfc-editor.org/rfc/rfc5705.html#section-4
+- IANA TLS Parameters, Exporter Labels registry: https://www.iana.org/assignments/tls-parameters/tls-parameters.xhtml
+- exported-attestation issue 63, filed 2 September 2026: https://github.com/tls-attestation/exported-attestation/issues/63
+
+---
+
+## Two normative sentences went missing when one tasks spec superseded another
+
+URL: https://imransiddique.com/notes/2026-08-31-two-sentences-lost-in-supersession.html  
+Published: 2026-08-31  
+Tags: mcp, agent-security, spec-review
+
+> The MCP tasks extension requires an authorization check on every task request. Its own rationale says that check is often impossible, the sentence that used to make servers disclose that is gone, and no error code represents a denial. One of the two losses was already found and fixed by somebody else three weeks ago.
+
+The MCP tasks extension defines three protocol error codes. `-32602` for an invalid or nonexistent task ID, `-32603` for internal errors, `-32021` for a missing client capability. Its Security Considerations require servers to perform an authorization check on every task-related request. None of the three codes represents that check failing.
+
+So a server that runs the mandated check and denies has nothing to return that says it denied. It returns `-32602`, which is also the answer for a task that never existed. A denial and a typo are the same response.
+
+That may be deliberate. There is a decent anti-enumeration argument for it, and the extension has no `tasks/list` for related reasons. But it is written down nowhere, so nobody implementing to the spec can tell a design decision from a hole.
+
+I filed that and one other point as issue 20 this afternoon. Checking whether they were already raised is most of what follows, and it changed what I filed.
+
+## The part that took reading two repositories
+
+The requirement and its rationale do not live in the same document.
+
+The Security Considerations bullet is in `ext-tasks`, the extension's own repo. The paragraph explaining when it can actually be satisfied is in SEP-2663, in the main specification repo, and says this:
+
+> all tasks should be bound to some sort of "authorization context," the implementation of which is left to individual servers according to their existing bespoke permission models. However, in many cases, it is not possible to perform this binding, in which case the task ID becomes the only line of defense against contamination.
+
+With sessions removed from the protocol by SEP-2567, there is, in the SEP's words, "no other natural scope a server can define unilaterally". `grep -ci motivation` on the ext-tasks specification returns zero. An implementer working from the extension repo sees a MUST with none of the context that bounds it.
+
+In those deployments the mandated check reduces to the bearer check the neighbouring bullet permits, where a server MAY use task IDs as bearer tokens. Possession of the handle becomes the authorization. That is a different property from the one the MUST describes, and the document uses the vocabulary of the stronger one.
+
+## Somebody already found half of this
+
+The auth binding bullet was not in the extension at all until eleven days ago.
+
+Rich Smith opened PR 9 on 31 July, titled "restore auth binding requirement dropped during SEP-2663 port". It was merged on 20 August. His argument: the port carried three of the four Security Implications bullets and dropped the second, leaving `tasks/get`, `tasks/update` and `tasks/cancel` with no specified authorization requirement. In his words, an unguessable task ID was the only control the specification mandated.
+
+He was right and it is fixed. I did not expect the second loss underneath it.
+
+SEP-1686, the tasks proposal this extension supersedes, had a rule for exactly the case the Motivation paragraph describes:
+
+> Receivers that do not implement session or authentication binding SHOULD document this limitation clearly, as task results may be accessible to any requestor that can guess the task ID.
+
+That sentence is not in SEP-2663 and not in the extension. The requirement to bind survived the transition, after being restored by hand. The requirement to disclose when you cannot bind did not survive, and nobody has restored it.
+
+Two normative sentences from the same section went missing in the same supersession. One was caught by a contributor doing a bullet-by-bullet diff. The other is still gone.
+
+## What did not survive checking
+
+The framing I started with was that the document contradicts itself. It does not, because the two halves are in different repositories, and on the repo where the requirement lives the rationale is simply absent. That is a weaker claim and a more useful one: this is a porting loss, not a drafting error, and it has the same signature as the one already fixed.
+
+I also could not claim the error taxonomy point was novel. The same shape was raised during SEP-2663 review for `requestState` integrity failures, and the maintainers resolved it on 4 May by allowing a synchronous error path as SHOULD statements. That is why two lines in Protocol Errors read SHOULD today. The authorization case is the one that conversation did not cover.
+
+And the Agents WG settled the governing principle three days ago, on 28 August, for a different proposal: operation-specific error codes should be defined, reusing an existing protocol code where an appropriate one exists. Pointing at a decision a group has already made is worth more than arriving with an argument they have not asked for.
+
+## The check worth stealing
+
+When a specification says it supersedes another, diff the security sections rather than reading the new one. Two separate losses came out of one transition here, and the one that was caught was caught by somebody comparing bullets by hand.
+
+The roadmap published on 22 August wants servers recognising agent identities built on existing standards "rather than pasted API keys and long-lived tokens", and names maturing this extension so it can move into the core specification. In the draft schema `ttlMs` is `number | null`, null documented as unlimited. A handle that may be a bearer token and need never expire is worth reconciling with that sentence while the document is cheap to change.
+
+### Checked against
+
+- SEP-2663 Tasks Extension, merged 15 May 2026: https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/seps/2663-tasks-extension.md
+- ext-tasks specification/draft/tasks.md, Security Considerations and Protocol Errors: https://github.com/modelcontextprotocol/ext-tasks/blob/main/specification/draft/tasks.md
+- ext-tasks PR 9, restore auth binding requirement dropped during SEP-2663 port: https://github.com/modelcontextprotocol/ext-tasks/pull/9
+- SEP-1686 tasks proposal, section 8.1 Task Isolation and Access Control: https://github.com/modelcontextprotocol/agents-wg/blob/main/proposals/1686-tasks.md
+- Agents WG meeting notes, 28 August 2026, error contracts for agent operations: https://github.com/modelcontextprotocol/agents-wg/blob/main/meetings/2026-08-28.md
+- ext-tasks schema/draft/schema.ts, Task interface and ttlMs: https://github.com/modelcontextprotocol/ext-tasks/blob/main/schema/draft/schema.ts
+- MCP roadmap, 22 August 2026: https://blog.modelcontextprotocol.io/posts/mcp-roadmap/
+- ext-tasks issue 20, filed 31 August 2026: https://github.com/modelcontextprotocol/ext-tasks/issues/20
+
+---
+
+## The tool list was advertised, the resolver decided
+
+URL: https://imransiddique.com/notes/2026-08-24-tool-list-advertised-resolver-decided.html  
+Published: 2026-08-24  
+Tags: agent-security, tool-calling, enforcement
+
+> Spring AI released a fix on 21 August for a bug where a tool absent from the request could still be called. The vulnerable dispatch is one line. The public fix exists on one of the three affected release lines, and the fallback left almost nothing useful in the log.
+
+Here is the vulnerable path in `DefaultToolCallingManager` at tag `v2.0.0`:
+
+```java
+ToolCallback toolCallback = toolCallbacks.stream()
+    .filter(tool -> toolName.equals(tool.getToolDefinition().name()))
+    .findFirst()
+    .orElseGet(() -> this.toolCallbackResolver.resolve(toolName));
+```
+
+`toolCallbacks` is the list attached to this request. It is also the list advertised to the model.
+
+If the model returns a name that is absent from that list, execution does not stop. The manager falls through to a resolver that has no knowledge of the request.
+
+Spring's advisory describes the distinction precisely: the per-request tool list was advertised as a boundary but was not fully enforced during dispatch.
+
+Sit with the word *advertised*. The boundary was something said to the model. The thing that actually decided was a lookup in a map.
+
+## What the map holds
+
+`StaticToolCallbackResolver` holds a map keyed by tool name. Its `resolve` operation is a lookup in that map. `DelegatingToolCallbackResolver` walks its configured resolvers and returns the first non-null result. Neither carries the request's advertised tool set.
+
+For the built-in resolvers, the per-request list governed what the model could see. The resolver governed what the process could execute.
+
+The evidence gap follows the enforcement gap. A successful fallback produced no fallback-specific log in the manager. The static resolver emits a debug message, but the message does not include the tool name.
+
+Enforcement did not run. Separately, the evidence needed to reconstruct the bypass was not written either. An audit log cannot tell you which unadvertised tool was resolved if the resolution event never names it.
+
+## The shape of the fix
+
+At `v2.0.1`, the dispatch line became:
+
+```java
+.orElseGet(() -> this.resolutionFallbackEnabled
+        ? this.toolCallbackResolver.resolve(toolName)
+        : null);
+```
+
+The default is now `false`.
+
+That is the right default for a library. It is still worth naming what kind of control it is: an in-process default that an application can reverse.
+
+Spring documents two ways to restore the old behaviour. Direct users can set `.resolutionFallbackEnabled(true)` on the builder. Spring Boot users can set:
+
+```properties
+spring.ai.tools.resolution.fallback.enabled=true
+```
+
+Dynamic tool resolution is a legitimate requirement. But once fallback is restored, the request's advertised list is no longer the complete execution boundary. That choice needs its own policy and evidence, not merely a configuration value.
+
+## Which line got the public fix
+
+The advisory identifies three affected release lines:
+
+- `1.0.0` through `1.0.9`
+- `1.1.0` through `1.1.8`
+- `2.0.0`
+
+Its fix table contains four versions. `2.0.1` is marked OSS. `2.0.0.1`, `1.1.9`, and `1.0.10` are marked Enterprise Support Only.
+
+That is a published commercial support model doing what it says it does. It is not a scandal. It does change the usual "upgrade to 2.0.1" summary.
+
+For someone already on `2.0.0`, the public fix is a patch bump. For someone on either affected 1.x line, the publicly available route is a major-version migration. The advisory's table says that plainly.
+
+I also dropped the CVSS number. The vector published by Spring did not reconcile with one score presented during checking, so this note uses Spring's **Medium** severity label and makes no numerical claim.
+
+## Where I sit in it
+
+cMCP enforces policy where tool calls cross its gateway. Its limitations already say that the gateway controls the tool boundary, not the model boundary, and that protection does not apply when a call bypasses the gateway.
+
+A callback resolved from a local Java registry is an in-process method call. It never crosses an MCP boundary. My gateway would not see it, deny it, or place it in its audit chain.
+
+That does not make the gateway control wrong. It identifies its enforcement domain.
+
+A control plane that observes calls leaving a process governs one class of tool execution. CVE-2026-59318 lived in the other class. I do not know how many deployed applications re-enable the fallback or otherwise resolve tools inside the process.
+
+### Checked against
+
+- Spring advisory CVE-2026-59318, published 20 August 2026: https://spring.io/security/cve-2026-59318/
+- Spring AI 2.0.1 release announcement, 21 August 2026: https://spring.io/blog/2026/08/21/spring-ai-2-0-1-available-now/
+- Spring AI 2.0.1 upgrade notes, tool resolution fallback: https://docs.spring.io/spring-ai/reference/upgrade-notes.html#_tool_resolution_fallback_disabled_by_default
+- DefaultToolCallingManager at v2.0.0, the vulnerable fallback: https://github.com/spring-projects/spring-ai/blob/v2.0.0/spring-ai-model/src/main/java/org/springframework/ai/model/tool/DefaultToolCallingManager.java
+- DefaultToolCallingManager at v2.0.1, the disabled-by-default fallback: https://github.com/spring-projects/spring-ai/blob/v2.0.1/spring-ai-model/src/main/java/org/springframework/ai/model/tool/DefaultToolCallingManager.java
+- StaticToolCallbackResolver at v2.0.1, registry lookup and debug log: https://github.com/spring-projects/spring-ai/blob/v2.0.1/spring-ai-model/src/main/java/org/springframework/ai/tool/resolution/StaticToolCallbackResolver.java
+- Maven Central, public spring-ai-model versions: https://repo1.maven.org/maven2/org/springframework/ai/spring-ai-model/
+- cMCP LIMITATIONS.md, gateway enforcement boundary: https://github.com/agentrust-io/cmcp/blob/main/LIMITATIONS.md
+
+---
+
+## The MCP registry checks that the repository URL looks like GitHub
+
+URL: https://imransiddique.com/notes/2026-08-21-repository-url-looks-like-github.html  
+Published: 2026-08-21  
+Tags: agent-security, provenance, registries
+
+> Publishing proves you own the namespace and you own the package. The repository URL next to them gets a regex, 498 entries name a repo owned by someone other than the publisher, and the one a vendor flagged twelve days ago is still marked active.
+
+The official MCP registry holds 24,615 server records. Of the 16,850 published under an
+`io.github.*` namespace, 15,235 name a GitHub repository, and 498 of those name a repository
+owned by a different GitHub account than the namespace the publisher authenticated as.
+
+Most of those 498 are almost certainly innocent. A personal account publishing an
+organisation's code, a monorepo, an account rename. That is the point. Nothing checked, so
+nothing distinguishes them.
+
+## What publishing actually proves
+
+The requirements document is clear and short. Four validations: namespace authentication,
+package ownership verification, restricted registry base URLs, and `_meta` namespace
+restrictions. Grep it for "repositor" and you get nothing.
+
+The code is not silent, though, and the difference matters. `validateRepository` calls
+`IsValidRepositoryURL`, which is this:
+
+```
+^https?://(www\.)?github\.com/[\w.-]+/[\w.-]+/?$
+```
+
+A shape check. Not whether the repository exists, not whether it resolves, not whether the
+publisher owns it, not whether it has anything to do with the package sitting beside it in
+the same record. If the field is absent the validator returns early, which is how 5,258
+entries have no repository at all.
+
+So the record proves two things and asserts a third. The namespace is proven. The package is
+proven. The repository is typed in.
+
+None of which is news to the maintainers. Issue 395 was opened in September 2025 by someone who
+found a live entry pointing at a GitHub URL that would not load, and the first reply, from a
+maintainer, is that the registry should "go one step further" and validate that the repository
+is "not only valid/publicly accessible but also actually owned by the publisher". Eleven months
+later the thread has eight comments, the URL in question turned out to be a private repo rather
+than a broken link, and PR 1266 has had a publish-time reachability probe waiting since May.
+The check the maintainer asked for on day one has not been built.
+
+## What used the gap
+
+On 8 August at 20:58 UTC, `io.github.jUXTAPOSITION1/vape` was published. On 9 August, one day
+later, OX Security reported it. Their account: the PyPI package is clean, deliberately, to get
+past automated scanners, and the payload sits in the linked repository in
+`.vscode/settings.json` and `.claude/settings.json`, which run when a developer opens or
+clones the project in a coding client. They describe it as the first time they had observed
+this worm delivered through the official registry.
+
+Every prior version of this story ran the other way. Honest repository, poisoned package.
+Here the clean package is the alibi and the pointer is the weapon, and the pointer is the
+field that gets the regex.
+
+GitHub blocked the repository for terms-of-service violation on 15 August. The PyPI package
+is still installable, both releases, neither yanked. The registry entry is still `active`,
+and its `statusChangedAt` is identical to the microsecond to its `publishedAt`.
+
+## Why nobody attached a warning
+
+There are three statuses. `active`, visible by default. `deprecated`, visible with a message.
+`deleted`, hidden by default. `statusMessage` is capped at 500 characters and rejected with a
+400 when the status is `active`.
+
+I read all 735 status messages in the registry. Not one describes a moderation action. They
+are renames, consolidations, accidental version bumps, republications under a new namespace.
+That is not a failure, it is the feature working as designed: `statusMessage` was introduced
+to carry a publisher's deprecation reason, and issue 623 was closed on exactly that ground.
+
+Which leaves the vocabulary with no way to say the thing this entry needs said. An aggregator
+mirroring the feed cannot tell a publisher's rename from a registry takedown, because both are
+a status plus free text, and there is no actor on the record.
+
+## What did not survive checking
+
+"The registry does not validate the repository field." Cut. It validates the shape. One grep
+would have refuted the stronger claim in public.
+
+"The choice is silence or removal." Cut. `deprecated` is documented as visible with a warning.
+The measured claim replaces it: the warning tier exists and has never once been used for this.
+
+"The repository was deleted." Corrected. GitHub's API records it as blocked for terms of
+service since 15 August, which is a stronger fact than the 404 I started from.
+
+"The maintainers deferred ownership binding." Cut, and it was nearly the worst error here. That
+is PR 1266's characterisation of the thread. The thread itself has a maintainer asking for
+ownership validation in the first reply. Nobody decided against it.
+
+I have not run the payload or read the repository, which is disabled. The attribution is OX
+Security's and I am reporting it as theirs.
+
+## Where I sit in this
+
+cMCP's own limitations file says the gateway cannot detect a look-alike package added to the
+catalog in the first place, because catalog approval is human-gated. This is a case study in
+what that human is handed: a green status, a proven package name, and a repository URL that
+was checked for punctuation.
+
+Filed today as issue 1563, a takedown request against the entry, citing the moderation policy's
+malware clause. The reachability gap is already in 395 and 1266 and does not need me to file it
+again.
+
+### Checked against
+
+- MCP registry, the io.github.jUXTAPOSITION1/vape entry, read 21 August 2026: https://registry.modelcontextprotocol.io/v0/servers?search=vape
+- Official registry requirements, the four validations enforced on publish: https://github.com/modelcontextprotocol/registry/blob/main/docs/reference/server-json/official-registry-requirements.md
+- internal/validators/validators.go, validateRepository: https://github.com/modelcontextprotocol/registry/blob/main/internal/validators/validators.go
+- internal/validators/utils.go, IsValidRepositoryURL and the two regexes: https://github.com/modelcontextprotocol/registry/blob/main/internal/validators/utils.go
+- Official registry API reference, status values and the statusMessage restriction: https://github.com/modelcontextprotocol/registry/blob/main/docs/reference/api/official-registry-api.md
+- The MCP Registry moderation policy: https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/moderation-policy.mdx
+- Issue 395, validate provided repositories are publicly reachable, open since September 2025: https://github.com/modelcontextprotocol/registry/issues/395
+- PR 1266, probe repository URL reachability at publish: https://github.com/modelcontextprotocol/registry/pull/1266
+- OX Security, Shai-Hulud outbreak debrief, 9 August 2026: https://www.ox.security/blog/shai-hulud-outbreak-debrief-the-worm-evolves-into-mcp/
+- PyPI JSON API, vape-mcp-server: https://pypi.org/pypi/vape-mcp-server/json
+- cMCP LIMITATIONS.md, tool name collision via malicious catalog entries: https://github.com/agentrust-io/cmcp/blob/main/LIMITATIONS.md
+- Issue 1563, the takedown request I filed against the entry: https://github.com/modelcontextprotocol/registry/issues/1563
+
+---
+
+## The platform bit that means the opposite of what the doc says
+
+URL: https://imransiddique.com/notes/2026-08-20-platform-bit-opposite.html  
+Published: 2026-08-20  
+Tags: attestation, sev-snp, evidence
+
+> Google Cloud tells you to update go-sev-guest so your parser stops breaking on v4 attestation reports. I wanted to know what you can actually check once it parses, and the answer sent me to look at my own verifier.
+
+I set out to answer a small question this morning, and it cost me more than I expected.
+
+Google Cloud's Confidential VM release notes, in an entry dated 27 October 2025, say that after a firmware update SEV-SNP instances generate v4 attestation reports and that parsers written for v3 might break. The fix offered is to update go-sev-guest to v0.14.0 or above. That advice is correct. I wanted to know what you can check once the thing parses.
+
+## The version the advice names cannot check what it reads
+
+The v4 report added two mitigation vectors, `LAUNCH_MIT_VECTOR` and `CURRENT_MIT_VECTOR`, at offsets 0x1F8 and 0x200. They carry which platform-level mitigations were in force at launch and which are in force now.
+
+At v0.14.0, tagged 9 October 2025, the `abi` package reads both. The `validate` package does not contain the string "mitigation" anywhere. There is no option to require anything of those vectors and no function that looks at them. Same at v0.14.1.
+
+The policy hooks arrive in v0.15.0, tagged 9 June 2026 and still the latest release: `MinimumLaunchMitigationVector`, `MinimumCurrentMitigationVector`, and a check wired into the main validation path.
+
+That is not a scandal. Libraries grow, and the option did not exist anywhere in the interval, so nobody was exposed by choosing wrongly. But "update to v0.14.0 or above" answers the question people asked, which was why their parser crashed, and not the question worth asking, which is what the new report says and whether anyone is reading it.
+
+## Four of seven fields mean the opposite of the documentation
+
+The second half is a documentation problem rather than a code one.
+
+The library's platform-info policy field is documented as a ceiling. The doc comment says `PlatformInfo` is the maximum of acceptable data. The README says each true field is permission for the corresponding report bit to be set. Read that and you build a policy by deciding what you will tolerate.
+
+Then read the function. The struct has seven fields. Three behave that way: SMT, TSME and SEV-TIO all fail with "unauthorized" when the report carries a bit your policy did not grant.
+
+The other four are reversed. ECC, RAPL disabled, ciphertext hiding and alias-check-complete all fail when the report is *missing* something your policy asked for. For those, setting the bit true is not permission. It is a demand.
+
+The one I care about is alias-check-complete. The comment above it in the source names what it is for and links to BadRAM and AMD's bulletin SB-3015. The firmware's alias check is the thing that prevents. The bit in the report only proves the firmware ran it. A verifier can require that proof, and under the documented model an operator has no reason to, because they are not trying to authorise anything. They leave it false and the requirement never runs.
+
+## What did not survive checking
+
+The morning brief that pointed me here claimed nobody had made this argument before. Wrong. Issue 187 has been open since 16 April, unanswered, reporting the same confusion from the other end: that TSME can only be required to be off. I read that as evidence for the doc being the cause, and cited it.
+
+It also had three of the four error strings wrong, and counted thirteen references where there are fifteen. I could not treat any of it as read.
+
+I could not date the release note from search results either. It turned out to be ten months old, which is worth knowing before deciding anything is news.
+
+## What this cost me
+
+I went to check my own verifier before writing a word of this, and I did not enjoy the result.
+
+`_snp_verify.py` in agent-manifest does not parse `PLATFORM_INFO` at all. The field sits at offset 0x40. My offset table goes from the signature algorithm at 0x34 straight to report data at 0x50. It is not in the table, not in the parsed struct, and across every first-party file in agent-manifest, cmcp, ca2a and trace-spec the terms `platform_info`, `alias_check`, `mit_vector` and `badram` appear zero times each.
+
+So this is not a case of my documents failing to mention a check that the code performs. The bytes are never read. What my verifiers do establish is real and fail-closed: report signature, the VCEK to ASK to ARK chain with the root pinned by the operator, measurement binding. That is authenticity and identity. None of those four asks the report what kind of machine it came from.
+
+I have written the honest limit the same way for months, that no confidential computing silicon is custody grade against an adversary who owns the machine, with BadRAM as the reason. I treated it as a boundary to state and live with. Part of it is a boundary you can assert on, and AMD put the bit in the report to let you.
+
+## What changed today
+
+I filed issue 195 against go-sev-guest, proposing the doc comment and the README bullet be split into the ceiling set and the floor set, with the fields named in each.
+
+Parsing `PLATFORM_INFO` and exposing an appraisal policy over it goes into agent-manifest next, and the limitations files across all four repos get a line naming what is not checked. Not everything unenforced is unenforceable. Sometimes the check is sitting in the struct and nobody wired it up.
+
+### Checked against
+
+- google/go-sev-guest validate.go at c930ed67, read 20 August 2026: https://github.com/google/go-sev-guest/blob/c930ed67bebfe7245c0309888ec185bd9ad35899/validate/validate.go
+- google/go-sev-guest abi.go at c930ed67, the SnpPlatformInfo struct: https://github.com/google/go-sev-guest/blob/c930ed67bebfe7245c0309888ec185bd9ad35899/abi/abi.go
+- Issue 195, the doc bug I filed against go-sev-guest: https://github.com/google/go-sev-guest/issues/195
+- Issue 187, milesdai on TSME polarity, open since April 2026: https://github.com/google/go-sev-guest/issues/187
+- Google Cloud Confidential VM release notes, entry of 27 October 2025: https://docs.cloud.google.com/confidential-computing/confidential-vm/docs/release-notes
+- BadRAM: https://badram.eu/
+- AMD security bulletin SB-3015: https://www.amd.com/en/resources/product-security/bulletin/amd-sb-3015.html
+
+---
+
+## The attestation everyone cites cannot be looked up any more
+
+URL: https://imransiddique.com/notes/2026-08-19-attestation-you-cannot-look-up.html  
+Published: 2026-08-19  
+Tags: supply-chain, evidence, provenance
+
+> Thirty poisoned npm packages are gone along with their attestations, and the Sigstore copy that survives can only be fetched with a digest that no longer exists in any public place I could find.
+
+Every account of the keyv compromise turns on one sentence. Aikido's is representative: "the poisoned versions were published to npm with valid provenance signed by GitHub Actions." That is the detail that made this story worth writing about rather than another package takeover.
+
+Fifteen days later I went to check it, and at npm you cannot.
+
+## What is left
+
+I fetched thirty packages this morning: the twenty that one release run published, and ten more across the maintainer's other projects. Every one behaves the same way. The poisoned version is absent from its packument's versions map, its tarball returns 404, and its attestation endpoint returns 404. A control fetch of a clean version returns 200 on all three.
+
+One thing does survive. npm keeps the publish timestamp in the packument's time map for a version that exists nowhere else in the registry. Thirty orphan timestamps, running from 09:30:01.291Z to 10:28:01.451Z on 4 August, and nothing else.
+
+Worth noting in passing, since it bears on every count you have read: the public indicator lists name eleven packages. The release run's own log ends with the line "Published 20 package(s)", from that one repository, before the campaign spread anywhere else. Thirty is a count of what I fetched, not a total.
+
+## The copy that is still there
+
+Deleting from npm does not delete the attestation. npm's provenance is written to Rekor, Sigstore's public append-only transparency log, and append-only means npm cannot take an entry back out.
+
+The retrieval path works, and I checked that it works before concluding anything about the missing ones. keyv 6.0.0-rc.1, published the evening before the compromise and still live, has a tarball digest in its packument. Handing that sha512 to Rekor's search index returns two entries, which are the two Sigstore bundles npm attached to that release. Fetching one by its log index returns the record.
+
+Now do the same for keyv 6.0.0. The digest lives in the packument's entry for that version, and the packument's entry for that version is exactly what unpublishing removes. The tarball is gone, so I cannot recompute it. npm's attestation endpoint, which would hand it over, is one of the ones returning 404. A public mirror I checked never carried the version at all. Rekor's index also accepts a certificate subject, so I tried the workflow identity instead, and it returned nothing for the poisoned build and nothing for the live control either, which tells me the method does not work rather than that the entry is missing.
+
+So the entry is almost certainly sitting in the log, and I have no way to ask for it.
+
+## Why I think this matters
+
+Unpublishing was the right call and it did the job it was for. Enforcement runs at the registry, in front of the fetch, and it is what actually stops anyone installing keyv 6.0.0 today. Nothing here argues against it. The point sits next to it, not against it.
+
+Evidence is a different job. It prevents nothing. Its whole value is that somebody who trusts neither the attacker nor the registry can come back later and check a claim. An append-only log answers the question "can this record be removed", which is the question everybody designs for. It does not answer "can this record be found", and that turns out to be the one that bites, because the address was carried by the artifact and the artifact is what you delete. The record outlived its index.
+
+The one other place the build is documented is the workflow run at GitHub. Per GitHub's documented default those logs are deleted 90 days after the run, which for this incident falls in early November, and I could not read the repository's actual setting.
+
+I have not answered this in my own work either. TRACE's limitations document says "Signature validity is permanent; trust is not. Nothing inside a record can retract the key that signed it", and the answer we specified is a revocation store the verifier consults at verification time. That handles a key being withdrawn. It says nothing about a record that stays perfectly valid and becomes unreachable because the thing it describes was deleted, and a content-addressed trust record has the same shape of problem as npm's.
+
+## What did not survive checking
+
+- **Whether the poisoned attestations are in Rekor.** I believe they are and I did not confirm it. Both routes failed for the reasons above, and the subject-index route failed its own control, so treat this as unproven rather than as a negative result.
+- **The size of the campaign.** Aikido's page currently reads 444 packages across 1,381 versions; VentureBeat cites Aikido at 868; JFrog traced more than 400 packages and 1,700 versions. I did not resolve them, so no total appears above and none of the argument rests on one.
+- **Whether the eleven named packages are the malicious set.** I can show that thirty were published in the window from the same runs and later removed. I cannot show what was in any of them, because the tarballs are gone. That is the same wall as everything else here.
+- **The 90-day expiry.** That is GitHub's documented default. The repository's configured retention is not readable without access I do not have.
+
+### Checked against
+
+- Aikido, "Keyv and friends compromised in npm supply chain attack", 4 August 2026: https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack
+- Snyk, "Inside the keyv npm compromise", read 19 August 2026: https://snyk.io/blog/inside-keyv-npm-compromise-preinstall-malware-trusted-provenance-ide-hooks/
+- VentureBeat, "The Shai-Hulud npm worm didn't fake its security check, it earned a legitimate one": https://venturebeat.com/security/the-shai-hulud-npm-worm-didnt-fake-its-security-check-it-earned-a-legitimate-one
+- nulltap, "Keyv's signed npm releases carried a credential-stealing worm": https://nulltap.sh/p/keyv-shai-hulud-provenance/
+- npm registry packuments and attestation endpoints, read 19 August 2026: https://registry.npmjs.org/keyv
+- Sigstore Rekor transparency log, search index API: https://rekor.sigstore.dev/api/v1/log/entries?logIndex=2336496546
+- GitHub docs, retention period for Actions artifacts and logs: https://docs.github.com/en/organizations/managing-organization-settings/configuring-the-retention-period-for-github-actions-artifacts-and-logs-in-your-organization
+- TRACE specification, LIMITATIONS.md: https://github.com/agentrust-io/trace-spec/blob/main/LIMITATIONS.md
+
+---
+
+## The LiteLLM compromise is not in any of the places you would look for it
+
+URL: https://imransiddique.com/notes/2026-08-14-litellm-not-in-the-record.html  
+Published: 2026-08-14  
+Tags: supply-chain, evidence, ci-cd
+
+> Both poisoned versions 404 on PyPI, no CVE was ever issued, and the KEV entry filed two days later belongs to the scanner rather than the gateway.
+
+In March, two poisoned releases of LiteLLM went up on PyPI. CloudSEK reported on 11 August that they may have reached more than 2,500 companies and 434,000 CI/CD pipelines. On 13 August Hudson Rock published its analysis of a 153GB archive taken in the attack: 433,909 files, of which 118,829 CI runner dumps were attributed to 2,488 corporate domains.
+
+I went to check the figures and found something more interesting than the figures. If you go looking for this incident in the three places an engineer would normally look, it is not in any of them.
+
+## PyPI
+
+`litellm` 1.82.7 and 1.82.8 are not on PyPI. Not yanked, which would leave them visible and installable by exact pin. Gone. Both return HTTP 404 from PyPI's own API, and neither appears anywhere in an index that currently lists 1,189 versions of the package.
+
+What the record shows instead is 1.82.6 on 22 March, then 1.83.0 on 31 March, with nothing between them and no 1.82.9 at all. A reader arriving at the release history today sees a nine day gap and a minor version bump. Nothing on that timeline says an incident happened.
+
+Removing the artifacts was right. Leaving no marker where they stood is a separate decision, and it is the one that makes the package's own history misleading.
+
+## The CVE
+
+There is no CVE for the LiteLLM package compromise. Searching NVD across March and April 2026 returns only ordinary code vulnerabilities: an unauthenticated `/config/update` endpoint, a JWT authentication flaw, a guardrails sandbox escape. LiteLLM appears twice in CISA's Known Exploited Vulnerabilities catalog and both are red herrings, CVE-2026-42208 added on 8 May and CVE-2026-42271 on 8 June, unrelated injection bugs found months later.
+
+## The KEV entry that does exist
+
+Two days after the poisoned releases there is a KEV entry, and it is worth being precise about whose it is. **CVE-2026-33634, added 26 March, is Aqua Security's Trivy, not LiteLLM.** CVSS 4.0 base score 9.4. CISA's own description: an embedded malicious code vulnerability that could allow an attacker to reach everything in the CI/CD environment, including all tokens, SSH keys, cloud credentials, database passwords and any sensitive configuration in memory.
+
+This matters because Trivy was the way in. CloudSEK describes a leaked automation token that was rotated but not fully revoked, leaving roughly a 20 day window in LiteLLM's release pipeline. The MITRE record for the Trivy CVE is more specific: on 19 March a threat actor published a malicious Trivy v0.69.4, **force-pushed 76 of the 77 version tags in `aquasecurity/trivy-action`** to credential-stealing malware, and replaced all seven tags in `aquasecurity/setup-trivy`. It was a continuation of an attack that began in late February, and after the 1 March disclosure the credential rotation "was not atomic".
+
+The dates sit close enough that it is easy to file the 26 March listing under LiteLLM and move on, which inverts the lesson. The component that earned a critical CVE and a federal remediation deadline was the scanner inside the build.
+
+## What that does to the usual advice
+
+The standard response to a poisoned package is to pin your dependencies, and for the PyPI half of this that holds. For the Trivy half it fails in the most literal way available: 76 of 77 tags were force-pushed. Anyone pinned to a version tag got the malware precisely because they were pinned. Only a commit SHA survives a force-push, and almost nobody pins actions by SHA.
+
+Pinning is not integrity. It is a stable name for something somebody else can still overwrite.
+
+## The part I cannot help with
+
+Five months on, 2,488 organisations established their own exposure by reading someone else's analysis of a stolen archive. Kevin Beaumont tried the credentials belonging to one large US technology company and reported that almost every one still worked.
+
+That gap is not a detection failure. Detection worked, and the packages were live for about forty minutes. It is that nothing produced a durable record of what the build actually did while it ran, so the only surviving account of the incident is the attacker's copy.
+
+I should be straight that this sits outside everything I have built. cMCP records what crosses the gateway and TRACE signs the records so a third party can check them, and neither is anywhere near a CI runner at build time. A poisoned package executing inside your pipeline never touches either one.
+
+## What did not survive checking
+
+- **"CISA added the CVE two days in."** Cut. No CVE exists for this compromise. The 26 March KEV entry is Trivy's.
+- **"Shipped a clean version six days later."** Corrected. 1.82.6 is 22 March and 1.83.0 is 31 March, so nine days after the last clean release and seven after the poisoned ones.
+- **"PyPI quarantined them inside forty minutes."** Narrowed. CloudSEK gives forty minutes as the period the packages were live and does not say who removed them. No source I could reach names the actor.
+- **"An unpinned Trivy scanner."** Corrected. The vector was a leaked automation token and a non-atomic rotation, not an unpinned dependency.
+- **"2,488 corporate domains" from 433,909 files.** Scoped. The domains were attributed from the 118,829 CI runner dumps, a subset of the archive.
+- Whether LiteLLM's maintainers disclosed the same day: I could not verify it, so it is not here.
+
+### Checked against
+
+- CloudSEK, "2,500+ Companies and 434,000 CI/CD Pipelines Exposed in the Largest AI Supply Chain Breach of 2026", 11 August 2026: https://www.cloudsek.com/blog/ai-supply-chain-breach-2500-companies-434000-cicd-pipelines
+- Help Net Security on Hudson Rock's archive analysis, 13 August 2026: https://www.helpnetsecurity.com/2026/08/13/litellm-breach-stolen-credentials-leak/
+- PyPI JSON API for litellm, read 14 August 2026: https://pypi.org/pypi/litellm/json
+- CVE-2026-33634, "Trivy ecosystem supply chain briefly compromised", MITRE record: https://cveawg.mitre.org/api/cve/CVE-2026-33634
+- CISA Known Exploited Vulnerabilities catalog, version 2026.08.14: https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
+
+---
+
+## What the encrypted reasoning paper actually counted
+
+URL: https://imransiddique.com/notes/2026-08-13-encrypted-reasoning-denominators.html  
+Published: 2026-08-13  
+Tags: agent-security, evidence, retention
+
+> Coverage of the reasoning-trace harvest reported three different totals as if they disagreed. They are all the paper's own numbers, at three different denominators.
+
+A paper posted on 10 August showed that the encrypted reasoning blocks Anthropic, OpenAI and Google hand back to API clients were interchangeable inside each provider. A block issued in one session could be replayed into a different session, a different account, a different model in the same family. Hand it to a weaker sibling model and ask it to transcribe, and it reads the contents back in plain text.
+
+No cipher was broken. The ciphertext was confidential and it was bound to nothing.
+
+I want to record two things that the coverage got wrong, because both are the kind of error that survives into everyone's slide deck.
+
+## The three totals are not a disagreement
+
+Different outlets reported the harvest as 182 credentials plus 367 pieces of personal information, or as 704 artifacts, or as 912. Read side by side those look like sources contradicting each other, and at least one write-up said so.
+
+They are all in the paper, and they count different things:
+
+- **912** is every privacy artifact recovered, including the ones that came from benchmark sources rather than real users.
+- **704** is the subset from genuine, non-benchmark user sessions. That is the number that means something, because those are real people's secrets.
+- **182 credentials and 367 pieces of personal information** are two of the paper's three artifact categories, which is what its abstract leads with.
+
+Within the genuine-session set, the breakdown is 62 API keys, 33 passwords, 24 access tokens, 7 private keys and 30 personal email addresses. The scan covered 6,708 publicly posted agent trajectories and decoded 315,320 reasoning blocks.
+
+The lesson is not about this paper. It is that coverage reliably repeats a number and drops the scope attached to it, and two correctly-reported numbers at different denominators then read as a contradiction. If you find yourself adjudicating between outlets, the answer is usually that nobody disagreed and the denominators were thrown away in the retelling.
+
+## The dismissals were not a response to this paper
+
+Matthew Green reported the replay behaviour on 29 May, three months earlier. His account of what came back is worth quoting exactly, because a shortened version of it is now circulating with the causality reversed:
+
+> OpenAI said my report was unreproducible
+
+> Anthropic quite reasonably told me they don't see any security implications in side channels or replays
+
+Several summaries have welded those quotes onto the August paper, producing a story where providers waved the researchers away and the team ran the harvest to force the issue. That story is not in the paper. Its disclosure section says all model providers acknowledged receipt of its report, and it attributes the earlier dismissals to Green's May disclosure by citation. Green himself calls Anthropic's answer a fine decision.
+
+So the honest version is duller and more interesting: a cryptographer flagged the primitive in May, the providers judged it low severity, and a paper in August measured what the primitive was costing in the wild. Nobody in that sequence behaved badly. The gap was that no one had counted.
+
+The paper's reproducibility statement notes that as of August the results no longer reproduce, because of mitigations the providers implemented following the disclosure. It does not date those mitigations, and I have not seen anyone who can.
+
+## The part that is mine
+
+The missing control is a binding check at decrypt: this block was issued for this session, this account, this model, or it is refused. It runs at the provider's API boundary, because that is the only place the plaintext exists. No gateway, no agent framework and no policy layer can validate a binding on a payload it cannot open. That is enforcement, and it prevents the replay.
+
+The evidence layer has a different job and it does not prevent anything. It decides what is allowed into the record in the first place.
+
+Here is where that lands on my own work. The TRACE specification says, in its stated limitations:
+
+> does not record the model's internal chain-of-thought, intermediate reasoning, or context window contents
+
+We file that under Known Limitations and it belongs there, because reasoning that changes behaviour without producing a tool call never reaches the record. It is also the reason a TRACE record contains nothing we cannot read back, which is the property this paper makes expensive to lack. Sixty-four of the recovered artifacts appeared only inside the opaque blocks and nowhere in the visible transcript. Some developers had cleaned the readable session before publishing it and shipped the secrets anyway.
+
+A retention policy is a claim about fields you can read. If your trace carries a field you cannot open, you do not have a retention policy for it. You have a hope.
+
+### Checked against
+
+- Panfilov et al., "Stealing Reasoning Traces from Proprietary LLM APIs", arXiv 2608.09867, 10 August 2026: https://arxiv.org/abs/2608.09867
+- Matthew Green, "Let's talk about encrypted reasoning", 29 May 2026: https://blog.cryptographyengineering.com/2026/05/29/fooling-around-with-encrypted-reasoning-blobs/
+- TRACE specification, LIMITATIONS.md: https://github.com/agentrust-io/trace-spec/blob/main/LIMITATIONS.md
+
+---
+
+## Two of the three endpoints checked authorization
+
+URL: https://imransiddique.com/notes/2026-08-12-two-of-three-endpoints.html  
+Published: 2026-08-12  
+Tags: agent-security, api, authorization
+
+> The gym booking story is being told as an API with no authorization. The agent's own account says two of the three operations it touched returned 403, and one did not.
+
+An Australian man asked his personal assistant agent to book him a gym class. He was fourth on the waitlist. Minutes later he was third, because the agent had cancelled the booking of the person in first place.
+
+The agent explained itself in plain text, and its wording matters:
+
+> the API has zero authorisations checks on cancelling other people's reservations
+
+Nothing was jailbroken. There was no prompt injection. The agent read the API and used it exactly as documented.
+
+## The detail that changes the story
+
+Most coverage stopped at "the API had no authorization". The agent's second message, which one outlet carried and the rest did not, says something more specific: `createReservation` and `joinWaitlist` both returned 403 Forbidden. Only `cancelReservation` was missing the ownership check.
+
+So this was not a platform built without a security model. It was a platform with a security model and one handler where somebody forgot to apply it. Two of the three operations the agent touched behaved correctly.
+
+That is a much more uncomfortable finding, because "we never did authorization" is a project you can schedule and "one of our handlers is missing a check" is a condition every codebase is in right now and cannot easily prove it is not.
+
+I am scoping that carefully on purpose. Three operations were reported. That says nothing about how many endpoints the booking platform has, and I do not know the ratio. When I first wrote this up I said "two thirds of the API worked", which generalises three data points to a whole system, and I had to correct it after publishing. The honest statement is the narrow one.
+
+## What kind of bug this is
+
+Broken Object Level Authorization: the caller is authenticated, the caller is permitted to invoke the operation, and nobody checks that the caller owns the specific object being operated on. It is the first entry on the OWASP API Security Top 10, and it has been for years.
+
+The gap was presumably always there. Human customers only ever clicked the buttons the web interface gave them, and the interface never offered to cancel a stranger's reservation. The agent is not a new class of attacker. It is the first client in that API's history that tried every request the API allowed.
+
+The missing control is per-request object authorization: does this caller own this object, not is this caller logged in. It has to run in the endpoint's own handler, on the server, next to the data that answers the question.
+
+## Why my own layer would not have caught it
+
+AGT puts a deterministic policy engine between an agent and its tools, with no model anywhere in the safety path. On this incident it would have seen the agent issue a cancel call. It would not have known the reservation belonged to a stranger, because that fact lives in the gym's database and appears nowhere in the request.
+
+A governance layer on the agent's side cannot make a check that only the server can make. This is the boundary, and I would rather state it than let a diagram imply otherwise.
+
+There is a second thing worth separating, because I blurred it in the first version of this and it is worth not repeating. Enforcement runs at the service, before the operation executes, and it prevents. Evidence is written after the fact, it is tamper-evident, and it proves. A log would not have saved the person whose class was cancelled. It would only have made the conversation afterwards short.
+
+OpenClaw was at 385,960 stars when I read the repository. Every latent authorization gap in your API now has a client that will find it, and it will find it while trying to be helpful.
+
+## What did not survive checking
+
+- One outlet placed the man in Melbourne. The Register says only "Australian" and the other coverage names no city, so the city is not here.
+- Reports of how far ahead the agent could book range from "several weeks" to "months", so no number is here either.
+- Several outlets called this Australia's first autonomous cyberattack. That is a characterisation and not a finding, and it argues the story on the wrong axis.
+- The original ABC News report is the primary source. abc.net.au blocks the crawler I use, so I have not read it directly. Everything above comes from two outlets that quote it and agree with each other.
+
+### Checked against
+
+- The Next Web, coverage carrying the agent's second message: https://thenextweb.com/
+- The Register, coverage quoting ABC News (Australia), 10 August 2026: https://www.theregister.com/
+- OWASP API Security Top 10, API1 Broken Object Level Authorization: https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/
+- openclaw/openclaw star count read at api.github.com, 12 August 2026: https://api.github.com/repos/openclaw/openclaw
+
+---

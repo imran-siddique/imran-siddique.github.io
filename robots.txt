@@ -35,11 +35,25 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
+# Answer-engine search and user-triggered fetchers
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
 # Sitemap location
 Sitemap: https://imransiddique.com/sitemap.xml
 
 # LLMs.txt - structured information for AI crawlers
 # See: https://imransiddique.com/llms.txt
+# Full text of every note: https://imransiddique.com/llms-full.txt
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1

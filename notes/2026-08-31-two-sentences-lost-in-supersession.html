@@ -5,15 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="The MCP tasks extension requires an authorization check on every task request. Its own rationale says that check is often impossible, the sentence that used to make servers disclose that is gone, and no error code represents a denial. One of the two losses was already found and fixed by somebody else three weeks ago.">
     <meta name="author" content="Imran Siddique">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="https://imransiddique.com/notes/2026-08-31-two-sentences-lost-in-supersession.html">
     <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
     <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Imran Siddique">
+    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://imransiddique.com/notes/2026-08-31-two-sentences-lost-in-supersession.html">
     <meta property="og:title" content="Two normative sentences went missing when one tasks spec superseded another">
     <meta property="og:description" content="The MCP tasks extension requires an authorization check on every task request. Its own rationale says that check is often impossible, the sentence that used to make servers disclose that is gone, and no error code represents a denial. One of the two losses was already found and fixed by somebody else three weeks ago.">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://imransiddique.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-08-31">
+    <meta property="article:modified_time" content="2026-08-31">
+    <meta property="article:author" content="https://imransiddique.com/about.html">
+    <meta property="article:tag" content="mcp">
+    <meta property="article:tag" content="agent-security">
+    <meta property="article:tag" content="spec-review">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:creator" content="@mosiddi">
+    <meta name="twitter:title" content="Two normative sentences went missing when one tasks spec superseded another">
+    <meta name="twitter:description" content="The MCP tasks extension requires an authorization check on every task request. Its own rationale says that check is often impossible, the sentence that used to make servers disclose that is gone, and no error code represents a denial. One of the two losses was already found and fixed by somebody else three weeks ago.">
+    <meta name="twitter:image" content="https://imransiddique.com/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -22,7 +37,7 @@
     <link rel="stylesheet" href="../notes/notes.css">
 </head>
 <body>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Two normative sentences went missing when one tasks spec superseded another", "datePublished": "2026-08-31", "description": "The MCP tasks extension requires an authorization check on every task request. Its own rationale says that check is often impossible, the sentence that used to make servers disclose that is gone, and no error code represents a denial. One of the two losses was already found and fixed by somebody else three weeks ago.", "author": {"@type": "Person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-08-31-two-sentences-lost-in-supersession.html"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "@id": "https://imransiddique.com/notes/2026-08-31-two-sentences-lost-in-supersession.html#article", "headline": "Two normative sentences went missing when one tasks spec superseded another", "description": "The MCP tasks extension requires an authorization check on every task request. Its own rationale says that check is often impossible, the sentence that used to make servers disclose that is gone, and no error code represents a denial. One of the two losses was already found and fixed by somebody else three weeks ago.", "datePublished": "2026-08-31", "dateModified": "2026-08-31", "inLanguage": "en-US", "wordCount": 893, "keywords": ["mcp", "agent-security", "spec-review"], "image": "https://imransiddique.com/og-image.png", "author": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "publisher": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "isPartOf": {"@type": "Blog", "@id": "https://imransiddique.com/notes/#blog", "name": "Notes by Imran Siddique", "url": "https://imransiddique.com/notes/"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-08-31-two-sentences-lost-in-supersession.html", "url": "https://imransiddique.com/notes/2026-08-31-two-sentences-lost-in-supersession.html", "citation": [{"@type": "CreativeWork", "name": "SEP-2663 Tasks Extension, merged 15 May 2026", "url": "https://github.com/modelcontextprotocol/modelcontextprotocol/blob/main/seps/2663-tasks-extension.md"}, {"@type": "CreativeWork", "name": "ext-tasks specification/draft/tasks.md, Security Considerations and Protocol Errors", "url": "https://github.com/modelcontextprotocol/ext-tasks/blob/main/specification/draft/tasks.md"}, {"@type": "CreativeWork", "name": "ext-tasks PR 9, restore auth binding requirement dropped during SEP-2663 port", "url": "https://github.com/modelcontextprotocol/ext-tasks/pull/9"}, {"@type": "CreativeWork", "name": "SEP-1686 tasks proposal, section 8.1 Task Isolation and Access Control", "url": "https://github.com/modelcontextprotocol/agents-wg/blob/main/proposals/1686-tasks.md"}, {"@type": "CreativeWork", "name": "Agents WG meeting notes, 28 August 2026, error contracts for agent operations", "url": "https://github.com/modelcontextprotocol/agents-wg/blob/main/meetings/2026-08-28.md"}, {"@type": "CreativeWork", "name": "ext-tasks schema/draft/schema.ts, Task interface and ttlMs", "url": "https://github.com/modelcontextprotocol/ext-tasks/blob/main/schema/draft/schema.ts"}, {"@type": "CreativeWork", "name": "MCP roadmap, 22 August 2026", "url": "https://blog.modelcontextprotocol.io/posts/mcp-roadmap/"}, {"@type": "CreativeWork", "name": "ext-tasks issue 20, filed 31 August 2026", "url": "https://github.com/modelcontextprotocol/ext-tasks/issues/20"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://imransiddique.com/"}, {"@type": "ListItem", "position": 2, "name": "Notes", "item": "https://imransiddique.com/notes/"}, {"@type": "ListItem", "position": 3, "name": "Two normative sentences went missing when one tasks spec superseded another", "item": "https://imransiddique.com/notes/2026-08-31-two-sentences-lost-in-supersession.html"}]}]}</script>
     <nav class="navbar">
         <div class="container">
             <a href="../index.html" class="logo">Imran Siddique</a>

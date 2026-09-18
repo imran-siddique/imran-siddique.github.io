@@ -3,25 +3,25 @@
   <!-- Main Site -->
   <url>
     <loc>https://imransiddique.com/</loc>
-    <lastmod>2026-02-17</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://imransiddique.com/about.html</loc>
-    <lastmod>2026-02-17</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://imransiddique.com/projects.html</loc>
-    <lastmod>2026-02-17</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://imransiddique.com/contact.html</loc>
-    <lastmod>2026-02-17</lastmod>
+    <lastmod>2026-09-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -29,16 +29,22 @@
   <!-- AgentMesh - Main -->
   <url>
     <loc>https://imransiddique.com/speaking/</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <!-- notes:start -->
   <url>
     <loc>https://imransiddique.com/notes/</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://imransiddique.com/notes/2026-09-18-five-cves-all-in-the-doors.html</loc>
+    <lastmod>2026-09-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://imransiddique.com/notes/2026-09-17-verified-with-nothing-hashed.html</loc>

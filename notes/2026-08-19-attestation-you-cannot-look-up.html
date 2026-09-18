@@ -5,15 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Thirty poisoned npm packages are gone along with their attestations, and the Sigstore copy that survives can only be fetched with a digest that no longer exists in any public place I could find.">
     <meta name="author" content="Imran Siddique">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="https://imransiddique.com/notes/2026-08-19-attestation-you-cannot-look-up.html">
     <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
     <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Imran Siddique">
+    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://imransiddique.com/notes/2026-08-19-attestation-you-cannot-look-up.html">
     <meta property="og:title" content="The attestation everyone cites cannot be looked up any more">
     <meta property="og:description" content="Thirty poisoned npm packages are gone along with their attestations, and the Sigstore copy that survives can only be fetched with a digest that no longer exists in any public place I could find.">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://imransiddique.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-08-19">
+    <meta property="article:modified_time" content="2026-08-19">
+    <meta property="article:author" content="https://imransiddique.com/about.html">
+    <meta property="article:tag" content="supply-chain">
+    <meta property="article:tag" content="evidence">
+    <meta property="article:tag" content="provenance">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:creator" content="@mosiddi">
+    <meta name="twitter:title" content="The attestation everyone cites cannot be looked up any more">
+    <meta name="twitter:description" content="Thirty poisoned npm packages are gone along with their attestations, and the Sigstore copy that survives can only be fetched with a digest that no longer exists in any public place I could find.">
+    <meta name="twitter:image" content="https://imransiddique.com/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -22,7 +37,7 @@
     <link rel="stylesheet" href="../notes/notes.css">
 </head>
 <body>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "The attestation everyone cites cannot be looked up any more", "datePublished": "2026-08-19", "description": "Thirty poisoned npm packages are gone along with their attestations, and the Sigstore copy that survives can only be fetched with a digest that no longer exists in any public place I could find.", "author": {"@type": "Person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-08-19-attestation-you-cannot-look-up.html"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "@id": "https://imransiddique.com/notes/2026-08-19-attestation-you-cannot-look-up.html#article", "headline": "The attestation everyone cites cannot be looked up any more", "description": "Thirty poisoned npm packages are gone along with their attestations, and the Sigstore copy that survives can only be fetched with a digest that no longer exists in any public place I could find.", "datePublished": "2026-08-19", "dateModified": "2026-08-19", "inLanguage": "en-US", "wordCount": 878, "keywords": ["supply-chain", "evidence", "provenance"], "image": "https://imransiddique.com/og-image.png", "author": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "publisher": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "isPartOf": {"@type": "Blog", "@id": "https://imransiddique.com/notes/#blog", "name": "Notes by Imran Siddique", "url": "https://imransiddique.com/notes/"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-08-19-attestation-you-cannot-look-up.html", "url": "https://imransiddique.com/notes/2026-08-19-attestation-you-cannot-look-up.html", "citation": [{"@type": "CreativeWork", "name": "Aikido, \"Keyv and friends compromised in npm supply chain attack\", 4 August 2026", "url": "https://www.aikido.dev/blog/keyv-and-friends-compromised-in-npm-supply-chain-attack"}, {"@type": "CreativeWork", "name": "Snyk, \"Inside the keyv npm compromise\", read 19 August 2026", "url": "https://snyk.io/blog/inside-keyv-npm-compromise-preinstall-malware-trusted-provenance-ide-hooks/"}, {"@type": "CreativeWork", "name": "VentureBeat, \"The Shai-Hulud npm worm didn't fake its security check, it earned a legitimate one\"", "url": "https://venturebeat.com/security/the-shai-hulud-npm-worm-didnt-fake-its-security-check-it-earned-a-legitimate-one"}, {"@type": "CreativeWork", "name": "nulltap, \"Keyv's signed npm releases carried a credential-stealing worm\"", "url": "https://nulltap.sh/p/keyv-shai-hulud-provenance/"}, {"@type": "CreativeWork", "name": "npm registry packuments and attestation endpoints, read 19 August 2026", "url": "https://registry.npmjs.org/keyv"}, {"@type": "CreativeWork", "name": "Sigstore Rekor transparency log, search index API", "url": "https://rekor.sigstore.dev/api/v1/log/entries?logIndex=2336496546"}, {"@type": "CreativeWork", "name": "GitHub docs, retention period for Actions artifacts and logs", "url": "https://docs.github.com/en/organizations/managing-organization-settings/configuring-the-retention-period-for-github-actions-artifacts-and-logs-in-your-organization"}, {"@type": "CreativeWork", "name": "TRACE specification, LIMITATIONS.md", "url": "https://github.com/agentrust-io/trace-spec/blob/main/LIMITATIONS.md"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://imransiddique.com/"}, {"@type": "ListItem", "position": 2, "name": "Notes", "item": "https://imransiddique.com/notes/"}, {"@type": "ListItem", "position": 3, "name": "The attestation everyone cites cannot be looked up any more", "item": "https://imransiddique.com/notes/2026-08-19-attestation-you-cannot-look-up.html"}]}]}</script>
     <nav class="navbar">
         <div class="container">
             <a href="../index.html" class="logo">Imran Siddique</a>

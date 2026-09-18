@@ -27,6 +27,8 @@ Note source format, notes/src/YYYY-MM-DD-slug.md:
 `linkedin` and `x` are optional and only set once a note has actually been posted to
 that channel. They are what stops an automation recommending a share that already
 happened: notes.json is the only machine-readable record of where a note has been.
+`updated: YYYY-MM-DD` is optional; set it when a published note's substance changes,
+and it becomes dateModified in the JSON-LD and the sitemap lastmod.
 `sources` is not optional. A note with no source it was checked against does
 not belong here.
 
@@ -46,6 +48,11 @@ ROOT = Path(__file__).resolve().parent.parent
 NOTES = ROOT / "notes"
 SRC = NOTES / "src"
 SITE = "https://imransiddique.com"
+OG_IMAGE = f"{SITE}/og-image.png"
+# The Person and WebSite nodes are declared once, in index.html's JSON-LD. Notes
+# point at them by @id so answer engines resolve every note to one author entity.
+PERSON = {"@type": "Person", "@id": f"{SITE}/#person", "name": "Imran Siddique", "url": SITE}
+BLOG_ID = f"{SITE}/notes/#blog"
 
 MONTHS = ["January", "February", "March", "April", "May", "June", "July",
           "August", "September", "October", "November", "December"]
@@ -195,23 +202,41 @@ def footer(prefix=""):
     <script src="{prefix}script.js"></script>"""
 
 
-def head(title, desc, canonical, prefix=""):
+def head(title, desc, canonical, prefix="", og_type="article", article=None):
+    """`article` is the note dict on a note page, None elsewhere."""
+    esc = lambda s: html.escape(s, quote=True)
+    art = ""
+    if article:
+        tags = "".join(f'\n    <meta property="article:tag" content="{esc(t)}">'
+                       for t in article["tags"])
+        art = (f'\n    <meta property="article:published_time" content="{article["date"]}">'
+               f'\n    <meta property="article:modified_time" content="{article["updated"]}">'
+               f'\n    <meta property="article:author" content="{SITE}/about.html">{tags}')
     return f"""<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{html.escape(desc, quote=True)}">
+    <meta name="description" content="{esc(desc)}">
     <meta name="author" content="Imran Siddique">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="{canonical}">
     <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="{SITE}/notes/feed.xml">
-    <meta property="og:type" content="article">
+    <meta property="og:type" content="{og_type}">
+    <meta property="og:site_name" content="Imran Siddique">
+    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="{canonical}">
-    <meta property="og:title" content="{html.escape(title, quote=True)}">
-    <meta property="og:description" content="{html.escape(desc, quote=True)}">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:title" content="{esc(title)}">
+    <meta property="og:description" content="{esc(desc)}">
+    <meta property="og:image" content="{OG_IMAGE}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">{art}
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:creator" content="@mosiddi">
+    <meta name="twitter:title" content="{esc(title)}">
+    <meta name="twitter:description" content="{esc(desc)}">
+    <meta name="twitter:image" content="{OG_IMAGE}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -239,14 +264,31 @@ def note_page(n):
     if n.get("linkedin"):
         posted = (f'<p class="note-elsewhere">A shorter version of this note ran on '
                   f'<a href="{n["linkedin"]}" rel="noopener">LinkedIn</a>.</p>')
-    ld = json.dumps({
-        "@context": "https://schema.org", "@type": "BlogPosting",
-        "headline": n["title"], "datePublished": n["date"],
-        "description": n["standfirst"],
-        "author": {"@type": "Person", "name": "Imran Siddique", "url": SITE},
-        "mainEntityOfPage": n["url"],
-    }, indent=None)
-    return f"""{head(n["title"], n["standfirst"], n["url"], prefix="../")}
+    ld = json.dumps({"@context": "https://schema.org", "@graph": [
+        {
+            "@type": "BlogPosting", "@id": f'{n["url"]}#article',
+            "headline": n["title"], "description": n["standfirst"],
+            "datePublished": n["date"], "dateModified": n["updated"],
+            "inLanguage": "en-US", "wordCount": n["words"],
+            "keywords": n["tags"], "image": OG_IMAGE,
+            "author": PERSON, "publisher": PERSON,
+            "isPartOf": {"@type": "Blog", "@id": BLOG_ID, "name": "Notes by Imran Siddique",
+                         "url": f"{SITE}/notes/"},
+            "mainEntityOfPage": n["url"], "url": n["url"],
+            # The sources are the point of a note. Declaring them as citations is
+            # what lets an answer engine see what each claim was checked against.
+            "citation": [{"@type": "CreativeWork", "name": s["label"], "url": s["url"]}
+                         for s in n["sources"] if s["url"]],
+        },
+        {
+            "@type": "BreadcrumbList", "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{SITE}/"},
+                {"@type": "ListItem", "position": 2, "name": "Notes", "item": f"{SITE}/notes/"},
+                {"@type": "ListItem", "position": 3, "name": n["title"], "item": n["url"]},
+            ],
+        },
+    ]}, indent=None)
+    return f"""{head(n["title"], n["standfirst"], n["url"], prefix="../", article=n)}
     <script type="application/ld+json">{ld}</script>
 {nav(prefix="../")}
     <main>
@@ -292,7 +334,17 @@ def index_page(notes, essays):
                         e.get("tags", []), external=True) for e in essays]
     desc = ("Notes and essays on agent security, evidence and governance by Imran Siddique. "
             "Every figure is checked against a named primary source.")
-    return f"""{head("Writing", desc, f"{SITE}/notes/", prefix="../")}
+    ld = json.dumps({
+        "@context": "https://schema.org", "@type": "Blog", "@id": BLOG_ID,
+        "name": "Notes by Imran Siddique", "url": f"{SITE}/notes/", "description": desc,
+        "inLanguage": "en-US", "author": PERSON, "publisher": PERSON,
+        "blogPost": [{"@type": "BlogPosting", "@id": f'{n["url"]}#article',
+                      "headline": n["title"], "url": n["url"],
+                      "datePublished": n["date"]} for n in notes],
+    }, indent=None)
+    return f"""{head("Writing on agent security, evidence and governance", desc,
+                     f"{SITE}/notes/", prefix="../", og_type="website")}
+    <script type="application/ld+json">{ld}</script>
 {nav(prefix="../")}
     <main>
         <section class="hero-small">
@@ -393,13 +445,84 @@ def update_sitemap(notes):
     for n in notes:
         block.append(f"""  <url>
     <loc>{n["url"]}</loc>
-    <lastmod>{n["date"]}</lastmod>
+    <lastmod>{n["updated"]}</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>""")
     block.append("  <!-- notes:end -->")
     xml = xml.replace("</urlset>", "\n".join(block) + "\n</urlset>")
-    return path, xml
+    return path, static_lastmods(xml)
+
+
+def static_lastmods(xml):
+    """Set each hand-written page's <lastmod> to its last commit date.
+
+    The static entries were typed in once and sat at 2026-02-17 for seven months
+    while the pages changed underneath them. A stale lastmod tells crawlers there
+    is nothing to re-fetch. Git is the only honest record of when a page changed;
+    if git is unavailable the existing value is left alone.
+    """
+    import subprocess
+
+    def fix(m):
+        loc = m.group(1)
+        rel = loc[len(SITE):].lstrip("/") or "index.html"
+        if rel.endswith("/"):
+            rel += "index.html"
+        if rel.startswith("notes/") or not (ROOT / rel).exists():
+            return m.group(0)
+        try:
+            day = subprocess.run(["git", "log", "-1", "--format=%cs", "--", rel], cwd=ROOT,
+                                 capture_output=True, text=True, timeout=10).stdout.strip()
+        except (OSError, subprocess.SubprocessError):
+            day = ""
+        return m.group(0) if not day else re.sub(
+            r"<lastmod>[^<]*</lastmod>", f"<lastmod>{day}</lastmod>", m.group(0))
+
+    return re.sub(r"<url>\s*<loc>([^<]+)</loc>.*?</url>", fix, xml, flags=re.S)
+
+
+def update_llms(notes):
+    """Keep the notes list in the root llms.txt current, between markers.
+
+    llms.txt is hand-written and describes who he is; before this it did not
+    mention a single note, which are the most citable pages on the site.
+    """
+    path = ROOT / "llms.txt"
+    text = path.read_text(encoding="utf-8")
+    text = re.sub(r"\n*<!-- notes:start -->.*?<!-- notes:end -->\n*", "\n\n", text, flags=re.S)
+    lines = ["<!-- notes:start -->", "## Notes",
+             "",
+             "Dated, sourced notes on agent security, evidence and governance. Every figure "
+             "was checked against the primary source listed on the page. Full text of every "
+             f"note: {SITE}/llms-full.txt",
+             ""]
+    lines += [f'- [{n["title"]}]({n["url"]}) ({n["date"]}): {n["standfirst"]}' for n in notes]
+    lines.append("<!-- notes:end -->")
+    block = "\n".join(lines)
+    if "\n## Links" in text:
+        text = text.replace("\n## Links", f"\n{block}\n\n## Links", 1)
+    else:
+        text = text.rstrip("\n") + "\n\n" + block
+    return path, text.rstrip("\n") + "\n"
+
+
+def llms_full(notes):
+    """Every note as plain markdown with its sources, for answer engines."""
+    parts = ["# Notes by Imran Siddique", "",
+             f"> Full text of every note published at {SITE}/notes/. Author: Imran Siddique, "
+             "Chief Platform Officer at Opaque Systems. Each note lists the primary sources "
+             "it was checked against.", ""]
+    for n in notes:
+        srcs = "\n".join(f'- {s["label"]}: {s["url"]}' if s["url"] else f'- {s["label"]}'
+                         for s in n["sources"])
+        parts += [f'## {n["title"]}', "",
+                  f'URL: {n["url"]}  ',
+                  f'Published: {n["date"]}  ',
+                  f'Tags: {", ".join(n["tags"])}', "",
+                  f'> {n["standfirst"]}', "", n["body"], "",
+                  "### Checked against", "", srcs, "", "---", ""]
+    return "\n".join(parts)
 
 
 # ---------------------------------------------------------------------- main
@@ -435,8 +558,8 @@ def load():
             "slug": slug, "title": meta.get("title", ""), "date": meta.get("date", ""),
             "standfirst": meta.get("standfirst", ""), "tags": meta.get("tags", []),
             "sources": meta["sources"], "linkedin": meta.get("linkedin", ""),
-            "x": meta.get("x", ""),
-            "words": words, "html": render(body),
+            "x": meta.get("x", ""), "updated": meta.get("updated") or meta.get("date", ""),
+            "words": words, "html": render(body), "body": body,
             "url": f"{SITE}/notes/{slug}.html",
         })
     notes.sort(key=lambda n: (n["date"], n["slug"]), reverse=True)
@@ -488,6 +611,9 @@ def main():
     (NOTES / "feed.xml").write_text(feed(notes), encoding="utf-8")
     sm_path, sm_xml = update_sitemap(notes)
     sm_path.write_text(sm_xml, encoding="utf-8")
+    llms_path, llms_text = update_llms(notes)
+    llms_path.write_text(llms_text, encoding="utf-8")
+    (ROOT / "llms-full.txt").write_text(llms_full(notes), encoding="utf-8")
     (NOTES / "notes.json").write_text(json.dumps(
         [{k: n[k] for k in ("slug", "title", "date", "standfirst", "tags",
                             "sources", "linkedin", "x", "words", "url")} for n in notes],
@@ -496,7 +622,8 @@ def main():
     print(f"Built {len(notes)} note(s) and listed {len(essays)} essay(s):")
     for n in notes:
         print(f"  {n['date']}  {n['words']:>4}w  notes/{n['slug']}.html")
-    print("Wrote notes/index.html, notes/feed.xml, notes/notes.json, sitemap.xml")
+    print("Wrote notes/index.html, notes/feed.xml, notes/notes.json, sitemap.xml, "
+          "llms.txt (notes block), llms-full.txt")
     return 0
 
 

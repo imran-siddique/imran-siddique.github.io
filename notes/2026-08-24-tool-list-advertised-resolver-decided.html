@@ -5,15 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Spring AI released a fix on 21 August for a bug where a tool absent from the request could still be called. The vulnerable dispatch is one line. The public fix exists on one of the three affected release lines, and the fallback left almost nothing useful in the log.">
     <meta name="author" content="Imran Siddique">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
     <link rel="canonical" href="https://imransiddique.com/notes/2026-08-24-tool-list-advertised-resolver-decided.html">
     <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
     <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Imran Siddique">
+    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://imransiddique.com/notes/2026-08-24-tool-list-advertised-resolver-decided.html">
     <meta property="og:title" content="The tool list was advertised, the resolver decided">
     <meta property="og:description" content="Spring AI released a fix on 21 August for a bug where a tool absent from the request could still be called. The vulnerable dispatch is one line. The public fix exists on one of the three affected release lines, and the fallback left almost nothing useful in the log.">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://imransiddique.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-08-24">
+    <meta property="article:modified_time" content="2026-08-24">
+    <meta property="article:author" content="https://imransiddique.com/about.html">
+    <meta property="article:tag" content="agent-security">
+    <meta property="article:tag" content="tool-calling">
+    <meta property="article:tag" content="enforcement">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:creator" content="@mosiddi">
+    <meta name="twitter:title" content="The tool list was advertised, the resolver decided">
+    <meta name="twitter:description" content="Spring AI released a fix on 21 August for a bug where a tool absent from the request could still be called. The vulnerable dispatch is one line. The public fix exists on one of the three affected release lines, and the fallback left almost nothing useful in the log.">
+    <meta name="twitter:image" content="https://imransiddique.com/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -22,7 +37,7 @@
     <link rel="stylesheet" href="../notes/notes.css">
 </head>
 <body>
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "The tool list was advertised, the resolver decided", "datePublished": "2026-08-24", "description": "Spring AI released a fix on 21 August for a bug where a tool absent from the request could still be called. The vulnerable dispatch is one line. The public fix exists on one of the three affected release lines, and the fallback left almost nothing useful in the log.", "author": {"@type": "Person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-08-24-tool-list-advertised-resolver-decided.html"}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "@id": "https://imransiddique.com/notes/2026-08-24-tool-list-advertised-resolver-decided.html#article", "headline": "The tool list was advertised, the resolver decided", "description": "Spring AI released a fix on 21 August for a bug where a tool absent from the request could still be called. The vulnerable dispatch is one line. The public fix exists on one of the three affected release lines, and the fallback left almost nothing useful in the log.", "datePublished": "2026-08-24", "dateModified": "2026-08-24", "inLanguage": "en-US", "wordCount": 622, "keywords": ["agent-security", "tool-calling", "enforcement"], "image": "https://imransiddique.com/og-image.png", "author": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "publisher": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "isPartOf": {"@type": "Blog", "@id": "https://imransiddique.com/notes/#blog", "name": "Notes by Imran Siddique", "url": "https://imransiddique.com/notes/"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-08-24-tool-list-advertised-resolver-decided.html", "url": "https://imransiddique.com/notes/2026-08-24-tool-list-advertised-resolver-decided.html", "citation": [{"@type": "CreativeWork", "name": "Spring advisory CVE-2026-59318, published 20 August 2026", "url": "https://spring.io/security/cve-2026-59318/"}, {"@type": "CreativeWork", "name": "Spring AI 2.0.1 release announcement, 21 August 2026", "url": "https://spring.io/blog/2026/08/21/spring-ai-2-0-1-available-now/"}, {"@type": "CreativeWork", "name": "Spring AI 2.0.1 upgrade notes, tool resolution fallback", "url": "https://docs.spring.io/spring-ai/reference/upgrade-notes.html#_tool_resolution_fallback_disabled_by_default"}, {"@type": "CreativeWork", "name": "DefaultToolCallingManager at v2.0.0, the vulnerable fallback", "url": "https://github.com/spring-projects/spring-ai/blob/v2.0.0/spring-ai-model/src/main/java/org/springframework/ai/model/tool/DefaultToolCallingManager.java"}, {"@type": "CreativeWork", "name": "DefaultToolCallingManager at v2.0.1, the disabled-by-default fallback", "url": "https://github.com/spring-projects/spring-ai/blob/v2.0.1/spring-ai-model/src/main/java/org/springframework/ai/model/tool/DefaultToolCallingManager.java"}, {"@type": "CreativeWork", "name": "StaticToolCallbackResolver at v2.0.1, registry lookup and debug log", "url": "https://github.com/spring-projects/spring-ai/blob/v2.0.1/spring-ai-model/src/main/java/org/springframework/ai/tool/resolution/StaticToolCallbackResolver.java"}, {"@type": "CreativeWork", "name": "Maven Central, public spring-ai-model versions", "url": "https://repo1.maven.org/maven2/org/springframework/ai/spring-ai-model/"}, {"@type": "CreativeWork", "name": "cMCP LIMITATIONS.md, gateway enforcement boundary", "url": "https://github.com/agentrust-io/cmcp/blob/main/LIMITATIONS.md"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://imransiddique.com/"}, {"@type": "ListItem", "position": 2, "name": "Notes", "item": "https://imransiddique.com/notes/"}, {"@type": "ListItem", "position": 3, "name": "The tool list was advertised, the resolver decided", "item": "https://imransiddique.com/notes/2026-08-24-tool-list-advertised-resolver-decided.html"}]}]}</script>
     <nav class="navbar">
         <div class="container">
             <a href="../index.html" class="logo">Imran Siddique</a>
