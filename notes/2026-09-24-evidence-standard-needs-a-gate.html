@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Proof-of-Control positions itself as the evidence half of agent assurance, not runtime enforcement. Its own threshold requires an in-path gateway that withholds actions, and its threat model has no row for that gateway. Filed as issue 78.">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://imransiddique.com/notes/2026-09-24-evidence-standard-needs-a-gate.html">
+    <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Imran Siddique">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://imransiddique.com/notes/2026-09-24-evidence-standard-needs-a-gate.html">
+    <meta property="og:title" content="The evidence standard that needs a gate to count">
+    <meta property="og:description" content="Proof-of-Control positions itself as the evidence half of agent assurance, not runtime enforcement. Its own threshold requires an in-path gateway that withholds actions, and its threat model has no row for that gateway. Filed as issue 78.">
+    <meta property="og:image" content="https://imransiddique.com/notes/cards/2026-09-24-evidence-standard-needs-a-gate.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-09-24">
+    <meta property="article:modified_time" content="2026-09-24">
+    <meta property="article:author" content="https://imransiddique.com/about.html">
+    <meta property="article:tag" content="agent-security">
+    <meta property="article:tag" content="standards">
+    <meta property="article:tag" content="enforcement">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:creator" content="@mosiddi">
+    <meta name="twitter:title" content="The evidence standard that needs a gate to count">
+    <meta name="twitter:description" content="Proof-of-Control positions itself as the evidence half of agent assurance, not runtime enforcement. Its own threshold requires an in-path gateway that withholds actions, and its threat model has no row for that gateway. Filed as issue 78.">
+    <meta name="twitter:image" content="https://imransiddique.com/notes/cards/2026-09-24-evidence-standard-needs-a-gate.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>The evidence standard that needs a gate to count | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css?v=f44781a">
+    <link rel="stylesheet" href="../notes/notes.css">
+</head>
+<body>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "@id": "https://imransiddique.com/notes/2026-09-24-evidence-standard-needs-a-gate.html#article", "headline": "The evidence standard that needs a gate to count", "description": "Proof-of-Control positions itself as the evidence half of agent assurance, not runtime enforcement. Its own threshold requires an in-path gateway that withholds actions, and its threat model has no row for that gateway. Filed as issue 78.", "datePublished": "2026-09-24", "dateModified": "2026-09-24", "inLanguage": "en-US", "wordCount": 674, "keywords": ["agent-security", "standards", "enforcement"], "image": "https://imransiddique.com/notes/cards/2026-09-24-evidence-standard-needs-a-gate.png", "author": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "publisher": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "isPartOf": {"@type": "Blog", "@id": "https://imransiddique.com/notes/#blog", "name": "Notes by Imran Siddique", "url": "https://imransiddique.com/notes/"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-09-24-evidence-standard-needs-a-gate.html", "url": "https://imransiddique.com/notes/2026-09-24-evidence-standard-needs-a-gate.html", "citation": [{"@type": "CreativeWork", "name": "LFDT-ProofOfControl/ov-poc-standard issue 78, filed 24 September 2026", "url": "https://github.com/LFDT-ProofOfControl/ov-poc-standard/issues/78"}, {"@type": "CreativeWork", "name": "LFDT-ProofOfControl/ov-poc-standard issue 79, one-pager residual trust", "url": "https://github.com/LFDT-ProofOfControl/ov-poc-standard/issues/79"}, {"@type": "CreativeWork", "name": "README, \"What Proof-of-Control is NOT\", commit 22c7b62", "url": "https://github.com/LFDT-ProofOfControl/ov-poc-standard/blob/22c7b62/README.md"}, {"@type": "CreativeWork", "name": "C7 Evidence Generation and Properties, 7.1.1 to 7.1.5, 7.3.2, 7.6.1 to 7.6.3", "url": "https://github.com/LFDT-ProofOfControl/ov-poc-standard/blob/22c7b62/0.1/en/0x10-C07-Evidence-Generation-and-Properties.md"}, {"@type": "CreativeWork", "name": "Using Proof-of-Control, Requirement Levels table", "url": "https://github.com/LFDT-ProofOfControl/ov-poc-standard/blob/22c7b62/0.1/en/0x03-Using-Proof-of-Control.md"}, {"@type": "CreativeWork", "name": "Appendix C, Threat Model (normative)", "url": "https://github.com/LFDT-ProofOfControl/ov-poc-standard/blob/22c7b62/0.1/en/0x92-Appendix-C_Threat-Model.md"}, {"@type": "CreativeWork", "name": "C10 Conformance and Disclosure, 10.3.2", "url": "https://github.com/LFDT-ProofOfControl/ov-poc-standard/blob/22c7b62/0.1/en/0x10-C10-Conformance-and-Disclosure.md"}, {"@type": "CreativeWork", "name": "CSA AARM crosswalk (draft seed coding)", "url": "https://github.com/LFDT-ProofOfControl/ov-poc-standard/blob/22c7b62/mappings/csa-aarm.md"}, {"@type": "CreativeWork", "name": "CISO review of v0.1.4, finding F1", "url": "https://github.com/LFDT-ProofOfControl/ov-poc-standard/blob/22c7b62/docs/reviews/ciso-review-v0.1.4.md"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://imransiddique.com/"}, {"@type": "ListItem", "position": 2, "name": "Notes", "item": "https://imransiddique.com/notes/"}, {"@type": "ListItem", "position": 3, "name": "The evidence standard that needs a gate to count", "item": "https://imransiddique.com/notes/2026-09-24-evidence-standard-needs-a-gate.html"}]}]}</script>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../index.html#book">Book</a></li>
+                <li><a href="../notes/index.html" class="active">Writing</a></li>
+                <li><a href="../speaking/index.html">Speaking</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <article class="note">
+            <div class="container container-narrow">
+                <p class="note-back"><a href="index.html">&larr; All notes</a></p>
+                <time class="note-date" datetime="2026-09-24">24 September 2026</time>
+                <h1>The evidence standard that needs a gate to count</h1>
+                <p class="note-standfirst">Proof-of-Control positions itself as the evidence half of agent assurance, not runtime enforcement. Its own threshold requires an in-path gateway that withholds actions, and its threat model has no row for that gateway. Filed as issue 78.</p>
+                <div class="note-tags"><span class="concept-tag">agent-security</span><span class="concept-tag">standards</span><span class="concept-tag">enforcement</span></div>
+                <div class="note-body">
+<p>"Enforcement decides what an agent may do; verification shows what it actually did."</p>
+<p>That line is from the Proof-of-Control crosswalk against CSA AARM, and it is a good division of labour. The README repeats it as a boundary: under what Proof-of-Control is not, one of four entries is "Not runtime enforcement." I use the same split in my own work. A gate prevents. A signed record proves. A log has never stopped anything.</p>
+<p>The standard, currently Working Draft v0.1.4 and open for public comment until 30 October, does not hold to it.</p>
+<h2>Where the line moves</h2>
+<p>C7.1 is called Generation at the Action Boundary. Three of its requirements describe a component that holds actions back:</p>
+<ul><li>7.1.1: "the agent has no network or credential path to its tools that bypasses the gateway."</li><li>7.1.3: "the gateway does not forward the action to the tool until the <em>before</em> record is durably written."</li><li>7.1.4 (c): "an attested enforcement point that admits only requests carrying matching evidence."</li></ul>
+<p>All three are Level 3. The standard's Requirement Levels table says meeting every Level 1 to 3 requirement in the claimed domains is the minimum for a Proof-of-Control claim. So nothing gets the label without an in-path, fail-closed gateway. That is enforcement, at the service, before the operation runs. Its only policy is that evidence exists, but it withholds the action all the same.</p>
+<p>I think those requirements are right. Evidencing a policy evaluation without controlling the effect channel is how a system ends up with perfect records of decisions it never enforced, and 7.1.5 caps that case below the threshold for exactly that reason. The problem is what happened around them.</p>
+<h2>The component with no row</h2>
+<p>Appendix C is the normative threat model: 32 coverage rows. In the column describing what Proof-of-Control defends against, 12 rows use "gate" or "gates". Word-boundary matches on the raw file for gateway, intercept, interception, mediation, custody and bypass: zero for all six.</p>
+<p>The gateway sees every action at Level 3, holds the signing keys that 7.3.2 puts out of the operator's reach, and at Level 4 refuses actions under 7.6.3 when evidence cannot be written. The CISO review found the failure case, F1, "No fail-closed requirement", and it was applied as 7.6.1 and 7.6.3. The compromise case never got a row.</p>
+<p>The nearest row, audit tampering, is about a host rewriting the record. A compromised gateway rewrites nothing. It signs true records for the actions it lets through and writes nothing for the ones it does not, and every signature verifies.</p>
+<h2>The check that does not reach it</h2>
+<p>Here is the part that is not in the issue, and it is the part I would test first.</p>
+<p>At Level 4, 10.3.2 requires evidence to cover every in-scope action, "demonstrated by reconciling gateway action counts against evidence-record counts over an audit window, with zero unexplained difference." Both numbers come from the gateway. An action that goes around it adds to neither count, so the reconciliation balances.</p>
+<p>That is judgment, not a measurement. I have read the text; I have not run a conformant deployment against it. But the arithmetic does not depend on the implementation.</p>
+<h2>What I filed</h2>
+<p>Issue 78 asks for three things: two Appendix C rows, gateway compromise and gateway bypass, with honest coverage grades; the gateway operator added to the C10.2 trust-assumption disclosure; and a restated boundary. My suggested wording is that Proof-of-Control does not define the policy an agent is held to, and does require an enforcement point whose only policy is that evidence exists. Issue 79 is smaller: the one-pager still tells newcomers Tiers 3 and 4 require trusting "no one", a claim C8 has already withdrawn. Comments in the window get a published disposition.</p>
+<p>For anyone evaluating a system that claims Proof-of-Control, ask who operates the gateway, then reconcile the tool side's own request logs against the evidence store rather than the gateway's counts. A tool call that appears in the first and not the second is the row Appendix C is missing.</p>
+                </div>
+                <section class="note-sources">
+                    <h2>Checked against</h2>
+                    <ul><li><a href="https://github.com/LFDT-ProofOfControl/ov-poc-standard/issues/78" rel="noopener">LFDT-ProofOfControl/ov-poc-standard issue 78, filed 24 September 2026</a></li><li><a href="https://github.com/LFDT-ProofOfControl/ov-poc-standard/issues/79" rel="noopener">LFDT-ProofOfControl/ov-poc-standard issue 79, one-pager residual trust</a></li><li><a href="https://github.com/LFDT-ProofOfControl/ov-poc-standard/blob/22c7b62/README.md" rel="noopener">README, &quot;What Proof-of-Control is NOT&quot;, commit 22c7b62</a></li><li><a href="https://github.com/LFDT-ProofOfControl/ov-poc-standard/blob/22c7b62/0.1/en/0x10-C07-Evidence-Generation-and-Properties.md" rel="noopener">C7 Evidence Generation and Properties, 7.1.1 to 7.1.5, 7.3.2, 7.6.1 to 7.6.3</a></li><li><a href="https://github.com/LFDT-ProofOfControl/ov-poc-standard/blob/22c7b62/0.1/en/0x03-Using-Proof-of-Control.md" rel="noopener">Using Proof-of-Control, Requirement Levels table</a></li><li><a href="https://github.com/LFDT-ProofOfControl/ov-poc-standard/blob/22c7b62/0.1/en/0x92-Appendix-C_Threat-Model.md" rel="noopener">Appendix C, Threat Model (normative)</a></li><li><a href="https://github.com/LFDT-ProofOfControl/ov-poc-standard/blob/22c7b62/0.1/en/0x10-C10-Conformance-and-Disclosure.md" rel="noopener">C10 Conformance and Disclosure, 10.3.2</a></li><li><a href="https://github.com/LFDT-ProofOfControl/ov-poc-standard/blob/22c7b62/mappings/csa-aarm.md" rel="noopener">CSA AARM crosswalk (draft seed coding)</a></li><li><a href="https://github.com/LFDT-ProofOfControl/ov-poc-standard/blob/22c7b62/docs/reviews/ciso-review-v0.1.4.md" rel="noopener">CISO review of v0.1.4, finding F1</a></li></ul>
+                </section>
+                
+            </div>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique.</p>
+                <p><a href="../notes/feed.xml">RSS</a> &middot; <a href="../index.html">imransiddique.com</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>
