@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The MCP TypeScript SDK&#x27;s 1.30.1 patch added a 4 MiB body limit and a 100 message batch limit. On the Express path the SDK documents, the batch limit holds and the body limit is never consulted. A 100 kilobyte parser default refuses first, and the transport never hears about it.">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://imransiddique.com/notes/2026-09-25-two-caps-two-enforcement-points.html">
+    <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Imran Siddique">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://imransiddique.com/notes/2026-09-25-two-caps-two-enforcement-points.html">
+    <meta property="og:title" content="Two caps, two enforcement points">
+    <meta property="og:description" content="The MCP TypeScript SDK&#x27;s 1.30.1 patch added a 4 MiB body limit and a 100 message batch limit. On the Express path the SDK documents, the batch limit holds and the body limit is never consulted. A 100 kilobyte parser default refuses first, and the transport never hears about it.">
+    <meta property="og:image" content="https://imransiddique.com/notes/cards/2026-09-25-two-caps-two-enforcement-points.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-09-25">
+    <meta property="article:modified_time" content="2026-09-25">
+    <meta property="article:author" content="https://imransiddique.com/about.html">
+    <meta property="article:tag" content="agent-security">
+    <meta property="article:tag" content="mcp">
+    <meta property="article:tag" content="enforcement">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:creator" content="@mosiddi">
+    <meta name="twitter:title" content="Two caps, two enforcement points">
+    <meta name="twitter:description" content="The MCP TypeScript SDK&#x27;s 1.30.1 patch added a 4 MiB body limit and a 100 message batch limit. On the Express path the SDK documents, the batch limit holds and the body limit is never consulted. A 100 kilobyte parser default refuses first, and the transport never hears about it.">
+    <meta name="twitter:image" content="https://imransiddique.com/notes/cards/2026-09-25-two-caps-two-enforcement-points.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>Two caps, two enforcement points | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css?v=f44781a">
+    <link rel="stylesheet" href="../notes/notes.css">
+</head>
+<body>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "@id": "https://imransiddique.com/notes/2026-09-25-two-caps-two-enforcement-points.html#article", "headline": "Two caps, two enforcement points", "description": "The MCP TypeScript SDK's 1.30.1 patch added a 4 MiB body limit and a 100 message batch limit. On the Express path the SDK documents, the batch limit holds and the body limit is never consulted. A 100 kilobyte parser default refuses first, and the transport never hears about it.", "datePublished": "2026-09-25", "dateModified": "2026-09-25", "inLanguage": "en-US", "wordCount": 756, "keywords": ["agent-security", "mcp", "enforcement"], "image": "https://imransiddique.com/notes/cards/2026-09-25-two-caps-two-enforcement-points.png", "author": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "publisher": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "isPartOf": {"@type": "Blog", "@id": "https://imransiddique.com/notes/#blog", "name": "Notes by Imran Siddique", "url": "https://imransiddique.com/notes/"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-09-25-two-caps-two-enforcement-points.html", "url": "https://imransiddique.com/notes/2026-09-25-two-caps-two-enforcement-points.html", "citation": [{"@type": "CreativeWork", "name": "\"@modelcontextprotocol/sdk on npm, 1.30.0 and 1.30.1 publish times\"", "url": "https://www.npmjs.com/package/@modelcontextprotocol/sdk"}, {"@type": "CreativeWork", "name": "Release 1.30.1 notes, three pull requests", "url": "https://github.com/modelcontextprotocol/typescript-sdk/releases/tag/1.30.1"}, {"@type": "CreativeWork", "name": "Pull request 2717, the v1.x backport of the body and batch limits", "url": "https://github.com/modelcontextprotocol/typescript-sdk/pull/2717"}, {"@type": "CreativeWork", "name": "Issue 1354, asking for a configurable parser limit on createMcpExpressApp", "url": "https://github.com/modelcontextprotocol/typescript-sdk/issues/1354"}, {"@type": "CreativeWork", "name": "Pull request 1625, adding jsonLimit on main, merged 5 March 2026", "url": "https://github.com/modelcontextprotocol/typescript-sdk/pull/1625"}, {"@type": "CreativeWork", "name": "\"@modelcontextprotocol/express on npm, 2.0.1\"", "url": "https://www.npmjs.com/package/@modelcontextprotocol/express"}, {"@type": "CreativeWork", "name": "Issue 2843, non-loopback host skips Host validation", "url": "https://github.com/modelcontextprotocol/typescript-sdk/issues/2843"}, {"@type": "CreativeWork", "name": "body-parser, the json limit default", "url": "https://github.com/expressjs/body-parser#limit"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://imransiddique.com/"}, {"@type": "ListItem", "position": 2, "name": "Notes", "item": "https://imransiddique.com/notes/"}, {"@type": "ListItem", "position": 3, "name": "Two caps, two enforcement points", "item": "https://imransiddique.com/notes/2026-09-25-two-caps-two-enforcement-points.html"}]}]}</script>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../index.html#book">Book</a></li>
+                <li><a href="../notes/index.html" class="active">Writing</a></li>
+                <li><a href="../speaking/index.html">Speaking</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <article class="note">
+            <div class="container container-narrow">
+                <p class="note-back"><a href="index.html">&larr; All notes</a></p>
+                <time class="note-date" datetime="2026-09-25">25 September 2026</time>
+                <h1>Two caps, two enforcement points</h1>
+                <p class="note-standfirst">The MCP TypeScript SDK&#x27;s 1.30.1 patch added a 4 MiB body limit and a 100 message batch limit. On the Express path the SDK documents, the batch limit holds and the body limit is never consulted. A 100 kilobyte parser default refuses first, and the transport never hears about it.</p>
+                <div class="note-tags"><span class="concept-tag">agent-security</span><span class="concept-tag">mcp</span><span class="concept-tag">enforcement</span></div>
+                <div class="note-body">
+<p>Set <code>maxRequestBodySize</code> to 20 MB on an MCP server built with the TypeScript SDK's own Express factory, send it 110 kilobytes of JSON-RPC, and it answers 413. The body of that 413 is an HTML page.</p>
+<p>Release 1.30.1 went to npm on 23 September, two months after 1.30.0. The package diff is small: three modules changed, one added, and the version string. The added module, <code>requestBody</code>, sets two numbers. A POST body over 4 MiB gets 413. A JSON-RPC batch longer than 100 messages gets 400 with code -32600.</p>
+<p>Both work. They are checked in different places.</p>
+<h2>Where each one sits</h2>
+<p>The web standard transport takes a POST one of two ways. If the caller passes a pre parsed body, it uses that. Otherwise it reads the stream itself, refusing a declared Content-Length over the bound before reading anything and stopping the moment the bound is crossed. The byte cap lives inside that second branch. The batch cap sits after both branches close, so it runs on the array however it arrived.</p>
+<p>The pull request says so. A pre parsed body <em>"remains the way to opt out of the SDK's read entirely"</em>, and the batch bound applies on both paths. Nothing is hidden. It is also the path the documented deployment takes.</p>
+<h2>What the documented server does</h2>
+<p><code>createMcpExpressApp</code> in the 1.x package mounts <code>express.json()</code> with no options. The Node transport's doc comment shows the handler passing <code>req.body</code> in as the pre parsed body. Express 5.2.1 resolves body-parser 2.3.0, whose limit defaults to 102,400 bytes.</p>
+<p>I ran that server on 1.30.1 with the transport option set to 20 MB:</p>
+<ul><li>90 KB body: 200.</li><li>110 KB body: 413, <code>text/html</code>, from Express. The route handler ran zero times.</li><li>5 MiB body: the same HTML 413.</li><li>101 message batch: 400, code -32600, from the transport.</li><li>The same transport reading the body itself: 110 KB passes, 5 MiB gets a JSON-RPC 413 naming 4194304 bytes.</li></ul>
+<p>The 20 MB setting is accepted, validated (0, -1, NaN and the string "4mb" each throw a RangeError at construction) and then <strong>never read</strong>. The ceiling that fires is 100 kilobytes, owned by a component the option cannot reach. On the 1.x factory nothing can reach it: its options type has two fields, <code>host</code> and <code>allowedHosts</code>.</p>
+<h2>What the operator sees</h2>
+<p>A client gets two different 413s for one condition. One is a JSON-RPC error object. The other is an Express error page, so a client that parses errors as JSON-RPC gets HTML instead.</p>
+<p>Monitoring splits the same way. The transport's <code>onerror</code> hook fired once for the 101 message batch and <strong>zero times</strong> for the 110 KB body, because the transport never ran. The only trace of that refusal is Express printing a stack to stderr through its default error handler. The parser prevented the request. The layer most teams instrument never recorded it.</p>
+<h2>The fix exists, on the other line</h2>
+<p>Issue 1354 asked for this, and pull request 1625 added a <code>jsonLimit</code> option in March. That landed on main, which ships as the v2 split packages. <code>@modelcontextprotocol/express</code> 2.0.1, published the same day as 1.30.1, has the option, and still defaults to the parser's 100 kilobytes when it is unset.</p>
+<p>The 1.x package is the one most people install. npm counted 40.3 million downloads of <code>@modelcontextprotocol/sdk</code> in the week to 21 September, against 239,746 for the v2 Express package. Downloads are not deployments. The gap is still two orders of magnitude.</p>
+<p>On 1.x, skip the factory. Build the Express app with the exported <code>hostHeaderValidation</code> middleware, mount <code>express.json({ limit })</code> at the number you meant, and add an error handler that answers in JSON-RPC and logs where the rest of your refusals go. On v2, set <code>jsonLimit</code> to match <code>maxRequestBodySize</code> so the two numbers agree.</p>
+<h2>What did not survive checking</h2>
+<p>"The factory offers no way to change the limit." True of 1.x only. v2 has had <code>jsonLimit</code> since March.</p>
+<p>"The release reordered a Host check that is not there." Partly. 1.30.1 moved the parser below Host validation, with a shipped comment saying a disallowed Host gets 403 unread. With no <code>allowedHosts</code> and any host other than the three loopback names, that validation is not installed. Issue 2843 already reports it on main, and a second contributor confirmed it across the Express, Hono and Fastify factories on 24 September. It is their finding, so it stays there.</p>
+<p>The release note describes two limits. On the deployment the SDK documents, one of them is 100 kilobytes and belongs to Express.</p>
+                </div>
+                <section class="note-sources">
+                    <h2>Checked against</h2>
+                    <ul><li><a href="https://www.npmjs.com/package/@modelcontextprotocol/sdk" rel="noopener">&quot;@modelcontextprotocol/sdk on npm, 1.30.0 and 1.30.1 publish times&quot;</a></li><li><a href="https://github.com/modelcontextprotocol/typescript-sdk/releases/tag/1.30.1" rel="noopener">Release 1.30.1 notes, three pull requests</a></li><li><a href="https://github.com/modelcontextprotocol/typescript-sdk/pull/2717" rel="noopener">Pull request 2717, the v1.x backport of the body and batch limits</a></li><li><a href="https://github.com/modelcontextprotocol/typescript-sdk/issues/1354" rel="noopener">Issue 1354, asking for a configurable parser limit on createMcpExpressApp</a></li><li><a href="https://github.com/modelcontextprotocol/typescript-sdk/pull/1625" rel="noopener">Pull request 1625, adding jsonLimit on main, merged 5 March 2026</a></li><li><a href="https://www.npmjs.com/package/@modelcontextprotocol/express" rel="noopener">&quot;@modelcontextprotocol/express on npm, 2.0.1&quot;</a></li><li><a href="https://github.com/modelcontextprotocol/typescript-sdk/issues/2843" rel="noopener">Issue 2843, non-loopback host skips Host validation</a></li><li><a href="https://github.com/expressjs/body-parser#limit" rel="noopener">body-parser, the json limit default</a></li></ul>
+                </section>
+                
+            </div>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique.</p>
+                <p><a href="../notes/feed.xml">RSS</a> &middot; <a href="../index.html">imransiddique.com</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>

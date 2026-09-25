@@ -1,5 +1,54 @@
 [
   {
+    "slug": "2026-09-25-two-caps-two-enforcement-points",
+    "title": "Two caps, two enforcement points",
+    "date": "2026-09-25",
+    "standfirst": "The MCP TypeScript SDK's 1.30.1 patch added a 4 MiB body limit and a 100 message batch limit. On the Express path the SDK documents, the batch limit holds and the body limit is never consulted. A 100 kilobyte parser default refuses first, and the transport never hears about it.",
+    "tags": [
+      "agent-security",
+      "mcp",
+      "enforcement"
+    ],
+    "sources": [
+      {
+        "label": "\"@modelcontextprotocol/sdk on npm, 1.30.0 and 1.30.1 publish times\"",
+        "url": "https://www.npmjs.com/package/@modelcontextprotocol/sdk"
+      },
+      {
+        "label": "Release 1.30.1 notes, three pull requests",
+        "url": "https://github.com/modelcontextprotocol/typescript-sdk/releases/tag/1.30.1"
+      },
+      {
+        "label": "Pull request 2717, the v1.x backport of the body and batch limits",
+        "url": "https://github.com/modelcontextprotocol/typescript-sdk/pull/2717"
+      },
+      {
+        "label": "Issue 1354, asking for a configurable parser limit on createMcpExpressApp",
+        "url": "https://github.com/modelcontextprotocol/typescript-sdk/issues/1354"
+      },
+      {
+        "label": "Pull request 1625, adding jsonLimit on main, merged 5 March 2026",
+        "url": "https://github.com/modelcontextprotocol/typescript-sdk/pull/1625"
+      },
+      {
+        "label": "\"@modelcontextprotocol/express on npm, 2.0.1\"",
+        "url": "https://www.npmjs.com/package/@modelcontextprotocol/express"
+      },
+      {
+        "label": "Issue 2843, non-loopback host skips Host validation",
+        "url": "https://github.com/modelcontextprotocol/typescript-sdk/issues/2843"
+      },
+      {
+        "label": "body-parser, the json limit default",
+        "url": "https://github.com/expressjs/body-parser#limit"
+      }
+    ],
+    "linkedin": "",
+    "x": "",
+    "words": 756,
+    "url": "https://imransiddique.com/notes/2026-09-25-two-caps-two-enforcement-points.html"
+  },
+  {
     "slug": "2026-09-24-evidence-standard-needs-a-gate",
     "title": "The evidence standard that needs a gate to count",
     "date": "2026-09-24",
