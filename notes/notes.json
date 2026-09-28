@@ -1,5 +1,54 @@
 [
   {
+    "slug": "2026-09-28-functional-observation-by-default",
+    "title": "Functional Observation by default",
+    "date": "2026-09-28",
+    "standfirst": "The App Defense Alliance AI Agent Specification defines three kinds of lab evidence and says an untagged requirement defaults to black-box testing. None of its 37 requirements is tagged, so two that need a configuration file or system logs read as black-box passes. Filed as issue 514.",
+    "tags": [
+      "agent-security",
+      "standards",
+      "evidence"
+    ],
+    "sources": [
+      {
+        "label": "appdefensealliance/ASA-WG issue 514, filed 28 September 2026",
+        "url": "https://github.com/appdefensealliance/ASA-WG/issues/514"
+      },
+      {
+        "label": "Comment on pull request 494, the Specification and Test Guide split",
+        "url": "https://github.com/appdefensealliance/ASA-WG/pull/494#issuecomment-5873432330"
+      },
+      {
+        "label": "AI Agent Specification on develop, commit 97c9f94",
+        "url": "https://github.com/appdefensealliance/ASA-WG/blob/97c9f946295cedd21d533ac91910c6c4f5cc77bc/AI%20Profile/AI%20Agent%20Specification.md"
+      },
+      {
+        "label": "AI Tool Testing Guide on develop, commit 97c9f94",
+        "url": "https://github.com/appdefensealliance/ASA-WG/blob/97c9f946295cedd21d533ac91910c6c4f5cc77bc/AI%20Profile/AI%20Tool%20Testing%20Guide.md"
+      },
+      {
+        "label": "Pull request 427, the evidence taxonomy and the held tagging item",
+        "url": "https://github.com/appdefensealliance/ASA-WG/pull/427"
+      },
+      {
+        "label": "Pull request 437, section 2.4.2 Verifiable Tool Identity and Provenance",
+        "url": "https://github.com/appdefensealliance/ASA-WG/pull/437"
+      },
+      {
+        "label": "Issue 400, one source of truth for the Tool documents",
+        "url": "https://github.com/appdefensealliance/ASA-WG/issues/400"
+      },
+      {
+        "label": "trace-spec LIMITATIONS.md, Platform state is not appraised",
+        "url": "https://github.com/agentrust-io/trace-spec/blob/e3111c7/LIMITATIONS.md"
+      }
+    ],
+    "linkedin": "",
+    "x": "",
+    "words": 767,
+    "url": "https://imransiddique.com/notes/2026-09-28-functional-observation-by-default.html"
+  },
+  {
     "slug": "2026-09-25-two-caps-two-enforcement-points",
     "title": "Two caps, two enforcement points",
     "date": "2026-09-25",
@@ -44,7 +93,7 @@
       }
     ],
     "linkedin": "",
-    "x": "",
+    "x": "https://x.com/mosiddi/status/2103502582048342030",
     "words": 756,
     "url": "https://imransiddique.com/notes/2026-09-25-two-caps-two-enforcement-points.html"
   },

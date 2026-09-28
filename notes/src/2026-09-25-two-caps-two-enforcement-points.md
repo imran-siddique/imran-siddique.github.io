@@ -3,6 +3,7 @@ title: Two caps, two enforcement points
 date: 2026-09-25
 standfirst: The MCP TypeScript SDK's 1.30.1 patch added a 4 MiB body limit and a 100 message batch limit. On the Express path the SDK documents, the batch limit holds and the body limit is never consulted. A 100 kilobyte parser default refuses first, and the transport never hears about it.
 tags: [agent-security, mcp, enforcement]
+x: https://x.com/mosiddi/status/2103502582048342030
 sources:
   - label: "@modelcontextprotocol/sdk on npm, 1.30.0 and 1.30.1 publish times"
     url: https://www.npmjs.com/package/@modelcontextprotocol/sdk

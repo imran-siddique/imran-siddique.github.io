@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The App Defense Alliance AI Agent Specification defines three kinds of lab evidence and says an untagged requirement defaults to black-box testing. None of its 37 requirements is tagged, so two that need a configuration file or system logs read as black-box passes. Filed as issue 514.">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://imransiddique.com/notes/2026-09-28-functional-observation-by-default.html">
+    <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Imran Siddique">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://imransiddique.com/notes/2026-09-28-functional-observation-by-default.html">
+    <meta property="og:title" content="Functional Observation by default">
+    <meta property="og:description" content="The App Defense Alliance AI Agent Specification defines three kinds of lab evidence and says an untagged requirement defaults to black-box testing. None of its 37 requirements is tagged, so two that need a configuration file or system logs read as black-box passes. Filed as issue 514.">
+    <meta property="og:image" content="https://imransiddique.com/notes/cards/2026-09-28-functional-observation-by-default.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-09-28">
+    <meta property="article:modified_time" content="2026-09-28">
+    <meta property="article:author" content="https://imransiddique.com/about.html">
+    <meta property="article:tag" content="agent-security">
+    <meta property="article:tag" content="standards">
+    <meta property="article:tag" content="evidence">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:creator" content="@mosiddi">
+    <meta name="twitter:title" content="Functional Observation by default">
+    <meta name="twitter:description" content="The App Defense Alliance AI Agent Specification defines three kinds of lab evidence and says an untagged requirement defaults to black-box testing. None of its 37 requirements is tagged, so two that need a configuration file or system logs read as black-box passes. Filed as issue 514.">
+    <meta name="twitter:image" content="https://imransiddique.com/notes/cards/2026-09-28-functional-observation-by-default.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>Functional Observation by default | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css?v=f44781a">
+    <link rel="stylesheet" href="../notes/notes.css">
+</head>
+<body>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "@id": "https://imransiddique.com/notes/2026-09-28-functional-observation-by-default.html#article", "headline": "Functional Observation by default", "description": "The App Defense Alliance AI Agent Specification defines three kinds of lab evidence and says an untagged requirement defaults to black-box testing. None of its 37 requirements is tagged, so two that need a configuration file or system logs read as black-box passes. Filed as issue 514.", "datePublished": "2026-09-28", "dateModified": "2026-09-28", "inLanguage": "en-US", "wordCount": 767, "keywords": ["agent-security", "standards", "evidence"], "image": "https://imransiddique.com/notes/cards/2026-09-28-functional-observation-by-default.png", "author": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "publisher": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "isPartOf": {"@type": "Blog", "@id": "https://imransiddique.com/notes/#blog", "name": "Notes by Imran Siddique", "url": "https://imransiddique.com/notes/"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-09-28-functional-observation-by-default.html", "url": "https://imransiddique.com/notes/2026-09-28-functional-observation-by-default.html", "citation": [{"@type": "CreativeWork", "name": "appdefensealliance/ASA-WG issue 514, filed 28 September 2026", "url": "https://github.com/appdefensealliance/ASA-WG/issues/514"}, {"@type": "CreativeWork", "name": "Comment on pull request 494, the Specification and Test Guide split", "url": "https://github.com/appdefensealliance/ASA-WG/pull/494#issuecomment-5873432330"}, {"@type": "CreativeWork", "name": "AI Agent Specification on develop, commit 97c9f94", "url": "https://github.com/appdefensealliance/ASA-WG/blob/97c9f946295cedd21d533ac91910c6c4f5cc77bc/AI%20Profile/AI%20Agent%20Specification.md"}, {"@type": "CreativeWork", "name": "AI Tool Testing Guide on develop, commit 97c9f94", "url": "https://github.com/appdefensealliance/ASA-WG/blob/97c9f946295cedd21d533ac91910c6c4f5cc77bc/AI%20Profile/AI%20Tool%20Testing%20Guide.md"}, {"@type": "CreativeWork", "name": "Pull request 427, the evidence taxonomy and the held tagging item", "url": "https://github.com/appdefensealliance/ASA-WG/pull/427"}, {"@type": "CreativeWork", "name": "Pull request 437, section 2.4.2 Verifiable Tool Identity and Provenance", "url": "https://github.com/appdefensealliance/ASA-WG/pull/437"}, {"@type": "CreativeWork", "name": "Issue 400, one source of truth for the Tool documents", "url": "https://github.com/appdefensealliance/ASA-WG/issues/400"}, {"@type": "CreativeWork", "name": "trace-spec LIMITATIONS.md, Platform state is not appraised", "url": "https://github.com/agentrust-io/trace-spec/blob/e3111c7/LIMITATIONS.md"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://imransiddique.com/"}, {"@type": "ListItem", "position": 2, "name": "Notes", "item": "https://imransiddique.com/notes/"}, {"@type": "ListItem", "position": 3, "name": "Functional Observation by default", "item": "https://imransiddique.com/notes/2026-09-28-functional-observation-by-default.html"}]}]}</script>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../index.html#book">Book</a></li>
+                <li><a href="../notes/index.html" class="active">Writing</a></li>
+                <li><a href="../speaking/index.html">Speaking</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <article class="note">
+            <div class="container container-narrow">
+                <p class="note-back"><a href="index.html">&larr; All notes</a></p>
+                <time class="note-date" datetime="2026-09-28">28 September 2026</time>
+                <h1>Functional Observation by default</h1>
+                <p class="note-standfirst">The App Defense Alliance AI Agent Specification defines three kinds of lab evidence and says an untagged requirement defaults to black-box testing. None of its 37 requirements is tagged, so two that need a configuration file or system logs read as black-box passes. Filed as issue 514.</p>
+                <div class="note-tags"><span class="concept-tag">agent-security</span><span class="concept-tag">standards</span><span class="concept-tag">evidence</span></div>
+                <div class="note-body">
+<p>The App Defense Alliance AI Profile gained a good agent control on 22 September. Section 2.4.2, Verifiable Tool Identity and Provenance, merged through pull request 437. The agent may invoke only allowlisted tools with pinned identities, verifies server identity and catalog integrity when a session opens, rejects a tool definition that changes after pinning, and fails closed on anything unknown or revoked. Those are enforcement requirements on the agent, before the call, and I have no quarrel with any of them.</p>
+<p>The same document has a sound idea about assessment too. Its Evidence Taxonomy, added in August for issue 411, sorts lab evidence into three kinds. Functional Observation is the assessor driving the production agent through its user and tool interfaces, with "No source-code or backend access." Attestation is a named artifact the developer supplies on request, and the taxonomy's example is log-file samples. Document Review covers policies that cannot be exercised.</p>
+<p>Then one sentence sets the default: "where a requirement can be satisfied purely by exercising the running application, it is Functional Observation by default."</p>
+<h2>The default does the tagging</h2>
+<p>On develop the three type names occur only inside the taxonomy section. A word-boundary grep of the raw file finds Functional Observation three times, Attestation three times and Document Review twice, and none of them in any of the 37 requirement Evidence blocks. So all 37 read as <strong>Functional Observation</strong>, including two that cannot be met that way.</p>
+<p>Section 2.4.2's Evidence block says: <em>"Agent application, including its tool allowlist/registry configuration. Access to the user interface and the tool interface."</em> Its first test step is to review that allowlist. Neither interface exposes it. Section 5.2.1 lists "System log files", which is the taxonomy's own example of Attestation.</p>
+<p>The 2.4.2 step also ends "(AL0/AL1 static evidence)". The document says this version "only contains testing guidance and acceptance criteria of Assurance Level 2", and leaves AL0 and AL1 to future revisions. One file over, the AI Tool Testing Guide defines both levels as evidence "based on source code inspection", the access Functional Observation rules out.</p>
+<p>In practice, a lab report saying 2.4.2 passed does not say whether the assessor saw the allowlist, took the developer's word for it, or read a configuration file sent over the day before. Under the default, each of those is a black-box pass.</p>
+<p>TRACE has this problem written down about itself. The trace-spec limitations file has a section headed Platform state is not appraised, and its consequence is that "a report from a machine with SMT enabled and the alias check never completed verifies exactly as cleanly as one from a machine with neither condition." An untagged Evidence block does the same to a certification one layer up. The pass is valid. What it was bought with is not in it.</p>
+<h2>It was already proposed</h2>
+<p>The idea is not mine. Issue 411 recommended tagging each requirement. Pull request 427, which added the taxonomy and closed 411, says: "Held for WG input (not in this PR): whether to tag <em>every</em> requirement's Evidence block with a type (recommended)." Nothing tracked that item until issue 514. The AI Tool Testing Guide in the same profile already carries an evidence line on <strong>38 of its 38</strong> Evidence blocks, per assurance level rather than per type, so the working group has the habit on one side and not the other.</p>
+<p>Timing matters because pull request 494, opened 22 September, splits the Agent Specification into a Specification and a Test Guide. On that branch the Test Guide holds 36 Evidence blocks and the Specification holds 16 Audit sections and none. Both files carry the taxonomy paragraph, identical to the byte, and both still say "Every AL2 test case in this specification". The branch was cut before 437 merged, so 2.4.2 is not in it yet; aeoess flagged that in review on 23 September.</p>
+<h2>What I filed</h2>
+<p>Issue 514 asks for a type line on each Evidence block, Functional Observation unless stated, with the named artifact for every Attestation or Document Review entry, starting with 2.4.2 and 5.2.1, and for the AL0/AL1 parenthetical to go. On 494 I asked the group to name one owner for the taxonomy before merge, since issue 400 already asks for a single source of truth on the Tool side.</p>
+<p>The counts are word-boundary greps of the raw files on develop at 97c9f94 and on the 494 head at 1be3d9e. This is a reading of the text, not an assessment I have run.</p>
+<p>If 494 merges first, the tags go into its Test Guide: 36 blocks now, 37 once 2.4.2 is carried over.</p>
+                </div>
+                <section class="note-sources">
+                    <h2>Checked against</h2>
+                    <ul><li><a href="https://github.com/appdefensealliance/ASA-WG/issues/514" rel="noopener">appdefensealliance/ASA-WG issue 514, filed 28 September 2026</a></li><li><a href="https://github.com/appdefensealliance/ASA-WG/pull/494#issuecomment-5873432330" rel="noopener">Comment on pull request 494, the Specification and Test Guide split</a></li><li><a href="https://github.com/appdefensealliance/ASA-WG/blob/97c9f946295cedd21d533ac91910c6c4f5cc77bc/AI%20Profile/AI%20Agent%20Specification.md" rel="noopener">AI Agent Specification on develop, commit 97c9f94</a></li><li><a href="https://github.com/appdefensealliance/ASA-WG/blob/97c9f946295cedd21d533ac91910c6c4f5cc77bc/AI%20Profile/AI%20Tool%20Testing%20Guide.md" rel="noopener">AI Tool Testing Guide on develop, commit 97c9f94</a></li><li><a href="https://github.com/appdefensealliance/ASA-WG/pull/427" rel="noopener">Pull request 427, the evidence taxonomy and the held tagging item</a></li><li><a href="https://github.com/appdefensealliance/ASA-WG/pull/437" rel="noopener">Pull request 437, section 2.4.2 Verifiable Tool Identity and Provenance</a></li><li><a href="https://github.com/appdefensealliance/ASA-WG/issues/400" rel="noopener">Issue 400, one source of truth for the Tool documents</a></li><li><a href="https://github.com/agentrust-io/trace-spec/blob/e3111c7/LIMITATIONS.md" rel="noopener">trace-spec LIMITATIONS.md, Platform state is not appraised</a></li></ul>
+                </section>
+                
+            </div>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique.</p>
+                <p><a href="../notes/feed.xml">RSS</a> &middot; <a href="../index.html">imransiddique.com</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>
