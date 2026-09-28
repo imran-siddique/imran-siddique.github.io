@@ -3,6 +3,7 @@ title: Functional Observation by default
 date: 2026-09-28
 standfirst: The App Defense Alliance AI Agent Specification defines three kinds of lab evidence and says an untagged requirement defaults to black-box testing. None of its 37 requirements is tagged, so two that need a configuration file or system logs read as black-box passes. Filed as issue 514.
 tags: [agent-security, standards, evidence]
+x: https://x.com/mosiddi/status/2104665046811087151
 sources:
   - label: appdefensealliance/ASA-WG issue 514, filed 28 September 2026
     url: https://github.com/appdefensealliance/ASA-WG/issues/514
