@@ -15,6 +15,19 @@
     ]
   },
   {
+    "date": "2026-10-22",
+    "title": "All Day AI",
+    "event": "All Day AI 2026",
+    "location": "Online",
+    "format": "Conference session",
+    "status": "scheduled",
+    "summary": "Accepted speaker for All Day AI on October 22, 2026. Session title and time to be announced.",
+    "url": "https://www.alldayai.com/",
+    "recording": "",
+    "tags": [],
+    "time": "Session title and time to be announced"
+  },
+  {
     "date": "2026-10-27",
     "title": "498 MCP Registry Entries Point at a Repository the Publisher Does Not Own",
     "event": "[un]prompted II, The AI Security Practitioner Conference",
@@ -47,24 +60,6 @@
     ]
   },
   {
-    "date": "2026-10-06",
-    "title": "Governed MCP: Cedar Policy Enforcement and TEE Attestation for Enterprise Tool Calls",
-    "event": "MCP Dev Summit Toronto 2026",
-    "location": "Toronto, Canada",
-    "format": "Session, 25 minutes",
-    "status": "scheduled",
-    "summary": "cMCP wraps any MCP server without changing the server or the agent: Cedar policies evaluated before a tool call runs, structured denials an agent can reason from, every call chained into a Merkle structure, and the chain root sealed into a hardware measurement so the receipt is verifiable without trusting the operator.",
-    "url": "https://events.linuxfoundation.org/mcp-dev-summit-toronto/program/schedule/?id=1260306",
-    "recording": "",
-    "tags": [
-      "cmcp",
-      "mcp",
-      "trace",
-      "confidential-computing"
-    ],
-    "registration": "https://events.linuxfoundation.org/mcp-dev-summit-toronto/register/"
-  },
-  {
     "date": "2026-09-30",
     "title": "Weight Custody Manifest: When the Model Leaves Your Data Center, the Threat Model Flips",
     "event": "AAIF Community Showcase, Agentic AI Foundation",
@@ -87,7 +82,7 @@
     "event": "OPAQUE Systems × Action State · Hosted by Mark Hinkle",
     "location": "Online",
     "format": "Webinar, 30 minutes",
-    "status": "scheduled",
+    "status": "delivered",
     "summary": "Two companies, one receipt, verified on your machine. Live offline verification of a TRACE Registry checkpoint witnessed by Action State, followed by questions.",
     "url": "https://event.webinarjam.com/462og/register/v1w8vs7v",
     "registration": "https://event.webinarjam.com/462og/register/v1w8vs7v",
