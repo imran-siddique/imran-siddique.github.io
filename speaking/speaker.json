@@ -1,21 +1,13 @@
 {
-  "intro": "I speak about what agent systems can actually prove, not what they claim. Talks are technical, demo-led, and usually carry a negative result alongside the working one.",
+  "intro": "I speak about building and operating AI systems, and the security and standards needed to use them responsibly. My talks draw on engineering work and contributions across AAIF, Appia, and CoSAI, with practical examples of what works, what fails, and what remains unproven.",
   "topics": [
     {
-      "title": "Runtime governance for AI agents",
-      "detail": "Where enforcement sits between an agent's decision and its action, and what a policy gate can express that a prompt cannot."
+      "title": "Building AI systems for production",
+      "detail": "Architecture, reliability, and operating AI at scale: from models and agent workflows to tools, data, and infrastructure. Practical lessons on deployment, evaluation, observability, and the trade-offs teams face in production."
     },
     {
-      "title": "Hardware attestation, and its limits",
-      "detail": "Validated on live SEV-SNP, TDX and H100. Including the part most talks skip: no confidential computing silicon is proof against someone who owns the machine."
-    },
-    {
-      "title": "Verifiable evidence and audit chains",
-      "detail": "Tamper-evident records a third party can check offline, and the difference between proving what happened and preventing it."
-    },
-    {
-      "title": "Model weight custody",
-      "detail": "What changes when the model leaves your data center, and why open weights do not end the custody problem."
+      "title": "AI security, governance, and open standards",
+      "detail": "How organizations control AI systems and assess the evidence behind them. Topics include agent identity and interoperability, authorization, confidential computing, model custody, auditability, and turning risk-management requirements into engineering controls."
     }
   ],
   "book": {

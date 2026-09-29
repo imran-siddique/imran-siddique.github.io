@@ -1878,7 +1878,7 @@ a.talk-card:hover .talk-thumb img { transform: scale(1.04); }
 
 .speak-topics {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-lg);
 }
 
@@ -1920,4 +1920,8 @@ a.talk-card:hover .talk-thumb img { transform: scale(1.04); }
 .speak-book a:hover,
 .speak-booking a:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+    .speak-topics { grid-template-columns: 1fr; }
 }
