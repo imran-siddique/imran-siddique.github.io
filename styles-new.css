@@ -1753,8 +1753,12 @@ footer a:hover { color: #fff; }
 .proof-video-channel {
     flex: 0 0 auto;
     color: inherit;
-    font-size: .82rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 1rem 1.4rem;
+    border: 2px solid currentColor;
+    border-radius: .6rem;
+    text-align: center;
     text-decoration: none;
 }
 .proof-video-channel:hover { text-decoration: underline; text-underline-offset: 3px; }

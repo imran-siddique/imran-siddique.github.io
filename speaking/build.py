@@ -345,7 +345,7 @@ def render(records, videos=(), speaker=None, _stale_out=None):
                         <h2 class="talk-h2" id="proof-videos-heading">Proof videos</h2>
                         <p class="proof-video-intro">Short, evidence-led demonstrations of what trustworthy AI systems can actually prove.</p>
                     </div>
-                    <a class="proof-video-channel" href="https://www.youtube.com/@imransiddiqueai" target="_blank" rel="noopener noreferrer">View all on YouTube <span aria-hidden="true">&rarr;</span></a>
+                    <a class="proof-video-channel" href="https://www.youtube.com/@imransiddiqueai" target="_blank" rel="noopener noreferrer">More proof videos on YouTube <span aria-hidden="true">&rarr;</span></a>
                 </div>
                 <div class="talk-grid">
 {cards}

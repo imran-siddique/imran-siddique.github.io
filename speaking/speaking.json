@@ -1,18 +1,20 @@
 [
   {
-    "date": "2026-10-30",
+    "date": "2026-11-16",
     "title": "Verifiable Agent Summit",
     "event": "Verifiable Agent Summit",
-    "location": "San Francisco, CA",
+    "location": "Workato · San Francisco, CA",
     "format": "Summit",
     "status": "scheduled",
     "summary": "In-person summit on verifiable agent control. TRACE is the evidence, ATF is the judgment, AAuth is the delivery.",
-    "url": "",
+    "url": "https://events.zoom.us/ev/AtEpq1n7kfuo-nbz6Gzh85JMXtfbaXH9QdnoFz7zVPiTI1GJZjpK~Ain1-MZYYigLXiIwOw6BrSBd7M7ZpjGoofeWaJRhb3wycG1tX6SHnnWAYQ",
     "recording": "",
     "tags": [
       "trace",
       "verifiable-agents"
-    ]
+    ],
+    "time": "4:00–8:00 PM Pacific",
+    "registration": "https://events.zoom.us/ev/AtEpq1n7kfuo-nbz6Gzh85JMXtfbaXH9QdnoFz7zVPiTI1GJZjpK~Ain1-MZYYigLXiIwOw6BrSBd7M7ZpjGoofeWaJRhb3wycG1tX6SHnnWAYQ"
   },
   {
     "date": "2026-10-22",
