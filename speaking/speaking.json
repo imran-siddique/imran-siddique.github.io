@@ -44,22 +44,6 @@
     ]
   },
   {
-    "date": "2026-10-15",
-    "title": "Your Root of Trust Is an Unhardened Parser: A Post-Mortem on My Own Attestation Code",
-    "event": "AI Security Summit, San Francisco",
-    "location": "San Francisco, CA",
-    "format": "Standard session, 20 minutes",
-    "status": "scheduled",
-    "summary": "Four defects found in the speaker's own shipped attestation verifier, all fixed in public commits: a declared length inside a TDX quote that overran its buffer, an invalid EAT profile URI that shipped in signed claims, documentation asserting hardware attestation for a path that did not have it, and nonce binding that does not stop a relayed quote. Live: replay a recorded SEV-SNP quote offline, then tamper, then relay.",
-    "url": "https://aisecuritysummit.com/",
-    "recording": "",
-    "tags": [
-      "attestation",
-      "confidential-computing",
-      "agent-manifest"
-    ]
-  },
-  {
     "date": "2026-12-08",
     "title": "Weight Custody Manifest: When the Model Leaves Your Data Center, the Threat Model Flips",
     "event": "AAIF Member Showcase, Agentic AI Foundation",
