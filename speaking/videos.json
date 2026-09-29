@@ -1,38 +1,128 @@
 [
   {
-    "number": "004",
-    "date": "2026-09-03",
-    "title": "AGT Runtime Guardrail: A Fully Offline Demo",
-    "subtitle": "Enforcement with no network",
-    "url": "https://www.youtube.com/watch?v=VvDsHqLYuXA",
-    "thumb": "",
-    "short": false
-  },
-  {
-    "number": "003",
-    "date": "2026-08-31",
-    "title": "Your Policy Engine Can Lie &mdash; Verify the Policy Hash",
-    "subtitle": "Checking the policy the engine actually loaded",
-    "url": "https://www.youtube.com/watch?v=Ir62ElWwv1M",
-    "thumb": "",
+    "number": "001",
+    "date": "2026-08-24",
+    "title": "Protect an AI Model from Tampering | Open-Weight Demo",
+    "subtitle": "Model custody, demonstrated",
+    "url": "https://www.youtube.com/watch?v=hIh6XsrPDgQ",
+    "thumb": "/speaking/assets/proof-video-001.png",
     "short": false
   },
   {
     "number": "002",
     "date": "2026-08-27",
     "title": "Change One Byte. This Model Refuses to Load.",
-    "subtitle": "Tamper detection in under a minute",
+    "subtitle": "Tamper detection before model loading",
     "url": "https://youtube.com/shorts/7o3jjn8Wy3M",
     "thumb": "/speaking/assets/proof-video-002.jpg",
     "short": true
   },
   {
-    "number": "001",
-    "date": "2026-08-24",
-    "title": "Open Weights Don't End the Custody Problem &mdash; Watch Tampering Fail",
-    "subtitle": "Model custody, demonstrated",
-    "url": "https://www.youtube.com/watch?v=hIh6XsrPDgQ",
-    "thumb": "/speaking/assets/proof-video-001.png",
+    "number": "003",
+    "date": "2026-08-31",
+    "title": "Did the Approved AI Policy Actually Run? Check the Hash",
+    "subtitle": "Checking the policy the engine actually loaded",
+    "url": "https://www.youtube.com/watch?v=Ir62ElWwv1M",
+    "thumb": "",
     "short": false
+  },
+  {
+    "number": "",
+    "date": "2026-09-03",
+    "title": "Stop a $250,000 Tool Call Before It Runs | Offline Agent Demo",
+    "subtitle": "Offline software demonstration of tool-call limits",
+    "url": "https://www.youtube.com/watch?v=VvDsHqLYuXA",
+    "thumb": "",
+    "short": false
+  },
+  {
+    "number": "004",
+    "date": "2026-09-04",
+    "title": "AI Agent Delegation: Read Allowed, Write Denied",
+    "subtitle": "Delegated permissions and local policy",
+    "url": "https://www.youtube.com/watch?v=h4ksCUa7jSU",
+    "thumb": "",
+    "short": false
+  },
+  {
+    "number": "006",
+    "date": "2026-09-07",
+    "title": "The Agent Never Calls the Tool When Policy Says No",
+    "subtitle": "Policy denial before tool execution",
+    "url": "https://youtube.com/shorts/Fj9J55rQ4bA",
+    "thumb": "",
+    "short": true
+  },
+  {
+    "number": "007",
+    "date": "2026-09-09",
+    "title": "If Your Policy Engine Crashes, Never Fail Open",
+    "subtitle": "An evaluator error leaves the tool uncalled",
+    "url": "https://youtube.com/shorts/QkKm1DjWvKI",
+    "thumb": "",
+    "short": true
+  },
+  {
+    "number": "005",
+    "date": "2026-09-14",
+    "title": "A Trust Badge Is Not Evidence — Verify the TRACE Record",
+    "subtitle": "What a signed TRACE record proves",
+    "url": "https://youtube.com/shorts/ISxjqNHwACM",
+    "thumb": "",
+    "short": true
+  },
+  {
+    "number": "010",
+    "date": "2026-09-16",
+    "title": "Same Tool. $120 Allowed. $250,000 Denied.",
+    "subtitle": "A refund authority limit enforced before execution",
+    "url": "https://youtube.com/shorts/6hYRteaEcY8",
+    "thumb": "",
+    "short": true
+  },
+  {
+    "number": "011",
+    "date": "2026-09-21",
+    "title": "Valid Token. Changed Code.",
+    "subtitle": "A valid token does not establish unchanged code",
+    "url": "https://youtube.com/shorts/KApSD77gYmY",
+    "thumb": "",
+    "short": true
+  },
+  {
+    "number": "012",
+    "date": "2026-09-23",
+    "title": "AI Contributions: Show What You Checked",
+    "subtitle": "Evidence for reviewing AI-assisted contributions",
+    "url": "https://youtube.com/shorts/Px6hpRyUFzE",
+    "thumb": "",
+    "short": true
+  },
+  {
+    "number": "013",
+    "date": "2026-09-26",
+    "title": "A Valid Signature Does Not Prove Every Claim",
+    "subtitle": "Signature verification and claim verification",
+    "url": "https://youtube.com/shorts/gYwJVkheSyA",
+    "thumb": "",
+    "short": true
+  },
+  {
+    "number": "014",
+    "date": "2026-09-26",
+    "title": "Two Valid Signatures. One Wrong Record.",
+    "subtitle": "Binding an appraisal to the intended record",
+    "url": "https://youtube.com/shorts/JqIp4WLdJZM",
+    "thumb": "",
+    "short": true
+  },
+  {
+    "number": "008",
+    "date": "2026-09-28",
+    "title": "A Hash Chain Can Still Tell a Different Story",
+    "subtitle": "Checking audit history against a separate checkpoint",
+    "url": "https://youtube.com/shorts/jdjQ_f329hM",
+    "thumb": "",
+    "short": true
   }
 ]

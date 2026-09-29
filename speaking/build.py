@@ -210,7 +210,7 @@ def render_video(v):
     return f"""                <a class="talk-card" href="{esc(v["url"])}" target="_blank" rel="noopener noreferrer">
                     <div class="{cls}"><img src="{esc(thumb)}" alt="" loading="lazy"><span class="talk-play" aria-hidden="true">&#9654;</span>{badge}</div>
                     <div class="talk-body">
-                        <p class="talk-meta">{esc(fmt_date(v["date"]))} &middot; Proof video {esc(v["number"])}</p>
+                        <p class="talk-meta">{esc(fmt_date(v["date"]))} &middot; {("Proof video " + esc(v["number"])) if v.get("number") else "Offline demo"}</p>
                         <h3>{v["title"]}</h3>
                         <p class="talk-event">{esc(v["subtitle"])}</p>
                     </div>
