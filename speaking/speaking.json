@@ -18,32 +18,16 @@
   },
   {
     "date": "2026-10-22",
-    "title": "All Day AI",
+    "title": "Block the Tool Call, Then Verify the Evidence",
     "event": "All Day AI 2026",
     "location": "Online",
     "format": "Conference session",
     "status": "scheduled",
-    "summary": "Accepted speaker for All Day AI on October 22, 2026. Session title and time to be announced.",
+    "summary": "Accepted proposal for All Day AI on October 22. MCP authorization and verification of signed evidence; final program details pending.",
     "url": "https://www.alldayai.com/",
     "recording": "",
     "tags": [],
-    "time": "Session title and time to be announced"
-  },
-  {
-    "date": "2026-10-27",
-    "title": "498 MCP Registry Entries Point at a Repository the Publisher Does Not Own",
-    "event": "[un]prompted II, The AI Security Practitioner Conference",
-    "location": "San Francisco, CA",
-    "format": "Standard session, 20 minutes",
-    "status": "submitted",
-    "summary": "The official MCP registry checks the repository field with a shape regex. 498 entries name a repository owned by a different account than the publisher authenticated as, and a worm shipped through the gap.",
-    "url": "https://unpromptedcon.org/",
-    "recording": "",
-    "tags": [
-      "supply-chain",
-      "mcp",
-      "provenance"
-    ]
+    "time": "Accepted proposal · Session time to be confirmed"
   },
   {
     "date": "2026-12-08",
@@ -248,6 +232,39 @@
     "tags": [
       "agent-governance",
       "agt"
+    ]
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Governed MCP: Policy Enforcement, Tamper-Evident Audit Chains, and Hardware-Sealed Receipts",
+    "event": "AGNTCon + MCPCon North America",
+    "location": "San Jose, CA",
+    "format": "Conference session, 25 minutes including Q&A",
+    "status": "scheduled",
+    "summary": "Policy enforcement for MCP tool calls, tamper-evident audit chains, and the limits of hardware-backed receipts.",
+    "url": "https://events.linuxfoundation.org/agntcon-mcpcon-north-america/program/schedule/?id=1260356",
+    "time": "4:05 to 4:30 PM PDT · Room 230C (Concourse Level)",
+    "recording": "",
+    "tags": [
+      "mcp",
+      "agent-governance"
+    ]
+  },
+  {
+    "date": "2026-10-12",
+    "title": "Mesh-LLM & Trusting a Stranger's Machine, Part 2: Evidence You Can Check",
+    "event": "The AIE Network · Mesh-LLM × Action State × TRACE",
+    "location": "Online",
+    "format": "Webinar",
+    "status": "scheduled",
+    "summary": "Mesh-LLM, TRACE and Agent Action Capsules: evidence of AI exchanges that attendees can check.",
+    "time": "Planned for 2:00 PM Pacific; calendar invitation and registration pending.",
+    "url": "",
+    "recording": "",
+    "tags": [
+      "trace",
+      "verifiable-agents",
+      "mesh-llm"
     ]
   }
 ]
