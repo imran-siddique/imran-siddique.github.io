@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OSSA&#x27;s README tells you to install 0.6.0, which is not on npm. The version that installs cannot start. Eight files on the default branch give five answers to which version this is, and the project&#x27;s own release check passes.">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://imransiddique.com/notes/2026-10-06-documented-install-does-not-resolve.html">
+    <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Imran Siddique">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://imransiddique.com/notes/2026-10-06-documented-install-does-not-resolve.html">
+    <meta property="og:title" content="The documented install does not resolve">
+    <meta property="og:description" content="OSSA&#x27;s README tells you to install 0.6.0, which is not on npm. The version that installs cannot start. Eight files on the default branch give five answers to which version this is, and the project&#x27;s own release check passes.">
+    <meta property="og:image" content="https://imransiddique.com/notes/cards/2026-10-06-documented-install-does-not-resolve.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-10-06">
+    <meta property="article:modified_time" content="2026-10-06">
+    <meta property="article:author" content="https://imransiddique.com/about.html">
+    <meta property="article:tag" content="agent-security">
+    <meta property="article:tag" content="provenance">
+    <meta property="article:tag" content="release-engineering">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:creator" content="@mosiddi">
+    <meta name="twitter:title" content="The documented install does not resolve">
+    <meta name="twitter:description" content="OSSA&#x27;s README tells you to install 0.6.0, which is not on npm. The version that installs cannot start. Eight files on the default branch give five answers to which version this is, and the project&#x27;s own release check passes.">
+    <meta name="twitter:image" content="https://imransiddique.com/notes/cards/2026-10-06-documented-install-does-not-resolve.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>The documented install does not resolve | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css?v=f44781a">
+    <link rel="stylesheet" href="../notes/notes.css">
+</head>
+<body>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "@id": "https://imransiddique.com/notes/2026-10-06-documented-install-does-not-resolve.html#article", "headline": "The documented install does not resolve", "description": "OSSA's README tells you to install 0.6.0, which is not on npm. The version that installs cannot start. Eight files on the default branch give five answers to which version this is, and the project's own release check passes.", "datePublished": "2026-10-06", "dateModified": "2026-10-06", "inLanguage": "en-US", "wordCount": 803, "keywords": ["agent-security", "provenance", "release-engineering"], "image": "https://imransiddique.com/notes/cards/2026-10-06-documented-install-does-not-resolve.png", "author": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "publisher": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "isPartOf": {"@type": "Blog", "@id": "https://imransiddique.com/notes/#blog", "name": "Notes by Imran Siddique", "url": "https://imransiddique.com/notes/"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-10-06-documented-install-does-not-resolve.html", "url": "https://imransiddique.com/notes/2026-10-06-documented-install-does-not-resolve.html", "citation": [{"@type": "CreativeWork", "name": "OSSA canonical repository on GitLab, default branch release/v0.6.x at 0bd0ab94", "url": "https://gitlab.com/blueflyio/ossa/openstandardagents/-/tree/0bd0ab94"}, {"@type": "CreativeWork", "name": "Release-prep commit 146e1eb2, 5 October 2026", "url": "https://gitlab.com/blueflyio/ossa/openstandardagents/-/commit/146e1eb2"}, {"@type": "CreativeWork", "name": "scripts/release-doctor.mjs at 0bd0ab94", "url": "https://gitlab.com/blueflyio/ossa/openstandardagents/-/blob/0bd0ab94/scripts/release-doctor.mjs"}, {"@type": "CreativeWork", "name": "release-state.json at 0bd0ab94", "url": "https://gitlab.com/blueflyio/ossa/openstandardagents/-/blob/0bd0ab94/release-state.json"}, {"@type": "CreativeWork", "name": "spec/v0.6/common/provenance.schema.json at 0bd0ab94", "url": "https://gitlab.com/blueflyio/ossa/openstandardagents/-/blob/0bd0ab94/spec/v0.6/common/provenance.schema.json"}, {"@type": "CreativeWork", "name": "The package on the npm registry, latest 0.5.6", "url": "https://registry.npmjs.org/@bluefly/openstandardagents"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://imransiddique.com/"}, {"@type": "ListItem", "position": 2, "name": "Notes", "item": "https://imransiddique.com/notes/"}, {"@type": "ListItem", "position": 3, "name": "The documented install does not resolve", "item": "https://imransiddique.com/notes/2026-10-06-documented-install-does-not-resolve.html"}]}]}</script>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../index.html#book">Book</a></li>
+                <li><a href="../notes/index.html" class="active">Writing</a></li>
+                <li><a href="../speaking/index.html">Speaking</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <article class="note">
+            <div class="container container-narrow">
+                <p class="note-back"><a href="index.html">&larr; All notes</a></p>
+                <time class="note-date" datetime="2026-10-06">6 October 2026</time>
+                <h1>The documented install does not resolve</h1>
+                <p class="note-standfirst">OSSA&#x27;s README tells you to install 0.6.0, which is not on npm. The version that installs cannot start. Eight files on the default branch give five answers to which version this is, and the project&#x27;s own release check passes.</p>
+                <div class="note-tags"><span class="concept-tag">agent-security</span><span class="concept-tag">provenance</span><span class="concept-tag">release-engineering</span></div>
+                <div class="note-body">
+<p>On 5 October the OSSA repository prepared a 0.6.0 release and held it, with a 0.5.7 hotfix to ship first. The README on that branch says the current stable release is 0.6.0 and gives this install line:</p>
+<pre><code>npm install @bluefly/openstandardagents@0.6.0</code></pre>
+<p>npm answers ETARGET, no matching version found. The registry has published nothing for this package since 3 June.</p>
+<p>OSSA, the Open Standard for Software Agents, is a vendor-neutral YAML contract for agent identity, capability boundaries and governance metadata. Development happens on GitLab, and the GitHub repository is a mirror last updated in May. The v0.6 tree on GitLab carries a provenance schema whose description says it links an object back to the run and the delegation that produced it, "so audit can reconstruct who acted, under whose authority, and in what run." That is the right thing to build, and it is why the rest of this matters.</p>
+<h2>Which version is this</h2>
+<p>Eight files at one commit on the default branch give five different numbers.</p>
+<ul><li>package.json and the README: 0.6.0.</li><li>release-state.json: current 0.6.0, registry tag 0.5.6.</li><li>.version.json: current 0.5.3, latest stable 0.5.2, spec version 0.5.3.</li><li>.well-known/ossa.json, the discovery document: 0.5.2.</li><li>llms.txt, the file an agent reads: <code>apiVersion: ossa/v0.5.2</code>.</li><li>RELEASE-NOTES.md: headed v0.5.2.</li><li>ai.json, the project descriptor: 0.5.1, with a trust tier of verified-signature.</li></ul>
+<p>The spec pointer is the one that bites. .version.json names 0.5.3 as the spec version. The README in the same tree says 0.5.3 was accidentally published during recovery, and not to use it.</p>
+<h2>What the registry serves</h2>
+<p>npm resolves latest to 0.5.6, published 3 June. I installed it on Node 24: one package, no runtime dependencies, no deprecation warning. Then I ran the CLI it puts on the path. <code>ossa --version</code> and <code>ossa validate</code> both exit 1 with ERR_MODULE_NOT_FOUND: cannot find package <code>commander</code>.</p>
+<p>The repository already knows. release-state.json deprecates 0.5.6 because the bin imports the unpublished <code>@bluefly/ossa-*</code> workspace packages and the root declares no dependencies. Both halves are true, and the first failure is neither. The shipped code imports three scoped workspace packages that are not on the registry, and four public packages (commander, yaml, did-resolver, web-did-resolver) that are on it and were never declared. commander is the first import in the entrypoint, so commander is what breaks.</p>
+<p>The deprecation that would have warned me is not on the registry either. 0.5.3, 0.5.4 and 0.5.5 carry deprecation text there; 0.5.6 does not. The live text on 0.5.4 says to use 0.5.1 until a corrected patch ships, while the repository's copy of that entry says to use 0.6.0 or later. The registry's version is the one a terminal prints.</p>
+<h2>The gate that passed</h2>
+<p>The project does have a release check. <code>release:doctor</code> runs scripts/release-doctor.mjs as the last step of <code>release:check</code>, and its comments say a stable-version drift "still fails closed." It compares two things: that the README's install line and its "Current stable release" line both name the version in package.json.</p>
+<p>Both name 0.6.0. I ran the script against the README and package.json at 0bd0ab94, on the release branch. It printed <code>RELEASE_DOCTOR_PASS</code> and exited 0.</p>
+<p>It never asks the registry whether 0.6.0 exists, and it never opens .version.json, the discovery document or llms.txt. ai.json lists a <code>validate:versions</code> check for "Version consistency across package.json, .version.json, spec/, CHANGELOG.md"; package.json has no script by that name.</p>
+<p>So the path has two checks. The one that refuses, npm's ETARGET, refuses the version the README recommends. The one the project wrote passes. A deprecation marker would not have changed either, because a marker prints and the install proceeds.</p>
+<h2>Where to report it</h2>
+<p>The <code>bugs</code> field points at the GitLab issues page, which returns 404 to an anonymous visitor, and the issues API returns an empty list. Merge requests return 403. CONTRIBUTING.md and SECURITY.md both send you to wiki pages that return 404. The GitHub mirror has issues turned off. SECURITY.md's supported versions table lists 0.3.x and 0.2.x and nothing later, so the version you can install is not in it. Whether the GitLab tracker is disabled or limited to members, I cannot tell from outside.</p>
+<h2>What a team can check</h2>
+<p>Agent provenance work tends to start one step late. The effort goes on signing the run, naming the actor and pinning the delegation. Before any of that, something has to say which version of the contract an agent was validated against, and say it once.</p>
+<p>Two checks would have caught all of this, and both fit in a release script. Resolve the documented install against the registry before tagging: <code>npm view @bluefly/openstandardagents@0.6.0 version</code> fails with E404 today. And read every file that states a version, the ones agents read included, and fail on any disagreement. A provenance record can only name the contract an agent was held to if the contract has one name.</p>
+                </div>
+                <section class="note-sources">
+                    <h2>Checked against</h2>
+                    <ul><li><a href="https://gitlab.com/blueflyio/ossa/openstandardagents/-/tree/0bd0ab94" rel="noopener">OSSA canonical repository on GitLab, default branch release/v0.6.x at 0bd0ab94</a></li><li><a href="https://gitlab.com/blueflyio/ossa/openstandardagents/-/commit/146e1eb2" rel="noopener">Release-prep commit 146e1eb2, 5 October 2026</a></li><li><a href="https://gitlab.com/blueflyio/ossa/openstandardagents/-/blob/0bd0ab94/scripts/release-doctor.mjs" rel="noopener">scripts/release-doctor.mjs at 0bd0ab94</a></li><li><a href="https://gitlab.com/blueflyio/ossa/openstandardagents/-/blob/0bd0ab94/release-state.json" rel="noopener">release-state.json at 0bd0ab94</a></li><li><a href="https://gitlab.com/blueflyio/ossa/openstandardagents/-/blob/0bd0ab94/spec/v0.6/common/provenance.schema.json" rel="noopener">spec/v0.6/common/provenance.schema.json at 0bd0ab94</a></li><li><a href="https://registry.npmjs.org/@bluefly/openstandardagents" rel="noopener">The package on the npm registry, latest 0.5.6</a></li></ul>
+                </section>
+                
+            </div>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique.</p>
+                <p><a href="../notes/feed.xml">RSS</a> &middot; <a href="../index.html">imransiddique.com</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>

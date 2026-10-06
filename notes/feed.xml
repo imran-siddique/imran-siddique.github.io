@@ -10,7 +10,42 @@
     <description>Working notes on agent security, evidence and governance.</description>
     <language>en</language>
     <dc:creator>Imran Siddique</dc:creator>
-    <lastBuildDate>Tue, 06 Oct 2026 04:52:09 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 06 Oct 2026 15:39:25 +0000</lastBuildDate>
+    <item>
+      <title>The documented install does not resolve</title>
+      <link>https://imransiddique.com/notes/2026-10-06-documented-install-does-not-resolve.html</link>
+      <guid isPermaLink="true">https://imransiddique.com/notes/2026-10-06-documented-install-does-not-resolve.html</guid>
+      <pubDate>Tue, 06 Oct 2026 09:00:00 +0000</pubDate>
+      <category>agent-security</category>
+      <category>provenance</category>
+      <category>release-engineering</category>
+      <description>OSSA&#x27;s README tells you to install 0.6.0, which is not on npm. The version that installs cannot start. Eight files on the default branch give five answers to which version this is, and the project&#x27;s own release check passes.</description>
+      <content:encoded><![CDATA[<p><em>OSSA&#x27;s README tells you to install 0.6.0, which is not on npm. The version that installs cannot start. Eight files on the default branch give five answers to which version this is, and the project&#x27;s own release check passes.</em></p>
+<p>On 5 October the OSSA repository prepared a 0.6.0 release and held it, with a 0.5.7 hotfix to ship first. The README on that branch says the current stable release is 0.6.0 and gives this install line:</p>
+<pre><code>npm install @bluefly/openstandardagents@0.6.0</code></pre>
+<p>npm answers ETARGET, no matching version found. The registry has published nothing for this package since 3 June.</p>
+<p>OSSA, the Open Standard for Software Agents, is a vendor-neutral YAML contract for agent identity, capability boundaries and governance metadata. Development happens on GitLab, and the GitHub repository is a mirror last updated in May. The v0.6 tree on GitLab carries a provenance schema whose description says it links an object back to the run and the delegation that produced it, "so audit can reconstruct who acted, under whose authority, and in what run." That is the right thing to build, and it is why the rest of this matters.</p>
+<h2>Which version is this</h2>
+<p>Eight files at one commit on the default branch give five different numbers.</p>
+<ul><li>package.json and the README: 0.6.0.</li><li>release-state.json: current 0.6.0, registry tag 0.5.6.</li><li>.version.json: current 0.5.3, latest stable 0.5.2, spec version 0.5.3.</li><li>.well-known/ossa.json, the discovery document: 0.5.2.</li><li>llms.txt, the file an agent reads: <code>apiVersion: ossa/v0.5.2</code>.</li><li>RELEASE-NOTES.md: headed v0.5.2.</li><li>ai.json, the project descriptor: 0.5.1, with a trust tier of verified-signature.</li></ul>
+<p>The spec pointer is the one that bites. .version.json names 0.5.3 as the spec version. The README in the same tree says 0.5.3 was accidentally published during recovery, and not to use it.</p>
+<h2>What the registry serves</h2>
+<p>npm resolves latest to 0.5.6, published 3 June. I installed it on Node 24: one package, no runtime dependencies, no deprecation warning. Then I ran the CLI it puts on the path. <code>ossa --version</code> and <code>ossa validate</code> both exit 1 with ERR_MODULE_NOT_FOUND: cannot find package <code>commander</code>.</p>
+<p>The repository already knows. release-state.json deprecates 0.5.6 because the bin imports the unpublished <code>@bluefly/ossa-*</code> workspace packages and the root declares no dependencies. Both halves are true, and the first failure is neither. The shipped code imports three scoped workspace packages that are not on the registry, and four public packages (commander, yaml, did-resolver, web-did-resolver) that are on it and were never declared. commander is the first import in the entrypoint, so commander is what breaks.</p>
+<p>The deprecation that would have warned me is not on the registry either. 0.5.3, 0.5.4 and 0.5.5 carry deprecation text there; 0.5.6 does not. The live text on 0.5.4 says to use 0.5.1 until a corrected patch ships, while the repository's copy of that entry says to use 0.6.0 or later. The registry's version is the one a terminal prints.</p>
+<h2>The gate that passed</h2>
+<p>The project does have a release check. <code>release:doctor</code> runs scripts/release-doctor.mjs as the last step of <code>release:check</code>, and its comments say a stable-version drift "still fails closed." It compares two things: that the README's install line and its "Current stable release" line both name the version in package.json.</p>
+<p>Both name 0.6.0. I ran the script against the README and package.json at 0bd0ab94, on the release branch. It printed <code>RELEASE_DOCTOR_PASS</code> and exited 0.</p>
+<p>It never asks the registry whether 0.6.0 exists, and it never opens .version.json, the discovery document or llms.txt. ai.json lists a <code>validate:versions</code> check for "Version consistency across package.json, .version.json, spec/, CHANGELOG.md"; package.json has no script by that name.</p>
+<p>So the path has two checks. The one that refuses, npm's ETARGET, refuses the version the README recommends. The one the project wrote passes. A deprecation marker would not have changed either, because a marker prints and the install proceeds.</p>
+<h2>Where to report it</h2>
+<p>The <code>bugs</code> field points at the GitLab issues page, which returns 404 to an anonymous visitor, and the issues API returns an empty list. Merge requests return 403. CONTRIBUTING.md and SECURITY.md both send you to wiki pages that return 404. The GitHub mirror has issues turned off. SECURITY.md's supported versions table lists 0.3.x and 0.2.x and nothing later, so the version you can install is not in it. Whether the GitLab tracker is disabled or limited to members, I cannot tell from outside.</p>
+<h2>What a team can check</h2>
+<p>Agent provenance work tends to start one step late. The effort goes on signing the run, naming the actor and pinning the delegation. Before any of that, something has to say which version of the contract an agent was validated against, and say it once.</p>
+<p>Two checks would have caught all of this, and both fit in a release script. Resolve the documented install against the registry before tagging: <code>npm view @bluefly/openstandardagents@0.6.0 version</code> fails with E404 today. And read every file that states a version, the ones agents read included, and fail on any disagreement. A provenance record can only name the contract an agent was held to if the contract has one name.</p>
+<h2>Checked against</h2>
+<ul><li><a href="https://gitlab.com/blueflyio/ossa/openstandardagents/-/tree/0bd0ab94">OSSA canonical repository on GitLab, default branch release/v0.6.x at 0bd0ab94</a></li><li><a href="https://gitlab.com/blueflyio/ossa/openstandardagents/-/commit/146e1eb2">Release-prep commit 146e1eb2, 5 October 2026</a></li><li><a href="https://gitlab.com/blueflyio/ossa/openstandardagents/-/blob/0bd0ab94/scripts/release-doctor.mjs">scripts/release-doctor.mjs at 0bd0ab94</a></li><li><a href="https://gitlab.com/blueflyio/ossa/openstandardagents/-/blob/0bd0ab94/release-state.json">release-state.json at 0bd0ab94</a></li><li><a href="https://gitlab.com/blueflyio/ossa/openstandardagents/-/blob/0bd0ab94/spec/v0.6/common/provenance.schema.json">spec/v0.6/common/provenance.schema.json at 0bd0ab94</a></li><li><a href="https://registry.npmjs.org/@bluefly/openstandardagents">The package on the npm registry, latest 0.5.6</a></li></ul>]]></content:encoded>
+    </item>
     <item>
       <title>Functional Observation by default</title>
       <link>https://imransiddique.com/notes/2026-09-28-functional-observation-by-default.html</link>

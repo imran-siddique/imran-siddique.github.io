@@ -1,5 +1,46 @@
 [
   {
+    "slug": "2026-10-06-documented-install-does-not-resolve",
+    "title": "The documented install does not resolve",
+    "date": "2026-10-06",
+    "standfirst": "OSSA's README tells you to install 0.6.0, which is not on npm. The version that installs cannot start. Eight files on the default branch give five answers to which version this is, and the project's own release check passes.",
+    "tags": [
+      "agent-security",
+      "provenance",
+      "release-engineering"
+    ],
+    "sources": [
+      {
+        "label": "OSSA canonical repository on GitLab, default branch release/v0.6.x at 0bd0ab94",
+        "url": "https://gitlab.com/blueflyio/ossa/openstandardagents/-/tree/0bd0ab94"
+      },
+      {
+        "label": "Release-prep commit 146e1eb2, 5 October 2026",
+        "url": "https://gitlab.com/blueflyio/ossa/openstandardagents/-/commit/146e1eb2"
+      },
+      {
+        "label": "scripts/release-doctor.mjs at 0bd0ab94",
+        "url": "https://gitlab.com/blueflyio/ossa/openstandardagents/-/blob/0bd0ab94/scripts/release-doctor.mjs"
+      },
+      {
+        "label": "release-state.json at 0bd0ab94",
+        "url": "https://gitlab.com/blueflyio/ossa/openstandardagents/-/blob/0bd0ab94/release-state.json"
+      },
+      {
+        "label": "spec/v0.6/common/provenance.schema.json at 0bd0ab94",
+        "url": "https://gitlab.com/blueflyio/ossa/openstandardagents/-/blob/0bd0ab94/spec/v0.6/common/provenance.schema.json"
+      },
+      {
+        "label": "The package on the npm registry, latest 0.5.6",
+        "url": "https://registry.npmjs.org/@bluefly/openstandardagents"
+      }
+    ],
+    "linkedin": "",
+    "x": "",
+    "words": 803,
+    "url": "https://imransiddique.com/notes/2026-10-06-documented-install-does-not-resolve.html"
+  },
+  {
     "slug": "2026-09-28-functional-observation-by-default",
     "title": "Functional Observation by default",
     "date": "2026-09-28",
