@@ -3,6 +3,7 @@ title: The evidence standard that needs a gate to count
 date: 2026-09-24
 standfirst: Proof-of-Control positions itself as the evidence half of agent assurance, not runtime enforcement. Its own threshold requires an in-path gateway that withholds actions, and its threat model has no row for that gateway. Filed as issue 78.
 tags: [agent-security, standards, enforcement]
+x: https://x.com/mosiddi/status/2107332893571989772
 sources:
   - label: LFDT-ProofOfControl/ov-poc-standard issue 78, filed 24 September 2026
     url: https://github.com/LFDT-ProofOfControl/ov-poc-standard/issues/78
