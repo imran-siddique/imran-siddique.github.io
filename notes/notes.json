@@ -1,5 +1,46 @@
 [
   {
+    "slug": "2026-10-07-one-release-both-sides-of-the-line",
+    "title": "One release, both sides of the line",
+    "date": "2026-10-07",
+    "standfirst": "AAP 0.5 deprecated a claim because a verifier may ignore it, wrote a security section saying such a claim is not a constraint, and in the same release added session_label, which a verifier may ignore. Filed as issue 33.",
+    "tags": [
+      "agent-security",
+      "standards",
+      "authorization"
+    ],
+    "sources": [
+      {
+        "label": "opena2a-standards/agent-authorization-protocol issue 33, filed 7 October 2026",
+        "url": "https://github.com/opena2a-standards/agent-authorization-protocol/issues/33"
+      },
+      {
+        "label": "AAP-SPEC.md 0.5.1-draft at commit 179f705",
+        "url": "https://github.com/opena2a-standards/agent-authorization-protocol/blob/179f705/AAP-SPEC.md"
+      },
+      {
+        "label": "AAP-BROKER-PROFILE.md 0.4.1-draft at commit 179f705",
+        "url": "https://github.com/opena2a-standards/agent-authorization-protocol/blob/179f705/AAP-BROKER-PROFILE.md"
+      },
+      {
+        "label": "CHANGELOG.md, the 0.5 entry",
+        "url": "https://github.com/opena2a-standards/agent-authorization-protocol/blob/179f705/CHANGELOG.md"
+      },
+      {
+        "label": "schemas/bac-claims-v1.schema.json at 179f705",
+        "url": "https://github.com/opena2a-standards/agent-authorization-protocol/blob/179f705/schemas/bac-claims-v1.schema.json"
+      },
+      {
+        "label": "aap-conformance conformance.json",
+        "url": "https://github.com/opena2a-standards/aap-conformance/blob/main/conformance.json"
+      }
+    ],
+    "linkedin": "",
+    "x": "",
+    "words": 846,
+    "url": "https://imransiddique.com/notes/2026-10-07-one-release-both-sides-of-the-line.html"
+  },
+  {
     "slug": "2026-10-06-documented-install-does-not-resolve",
     "title": "The documented install does not resolve",
     "date": "2026-10-06",

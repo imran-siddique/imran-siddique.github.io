@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AAP 0.5 deprecated a claim because a verifier may ignore it, wrote a security section saying such a claim is not a constraint, and in the same release added session_label, which a verifier may ignore. Filed as issue 33.">
+    <meta name="author" content="Imran Siddique">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+    <link rel="canonical" href="https://imransiddique.com/notes/2026-10-07-one-release-both-sides-of-the-line.html">
+    <link rel="alternate" type="application/rss+xml" title="Notes by Imran Siddique" href="https://imransiddique.com/notes/feed.xml">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Imran Siddique">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://imransiddique.com/notes/2026-10-07-one-release-both-sides-of-the-line.html">
+    <meta property="og:title" content="One release, both sides of the line">
+    <meta property="og:description" content="AAP 0.5 deprecated a claim because a verifier may ignore it, wrote a security section saying such a claim is not a constraint, and in the same release added session_label, which a verifier may ignore. Filed as issue 33.">
+    <meta property="og:image" content="https://imransiddique.com/notes/cards/2026-10-07-one-release-both-sides-of-the-line.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="article:published_time" content="2026-10-07">
+    <meta property="article:modified_time" content="2026-10-07">
+    <meta property="article:author" content="https://imransiddique.com/about.html">
+    <meta property="article:tag" content="agent-security">
+    <meta property="article:tag" content="standards">
+    <meta property="article:tag" content="authorization">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mosiddi">
+    <meta name="twitter:creator" content="@mosiddi">
+    <meta name="twitter:title" content="One release, both sides of the line">
+    <meta name="twitter:description" content="AAP 0.5 deprecated a claim because a verifier may ignore it, wrote a security section saying such a claim is not a constraint, and in the same release added session_label, which a verifier may ignore. Filed as issue 33.">
+    <meta name="twitter:image" content="https://imransiddique.com/notes/cards/2026-10-07-one-release-both-sides-of-the-line.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>One release, both sides of the line | Imran Siddique</title>
+    <link rel="stylesheet" href="../styles-new.css?v=f44781a">
+    <link rel="stylesheet" href="../notes/notes.css">
+</head>
+<body>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "@id": "https://imransiddique.com/notes/2026-10-07-one-release-both-sides-of-the-line.html#article", "headline": "One release, both sides of the line", "description": "AAP 0.5 deprecated a claim because a verifier may ignore it, wrote a security section saying such a claim is not a constraint, and in the same release added session_label, which a verifier may ignore. Filed as issue 33.", "datePublished": "2026-10-07", "dateModified": "2026-10-07", "inLanguage": "en-US", "wordCount": 846, "keywords": ["agent-security", "standards", "authorization"], "image": "https://imransiddique.com/notes/cards/2026-10-07-one-release-both-sides-of-the-line.png", "author": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "publisher": {"@type": "Person", "@id": "https://imransiddique.com/#person", "name": "Imran Siddique", "url": "https://imransiddique.com"}, "isPartOf": {"@type": "Blog", "@id": "https://imransiddique.com/notes/#blog", "name": "Notes by Imran Siddique", "url": "https://imransiddique.com/notes/"}, "mainEntityOfPage": "https://imransiddique.com/notes/2026-10-07-one-release-both-sides-of-the-line.html", "url": "https://imransiddique.com/notes/2026-10-07-one-release-both-sides-of-the-line.html", "citation": [{"@type": "CreativeWork", "name": "opena2a-standards/agent-authorization-protocol issue 33, filed 7 October 2026", "url": "https://github.com/opena2a-standards/agent-authorization-protocol/issues/33"}, {"@type": "CreativeWork", "name": "AAP-SPEC.md 0.5.1-draft at commit 179f705", "url": "https://github.com/opena2a-standards/agent-authorization-protocol/blob/179f705/AAP-SPEC.md"}, {"@type": "CreativeWork", "name": "AAP-BROKER-PROFILE.md 0.4.1-draft at commit 179f705", "url": "https://github.com/opena2a-standards/agent-authorization-protocol/blob/179f705/AAP-BROKER-PROFILE.md"}, {"@type": "CreativeWork", "name": "CHANGELOG.md, the 0.5 entry", "url": "https://github.com/opena2a-standards/agent-authorization-protocol/blob/179f705/CHANGELOG.md"}, {"@type": "CreativeWork", "name": "schemas/bac-claims-v1.schema.json at 179f705", "url": "https://github.com/opena2a-standards/agent-authorization-protocol/blob/179f705/schemas/bac-claims-v1.schema.json"}, {"@type": "CreativeWork", "name": "aap-conformance conformance.json", "url": "https://github.com/opena2a-standards/aap-conformance/blob/main/conformance.json"}]}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://imransiddique.com/"}, {"@type": "ListItem", "position": 2, "name": "Notes", "item": "https://imransiddique.com/notes/"}, {"@type": "ListItem", "position": 3, "name": "One release, both sides of the line", "item": "https://imransiddique.com/notes/2026-10-07-one-release-both-sides-of-the-line.html"}]}]}</script>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">Imran Siddique</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../about.html">About</a></li>
+                <li><a href="../projects.html">Projects</a></li>
+                <li><a href="../index.html#book">Book</a></li>
+                <li><a href="../notes/index.html" class="active">Writing</a></li>
+                <li><a href="../speaking/index.html">Speaking</a></li>
+                <li><a href="../contact.html">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                </svg>
+            </button>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+    <main>
+        <article class="note">
+            <div class="container container-narrow">
+                <p class="note-back"><a href="index.html">&larr; All notes</a></p>
+                <time class="note-date" datetime="2026-10-07">7 October 2026</time>
+                <h1>One release, both sides of the line</h1>
+                <p class="note-standfirst">AAP 0.5 deprecated a claim because a verifier may ignore it, wrote a security section saying such a claim is not a constraint, and in the same release added session_label, which a verifier may ignore. Filed as issue 33.</p>
+                <div class="note-tags"><span class="concept-tag">agent-security</span><span class="concept-tag">standards</span><span class="concept-tag">authorization</span></div>
+                <div class="note-body">
+<p>The Agent Authorization Protocol release notes for 0.5 deprecate the <code>fga_constraints</code> claim with one line of reasoning: "A verifier still ignores it." The same release adds a security consideration, §8.7, titled "A constraint a verifier may ignore is not a constraint." It also adds <code>session_label</code> to the behavioral attestation token. A verifier may ignore that one too.</p>
+<p>AAP is the authorization layer of the OpenA2A family. An agent asks for an abstract grant, a local broker checks the agent's credential, applies policy, performs the operation and hands back only the result. No secret reaches the agent or the model behind it. The spec is at 0.5.1-draft, with an Internet-Draft revision submitted on 2 October, and the repository asks outright for review of the authorization model before it goes to a standards body. So I reviewed it.</p>
+<h2>The rule the spec already has</h2>
+<p>Broker profile §8.3 sorts every claim into two kinds. A claim named in <code>aap_crit</code> is mandatory to understand, and a verifier that does not implement it must reject the token. Every other claim is optional to ignore, and a verifier that does not implement it must accept the token anyway.</p>
+<p>That rule is sound, and 0.5 applies it well to the capability grant and the delegation assertion. Both carry <code>aap_crit</code>. <code>authorization_details</code> and <code>cnf</code> must be listed whenever present, because a verifier that skips <code>cnf</code> accepts a proof-of-possession token as a bearer token.</p>
+<h2>Where it stops working</h2>
+<p>The behavioral attestation token, the BAC, has no <code>aap_crit</code>. The §6.4 claim table has 12 rows and none of them is <code>aap_crit</code>; the BAC claim schema has 13 properties and none of them is <code>aap_crit</code>. The changelog records both halves in one sentence: the grant and delegation schemas gain <code>authorization_details</code>, <code>aap_crit</code> and <code>cnf</code>, and <code>bac-claims-v1</code> gains <code>session_label</code>.</p>
+<p><code>session_label</code> is the session's high water mark: the union of the labels of every field the broker has admitted into the agent's context. The broker's no-write-down rule checks egress against it. So a receiver that does not implement <code>session_label</code> accepts an L3 attestation from a session that has read health records, and the label never enters its decision. §8.7 already describes the outcome, in its sentence about <code>fga_constraints</code>: "A downstream that does not understand it treats the grant as unconstrained."</p>
+<h2>What it means for someone deploying it</h2>
+<p>Inside one broker, nothing breaks. Rule 3 of profile §6.10 checks egress against the broker's own state before the operation runs. That is enforcement, and it prevents.</p>
+<p>The claim is evidence. It is the only way the high water mark crosses a boundary, and §6.3 has a receiver verifying a BAC against the issuing registry's key, which is exactly that crossing. The receiver is the party the claim exists for, and the party the spec leaves free to drop it.</p>
+<p>The conformance suite is consistent with this, which is correct behaviour for an optional claim. Of 44 fixtures, 4 are BACs, 1 carries <code>session_label</code> with ACCEPT expected, and all 6 that exercise <code>aap_crit</code> are grant tokens. The suite pins itself to 0.5.0-draft.</p>
+<h2>The issue</h2>
+<p>Issue 33 offers two ways to close it. Give the BAC <code>aap_crit</code>, with <code>session_label</code> listed whenever present; that also needs a way for a receiver to advertise claim names, since the §4.4 producer rule advertises entry types only. Or state in §6.1 that the BAC is a report and never an input to a decision, and mark the label informational. It also notes that nothing carries an accumulated label across a <code>peer_agent</code> hop, and that two schema descriptions still say "mints BACs yet", the wording the project's own status check now rejects in the Markdown, because that check does not read <code>schemas/</code>.</p>
+<p>This is a reading of the text. I ran no broker, and the schema says no reference implementation mints BACs, so nobody is relying on this claim today.</p>
+<h2>What did not survive checking</h2>
+<ul><li>The draft argued that an absent label reads as the permissive case under §4.4.2. §6.4 now separates an empty array, which means no labeled field was admitted, from an absent claim, which means the issuer holds no mark. The argument now rests on §8.7's own sentence instead.</li><li>The first fix proposal said the §4.4 producer rule would cover it. That rule advertises entry types, not claim names, so the issue says a second mechanism is needed.</li><li>A second finding, that §5.4 attenuation passes vacuously when a delegation omits <code>authorization_details</code>, was cut. The conformance file already calls it "a spec text gap, pending a spec sentence."</li></ul>
+<h2>The third time this autumn</h2>
+<p>On 8 September, the <a href="2026-09-08-forbade-the-swap-kept-the-signal-optional.html" rel="noopener">MCP 2026-07-28 release</a> forbade a silent tool-list swap and left the change signal opt-in. On 28 September, the <a href="2026-09-28-functional-observation-by-default.html" rel="noopener">App Defense Alliance agent spec</a> defaulted every untagged requirement to black-box testing, and none was tagged. Three documents, one shape: whatever the text does not mark falls to the permissive reading.</p>
+<p>So when a spec adds a claim or a requirement, the check worth running is what a reader who skips it ends up doing. For <code>session_label</code> at 0.5.1-draft, that reader accepts the token.</p>
+                </div>
+                <section class="note-sources">
+                    <h2>Checked against</h2>
+                    <ul><li><a href="https://github.com/opena2a-standards/agent-authorization-protocol/issues/33" rel="noopener">opena2a-standards/agent-authorization-protocol issue 33, filed 7 October 2026</a></li><li><a href="https://github.com/opena2a-standards/agent-authorization-protocol/blob/179f705/AAP-SPEC.md" rel="noopener">AAP-SPEC.md 0.5.1-draft at commit 179f705</a></li><li><a href="https://github.com/opena2a-standards/agent-authorization-protocol/blob/179f705/AAP-BROKER-PROFILE.md" rel="noopener">AAP-BROKER-PROFILE.md 0.4.1-draft at commit 179f705</a></li><li><a href="https://github.com/opena2a-standards/agent-authorization-protocol/blob/179f705/CHANGELOG.md" rel="noopener">CHANGELOG.md, the 0.5 entry</a></li><li><a href="https://github.com/opena2a-standards/agent-authorization-protocol/blob/179f705/schemas/bac-claims-v1.schema.json" rel="noopener">schemas/bac-claims-v1.schema.json at 179f705</a></li><li><a href="https://github.com/opena2a-standards/aap-conformance/blob/main/conformance.json" rel="noopener">aap-conformance conformance.json</a></li></ul>
+                </section>
+                
+            </div>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Imran Siddique.</p>
+                <p><a href="../notes/feed.xml">RSS</a> &middot; <a href="../index.html">imransiddique.com</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="../script.js"></script>
+</body>
+</html>
