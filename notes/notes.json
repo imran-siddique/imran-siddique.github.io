@@ -1,5 +1,38 @@
 [
   {
+    "slug": "2026-10-08-mandatory-signal-nothing-to-check",
+    "title": "The mandatory signal has nothing to check against yet",
+    "date": "2026-10-08",
+    "standfirst": "AFSP v0.1 makes agent provenance mandatory, with no partial session allowed without it, and both checks it specifies for it resolve against a registry the same draft puts on the v1.0 roadmap. Issue 4 on the spec repository asks which way the working group means to resolve it.",
+    "tags": [
+      "agent-identity",
+      "standards",
+      "financial-services"
+    ],
+    "sources": [
+      {
+        "label": "primitive-os/AFSP issue 4, filed 8 October 2026",
+        "url": "https://github.com/primitive-os/AFSP/issues/4"
+      },
+      {
+        "label": "AFSP v0.1 Public Review Draft, 28 September 2026 (PDF, commit 0ac0df9)",
+        "url": "https://github.com/primitive-os/AFSP/blob/0ac0df9/spec/AFSP-v0.1-Public-Review-Draft.pdf"
+      },
+      {
+        "label": "primitive-os/AFSP repository at 0ac0df9",
+        "url": "https://github.com/primitive-os/AFSP/tree/0ac0df9"
+      },
+      {
+        "label": "LedgerDrift, What AFSP v0.1 Won't Let Your Agent Do",
+        "url": "https://www.ledgerdrift.com/opinion/afsp-what-v01-wont-let-agents-do"
+      }
+    ],
+    "linkedin": "",
+    "x": "",
+    "words": 792,
+    "url": "https://imransiddique.com/notes/2026-10-08-mandatory-signal-nothing-to-check.html"
+  },
+  {
     "slug": "2026-10-07-one-release-both-sides-of-the-line",
     "title": "One release, both sides of the line",
     "date": "2026-10-07",
