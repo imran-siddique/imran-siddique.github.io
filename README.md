@@ -1,0 +1,1 @@
+Data-only branch. open-prs.json is written each weekday by a local task and read by the Daily Nudge routine. Not part of the site; Pages builds from main.
