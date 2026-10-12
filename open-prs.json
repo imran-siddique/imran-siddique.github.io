@@ -1,0 +1,163 @@
+{
+ "generated_at": "2026-10-12T18:17:09Z",
+ "author": "imran-siddique",
+ "open_prs": 14,
+ "failing": 1,
+ "conflicting": 1,
+ "prs": [
+  {
+   "repo": "LFDT-ProofOfControl/ov-poc-standard",
+   "number": 120,
+   "title": "Appendix C: gateway compromise and gateway bypass rows for the C7.1 enforcement point",
+   "url": "https://github.com/LFDT-ProofOfControl/ov-poc-standard/pull/120",
+   "updated": "2026-10-12T18:14:35Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": ""
+  },
+  {
+   "repo": "agentrust-io/agent-manifest",
+   "number": 498,
+   "title": "docs(spec): section 6.3.2 binds the manifest by digest and leaves appraisal to the verifier",
+   "url": "https://github.com/agentrust-io/agent-manifest/pull/498",
+   "updated": "2026-10-12T15:01:11Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
+  {
+   "repo": "agentrust-io/agent-manifest",
+   "number": 489,
+   "title": "docs: align signature, HITL and compliance wording with the spec",
+   "url": "https://github.com/agentrust-io/agent-manifest/pull/489",
+   "updated": "2026-10-12T14:43:27Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "CHANGES_REQUESTED"
+  },
+  {
+   "repo": "cosai-oasis/ws1-supply-chain",
+   "number": 33,
+   "title": "Propose an experimental deployment decision schema and test vectors",
+   "url": "https://github.com/cosai-oasis/ws1-supply-chain/pull/33",
+   "updated": "2026-10-12T05:11:53Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
+  {
+   "repo": "OpenSecureAIAlliance/RFCs",
+   "number": 18,
+   "title": "RFC: Anchored evidence for SAFE",
+   "url": "https://github.com/OpenSecureAIAlliance/RFCs/pull/18",
+   "updated": "2026-10-12T04:49:58Z",
+   "draft": false,
+   "checks": "none",
+   "mergeable": "MERGEABLE",
+   "review": ""
+  },
+  {
+   "repo": "agentrust-io/cmcp",
+   "number": 743,
+   "title": "fix(agent-manifest)!: authorize the signing key for the manifest issuer",
+   "url": "https://github.com/agentrust-io/cmcp/pull/743",
+   "updated": "2026-10-12T00:45:32Z",
+   "draft": false,
+   "checks": "failing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
+  {
+   "repo": "agentrust-io/agent-manifest",
+   "number": 494,
+   "title": "fix(verify)!: issuer key authorization before the signature, and no VALID without a policy",
+   "url": "https://github.com/agentrust-io/agent-manifest/pull/494",
+   "updated": "2026-10-12T00:43:45Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "CONFLICTING",
+   "review": "REVIEW_REQUIRED"
+  },
+  {
+   "repo": "agentrust-io/ca2a",
+   "number": 238,
+   "title": "fix(github): point the issue chooser's discussion link at the org discussions",
+   "url": "https://github.com/agentrust-io/ca2a/pull/238",
+   "updated": "2026-10-11T21:20:58Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
+  {
+   "repo": "agentrust-io/weight-custody-manifest",
+   "number": 186,
+   "title": "fix(github): point the issue chooser's discussion link at the org discussions",
+   "url": "https://github.com/agentrust-io/weight-custody-manifest/pull/186",
+   "updated": "2026-10-11T21:19:07Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
+  {
+   "repo": "cosai-oasis/ws4-secure-design-agentic-systems",
+   "number": 210,
+   "title": "docs(rfc): scope agent deployment content as a profile of the ODIS registration record",
+   "url": "https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/210",
+   "updated": "2026-10-09T09:24:11Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
+  {
+   "repo": "microsoft/agent-governance-toolkit",
+   "number": 4166,
+   "title": "fix(openshell): make the [openshell] extra enforce ACS policy again",
+   "url": "https://github.com/microsoft/agent-governance-toolkit/pull/4166",
+   "updated": "2026-10-08T23:41:36Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "CHANGES_REQUESTED"
+  },
+  {
+   "repo": "cosai-oasis/ws4-odis",
+   "number": 35,
+   "title": "docs(mappings): Agent Manifest and TRACE mapped onto ODIS \u00a76.1 and \u00a76.3 (draft for 2026-10-14)",
+   "url": "https://github.com/cosai-oasis/ws4-odis/pull/35",
+   "updated": "2026-10-08T19:44:28Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": ""
+  },
+  {
+   "repo": "cosai-oasis/ws4-secure-design-agentic-systems",
+   "number": 201,
+   "title": "guides: action-layer containment for multimodal agents",
+   "url": "https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/201",
+   "updated": "2026-10-01T20:15:40Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
+  {
+   "repo": "github/advisory-database",
+   "number": 9436,
+   "title": "[GHSA-q9cv-5mjc-7cjc] Add the missing affected package range for google-adk",
+   "url": "https://github.com/github/advisory-database/pull/9436",
+   "updated": "2026-09-25T19:15:47Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": ""
+  }
+ ]
+}
