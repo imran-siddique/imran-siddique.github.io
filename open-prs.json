@@ -1,10 +1,87 @@
 {
- "generated_at": "2026-10-12T18:17:09Z",
+ "generated_at": "2026-10-13T15:40:19Z",
  "author": "imran-siddique",
- "open_prs": 14,
+ "open_prs": 15,
  "failing": 1,
- "conflicting": 1,
+ "conflicting": 0,
  "prs": [
+  {
+   "repo": "agentrust-io/ca2a",
+   "number": 239,
+   "title": "docs: drop removed OpaqueProvider from AttestationUnsupported row",
+   "url": "https://github.com/agentrust-io/ca2a/pull/239",
+   "updated": "2026-10-13T14:52:07Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
+  {
+   "repo": "agentrust-io/cmcp",
+   "number": 743,
+   "title": "fix(agent-manifest)!: authorize the signing key for the manifest issuer",
+   "url": "https://github.com/agentrust-io/cmcp/pull/743",
+   "updated": "2026-10-13T13:11:42Z",
+   "draft": false,
+   "checks": "failing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
+  {
+   "repo": "cosai-oasis/ws4-secure-design-agentic-systems",
+   "number": 201,
+   "title": "guides: action-layer containment for multimodal agents",
+   "url": "https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/201",
+   "updated": "2026-10-13T00:18:46Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
+  {
+   "repo": "agentrust-io/agent-manifest",
+   "number": 498,
+   "title": "docs(spec): section 6.3.2 binds the manifest by digest and leaves appraisal to the verifier",
+   "url": "https://github.com/agentrust-io/agent-manifest/pull/498",
+   "updated": "2026-10-13T00:01:51Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
+  {
+   "repo": "agentrust-io/agent-manifest",
+   "number": 494,
+   "title": "fix(verify)!: issuer key authorization before the signature, and no VALID without a policy",
+   "url": "https://github.com/agentrust-io/agent-manifest/pull/494",
+   "updated": "2026-10-12T22:25:03Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
+  {
+   "repo": "cosai-oasis/ws1-supply-chain",
+   "number": 33,
+   "title": "Propose an experimental deployment decision schema and test vectors",
+   "url": "https://github.com/cosai-oasis/ws1-supply-chain/pull/33",
+   "updated": "2026-10-12T20:57:46Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
+  {
+   "repo": "cosai-oasis/ws4-secure-design-agentic-systems",
+   "number": 210,
+   "title": "docs(rfc): scope agent deployment content as a profile of the ODIS registration record",
+   "url": "https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/210",
+   "updated": "2026-10-12T20:57:39Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
   {
    "repo": "LFDT-ProofOfControl/ov-poc-standard",
    "number": 120,
@@ -18,17 +95,6 @@
   },
   {
    "repo": "agentrust-io/agent-manifest",
-   "number": 498,
-   "title": "docs(spec): section 6.3.2 binds the manifest by digest and leaves appraisal to the verifier",
-   "url": "https://github.com/agentrust-io/agent-manifest/pull/498",
-   "updated": "2026-10-12T15:01:11Z",
-   "draft": false,
-   "checks": "passing",
-   "mergeable": "MERGEABLE",
-   "review": "REVIEW_REQUIRED"
-  },
-  {
-   "repo": "agentrust-io/agent-manifest",
    "number": 489,
    "title": "docs: align signature, HITL and compliance wording with the spec",
    "url": "https://github.com/agentrust-io/agent-manifest/pull/489",
@@ -37,17 +103,6 @@
    "checks": "passing",
    "mergeable": "MERGEABLE",
    "review": "CHANGES_REQUESTED"
-  },
-  {
-   "repo": "cosai-oasis/ws1-supply-chain",
-   "number": 33,
-   "title": "Propose an experimental deployment decision schema and test vectors",
-   "url": "https://github.com/cosai-oasis/ws1-supply-chain/pull/33",
-   "updated": "2026-10-12T05:11:53Z",
-   "draft": false,
-   "checks": "passing",
-   "mergeable": "MERGEABLE",
-   "review": "REVIEW_REQUIRED"
   },
   {
    "repo": "OpenSecureAIAlliance/RFCs",
@@ -59,28 +114,6 @@
    "checks": "none",
    "mergeable": "MERGEABLE",
    "review": ""
-  },
-  {
-   "repo": "agentrust-io/cmcp",
-   "number": 743,
-   "title": "fix(agent-manifest)!: authorize the signing key for the manifest issuer",
-   "url": "https://github.com/agentrust-io/cmcp/pull/743",
-   "updated": "2026-10-12T00:45:32Z",
-   "draft": false,
-   "checks": "failing",
-   "mergeable": "MERGEABLE",
-   "review": "REVIEW_REQUIRED"
-  },
-  {
-   "repo": "agentrust-io/agent-manifest",
-   "number": 494,
-   "title": "fix(verify)!: issuer key authorization before the signature, and no VALID without a policy",
-   "url": "https://github.com/agentrust-io/agent-manifest/pull/494",
-   "updated": "2026-10-12T00:43:45Z",
-   "draft": false,
-   "checks": "passing",
-   "mergeable": "CONFLICTING",
-   "review": "REVIEW_REQUIRED"
   },
   {
    "repo": "agentrust-io/ca2a",
@@ -105,17 +138,6 @@
    "review": "REVIEW_REQUIRED"
   },
   {
-   "repo": "cosai-oasis/ws4-secure-design-agentic-systems",
-   "number": 210,
-   "title": "docs(rfc): scope agent deployment content as a profile of the ODIS registration record",
-   "url": "https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/210",
-   "updated": "2026-10-09T09:24:11Z",
-   "draft": false,
-   "checks": "passing",
-   "mergeable": "MERGEABLE",
-   "review": "REVIEW_REQUIRED"
-  },
-  {
    "repo": "microsoft/agent-governance-toolkit",
    "number": 4166,
    "title": "fix(openshell): make the [openshell] extra enforce ACS policy again",
@@ -123,7 +145,7 @@
    "updated": "2026-10-08T23:41:36Z",
    "draft": false,
    "checks": "passing",
-   "mergeable": "MERGEABLE",
+   "mergeable": "UNKNOWN",
    "review": "CHANGES_REQUESTED"
   },
   {
@@ -136,17 +158,6 @@
    "checks": "passing",
    "mergeable": "MERGEABLE",
    "review": ""
-  },
-  {
-   "repo": "cosai-oasis/ws4-secure-design-agentic-systems",
-   "number": 201,
-   "title": "guides: action-layer containment for multimodal agents",
-   "url": "https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/201",
-   "updated": "2026-10-01T20:15:40Z",
-   "draft": false,
-   "checks": "passing",
-   "mergeable": "MERGEABLE",
-   "review": "REVIEW_REQUIRED"
   },
   {
    "repo": "github/advisory-database",
