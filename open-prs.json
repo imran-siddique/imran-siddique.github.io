@@ -1,10 +1,54 @@
 {
- "generated_at": "2026-10-13T15:40:19Z",
+ "generated_at": "2026-10-14T15:40:23Z",
  "author": "imran-siddique",
  "open_prs": 15,
  "failing": 1,
  "conflicting": 0,
  "prs": [
+  {
+   "repo": "agentrust-io/cmcp",
+   "number": 743,
+   "title": "fix(agent-manifest)!: authorize the signing key for the manifest issuer",
+   "url": "https://github.com/agentrust-io/cmcp/pull/743",
+   "updated": "2026-10-13T23:39:32Z",
+   "draft": false,
+   "checks": "failing",
+   "mergeable": "MERGEABLE",
+   "review": "CHANGES_REQUESTED"
+  },
+  {
+   "repo": "agentrust-io/agent-manifest",
+   "number": 494,
+   "title": "fix(verify)!: issuer key authorization before the signature, and no VALID without a policy",
+   "url": "https://github.com/agentrust-io/agent-manifest/pull/494",
+   "updated": "2026-10-13T22:20:19Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "CHANGES_REQUESTED"
+  },
+  {
+   "repo": "agentrust-io/integrations",
+   "number": 314,
+   "title": "chore(marketplace): verify parmana-server",
+   "url": "https://github.com/agentrust-io/integrations/pull/314",
+   "updated": "2026-10-13T19:03:31Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
+  {
+   "repo": "agentrust-io/agent-manifest",
+   "number": 498,
+   "title": "docs(spec): section 6.3.2 binds the manifest by digest and leaves appraisal to the verifier",
+   "url": "https://github.com/agentrust-io/agent-manifest/pull/498",
+   "updated": "2026-10-13T18:59:53Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
   {
    "repo": "agentrust-io/ca2a",
    "number": 239,
@@ -17,44 +61,11 @@
    "review": "REVIEW_REQUIRED"
   },
   {
-   "repo": "agentrust-io/cmcp",
-   "number": 743,
-   "title": "fix(agent-manifest)!: authorize the signing key for the manifest issuer",
-   "url": "https://github.com/agentrust-io/cmcp/pull/743",
-   "updated": "2026-10-13T13:11:42Z",
-   "draft": false,
-   "checks": "failing",
-   "mergeable": "MERGEABLE",
-   "review": "REVIEW_REQUIRED"
-  },
-  {
    "repo": "cosai-oasis/ws4-secure-design-agentic-systems",
    "number": 201,
    "title": "guides: action-layer containment for multimodal agents",
    "url": "https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/201",
    "updated": "2026-10-13T00:18:46Z",
-   "draft": false,
-   "checks": "passing",
-   "mergeable": "MERGEABLE",
-   "review": "REVIEW_REQUIRED"
-  },
-  {
-   "repo": "agentrust-io/agent-manifest",
-   "number": 498,
-   "title": "docs(spec): section 6.3.2 binds the manifest by digest and leaves appraisal to the verifier",
-   "url": "https://github.com/agentrust-io/agent-manifest/pull/498",
-   "updated": "2026-10-13T00:01:51Z",
-   "draft": false,
-   "checks": "passing",
-   "mergeable": "MERGEABLE",
-   "review": "REVIEW_REQUIRED"
-  },
-  {
-   "repo": "agentrust-io/agent-manifest",
-   "number": 494,
-   "title": "fix(verify)!: issuer key authorization before the signature, and no VALID without a policy",
-   "url": "https://github.com/agentrust-io/agent-manifest/pull/494",
-   "updated": "2026-10-12T22:25:03Z",
    "draft": false,
    "checks": "passing",
    "mergeable": "MERGEABLE",
@@ -92,17 +103,6 @@
    "checks": "passing",
    "mergeable": "MERGEABLE",
    "review": ""
-  },
-  {
-   "repo": "agentrust-io/agent-manifest",
-   "number": 489,
-   "title": "docs: align signature, HITL and compliance wording with the spec",
-   "url": "https://github.com/agentrust-io/agent-manifest/pull/489",
-   "updated": "2026-10-12T14:43:27Z",
-   "draft": false,
-   "checks": "passing",
-   "mergeable": "MERGEABLE",
-   "review": "CHANGES_REQUESTED"
   },
   {
    "repo": "OpenSecureAIAlliance/RFCs",
@@ -145,7 +145,7 @@
    "updated": "2026-10-08T23:41:36Z",
    "draft": false,
    "checks": "passing",
-   "mergeable": "UNKNOWN",
+   "mergeable": "MERGEABLE",
    "review": "CHANGES_REQUESTED"
   },
   {
