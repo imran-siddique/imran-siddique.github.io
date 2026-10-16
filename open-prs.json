@@ -1,16 +1,27 @@
 {
- "generated_at": "2026-10-16T15:40:15Z",
+ "generated_at": "2026-10-16T16:47:25Z",
  "author": "imran-siddique",
- "open_prs": 9,
+ "open_prs": 10,
  "failing": 0,
  "conflicting": 0,
  "prs": [
+  {
+   "repo": "agentrust-io/agent-manifest",
+   "number": 515,
+   "title": "docs(spec): transport no longer recommends intra-handshake attestation (CVE-2026-33697)",
+   "url": "https://github.com/agentrust-io/agent-manifest/pull/515",
+   "updated": "2026-10-16T16:44:06Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "REVIEW_REQUIRED"
+  },
   {
    "repo": "agentrust-io/trace-spec",
    "number": 533,
    "title": "spec(anchor)!: a Level 2 anchor verdict requires the registry entry",
    "url": "https://github.com/agentrust-io/trace-spec/pull/533",
-   "updated": "2026-10-16T10:33:21Z",
+   "updated": "2026-10-16T15:41:29Z",
    "draft": false,
    "checks": "passing",
    "mergeable": "MERGEABLE",
@@ -25,7 +36,8 @@
    "draft": false,
    "checks": "passing",
    "mergeable": "MERGEABLE",
-   "review": "CHANGES_REQUESTED"
+   "review": "CHANGES_REQUESTED",
+   "pushed_since_changes_requested": true
   },
   {
    "repo": "agentrust-io/cmcp",
@@ -68,7 +80,7 @@
    "updated": "2026-10-15T16:31:42Z",
    "draft": false,
    "checks": "passing",
-   "mergeable": "UNKNOWN",
+   "mergeable": "MERGEABLE",
    "review": "REVIEW_REQUIRED"
   },
   {
@@ -104,5 +116,19 @@
    "mergeable": "MERGEABLE",
    "review": ""
   }
- ]
+ ],
+ "newsletter": {
+  "this_week": {
+   "week_of": "2026-10-12",
+   "date": "2026-10-12",
+   "status": "published",
+   "published_at": "2026-10-12T19:03:31Z"
+  },
+  "next_week": {
+   "week_of": "2026-10-19",
+   "date": "2026-10-19",
+   "status": "drafting",
+   "published_at": null
+  }
+ }
 }
