@@ -1,16 +1,27 @@
 {
- "generated_at": "2026-10-16T16:47:25Z",
+ "generated_at": "2026-10-19T15:51:09Z",
  "author": "imran-siddique",
  "open_prs": 10,
  "failing": 0,
  "conflicting": 0,
  "prs": [
   {
-   "repo": "agentrust-io/agent-manifest",
-   "number": 515,
-   "title": "docs(spec): transport no longer recommends intra-handshake attestation (CVE-2026-33697)",
-   "url": "https://github.com/agentrust-io/agent-manifest/pull/515",
-   "updated": "2026-10-16T16:44:06Z",
+   "repo": "agentrust-io/weight-custody-manifest",
+   "number": 212,
+   "title": "chore(release): 0.33.0",
+   "url": "https://github.com/agentrust-io/weight-custody-manifest/pull/212",
+   "updated": "2026-10-19T15:14:05Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "APPROVED"
+  },
+  {
+   "repo": "agentrust-io/weight-custody-manifest",
+   "number": 213,
+   "title": "docs(changelog): add the #209 challenge-pruning entry",
+   "url": "https://github.com/agentrust-io/weight-custody-manifest/pull/213",
+   "updated": "2026-10-19T15:02:01Z",
    "draft": false,
    "checks": "passing",
    "mergeable": "MERGEABLE",
@@ -21,30 +32,29 @@
    "number": 533,
    "title": "spec(anchor)!: a Level 2 anchor verdict requires the registry entry",
    "url": "https://github.com/agentrust-io/trace-spec/pull/533",
-   "updated": "2026-10-16T15:41:29Z",
+   "updated": "2026-10-18T16:16:10Z",
    "draft": false,
    "checks": "passing",
    "mergeable": "MERGEABLE",
    "review": "REVIEW_REQUIRED"
   },
   {
-   "repo": "agentrust-io/agent-manifest",
-   "number": 508,
-   "title": "ci: add an all-checks job that stands for every check on the PR head",
-   "url": "https://github.com/agentrust-io/agent-manifest/pull/508",
-   "updated": "2026-10-16T03:29:07Z",
+   "repo": "GenAI-Security-Project/agent-control-standard",
+   "number": 278,
+   "title": "Give the OCSF allow decision its own class entry",
+   "url": "https://github.com/GenAI-Security-Project/agent-control-standard/pull/278",
+   "updated": "2026-10-16T20:03:45Z",
    "draft": false,
    "checks": "passing",
-   "mergeable": "MERGEABLE",
-   "review": "CHANGES_REQUESTED",
-   "pushed_since_changes_requested": true
+   "mergeable": "UNKNOWN",
+   "review": "REVIEW_REQUIRED"
   },
   {
-   "repo": "agentrust-io/cmcp",
-   "number": 762,
-   "title": "fix(catalog): align the manifest tool projection with the #340 profile",
-   "url": "https://github.com/agentrust-io/cmcp/pull/762",
-   "updated": "2026-10-16T03:24:41Z",
+   "repo": "cosai-oasis/ws4-secure-design-agentic-systems",
+   "number": 265,
+   "title": "docs(taxonomy): fill Confidentiality boundary row",
+   "url": "https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/265",
+   "updated": "2026-10-16T19:29:02Z",
    "draft": false,
    "checks": "passing",
    "mergeable": "MERGEABLE",
@@ -62,17 +72,6 @@
    "review": "REVIEW_REQUIRED"
   },
   {
-   "repo": "GenAI-Security-Project/agent-control-standard",
-   "number": 278,
-   "title": "Give the OCSF allow decision its own class entry",
-   "url": "https://github.com/GenAI-Security-Project/agent-control-standard/pull/278",
-   "updated": "2026-10-15T18:00:31Z",
-   "draft": false,
-   "checks": "passing",
-   "mergeable": "MERGEABLE",
-   "review": "REVIEW_REQUIRED"
-  },
-  {
    "repo": "microsoft/agent-governance-toolkit",
    "number": 4166,
    "title": "fix(openshell): make the [openshell] extra enforce ACS policy again",
@@ -80,7 +79,7 @@
    "updated": "2026-10-15T16:31:42Z",
    "draft": false,
    "checks": "passing",
-   "mergeable": "MERGEABLE",
+   "mergeable": "UNKNOWN",
    "review": "REVIEW_REQUIRED"
   },
   {
@@ -119,14 +118,14 @@
  ],
  "newsletter": {
   "this_week": {
-   "week_of": "2026-10-12",
-   "date": "2026-10-12",
-   "status": "published",
-   "published_at": "2026-10-12T19:03:31Z"
-  },
-  "next_week": {
    "week_of": "2026-10-19",
    "date": "2026-10-19",
+   "status": "drafting",
+   "published_at": null
+  },
+  "next_week": {
+   "week_of": "2026-10-26",
+   "date": "2026-10-26",
    "status": "drafting",
    "published_at": null
   }
