@@ -10,7 +10,35 @@
     <description>Working notes on agent security, evidence and governance.</description>
     <language>en</language>
     <dc:creator>Imran Siddique</dc:creator>
-    <lastBuildDate>Thu, 08 Oct 2026 18:33:10 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 20 Oct 2026 04:18:52 +0000</lastBuildDate>
+    <item>
+      <title>The MCP registry took the worm down in fifteen days. The repository field still gets a regex</title>
+      <link>https://imransiddique.com/notes/2026-10-19-one-takedown-same-regex.html</link>
+      <guid isPermaLink="true">https://imransiddique.com/notes/2026-10-19-one-takedown-same-regex.html</guid>
+      <pubDate>Mon, 19 Oct 2026 09:00:00 +0000</pubDate>
+      <category>agent-security</category>
+      <category>provenance</category>
+      <category>registries</category>
+      <description>The takedown request against io.github.jUXTAPOSITION1/vape worked, and it is the only moderation action among 6,134 status messages. The package is still on PyPI, the check that let it through has not changed, and the registry has nearly doubled around it.</description>
+      <content:encoded><![CDATA[<p><em>The takedown request against io.github.jUXTAPOSITION1/vape worked, and it is the only moderation action among 6,134 status messages. The package is still on PyPI, the check that let it through has not changed, and the registry has nearly doubled around it.</em></p>
+<p>On 5 September the MCP registry marked every version of <code>io.github.jUXTAPOSITION1/vape</code> deleted. The status message names the malware moderation policy, the OX Security report, GitHub's block on the repository, and issue 1563, the takedown request I filed on 21 August. A maintainer closed that issue the same day with a short account of what was done and how it was verified. Fifteen days from the request, twenty-eight from publication.</p>
+<p>That is the process working. It is also, as of today, the only time it has worked in public. I pulled every record again on 19 October, deleted ones included. There are 6,134 status messages. One describes a moderation action, and it is this one.</p>
+<h2>What the takedown did not touch</h2>
+<p>The PyPI package <code>vape-mcp-server</code> is still installable. Both releases, 1.1.0 and 1.1.1, report <code>yanked: false</code>. A registry entry is a pointer, and removing the pointer leaves the thing it pointed at where it was.</p>
+<p>The check that let the entry through has not changed either. <code>IsValidRepositoryURL</code> in <code>internal/validators/utils.go</code> is the same shape regex it was in August, and the only commit to that file since 1 August bumps a linter. PR 1266, which probes whether the repository is reachable at publish, is still open with review required and no comments, last updated 26 May. Issue 395, where a maintainer asked on day one for the registry to check that the publisher owns the repository, has had no comment since September 2025.</p>
+<h2>What grew around it</h2>
+<p>For servers at their latest version, the registry went from 24,615 records in August to 46,459 now. Of those under <code>io.github.*</code> that name a GitHub repository, 676 name one owned by a different account than the publisher authenticated as, up from 498. As a share that fell, from 3.3% to 2.6%. Records with no repository at all went from 5,258 to 14,155, which is 30.5% of the registry against 21.4% in August.</p>
+<p>So the gap the worm used is not getting worse per entry. It is getting bigger because the registry is.</p>
+<h2>What a consumer can check today</h2>
+<p>An aggregator or a gateway that admits servers from the feed is handed the same three things a human was handed in August: a proven namespace, a proven package, and a repository URL that matched a pattern. The registry can now say "deleted under the malware policy", and that statement carries weight because a maintainer wrote it. It still carries no actor field, so a consumer reading the feed has to trust the text.</p>
+<p>Two checks need no change on the registry side. Before admitting a server, resolve the repository URL and confirm the owner matches the namespace, which is the check issue 395 asked for. And when the registry deletes an entry for malware, look up the package it named on its own index, because the index has not necessarily heard.</p>
+<h2>What did not survive checking</h2>
+<p>"The share of mismatched repositories held steady." I said that while reading the first counts, and it was wrong: 3.3% to 2.6%, computed against entries that name a GitHub repository.</p>
+<p>The August-to-October comparison itself carries a caveat. The script behind the August figures was not kept, and the counts above use the latest version of each server with deleted records excluded, which is my reading of what August counted. The direction of every change survives either way; the exact growth multiple depends on that choice.</p>
+<p>Working, the per-view counts and the status message dump are reproducible from the registry API above.</p>
+<h2>Checked against</h2>
+<ul><li><a href="https://registry.modelcontextprotocol.io/v0/servers?search=vape&include_deleted=true">MCP registry, the vape entry with deleted records included, read 19 October 2026</a></li><li><a href="https://github.com/modelcontextprotocol/registry/issues/1563">Issue 1563, the takedown request, closed as completed 5 September 2026</a></li><li><a href="https://imransiddique.com/notes/2026-08-21-repository-url-looks-like-github.html">The 21 August note this follows up</a></li><li><a href="https://github.com/modelcontextprotocol/registry/blob/main/internal/validators/utils.go">internal/validators/utils.go, the repository URL regexes, unchanged since August</a></li><li><a href="https://github.com/modelcontextprotocol/registry/pull/1266">PR 1266, probe repository URL reachability at publish, open since May</a></li><li><a href="https://github.com/modelcontextprotocol/registry/issues/395">Issue 395, validate provided repositories, last comment September 2025</a></li><li><a href="https://pypi.org/pypi/vape-mcp-server/json">PyPI JSON API, vape-mcp-server, both releases not yanked</a></li><li><a href="https://registry.modelcontextprotocol.io/v0/servers">MCP registry API, the server list used for the counts</a></li></ul>]]></content:encoded>
+    </item>
     <item>
       <title>The mandatory signal has nothing to check against yet</title>
       <link>https://imransiddique.com/notes/2026-10-08-mandatory-signal-nothing-to-check.html</link>
