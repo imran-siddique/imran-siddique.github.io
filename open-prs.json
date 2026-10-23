@@ -1,16 +1,16 @@
 {
- "generated_at": "2026-10-21T23:36:14Z",
+ "generated_at": "2026-10-23T00:15:30Z",
  "author": "imran-siddique",
  "open_prs": 9,
  "failing": 0,
- "conflicting": 0,
+ "conflicting": 1,
  "prs": [
   {
-   "repo": "agentrust-io/trace-spec",
-   "number": 595,
-   "title": "spec(references)!: entries validated by recomputation, and position-commitment registered (#321)",
-   "url": "https://github.com/agentrust-io/trace-spec/pull/595",
-   "updated": "2026-10-21T18:25:45Z",
+   "repo": "agentrust-io/integrations",
+   "number": 362,
+   "title": "ci(examples): install pyOpenSSL for model-signing 1.1.1",
+   "url": "https://github.com/agentrust-io/integrations/pull/362",
+   "updated": "2026-10-22T14:01:09Z",
    "draft": false,
    "checks": "passing",
    "mergeable": "MERGEABLE",
@@ -18,14 +18,14 @@
   },
   {
    "repo": "agentrust-io/trace-spec",
-   "number": 533,
-   "title": "spec(anchor)!: a Level 2 anchor verdict requires the registry entry",
-   "url": "https://github.com/agentrust-io/trace-spec/pull/533",
-   "updated": "2026-10-21T18:23:17Z",
+   "number": 595,
+   "title": "spec(references)!: entries validated by recomputation, and position-commitment registered (#321)",
+   "url": "https://github.com/agentrust-io/trace-spec/pull/595",
+   "updated": "2026-10-22T02:10:20Z",
    "draft": false,
    "checks": "passing",
-   "mergeable": "MERGEABLE",
-   "review": "APPROVED"
+   "mergeable": "CONFLICTING",
+   "review": "REVIEW_REQUIRED"
   },
   {
    "repo": "cosai-oasis/ws4-odis",
@@ -57,7 +57,7 @@
    "updated": "2026-10-20T04:27:53Z",
    "draft": false,
    "checks": "passing",
-   "mergeable": "MERGEABLE",
+   "mergeable": "UNKNOWN",
    "review": "REVIEW_REQUIRED"
   },
   {
