@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-10-23T00:15:30Z",
+ "generated_at": "2026-10-23T16:29:21Z",
  "author": "imran-siddique",
- "open_prs": 9,
+ "open_prs": 8,
  "failing": 0,
  "conflicting": 1,
  "prs": [
@@ -10,7 +10,18 @@
    "number": 362,
    "title": "ci(examples): install pyOpenSSL for model-signing 1.1.1",
    "url": "https://github.com/agentrust-io/integrations/pull/362",
-   "updated": "2026-10-22T14:01:09Z",
+   "updated": "2026-10-23T07:50:46Z",
+   "draft": false,
+   "checks": "passing",
+   "mergeable": "MERGEABLE",
+   "review": "APPROVED"
+  },
+  {
+   "repo": "cosai-oasis/ws4-secure-design-agentic-systems",
+   "number": 272,
+   "title": "docs(guides): add multimodal action containment guide",
+   "url": "https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/272",
+   "updated": "2026-10-23T01:55:08Z",
    "draft": false,
    "checks": "passing",
    "mergeable": "MERGEABLE",
@@ -46,7 +57,7 @@
    "updated": "2026-10-20T05:02:57Z",
    "draft": false,
    "checks": "passing",
-   "mergeable": "MERGEABLE",
+   "mergeable": "UNKNOWN",
    "review": "REVIEW_REQUIRED"
   },
   {
@@ -81,28 +92,6 @@
    "checks": "none",
    "mergeable": "MERGEABLE",
    "review": ""
-  },
-  {
-   "repo": "cosai-oasis/ws4-secure-design-agentic-systems",
-   "number": 272,
-   "title": "docs(guides): add multimodal action containment guide",
-   "url": "https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/272",
-   "updated": "2026-10-19T16:57:05Z",
-   "draft": false,
-   "checks": "passing",
-   "mergeable": "MERGEABLE",
-   "review": "REVIEW_REQUIRED"
-  },
-  {
-   "repo": "cosai-oasis/ws4-secure-design-agentic-systems",
-   "number": 265,
-   "title": "docs(taxonomy): fill Confidentiality boundary row",
-   "url": "https://github.com/cosai-oasis/ws4-secure-design-agentic-systems/pull/265",
-   "updated": "2026-10-16T19:29:02Z",
-   "draft": false,
-   "checks": "passing",
-   "mergeable": "MERGEABLE",
-   "review": "REVIEW_REQUIRED"
   }
  ],
  "newsletter": {
